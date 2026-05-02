@@ -113,6 +113,12 @@ export {
 	type UploadItem,
 	type UploadStatus,
 } from './upload-progress-list';
+export {
+	UploadTray,
+	defaultUploadTrayStrings,
+	type UploadTrayProps,
+	type UploadTrayStrings,
+} from './upload-tray';
 
 // Key-Value
 export { KeyValue, type KeyValueProps, type KeyValueItem } from './key-value';

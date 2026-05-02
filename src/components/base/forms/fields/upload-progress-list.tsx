@@ -34,6 +34,12 @@ export interface UploadItem {
 	status: UploadStatus;
 	/** Error message rendered under the row when status is `error`. */
 	error?: string;
+	/**
+	 * Optional thumbnail URL — when set and the consumer renders this list
+	 * inside `<UploadTray>`, the row uses the thumbnail in place of the
+	 * status icon. Pure-`<UploadProgressList>` callers can ignore this.
+	 */
+	preview?: string;
 }
 
 export interface UploadProgressListStrings {

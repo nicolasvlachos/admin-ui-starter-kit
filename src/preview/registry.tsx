@@ -64,6 +64,7 @@ export const REGISTRY: PreviewEntry[] = [
 	{ id: 'base/currency', label: 'Currency', section: 'Base', family: 'Display', component: lazy(() => import('./pages/base/CurrencyPage')), status: 'ready' },
 
 	{ id: 'base/forms', label: 'Forms', section: 'Base', family: 'Forms & inputs', component: lazy(() => import('./pages/base/FormsPage')), status: 'ready' },
+	{ id: 'base/upload-tray', label: 'Upload tray', section: 'Base', family: 'Forms & inputs', component: lazy(() => import('./pages/base/UploadTrayPage')), status: 'ready' },
 	{ id: 'base/combobox', label: 'Combobox', section: 'Base', family: 'Forms & inputs', component: lazy(() => import('./pages/base/ComboboxPage')), status: 'ready' },
 	{ id: 'base/date-pickers', label: 'Date pickers', section: 'Base', family: 'Forms & inputs', component: lazy(() => import('./pages/base/DatePickersPage')), status: 'ready' },
 
