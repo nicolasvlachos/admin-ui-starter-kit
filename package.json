@@ -1,0 +1,241 @@
+{
+  "name": "admin-ui-starter-kit",
+  "version": "0.1.0",
+  "description": "Opinionated React component kit for admin panels and SaaS dashboards, built on top of shadcn/ui + Tailwind CSS v4. Callback-driven, framework-agnostic, i18n-ready.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Nicolas Vlachos",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolasvlachos/admin-ui-starter-kit.git"
+  },
+  "homepage": "https://github.com/nicolasvlachos/admin-ui-starter-kit#readme",
+  "bugs": {
+    "url": "https://github.com/nicolasvlachos/admin-ui-starter-kit/issues"
+  },
+  "keywords": [
+    "react",
+    "component-library",
+    "shadcn",
+    "tailwind",
+    "ui",
+    "framework-agnostic",
+    "design-system",
+    "admin",
+    "admin-panel",
+    "dashboard",
+    "starter-kit"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE",
+    "CLAUDE.md",
+    "AGENTS.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:lib": "rm -rf dist && vite build -c vite.lib.config.ts && tailwindcss -i ./src/App.css -o ./dist/style.css --minify",
+    "lint": "eslint .",
+    "lint:architecture": "node scripts/check-architecture.mjs",
+    "test:exports": "node scripts/check-package-exports.mjs",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit --ignoreDeprecations 6.0",
+    "verify": "npm run lint:architecture && npm run test:exports && npm run typecheck && npm run lint && npm run test -- --pool=threads --maxWorkers=1",
+    "test": "vitest run",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build:lib",
+    "publish:skill": "node scripts/publish-skill.mjs"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css",
+    "./ui-provider": {
+      "types": "./dist/lib/ui-provider/index.d.ts",
+      "import": "./dist/lib/ui-provider/index.js",
+      "require": "./dist/lib/ui-provider/index.cjs"
+    },
+    "./base": {
+      "types": "./dist/components/base/index.d.ts",
+      "import": "./dist/components/base/index.js",
+      "require": "./dist/components/base/index.cjs"
+    },
+    "./base/*": {
+      "types": "./dist/components/base/*/index.d.ts",
+      "import": "./dist/components/base/*/index.js",
+      "require": "./dist/components/base/*/index.cjs"
+    },
+    "./composed": {
+      "types": "./dist/components/composed/index.d.ts",
+      "import": "./dist/components/composed/index.js",
+      "require": "./dist/components/composed/index.cjs"
+    },
+    "./composed/*": {
+      "types": "./dist/components/composed/*/index.d.ts",
+      "import": "./dist/components/composed/*/index.js",
+      "require": "./dist/components/composed/*/index.cjs"
+    },
+    "./features": {
+      "types": "./dist/components/features/index.d.ts",
+      "import": "./dist/components/features/index.js",
+      "require": "./dist/components/features/index.cjs"
+    },
+    "./features/*": {
+      "types": "./dist/components/features/*/index.d.ts",
+      "import": "./dist/components/features/*/index.js",
+      "require": "./dist/components/features/*/index.cjs"
+    },
+    "./layout": {
+      "types": "./dist/components/layout/index.d.ts",
+      "import": "./dist/components/layout/index.js",
+      "require": "./dist/components/layout/index.cjs"
+    },
+    "./layout/*": {
+      "types": "./dist/components/layout/*/index.d.ts",
+      "import": "./dist/components/layout/*/index.js",
+      "require": "./dist/components/layout/*/index.cjs"
+    },
+    "./lib/strings": {
+      "types": "./dist/lib/strings.d.ts",
+      "import": "./dist/lib/strings.js",
+      "require": "./dist/lib/strings.cjs"
+    },
+    "./lib/utils": {
+      "types": "./dist/lib/utils.d.ts",
+      "import": "./dist/lib/utils.js",
+      "require": "./dist/lib/utils.cjs"
+    }
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.4.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "tailwind-merge": "^3.5.0",
+    "zustand": "^5.0.12"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "lucide-react": "^1.0.0",
+    "@dnd-kit/core": "^6.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.0.0",
+    "@tanstack/react-table": "^8.0.0",
+    "@tiptap/pm": "^3.0.0",
+    "@tiptap/react": "^3.0.0",
+    "@tiptap/starter-kit": "^3.0.0",
+    "@fontsource-variable/inter": "^5.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "tw-animate-css": "^1.0.0",
+    "axios": "^1.0.0",
+    "cmdk": "^1.0.0",
+    "culori": "^4.0.0",
+    "leaflet": "^1.0.0",
+    "leaflet-draw": "^1.0.0",
+    "leaflet.fullscreen": "^5.0.0",
+    "leaflet.markercluster": "^1.0.0",
+    "qrcode": "^1.0.0",
+    "react-day-picker": "^9.0.0",
+    "react-hook-form": "^7.0.0",
+    "react-leaflet": "^5.0.0",
+    "react-leaflet-markercluster": "^5.0.0-rc.0",
+    "recharts": "^3.0.0",
+    "sonner": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "tailwindcss": { "optional": false },
+    "lucide-react": { "optional": false },
+    "@dnd-kit/core": { "optional": true },
+    "@dnd-kit/sortable": { "optional": true },
+    "@dnd-kit/utilities": { "optional": true },
+    "@tanstack/react-table": { "optional": true },
+    "@tiptap/pm": { "optional": true },
+    "@tiptap/react": { "optional": true },
+    "@tiptap/starter-kit": { "optional": true },
+    "@fontsource-variable/inter": { "optional": true },
+    "@tailwindcss/vite": { "optional": true },
+    "tw-animate-css": { "optional": true },
+    "axios": { "optional": true },
+    "cmdk": { "optional": true },
+    "culori": { "optional": true },
+    "leaflet": { "optional": true },
+    "leaflet-draw": { "optional": true },
+    "leaflet.fullscreen": { "optional": true },
+    "leaflet.markercluster": { "optional": true },
+    "qrcode": { "optional": true },
+    "react-day-picker": { "optional": true },
+    "react-hook-form": { "optional": true },
+    "react-leaflet": { "optional": true },
+    "react-leaflet-markercluster": { "optional": true },
+    "recharts": { "optional": true },
+    "sonner": { "optional": true }
+  },
+  "devDependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@eslint/js": "^10.0.1",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@tailwindcss/cli": "^4.2.4",
+    "@tailwindcss/vite": "^4.2.4",
+    "@tanstack/react-table": "^8.21.3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@tiptap/pm": "^3.22.5",
+    "@tiptap/react": "^3.22.5",
+    "@tiptap/starter-kit": "^3.22.5",
+    "@types/culori": "^4.0.1",
+    "@types/leaflet": "^1.9.21",
+    "@types/leaflet-draw": "^1.0.13",
+    "@types/leaflet.markercluster": "^1.5.6",
+    "@types/node": "^24.12.2",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "axios": "^1.15.2",
+    "cmdk": "^1.1.1",
+    "culori": "^4.0.2",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "jsdom": "^29.1.1",
+    "leaflet": "^1.9.4",
+    "leaflet-draw": "^1.0.4",
+    "leaflet.fullscreen": "^5.3.1",
+    "leaflet.markercluster": "^1.5.3",
+    "lucide-react": "^1.14.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.5",
+    "react-day-picker": "^9.14.0",
+    "react-dom": "^19.2.5",
+    "react-hook-form": "^7.74.0",
+    "react-leaflet": "^5.0.0",
+    "react-leaflet-markercluster": "^5.0.0-rc.0",
+    "recharts": "^3.8.1",
+    "shadcn": "^4.5.0",
+    "sonner": "^2.0.7",
+    "tailwindcss": "^4.2.4",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.10",
+    "vite-plugin-dts": "^5.0.0",
+    "vitest": "^4.1.5"
+  }
+}

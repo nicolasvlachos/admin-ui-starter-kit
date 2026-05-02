@@ -1,0 +1,59 @@
+name: Feature request
+description: Suggest a new component, prop, or capability.
+title: "[feature] "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening a feature request, read the
+        [`SKILL.md`](../../.claude/skills/component-library-rules/SKILL.md)
+        rules. Most "missing" features turn out to fit an existing primitive
+        (`Item`, `FormField`, `SmartCard`, `<UIProvider>`, `useStrings`).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you solving?
+      description: Describe the user-facing problem first, not the implementation. One paragraph.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: API sketch is welcome but not required. If you've checked the existing primitives and they don't fit, explain why.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Which layer would this live in?
+      options:
+        - "base/ — typography-aware wrapper"
+        - "composed/ — domain row or card"
+        - "features/ — provider-driven feature surface"
+        - "layout/ — app-shell scaffold"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Does it fit the rules?
+      description: Check what applies. The maintainer reads these.
+      options:
+        - label: Framework-agnostic — works in Vite, Next.js, Remix, Inertia, Tanstack
+        - label: Strings overridable through `useStrings`
+        - label: Sensible defaults can flow through `<UIProvider>` if applicable
+        - label: Composable via slots / render-props / exported partials

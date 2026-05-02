@@ -1,0 +1,47 @@
+// tsconfig.lib.json — TypeScript config for the publishable-library build.
+//
+// Used by `vite-plugin-dts` (configured in `vite.lib.config.ts`) to emit
+// `.d.ts` files into `dist/` alongside the JS bundles. NOT the IDE/typecheck
+// config — that's `tsconfig.app.json`, which has stricter unused-locals
+// linting and includes the preview app.
+//
+// Differences from tsconfig.app.json:
+//   - emitDeclarationOnly: true        (dts plugin handles emit; vite handles JS)
+//   - declarationMap:      true        (link compiled .d.ts back to source for IDE go-to-definition)
+//   - excludes preview / tests / app entry from the dts emit
+//   - rootDir = src                    (dts mirrors src/ tree under dist/)
+{
+	"compilerOptions": {
+		"target": "es2023",
+		"lib": ["ES2023", "DOM"],
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"types": ["vite/client"],
+		"jsx": "react-jsx",
+		"strict": true,
+		"skipLibCheck": true,
+		"ignoreDeprecations": "6.0",
+		"verbatimModuleSyntax": false,
+		"isolatedModules": true,
+		"moduleDetection": "force",
+
+		"declaration": true,
+		"declarationMap": true,
+		"emitDeclarationOnly": true,
+		"outDir": "dist",
+		"rootDir": "src",
+
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"include": ["src"],
+	"exclude": [
+		"src/preview",
+		"src/main.tsx",
+		"src/App.tsx",
+		"**/*.test.ts",
+		"**/*.test.tsx"
+	]
+}

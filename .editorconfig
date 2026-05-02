@@ -1,0 +1,29 @@
+# EditorConfig — consistent indentation across editors and contributors.
+# See https://editorconfig.org/. Most modern editors honour this natively;
+# JetBrains and VS Code both load it without a plugin.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 4
+
+# Markdown is tab-hostile (renderers vary).
+[*.md]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = false
+
+# JSON / package.json — npm normalises to 2-space anyway.
+[*.{json,jsonc}]
+indent_style = space
+indent_size = 2
+
+# YAML uses spaces by spec.
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2

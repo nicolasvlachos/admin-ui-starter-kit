@@ -1,0 +1,368 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/inter";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Inter Variable', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-info: var(--info);
+    --color-info-foreground: var(--info-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+    --color-error: var(--error);
+    --color-error-foreground: var(--error-foreground);
+    --color-main: var(--main);
+    --color-main-foreground: var(--main-foreground);
+    --color-text: var(--foreground);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+
+    /*
+     * Typography font-size tokens.
+     *
+     * Library-wide source of truth for `Text` and `Heading` sizes.
+     * Consumers can override at `:root` (or any wrapping element) to
+     * resize the entire library — e.g. denser admin dashboards can set
+     * `--text-sm: 0.8125rem` to shave a pixel without touching JS.
+     *
+     * The `.text-*` utility overrides further down (under `@layer base`)
+     * compose these against the per-region `--typo-scale`.
+     */
+    --text-xxs:  0.625rem;
+    --text-xs:   0.75rem;
+    --text-sm:   0.875rem;
+    --text-base: 1rem;
+    --text-lg:   1.125rem;
+    --text-xl:   1.25rem;
+    --text-2xl:  1.5rem;
+    --text-3xl:  1.875rem;
+    --text-4xl:  2.25rem;
+    --text-5xl:  3rem;
+
+    /*
+     * Density tokens — list-row vertical padding.
+     *
+     * Consumed by base/composed/feature list rows (filters, global-search,
+     * comments, metrics, popover-menu items …). Override on a wrapping
+     * element to densify a single surface without forking components:
+     *
+     *   <div style={{ '--row-py: var(--row-py-tight)' }}> … </div>
+     */
+    --row-py-tight:   0.25rem;   /* 4px  — chip-dense rows  */
+    --row-py-default: 0.5rem;    /* 8px  — standard menu/list rows */
+    --row-py-loose:   0.625rem;  /* 10px — generous rows in cards */
+    --row-py: var(--row-py-default);
+
+    /*
+     * Component-specific theming knobs.
+     * Add narrowly-scoped vars here when a real consumer override exists —
+     * never re-purpose existing variables.
+     */
+    --popover-content-pad: 0.25rem; /* PopoverContent inner padding */
+}
+
+
+:root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.99 0 0);
+    --success: oklch(0.65 0.17 150);
+    --success-foreground: oklch(0.99 0 0);
+    --info: oklch(0.62 0.16 250);
+    --info-foreground: oklch(0.99 0 0);
+    --warning: oklch(0.78 0.16 80);
+    --warning-foreground: oklch(0.2 0.05 80);
+    --error: oklch(0.577 0.245 27.325);
+    --error-foreground: oklch(0.99 0 0);
+    --main: oklch(0.205 0 0);
+    --main-foreground: oklch(0.985 0 0);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --destructive-foreground: oklch(0.99 0 0);
+    --success: oklch(0.72 0.18 150);
+    --success-foreground: oklch(0.13 0 0);
+    --info: oklch(0.7 0.16 250);
+    --info-foreground: oklch(0.13 0 0);
+    --warning: oklch(0.82 0.17 85);
+    --warning-foreground: oklch(0.18 0.05 80);
+    --error: oklch(0.704 0.191 22.216);
+    --error-foreground: oklch(0.13 0 0);
+    --main: oklch(0.985 0 0);
+    --main-foreground: oklch(0.205 0 0);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  :root {
+    /*
+     * Typography scaling knobs.
+     * --base-font-scale  multiplies the document root font-size (16px baseline).
+     * The four kind-specific scales compound on top of --base-font-scale,
+     * letting consumers shrink/grow individual surfaces independently
+     * (e.g. denser tables, larger marketing headings) without touching JS.
+     *
+     *   <div style="--text-font-scale: 0.9">    // shrink Text only
+     *   <section style="--label-font-scale: 0.85"> // dense form labels
+     */
+    --base-font-scale: 1;
+    --heading-font-scale: 1;
+    --text-font-scale: 1;
+    --label-font-scale: 1;
+    --link-font-scale: 1;
+    font-size: calc(16px * var(--base-font-scale));
+  }
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  /*
+   * Route each typography kind to its scale knob. Tailwind text-* utilities
+   * read `var(--typo-scale)` (declared in the @theme block above), so setting
+   * --typo-scale on the element transparently rescales every text-* utility
+   * applied to it without fighting the cascade.
+   */
+  /*
+   * Route each typography kind to its scale knob. The actual font-size scaling
+   * is applied through the .text-* utility overrides below, which read
+   * `var(--typo-scale)` lazily — so setting it on the typography element
+   * propagates correctly without fighting Tailwind's pre-resolved theme tokens.
+   */
+  [data-typography="heading"] { --typo-scale: var(--heading-font-scale, 1); }
+  [data-typography="text"]    { --typo-scale: var(--text-font-scale, 1); }
+  [data-typography="label"]   { --typo-scale: var(--label-font-scale, 1); }
+  [data-typography="link"]    { --typo-scale: var(--link-font-scale, 1); }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+
+/*
+ * Tailwind v4 text-* utility overrides.
+ *
+ * Tailwind's @theme tokens are resolved once at :root, so a `var(--typo-scale)`
+ * embedded inside an @theme value collapses to its root fallback rather than
+ * inheriting from descendants. To make per-region scaling actually work we
+ * redeclare the utilities themselves so the var lookup happens at use-site.
+ *
+ * These rules sit outside any @layer so they win over Tailwind's utilities
+ * layer regardless of import order. Outside elements with `data-typography`
+ * --typo-scale falls back to 1, leaving non-typo usages unchanged.
+ */
+.text-xxs  { font-size: calc(var(--text-xxs)  * var(--typo-scale, 1)); line-height: 1rem; }
+.text-xs   { font-size: calc(var(--text-xs)   * var(--typo-scale, 1)); line-height: 1rem; }
+.text-sm   { font-size: calc(var(--text-sm)   * var(--typo-scale, 1)); line-height: 1.25rem; }
+.text-base { font-size: calc(var(--text-base) * var(--typo-scale, 1)); line-height: 1.5rem; }
+.text-lg   { font-size: calc(var(--text-lg)   * var(--typo-scale, 1)); line-height: 1.75rem; }
+.text-xl   { font-size: calc(var(--text-xl)   * var(--typo-scale, 1)); line-height: 1.75rem; }
+.text-2xl  { font-size: calc(var(--text-2xl)  * var(--typo-scale, 1)); line-height: 2rem; }
+.text-3xl  { font-size: calc(var(--text-3xl)  * var(--typo-scale, 1)); line-height: 2.25rem; }
+.text-4xl  { font-size: calc(var(--text-4xl)  * var(--typo-scale, 1)); line-height: 2.5rem; }
+.text-5xl  { font-size: calc(var(--text-5xl)  * var(--typo-scale, 1)); line-height: 1; }
+/* ----------------------------------------------------------------- */
+/*  Inline mention chips                                              */
+/*                                                                    */
+/*  `.rsc-mention` is the editor-side counterpart to <MentionChip>    */
+/*  (which wraps <Badge>). Same tone palette, same shape, but driven  */
+/*  by `data-ref-tone` so the chip renders identically inside any     */
+/*  contenteditable surface — no React component required.            */
+/*                                                                    */
+/*  Tones map to the existing semantic CSS variables. If you rebrand  */
+/*  the lib's `--info`, `--success`, etc., chips follow automatically.*/
+/* ----------------------------------------------------------------- */
+.rsc-mention {
+    /* Inline-flow tweaks:
+     *   - `inline-block` (not `inline-flex`) so the chip sits on the
+     *     baseline of the surrounding text instead of the line's
+     *     midpoint — `inline-flex` was drifting below adjacent text.
+     *   - `em`-scaled font/padding so the chip scales with whatever
+     *     line it's embedded in (text-sm body, text-base body, …).
+     *   - small but visible vertical padding for breathing room.
+     */
+    display: inline-block;
+    padding: 0.125em 0.5em;
+    border-radius: 9999px;
+    font-size: 0.875em;
+    line-height: 1.35;
+    font-weight: 600;
+    white-space: nowrap;
+    vertical-align: baseline;
+    text-decoration: none;
+    cursor: default;
+    user-select: all;
+    background: color-mix(in oklab, var(--foreground) 8%, transparent);
+    color: var(--foreground);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--foreground) 10%, transparent);
+    transition: background 0.12s ease;
+}
+.rsc-mention:hover {
+    background: color-mix(in oklab, var(--foreground) 14%, transparent);
+}
+
+.rsc-mention[data-ref-tone="info"] {
+    background: color-mix(in oklab, var(--info) 18%, transparent);
+    color: var(--info);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--info) 30%, transparent);
+}
+.rsc-mention[data-ref-tone="success"] {
+    background: color-mix(in oklab, var(--success) 20%, transparent);
+    color: var(--success);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--success) 35%, transparent);
+}
+.rsc-mention[data-ref-tone="warning"] {
+    background: color-mix(in oklab, var(--warning) 50%, transparent);
+    color: var(--warning-foreground);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--warning) 50%, transparent);
+}
+.rsc-mention[data-ref-tone="destructive"] {
+    background: color-mix(in oklab, var(--destructive) 12%, transparent);
+    color: var(--destructive);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--destructive) 30%, transparent);
+}
+.rsc-mention[data-ref-tone="primary"] {
+    background: color-mix(in oklab, var(--primary) 12%, transparent);
+    color: var(--primary);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 25%, transparent);
+}
+.rsc-mention[data-ref-tone="secondary"] {
+    background: var(--muted);
+    color: var(--muted-foreground);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--foreground) 10%, transparent);
+}
+
+/* Inside the editor we also want spell-check disabled on chip labels.  */
+.ProseMirror .rsc-mention,
+[contenteditable="true"] .rsc-mention {
+    /* Treat the chip as an atomic, non-editable glyph. */
+    user-select: all;
+    -webkit-user-select: all;
+}
+
+/* ----------------------------------------------------------------- */
+/*  AI shimmer                                                        */
+/*                                                                    */
+/*  Token-driven shimmer used by <AiShimmer> and any "thinking…"      */
+/*  surface that wants the moving-gradient sweep effect.              */
+/*                                                                    */
+/*  Override --ai-shimmer-base / --ai-shimmer-highlight at any scope  */
+/*  to retone the sweep (e.g. brand-coloured wash on the hero).       */
+/* ----------------------------------------------------------------- */
+:root {
+    --ai-shimmer-base: color-mix(in oklab, var(--foreground) 45%, transparent);
+    --ai-shimmer-highlight: var(--foreground);
+}
+.dark {
+    --ai-shimmer-base: color-mix(in oklab, var(--foreground) 35%, transparent);
+    --ai-shimmer-highlight: var(--foreground);
+}
+@keyframes ai-shimmer-sweep {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

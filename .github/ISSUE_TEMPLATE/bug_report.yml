@@ -1,0 +1,84 @@
+name: Bug report
+description: Something is broken or behaves unexpectedly.
+title: "[bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: A clear, concrete description of the bug. One paragraph.
+      placeholder: When I render <Item> inside a <Dialog>, the focus ring is not visible.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: |
+        A CodeSandbox / Stackblitz link, a small code block, or a public
+        git repo. Issues without a reproduction are usually closed.
+      placeholder: https://codesandbox.io/p/sandbox/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+
+  - type: input
+    id: entrypoint
+    attributes:
+      label: Entrypoint
+      description: Which `admin-ui-starter-kit/...` import are you using?
+      placeholder: admin-ui-starter-kit/base/item
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: From `npm ls admin-ui-starter-kit` or your package.json.
+      placeholder: 0.1.0
+    validations:
+      required: true
+
+  - type: input
+    id: react-version
+    attributes:
+      label: React version
+      placeholder: 19.2.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bundler
+    attributes:
+      label: Bundler / framework
+      options:
+        - Vite
+        - Next.js
+        - Remix
+        - Tanstack Start
+        - Webpack
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Console errors, stack traces, screenshots, browser/OS.
