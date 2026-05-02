@@ -34,6 +34,7 @@ export * from './separator';
 export * from './skeleton';
 export * from './tooltip';
 
+export * from './empty-state';
 export * from './fields';
 export * from './metadata';
 export * from './inline-stat';
