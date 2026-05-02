@@ -57,6 +57,7 @@ export const REGISTRY: PreviewEntry[] = [
 	{ id: 'layout/sidebar', label: 'Sidebar shell', section: 'Base', family: 'Layout', component: lazy(() => import('./pages/layout/LayoutSidebarPage')), status: 'ready' },
 	{ id: 'layout/users', label: 'Users & avatars', section: 'Base', family: 'Layout', component: lazy(() => import('./pages/layout/LayoutUsersPage')), status: 'ready' },
 
+	{ id: 'base/accordion', label: 'Accordion', section: 'Base', family: 'Display', component: lazy(() => import('./pages/base/AccordionPage')), status: 'ready' },
 	{ id: 'base/display', label: 'Display', section: 'Base', family: 'Display', component: lazy(() => import('./pages/base/DisplayPage')), status: 'ready' },
 	{ id: 'base/empty-state', label: 'Empty state', section: 'Base', family: 'Display', component: lazy(() => import('./pages/base/EmptyStatePage')), status: 'ready' },
 	{ id: 'base/copyable', label: 'Copyable', section: 'Base', family: 'Display', component: lazy(() => import('./pages/base/CopyablePage')), status: 'ready' },
