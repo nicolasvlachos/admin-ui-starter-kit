@@ -217,6 +217,30 @@ Ship: introduce `<NumberChip value={n} />` in `base/display/` and
 codemod the two sites. Pairs with the gradient-card glass-Badge
 follow-up — both are missing primitives, not raw-span violations.
 
+### [H] `base/map/place-autocomplete.tsx` makes hardcoded Photon API calls
+
+`base/map/place-autocomplete.tsx:213` calls `fetch()` against the
+hardcoded Photon API endpoint via `buildSearchUrl(...)`. That's a
+rule 9 violation: the library is making outbound network calls to a
+specific service the consumer didn't pick.
+
+Ship: introduce a `fetcher?: (query: string, options) => Promise<PlaceFeature[]>`
+prop with the current Photon-backed implementation as the default. A
+consumer who wants Mapbox / Google Places / Nominatim swaps in their
+own fetcher without forking. Same shape as `features/filters` use of
+`useAsyncOptions` — keep the URL builder + Photon parser exported so
+the default is one line.
+
+### [L] Rename `InertiaLink` type
+
+`src/types/inertia.types.ts` exports `InertiaLink = { url, label, active }`.
+The shape has nothing to do with Inertia — it's a generic nav link
+descriptor. The name leaks consumer-context vocabulary into the
+library. Rename to `NavigationLink` (or move into
+`@/components/base/navigation/types.ts`) and codemod the few sites
+that reference it. Breaking-change for consumers, so batch with the
+next minor version bump.
+
 ### [L] Rich-text editor placeholder spans
 
 `features/rich-text-editor/partials/rich-text-editor-tiptap.tsx:287`

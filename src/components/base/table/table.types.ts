@@ -32,7 +32,14 @@ export interface ActionItem<TData> {
 	id?: string;
 	/** Visible label */
 	label: string;
-	/** Optional navigation target. If provided and no onClick, will navigate */
+	/**
+	 * Optional href the consumer wants to associate with the action. The
+	 * library does NOT navigate on its own — supply `onClick` and route in
+	 * your framework's router (Tanstack Router `navigate(href)`, Inertia
+	 * `router.visit(href)`, Next `router.push(href)`, etc.). `href` is kept
+	 * as data so the consumer can read it inside `onClick` and so you can
+	 * render `<a href={action.href}>` if you swap in a custom action shell.
+	 */
 	href?: string;
 	/** Optional click handler receiving the row */
 	onClick?: (row: TData) => void;

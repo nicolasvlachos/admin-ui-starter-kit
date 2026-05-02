@@ -82,14 +82,6 @@ export function DataTableActions<TData>(props: DataTableActionsProps<TData>) {
 
     const mode: 'menu' | 'inline' = displayMode === 'auto' ? (isNarrow ? 'menu' : 'inline') : displayMode;
 
-    // Navigation helper
-    const navigateTo = (href?: string) => {
-        if (!href) return;
-        if (typeof window !== 'undefined') {
-            window.location.assign(href);
-        }
-    };
-
     const resolveMenuIcon = (icon: ActionItem<TData>['icon']): LucideIcon | undefined => {
         if (!icon) return undefined;
         if (typeof icon === 'function') {
@@ -145,8 +137,7 @@ export function DataTableActions<TData>(props: DataTableActionsProps<TData>) {
                     const key = action.id || `${action.label}-${idx}`;
                     const resolved = resolveActionButtonVariant(action.variant ?? 'ghost');
                     const onClick = () => {
-                        if (action.onClick) action.onClick(row);
-                        else if (action.href) navigateTo(action.href);
+                        action.onClick?.(row);
                     };
                     return (
                         <Button
@@ -180,8 +171,7 @@ export function DataTableActions<TData>(props: DataTableActionsProps<TData>) {
             {sortedActions.map((action, idx) => {
                 const key = action.id || `${action.label}-${idx}`;
                 const onClick = () => {
-                    if (action.onClick) action.onClick(row);
-                    else if (action.href) navigateTo(action.href);
+                    action.onClick?.(row);
                 };
                 const menuIcon = resolveMenuIcon(action.icon);
                 const inlineIcon = action.icon

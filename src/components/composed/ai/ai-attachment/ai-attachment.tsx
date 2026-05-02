@@ -96,7 +96,7 @@ export function AiAttachment({
 				{showProgress && (
 					<div
 						className="mt-1 h-1 overflow-hidden rounded-full bg-muted"
-						aria-label="Upload progress"
+						aria-label={strings.uploadProgressAria}
 					>
 						<div
 							className="h-full rounded-full bg-primary transition-[width] duration-150"

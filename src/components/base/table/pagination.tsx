@@ -49,9 +49,13 @@ function generatePageNumbers(
 }
 
 function buildPageUrl(basePath: string, page: number, queryKey: string): string {
-	const currentParams = new URLSearchParams(window.location.search);
-	currentParams.set(queryKey, String(page));
-	return `${basePath}?${currentParams.toString()}`;
+	// Build a URL without inheriting the current location's query string —
+	// the library is framework-agnostic and must not read browser globals
+	// to decide what to put in href. Consumers that need their own params
+	// merged should compute and pass the URL via the pagination object.
+	const params = new URLSearchParams();
+	params.set(queryKey, String(page));
+	return `${basePath}?${params.toString()}`;
 }
 
 export function Pagination({
@@ -75,27 +79,14 @@ export function Pagination({
 	const navigateToPage = useCallback(
 		(page: number, url: string | null) => {
 			if (!url) return;
-
-			if (onPageChange) {
-				onPageChange(page, url, pagination.path || '');
-				return;
-			}
-
-			const urlObj = new URL(url);
-			const pageParam = urlObj.searchParams.get(queryKey);
-			const currentParams = new URLSearchParams(window.location.search);
-
-			if (pageParam && pageParam !== '1') {
-				currentParams.set(queryKey, pageParam);
-			} else {
-				currentParams.delete(queryKey);
-			}
-
-			const query = currentParams.toString();
-			const target = `${window.location.pathname}${query ? `?${query}` : ''}`;
-			window.location.assign(target);
+			// The library never navigates on its own. Consumers wire their
+			// router (Inertia, Tanstack Router, RR7, Next, …) through
+			// `onPageChange`. When it's absent the click is a no-op — the
+			// `href` attribute on the underlying anchor remains the only
+			// fallback path (browsers will navigate it if JS doesn't run).
+			onPageChange?.(page, url, pagination.path || '');
 		},
-		[onPageChange, pagination.path, queryKey],
+		[onPageChange, pagination.path],
 	);
 
 	const hasPrevious = pagination.prev_page_url !== null;

@@ -102,8 +102,7 @@ gratuitous `!text-X` usage out of base and composed components.
 ## 4. Card primitive rule
 
 `SmartCard` is the single card primitive. Only `src/components/base/cards/smart-card.tsx`
-imports the underlying shadcn `Card` parts (currently aliased through
-`@/components/ui/primitives/shadcn/card`).
+imports the underlying shadcn `Card` parts from `@/components/ui/card`.
 
 **Allowed exception:** `src/preview/pages/ui/UiCardPage.tsx` and other preview
 pages that exist to demonstrate the raw primitive itself. Production components

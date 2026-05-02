@@ -5,11 +5,13 @@ export type AiAttachmentKind = 'image' | 'document' | 'audio' | 'video' | 'code'
 export interface AiAttachmentStrings {
 	removeAria: string;
 	openAria: string;
+	uploadProgressAria: string;
 }
 
 export const defaultAiAttachmentStrings: AiAttachmentStrings = {
 	removeAria: 'Remove attachment',
 	openAria: 'Open attachment',
+	uploadProgressAria: 'Upload progress',
 };
 
 export interface AiAttachmentProps {
