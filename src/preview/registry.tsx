@@ -123,6 +123,7 @@ export const REGISTRY: PreviewEntry[] = [
 	{ id: 'features/event-log', label: 'Event log (comments + events)', section: 'Features', family: 'Collaboration', component: lazy(() => import('./pages/features/EventLogPage')), status: 'ready' },
 	{ id: 'features/activities', label: 'Activity feed', section: 'Features', family: 'Collaboration', component: lazy(() => import('./pages/features/ActivitiesPage')), status: 'ready' },
 	{ id: 'features/enhanced-activities', label: 'Enhanced activities (Shopify-style)', section: 'Features', family: 'Collaboration', component: lazy(() => import('./pages/features/EnhancedActivitiesPage')), status: 'ready' },
+	{ id: 'features/kanban', label: 'Kanban', section: 'Features', family: 'Boards', component: lazy(() => import('./pages/features/KanbanPage')), status: 'ready' },
 	{ id: 'base/spinner', label: 'Spinner', section: 'Base', family: 'Feedback', component: lazy(() => import('./pages/base/SpinnerPage')), status: 'ready' },
 	{ id: 'base/metadata', label: 'Metadata list', section: 'Base', family: 'Data display', component: lazy(() => import('./pages/base/MetadataListPage')), status: 'ready' },
 

@@ -5,6 +5,7 @@ export * as Comments from './comments';
 export * as EventLog from './event-log';
 export * as Filters from './filters';
 export * as GlobalSearch from './global-search';
+export * as Kanban from './kanban';
 export * as Mentions from './mentions';
 export * as Overlays from './overlays';
 export * as RichTextEditor from './rich-text-editor';
