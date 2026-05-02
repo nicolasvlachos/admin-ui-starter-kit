@@ -7,3 +7,4 @@ export * from './commerce';
 export * from './admin';
 export * from './ai';
 export * from './navigation';
+export * from './onboarding';

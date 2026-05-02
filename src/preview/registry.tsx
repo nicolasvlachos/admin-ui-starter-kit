@@ -99,6 +99,7 @@ export const REGISTRY: PreviewEntry[] = [
 	{ id: 'composed/ai', label: 'AI', section: 'Composed', family: 'AI', component: lazy(() => import('./pages/composed/AiPage')), status: 'ready' },
 	{ id: 'composed/ai-extras', label: 'AI (extras)', section: 'Composed', family: 'AI', component: lazy(() => import('./pages/composed/AiNewPage')), status: 'ready' },
 	{ id: 'composed/ai-elements', label: 'AI elements', section: 'Composed', family: 'AI', component: lazy(() => import('./pages/composed/AiElementsPage')), status: 'ready' },
+	{ id: 'composed/onboarding-checklist', label: 'Onboarding checklist', section: 'Composed', family: 'Onboarding', component: lazy(() => import('./pages/composed/OnboardingChecklistPage')), status: 'ready' },
 
 	// ── Features (app-level capabilities) ────────────────────────────
 	{ id: 'features/metrics-overview', label: 'Overview', section: 'Features', family: 'Metrics', component: lazy(() => import('./pages/features/MetricsOverviewPage')), status: 'ready' },
