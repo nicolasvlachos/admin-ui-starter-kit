@@ -1,11 +1,13 @@
-# Standalone-package readiness plan
+# History — how we got here
 
-This plan ladders the codebase up to "publishable npm package" state. Each phase is a self-contained session — execute in order, verify, then move on. Every phase ends with `tsc` clean and a visual evaluation pass per rule 16.
+This document is **historical, not a live roadmap**. It traces the phased migration that brought `admin-ui-starter-kit` from an in-app component grab-bag to a publish-ready, framework-agnostic component library.
 
-> **Status (last update):** Phases 1–13 are complete. The library is publish-ready
-> from an architecture and patterns standpoint. Remaining work is largely about
-> packaging metadata (Phase 10) and a final pre-publish verification pass (Phase
-> 11). See "Phase 13" at the bottom for what landed after the original plan.
+Read it once if you're touching structural plumbing (build config, package exports, layer boundaries, the `<UIProvider>` design) and want to understand *why* a thing looks the way it does. Otherwise skip — the live operating contract is `SKILL.md` and the entries in `references/`.
+
+> **Status:** all phases below have landed. The library is publish-ready.
+> If you find yourself "executing Phase X" — stop, that's a misread; this
+> file is a build log, not work-to-do. New work goes into a fresh plan or
+> directly into the relevant rule/reference.
 
 ---
 

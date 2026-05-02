@@ -20,7 +20,7 @@ That goal drives every other rule:
 
 When in doubt, ask: "Would this work for a brand-new consumer who installed `admin-ui-starter-kit` from npm and has no idea what Inertia is?" If not, refactor.
 
-The phased migration to standalone-package readiness lives in `PLAN.md` next to this file. Read it before starting structural work so you know which phase you're in and what's blocking publish.
+The historical migration log of how this codebase reached publish-ready state lives in [`references/history.md`](references/history.md) next to this file. **It is background only — not a live roadmap.** Read it once for context if you're touching structural plumbing; otherwise skip.
 
 ## Mandatory loading
 
@@ -30,7 +30,7 @@ The repo's `AGENTS.md` and `CLAUDE.md` at the project root point at this skill. 
 
 ## Conditional sub-guides — read when the work matches
 
-These deeper guides live alongside this file under `.claude/skills/component-library-rules/references/`. The skill stays lean; reach into the right reference only when the task fits. Each is self-contained and can be opened directly with `Read`.
+These deeper guides live alongside this file under `references/`. The skill stays lean; reach into the right reference only when the task fits. Each is self-contained and can be opened directly with `Read`.
 
 | When you're doing | Open the guide |
 | --- | --- |
@@ -44,20 +44,21 @@ These deeper guides live alongside this file under `.claude/skills/component-lib
 | Wiring framework-specific behaviour at a call site | [`references/consumer-wiring.md`](references/consumer-wiring.md) |
 | Auditing or migrating import paths | [`references/import-paths.md`](references/import-paths.md) |
 | Visual evaluation pass before declaring done | [`references/visual-eval.md`](references/visual-eval.md) |
+| Adding tests for a component or feature | [`references/testing.md`](references/testing.md) |
+| Working in the `layout/` layer (page shells, sidebars, header) | [`references/layout.md`](references/layout.md) |
+| Placing a new card/widget inside `composed/` | [`references/composed-domains.md`](references/composed-domains.md) |
+| Background reading on how the library reached publish-ready state | [`references/history.md`](references/history.md) |
+| Looking for the next high-leverage piece of work | [`references/audit-followups.md`](references/audit-followups.md) |
 
 Don't read all of them — find the matching guide for the immediate task, follow it, return.
 
-## Companion skills
+## This is the only skill in this repo
 
-These skills cover material this one deliberately leaves out. When the work matches, use them — they ship better answers than ad-hoc reasoning.
+There are no other skills shipped with this repo. The harness may surface generic skills (`frontend-design`, `shadcn`, `tailwind-v4-shadcn`, etc.) from the user's plugin set, but **this skill is the source of truth for anything inside `src/components/**`**. Where they conflict, this skill wins. The relevant material from those generic skills is inlined here:
 
-- **`frontend-design`** — distinctive, production-grade visual design. Use whenever you need to escape generic AI aesthetics: landing pages, dashboards, polished surfaces. Pairs with this skill: `frontend-design` chooses *what to build*, this one dictates *how to build it inside the library* (layers, tokens, strings, slots).
-- **`shadcn`** — adding, searching, fixing, and composing shadcn components. Use it before bringing in a new primitive, resolving registry/preset issues, or understanding compound-component intent.
-- **`shadcn-ui`** — expert guidance on shadcn/ui integration, customization, and best practices. Use it for "how do I wire this correctly" questions on top of `shadcn`'s "which command to run" answers.
-- **`tailwind-v4-shadcn`** — production-tested Tailwind v4 + shadcn setup. Reach for it when touching `App.css`, `@theme`, dark mode, the typography/density tokens, or anything CSS-architectural.
-- **`ui-components`** — broader UI component-library patterns (shadcn/ui + Radix primitives, accessibility, design-system foundations). Useful when a question is primitive-level rather than feature-level.
-
-Priority when several skills could apply: process skills first (debugging, brainstorming), implementation skills second. **Within the implementation tier, this skill overrides generic guidance whenever they conflict** — library rules trump opinions.
+- **Visual taste / "escape generic AI aesthetics"** → see rule 16 (visual evaluation) and the "Tone for visual work" section in `AGENTS.md`. The library voice is calm, neutral, dense without being cramped — admin density, not marketing flash.
+- **Adding a shadcn primitive** → step 0 of [`references/base-wrapper.md`](references/base-wrapper.md): `npx shadcn@latest add <primitive>` lands the file in `src/components/ui/<primitive>.tsx`. Then write the wrapper.
+- **Tailwind v4 + shadcn token architecture** → tokens live in `src/App.css` under `@theme inline { … }` (and the `:root` / `.dark` blocks for the variable values themselves). Read the comment blocks at the top of `App.css` before editing. Do **not** move design tokens into runtime CSS or component-level `style={}` props.
 
 ## 1. Never modify shadcn primitives directly
 
@@ -538,12 +539,16 @@ Existing wrappers — DO NOT recreate, prefer them:
 - `base/popover/` (wraps `ui/popover`) — every filter facet, mention picker, popover menus
 - `base/command/` (wraps `ui/command`) — every cmdk surface
 - `base/popover-menu/` — composed of `base/popover` + `base/command`
+- `base/sheet/` (wraps `ui/sheet`) — slide-in panels (mobile sidebar, drawers)
+- `base/sidebar/` (wraps `ui/sidebar`) — every sidebar shell, used by `layout/sidebar`
 - `base/navigation/` (re-exports `ui/dropdown-menu`, `ui/breadcrumb`, etc.) — use for menus, dropdowns, action menus
-- `base/forms/` — Input, Select, Textarea, Checkbox, Switch, repeaters
+- `base/forms/` — `FormField`, `ControlledFormField`, plus `fields/` (Input, Select, Textarea, Checkbox, Switch, repeaters, …)
 - `base/cards/` (SmartCard) — every domain-card chrome
+- `base/item/` — canonical "icon + title-stack + actions" row primitive
+- `base/spinner/` — every loading spinner
 - `base/badge/`, `base/buttons/`, `base/combobox/`, `base/copyable/`, `base/currency/`, `base/date-pickers/`, `base/display/` (Avatar, Tooltip, Separator, IconBadge, InlineStat, Metadata), `base/event-calendar/`, `base/map/`, `base/table/`, `base/toaster/`
 
-Wrappers that may still be missing — add liberally when you encounter the same primitive being inlined with class blobs in 2+ places. Recent candidates worth promoting if work calls for them: `base/sheet/` (around `ui/sheet`) and `base/sidebar/` (around `ui/sidebar`) — currently only the layout package reaches into those primitives directly.
+Add a new wrapper liberally when you encounter the same primitive being inlined with class blobs in 2+ places. Don't wait for permission — that's exactly what the `base/` layer is for.
 
 ## 13. Composability via slots, render-props, and hooks
 
@@ -560,7 +565,7 @@ Two-line rule: if a consumer asks "how do I customize X" and the answer requires
 Shadcn tokens (`--background`, `--foreground`, `--card`, etc.) are the foundation. Beyond them, expose component-level CSS variables in `App.css` `@theme` so consumers can rebrand without forking:
 
 - **Typography scale** — `--text-xxs`, `--text-xs`, `--text-sm`, `--text-base`, `--text-lg`. The `Text`/`Heading` components read from these, so a consumer can resize the entire library at `:root` for denser/sparser dashboards.
-- **Density** — `--row-py-tight`, `--row-py-default`, `--row-py-loose`. List rows in filters/global-search/comments/metrics consume these.
+- **Density** — `--row-py-tight`, `--row-py-default`, `--row-py-loose`. List rows in filters/global-search/comments/analytics consume these.
 - **Component-specific** — when a single component reasonably needs override (`--filter-chip-h`, `--popover-content-pad`), add a variable and document where it's read.
 
 Document each new variable in `App.css` with a comment listing the consuming components.
@@ -585,7 +590,7 @@ Before declaring any visual change done:
 
 ## 17. `<UIProvider>` — single source of library-wide display defaults
 
-There is exactly **one** library provider: `<UIProvider>` from `@/lib/ui-provider`. It holds the small set of values consumers want to set once at the root and never repeat:
+There is exactly **one** library provider: `<UIProvider>` from `@/lib/ui-provider`. It holds the small set of values consumers want to set once at the root and never repeat. A representative (non-exhaustive) list:
 
 - `money.defaultCurrency`, `money.locale`, `money.formatMode`, `money.dualPricingEnabled`, …
 - `dates.weekStartsOn`, `dates.format`, `dates.formatRelativeTime`, …
@@ -601,6 +606,9 @@ There is exactly **one** library provider: `<UIProvider>` from `@/lib/ui-provide
 - `toast.duration`, `toast.position`
 - `spinner.defaultVariant`
 - `media.resolveUrl`, `media.resolveName`
+
+> **Source of truth**: the canonical, up-to-date slice list lives in
+> [`src/lib/ui-provider/types.ts`](../../../src/lib/ui-provider/types.ts) (the `UIConfig` union and its slice types). The bullet list above is informational; trust the file when they disagree.
 
 Implemented as a single zustand store; consumers read via slice hooks (`useMoneyConfig()`, `useBadgeConfig()`, `useItemConfig()`, `useDatesConfig()`, …). Slice-scoped subscriptions: components that read `money` do not re-render when `dates` changes.
 

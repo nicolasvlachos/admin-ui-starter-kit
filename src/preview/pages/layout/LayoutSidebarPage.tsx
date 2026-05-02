@@ -17,7 +17,7 @@ import {
 	SidebarWorkspaceDropdown,
 	type SidebarNavItem,
 } from '@/components/layout/sidebar';
-import { SidebarMenuItem } from '@/components/ui/sidebar';
+import { SidebarMenuItem } from '@/components/base/sidebar';
 import { PreviewPage, PreviewSection } from '../../PreviewLayout';
 
 const groups: Record<string, SidebarNavItem[]> = {
