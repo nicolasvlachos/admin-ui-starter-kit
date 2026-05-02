@@ -205,6 +205,28 @@ Fold into the tone-token sweep above or document as illustrative.
 user-facing JSX strings yet. Add an empty interface + defaults so the
 feature shape matches rule 11 and survives a future string addition.
 
+### [M] Add `<NumberChip>` primitive in `base/display/`
+
+Two sites currently hand-roll a "circular numeric badge" with a span +
+inline-flex + size-5 + rounded-full + tabular-nums:
+
+- `composed/ai/ai-citation/ai-citation.tsx:111`
+- `composed/ai/ai-sources/ai-sources.tsx:202`
+
+Ship: introduce `<NumberChip value={n} />` in `base/display/` and
+codemod the two sites. Pairs with the gradient-card glass-Badge
+follow-up — both are missing primitives, not raw-span violations.
+
+### [L] Rich-text editor placeholder spans
+
+`features/rich-text-editor/partials/rich-text-editor-tiptap.tsx:287`
+and `…/rich-text-editor-fallback.tsx:168` use raw `<span>` for the
+absolute-positioned placeholder text overlaid on the editor. The
+positioning is load-bearing (the placeholder sits under the contenteditable),
+so wrapping in `<Text>` adds an extra layout box. Acceptable as-is, or
+ship a `<EditorPlaceholder>` partial in the feature folder if it
+appears in any third surface.
+
 ---
 
 ## Ordering

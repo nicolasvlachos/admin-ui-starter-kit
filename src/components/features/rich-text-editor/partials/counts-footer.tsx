@@ -1,3 +1,4 @@
+import { Text } from '@/components/typography';
 import { cn } from '@/lib/utils';
 
 import type { RichTextEditorStrings } from '../rich-text-editor.strings';
@@ -16,18 +17,19 @@ export function CountsFooterText({ text, maxLength, strings }: CountsFooterTextP
 
 	return (
 		<div className="border-border flex items-center justify-end gap-3 border-t px-3 py-1.5">
-			<span
-				className={cn(
-					'text-muted-foreground text-xs tabular-nums',
-					overLimit && 'text-destructive font-medium',
-				)}
+			<Text
+				tag="span"
+				size="xs"
+				type={overLimit ? 'error' : 'secondary'}
+				weight={overLimit ? 'medium' : 'regular'}
+				className={cn('tabular-nums')}
 			>
 				{chars}
 				{typeof maxLength === 'number' ? ` / ${maxLength}` : ''} {strings.counts.characters}
-			</span>
-			<span className="text-muted-foreground text-xs tabular-nums">
+			</Text>
+			<Text tag="span" size="xs" type="secondary" className="tabular-nums">
 				{words} {strings.counts.words}
-			</span>
+			</Text>
 		</div>
 	);
 }

@@ -16,7 +16,7 @@ import {
 import {
     PlaceAutocomplete,
     type PlaceAutocompleteProps,
-} from "@/components/ui/place-autocomplete"
+} from "./place-autocomplete"
 import type {
     Circle,
     CircleMarker,

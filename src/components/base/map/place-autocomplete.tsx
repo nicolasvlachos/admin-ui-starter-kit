@@ -1,3 +1,4 @@
+import { Text } from "@/components/typography"
 import { cn } from "@/lib/utils"
 import {
     Command,
@@ -379,15 +380,15 @@ function PlaceAutocomplete({
                                             }}>
                                             <MapPinIcon />
                                             <div className="flex flex-col items-start text-start">
-                                                <span className="font-medium">
+                                                <Text tag="span" weight="medium">
                                                     {feature.properties.name ||
                                                         feature.properties
                                                             .street ||
                                                         "Unknown"}
-                                                </span>
-                                                <span className="text-muted-foreground text-xs">
+                                                </Text>
+                                                <Text tag="span" size="xs" type="secondary">
                                                     {formattedAddress}
-                                                </span>
+                                                </Text>
                                             </div>
                                         </CommandItem>
                                     )

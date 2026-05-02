@@ -62,7 +62,7 @@ There are no other skills shipped with this repo. The harness may surface generi
 
 ## 1. Never modify shadcn primitives directly
 
-**`src/components/ui/*`** is the shadcn primitive layer. **Do not edit these files** to change defaults, sizes, density, or typography.
+**`src/components/ui/*`** is the shadcn primitive layer. **Do not edit these files** to change defaults, sizes, density, or typography. Every file in `ui/` should be reproducible by re-running `npx shadcn@latest add <primitive>`. If a file in `ui/` doesn't roundtrip with shadcn, it doesn't belong there.
 
 If you need a different version (denser, larger, themed):
 - **Compose a wrapper** in `src/components/base/` that wraps the shadcn primitive and applies your variant.
@@ -71,6 +71,8 @@ If you need a different version (denser, larger, themed):
 The bare `@/components/ui/<primitive>` path is allowed **only** for base wrappers (e.g. `base/popover/popover.tsx` reaches into `@/components/ui/popover`). Anywhere outside `base/`, importing directly from `@/components/ui/*` is a layering violation — wrap the primitive first, or use the existing wrapper.
 
 Touching shadcn primitives directly breaks the abstraction layer and means the next shadcn upgrade overwrites your work.
+
+**Package-owned non-shadcn "primitives".** A few units of UI in this library are large, package-owned, opinionated implementations (Mapbox/Leaflet adapter, Google Places autocomplete) that are **not** shadcn primitives. They live in `src/components/base/` directly (e.g. `base/map/map.tsx`, `base/map/place-autocomplete.tsx`), not in `ui/`. They follow the same framework-agnostic / token-driven / strings-overridable rules as everything else in `base/`. Don't recreate them in `ui/` — `ui/` is shadcn-only.
 
 ## 2. The component layer order is sacred
 

@@ -74,7 +74,7 @@ export function RefundStatusCard({
 									{done ? (
 										<Check className="size-3" />
 									) : (
-										<span className="text-xxs font-medium tabular-nums">{i + 1}</span>
+										<Text tag="span" size="xxs" weight="medium" className="tabular-nums">{i + 1}</Text>
 									)}
 								</div>
 								{i < STAGE_ORDER.length - 1 && (

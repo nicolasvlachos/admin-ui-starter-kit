@@ -148,7 +148,7 @@ function renderMenuItems(
 
 		const itemClassName = cn(
 			'gap-1.5 px-2 py-1.5 text-xs',
-			action.variant === 'destructive' && 'text-destructive focus:text-destructive',
+			action.variant === 'destructive' && 'text-destructive focus-visible:text-destructive',
 		);
 
 		if (action.href && !action.onClick && !disabled) {
