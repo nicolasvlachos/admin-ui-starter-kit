@@ -90,6 +90,7 @@ export const REGISTRY: PreviewEntry[] = [
 	{ id: 'composed/data-display-dense-info', label: 'Dense info', section: 'Composed', family: 'Data display', component: lazy(() => import('./pages/composed/DenseInfoPage')), status: 'ready' },
 
 	{ id: 'composed/admin', label: 'Admin', section: 'Composed', family: 'Admin', component: lazy(() => import('./pages/composed/AdminPage')), status: 'ready' },
+	{ id: 'composed/admin-api-keys', label: 'API keys', section: 'Composed', family: 'Admin', component: lazy(() => import('./pages/composed/ApiKeyListPage')), status: 'ready' },
 	{ id: 'composed/dark-surfaces', label: 'Dark surfaces', section: 'Composed', family: 'Surfaces', component: lazy(() => import('./pages/composed/DarkSurfacesPage')), status: 'ready' },
 	{ id: 'composed/commerce', label: 'Commerce', section: 'Composed', family: 'Commerce', component: lazy(() => import('./pages/composed/CommercePage')), status: 'ready' },
 	{ id: 'composed/commerce-extras', label: 'Commerce (extras)', section: 'Composed', family: 'Commerce', component: lazy(() => import('./pages/composed/CommerceExtrasPage')), status: 'ready' },
