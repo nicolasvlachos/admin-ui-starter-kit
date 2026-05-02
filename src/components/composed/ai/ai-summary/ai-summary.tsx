@@ -64,7 +64,7 @@ export function AiSummaryBlock({ data, strings: stringsProp }: AiSummaryBlockPro
                         </Text>
                     </div>
                     {!!data.onRegenerate && (
-                        <Button variant="secondary" buttonStyle="ghost" size="xs" onClick={data.onRegenerate}>
+                        <Button variant="secondary" buttonStyle="ghost" onClick={data.onRegenerate}>
                             <RefreshCw className="mr-1 h-3 w-3" />
                             {strings.regenerate}
                         </Button>

@@ -6,7 +6,7 @@ import { TooltipProvider } from '@/components/base/display/tooltip';
 import {
 	SidebarProvider as PrimitiveSidebarProvider,
 	useSidebar as primitiveUseSidebar,
-} from '@/components/ui/sidebar';
+} from '@/components/base/sidebar';
 import { cn } from '@/lib/utils';
 
 export const useSidebar = primitiveUseSidebar;

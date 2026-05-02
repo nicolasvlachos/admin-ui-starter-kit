@@ -173,7 +173,7 @@ export function CoordinatesInput({
             </div>
 
             {!!showPreviewLink && !!mapUrl && !!previewLinkLabel && (
-                <TextLink href={mapUrl} size="sm" type="secondary" underline={false}>
+                <TextLink href={mapUrl} type="secondary" underline={false}>
                     {previewLinkLabel}
                 </TextLink>
               )}

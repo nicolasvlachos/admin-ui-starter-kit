@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import * as baseui from '@/components/ui/select';
 import { Label } from '@/components/typography';
 import { cn } from '@/lib/utils';
@@ -94,18 +94,6 @@ export function WeightInput({
 
     const value = isValueControlled ? controlledValue ?? '' : internalValue;
     const unit = isUnitControlled ? controlledUnit ?? defaultUnit : internalUnit;
-
-    useEffect(() => {
-        if (!isValueControlled && defaultValue !== undefined) {
-            setInternalValue(defaultValue);
-        }
-    }, [defaultValue, isValueControlled]);
-
-    useEffect(() => {
-        if (!isUnitControlled && controlledUnit !== undefined) {
-            setInternalUnit(controlledUnit);
-        }
-    }, [controlledUnit, isUnitControlled]);
 
     const handleValueChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {

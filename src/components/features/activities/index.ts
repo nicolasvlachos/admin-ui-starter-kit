@@ -63,7 +63,7 @@ export {
     type UseActivityResourcesReturn,
 } from './hooks';
 
-// NOTE: framework adapters (Inertia, Next.js, …) live under
-// `./adapters/$framework.tsx` and are NOT re-exported here. Consumers using
-// Inertia opt in explicitly:
-//   import { InertiaActivityFeed } from '@/components/features/activities/adapters/inertia';
+// NOTE: this feature is framework-agnostic. The library no longer ships
+// `adapters/$framework/` folders. Consumers wire fetching / pagination /
+// router calls at the call site by passing `fetcher`, `onLoadMore`,
+// `onFilterChange`, etc. directly to `<ActivityFeedCard>`.

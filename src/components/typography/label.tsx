@@ -22,7 +22,7 @@ function resolveLabelSize(
 	return sizeProp ?? defaultLabelSize ?? 'sm';
 }
 
-type LabelProps = {
+export type LabelProps = {
 	content?: ReactNode;
 	className?: string;
 	size?: FormLabelSize;

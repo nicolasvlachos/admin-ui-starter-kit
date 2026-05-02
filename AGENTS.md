@@ -35,84 +35,75 @@ The architectural goals — and the reason every rule below exists — are:
 6. **Visual-quality first**: every shipped surface is evaluated as a
    designer would — spacing, hierarchy, focus states, voice consistency.
 
-The full migration roadmap to standalone-package readiness lives in
-[.claude/skills/component-library-rules/PLAN.md](.claude/skills/component-library-rules/PLAN.md).
-The roadmap is complete through Phase 11 — the library is publish-ready.
+A historical record of how the library reached publish-ready state
+lives in
+[`.agents/skills/component-library-rules/references/history.md`](.agents/skills/component-library-rules/references/history.md).
+Read it once for context; it is not a live roadmap.
 
 ## Mandatory reading before any code change
 
-### 1. `component-library-rules` skill (non-negotiable)
-
-The skill at
-[.claude/skills/component-library-rules/SKILL.md](.claude/skills/component-library-rules/SKILL.md)
-encodes 16 rules covering layer order, typography, density, tokens,
+The **only** mandatory skill in this repo is
+[`component-library-rules`](.agents/skills/component-library-rules/SKILL.md).
+It encodes 23 rules covering layer order, typography, density, tokens,
 strings/i18n, framework-agnostic contracts, slot/render-prop
-composability, and the visual-evaluation pass. Read it before touching
-any component in `src/components/**`. It is loaded automatically by the
-Claude harness, but you must read it through and follow it. Failing to
-do so turns into "you keep fucking up things." Don't.
+composability, locale-agnosticism, console hygiene, and the visual
+evaluation pass. Read it before touching any component in
+`src/components/**`. The Claude harness auto-loads it; you must read it
+through and follow it.
 
-The companion file
-[PLAN.md](.claude/skills/component-library-rules/PLAN.md) lists the
-phased migration that brought this codebase to standalone-package
-state. Re-read it before structural work so you know which patterns are
-canonical and which are legacy.
+Deeper how-to guides live alongside the skill under
+[`.agents/skills/component-library-rules/references/`](.agents/skills/component-library-rules/references):
+strings pattern, base wrapper, item / form-field patterns, preview
+pages, ui-provider, consumer wiring, import paths, visual evaluation,
+testing, layout, composed-domains. Pull the matching one when the work
+fits; don't read all of them.
 
-### 2. Other design / UI skills available
-
-These skills are also auto-loaded. Use them when the work matches —
-they cover material this repo's own skill deliberately leaves out.
-
-- **`frontend-design`** — for distinctive, production-grade visual
-  design. Reach for it whenever building or styling user-facing surfaces
-  (pages, dashboards, landing components) and you want to escape generic
-  AI aesthetics. Pairs naturally with `component-library-rules`: this
-  one chooses *what to build*, ours dictates *how to build it inside the
-  library*.
-- **`shadcn`** — for adding, searching, fixing, debugging, or composing
-  shadcn components. Use it when you need to bring in a new primitive,
-  resolve a registry/preset issue, or understand how a shadcn component
-  is meant to compose.
-- **`shadcn-ui`** — expert guidance on shadcn/ui integration,
-  customization, and best practices. Use alongside `shadcn` when the
-  question is *how to wire it correctly*, not *which command to run*.
-- **`tailwind-v4-shadcn`** — production-tested Tailwind v4 + shadcn
-  setup. Reach for it when touching `App.css`, `@theme`, dark mode,
-  tokens, or anything CSS-architectural.
-- **`ui-components`** — broader UI component-library patterns
-  (shadcn/ui + Radix primitives, accessibility, design-system
-  foundations). Useful for primitive-level decisions.
-
-If multiple skills apply, follow the priority hierarchy defined in
-`component-library-rules`: process skills first, implementation skills
-second; library rules override generic guidance when they conflict.
+This skill is **self-sufficient by design** — there are no other skills
+shipped with this repo. If a topic isn't covered, ask before inventing
+a pattern.
 
 ## The architectural layers
 
 ```
 src/components/
-├── ui/        ← shadcn primitives — DO NOT EDIT directly
-├── base/      ← thin wrappers / compositions of UI primitives
-│               (Button, Text, Heading, Card, Input, Badge, Popover,
-│                Command, PopoverMenu, Tabs, Combobox, …)
-├── composed/  ← domain-level cards & widgets built from base
-│               (analytics, cards, charts, commerce, navigation, …)
-└── features/  ← app-level features (filters, comments, overlays,
-                 metrics, search) — provider/callback driven, with
-                 strings, slots, and `adapters/$framework/` opt-ins.
+├── ui/         ← shadcn primitives — DO NOT EDIT
+├── typography/ ← Text, Heading, Label, TextLink (peer to ui/, no upstream deps)
+├── base/       ← thin wrappers / compositions of UI primitives
+│                 (Button, Card, Input, Badge, Popover, Command,
+│                  PopoverMenu, Tabs, Combobox, Item, FormField, …)
+├── layout/     ← page shells (header, sidebar, page) — built on
+│                 base + typography + ui, never imports composed/features
+├── composed/   ← domain-level cards & widgets built from base
+│                 (admin, ai, analytics, cards, commerce, dark-surfaces,
+│                  data-display, navigation, timelines, …)
+└── features/   ← app-level features (filters, comments, overlays,
+                   global-search, mentions, rich-text-editor, sync,
+                   activities, ai-chat, event-log, suggestions, card)
+                   — provider/callback driven, with strings + slots.
 ```
 
-Hard rules:
-- A `composed` component imports from `base` and `ui`, never `features`.
-- A `feature` imports from `base`, `composed`, `ui`. **No framework
-  integration imports anywhere in the library** — no `@inertiajs/*`, no
-  `@tanstack/react-query`, no `@tanstack/react-router`, no
-  `react-router*`, no `next/*`, no `vite-bundled-i18n/*`, no `ziggy-js`.
-  Framework wiring lives in the consumer's app, not here.
-- Adapter folders (`features/$feature/adapters/$framework/`) **do not
-  exist anymore**. The consumer passes `onSubmit`, `onDelete`,
-  `onResultSelect`, `onChange`, `fetcher`, etc. as direct props at the
-  call site.
+Hard rules (full detail in the skill):
+- `typography/` depends only on `@/lib/ui-provider`, `@/lib/utils`,
+  `@/lib/sanitize-html`. Never imports from `base/`/`composed/`/
+  `features/`/`layout/`.
+- A `base` wrapper imports from `ui/` and `typography/` (and other
+  `base`). Never `composed`/`features`/`layout`.
+- A `layout` shell imports from `base`, `typography`, `ui`. Never
+  `composed`/`features`.
+- A `composed` component imports from `base`, `typography`, `ui`. Never
+  `features` or `layout`.
+- A `features` component imports from `base`, `typography`, `composed`,
+  `ui` — and its **default behaviour is callback-driven**, never
+  hardcoded routing/i18n/data fetching.
+- **No framework integration imports anywhere in the library** — no
+  `@inertiajs/*`, no `@tanstack/react-query`, no
+  `@tanstack/react-router`, no `react-router*`, no `next/*`, no
+  `vite-bundled-i18n/*`, no `ziggy-js`. There is **no**
+  `adapters/$framework/` folder anymore. The consumer wires routing /
+  data / i18n at the call site via direct props
+  (`onSubmit`, `onSelect`, `fetcher`, `strings`, …).
+- Direct imports from `@/components/ui/*` are allowed **only** inside
+  the matching `base/` wrapper. Anywhere else, use the wrapper.
 
 ## Quick reference
 
@@ -126,13 +117,16 @@ Hard rules:
   `useBadgeConfig()`, …). Resolution rule everywhere:
   **`props.X ?? useFooConfig().X ?? hardcoded fallback`**. Per-mount
   callbacks, data, and resource registries are **always** direct props
-  on the actual component — never put them in the store.
+  on the actual component — never put them in the store. Canonical
+  slice list: see the union types in `src/lib/ui-provider/types.ts`.
 - **Tokens**: `src/App.css` — typography, density, semantic colours,
   shadcn token composition. Read the comment blocks before editing.
 - **Strings pattern**: every component with user-facing text exports a
   `*Strings` interface + `default*Strings` defaults; the prop is
-  deep-merged. See `features/global-search/global-search.strings.ts` or
-  `features/comments/comments.strings.ts` for canonical examples.
+  deep-merged via `useStrings(defaults, override)`. See
+  `features/global-search/global-search.strings.ts`,
+  `features/comments/comments.strings.ts`, or
+  `composed/analytics/analytics.strings.ts` for canonical examples.
 - **Slots / hooks**: see `features/global-search/` (slots, render-prop,
   `useGlobalSearch`) and `features/filters/` (provider + exported
   partials + `useAsyncOptions`) for canonical composability patterns.
@@ -141,7 +135,8 @@ Hard rules:
 
 1. Read `component-library-rules/SKILL.md` if you haven't this session.
 2. Identify which layer owns the change (`ui` → primitive, `base` →
-   wrapper, `composed` → surface, `features` → app feature).
+   wrapper, `composed` → surface, `features` → app feature, `layout`
+   → page shell).
 3. Read the file and its callers. Don't assume an API.
 4. Use `base/` components, not raw HTML. If a primitive is used in 2+
    places without a wrapper, add one in `base/` rather than inlining.
@@ -154,6 +149,16 @@ Hard rules:
 # Type-check the app (the only invocation that works on this repo —
 # the deprecation flag is mandatory because `baseUrl` is still used).
 npx tsc -p tsconfig.app.json --noEmit --ignoreDeprecations 6.0
+# or: npm run typecheck
+
+# Architecture check (forbidden imports between layers, alias drift).
+npm run lint:architecture
+
+# Public exports surface check.
+npm run test:exports
+
+# All of the above + lint + tests.
+npm run verify
 
 # Dev / preview server. Already auto-managed by the Claude harness via
 # preview_start; for terminal use:
@@ -162,20 +167,18 @@ npm run dev
 # Lint
 npm run lint
 
-# Build (only when verifying publish-readiness)
-npm run build
+# Library build (verifying publish-readiness).
+npm run build:lib
 ```
 
 When asserting "no new tsc errors", filter the output to the files you
-actually touched — there are pre-existing errors (peer-dep imports
-inside opt-in adapters, `enum` syntax under `erasableSyntaxOnly`, a
-`MoneyValueData` mismatch). Don't claim success against the unfiltered
-exit code.
+actually touched — there are pre-existing errors flagged in `verify`.
+Don't claim success against the unfiltered exit code.
 
 For the visual pass:
 1. Use `preview_start` / `preview_eval` / `preview_screenshot` from
    the harness, not Bash. The repo's preview server is already wired
-   into `.claude/launch.json`.
+   into `.claude/launch.json` (the local-only Claude config).
 2. Reload via `window.location.reload()` after edits — Vite HMR is
    reliable except for module-shape changes (renames, new exports).
 3. Run rule 16's five-question check before declaring done.
@@ -190,45 +193,63 @@ src/
 │                                   comment blocks before editing.
 ├── components/
 │   ├── ui/                       — shadcn primitives. Read-only.
+│   ├── typography/               — Text, Heading, Label, TextLink
 │   ├── base/
-│   │   ├── typography/           — Text, Heading, Label, TextLink
 │   │   ├── buttons/              — Button (variant + buttonStyle)
 │   │   ├── badge/                — Badge (size: xs/sm/md, variant)
 │   │   ├── cards/                — SmartCard with PADDING preset
 │   │   ├── popover/              — wrapper around ui/popover
 │   │   ├── command/              — wrapper around ui/command (cmdk)
 │   │   ├── popover-menu/         — popover + command + slots
-│   │   ├── navigation/tabs.tsx   — re-export of ui/tabs (segmented)
-│   │   ├── forms/fields/         — Input, Select, MoneyInput, etc.
+│   │   ├── navigation/            — tabs, breadcrumbs, dropdown menus
+│   │   ├── forms/                — FormField, ControlledFormField,
+│   │   │                            fields/ (Input, Select, Money…)
 │   │   ├── combobox/             — searchable combobox + hooks/
 │   │   ├── currency/             — useCurrency lives in hooks/
 │   │   ├── date-pickers/         — DatePicker, DateRangePicker, …
-│   │   └── display/              — Avatar, Tooltip, Separator, …
+│   │   ├── display/              — Avatar, Tooltip, Separator,
+│   │   │                            IconBadge, InlineStat, Metadata
+│   │   ├── item/                 — canonical row primitive
+│   │   │                            (icon + title-stack + actions)
+│   │   ├── event-calendar/, map/, table/, toaster/, spinner/
+│   │   ├── copyable/             — copy-to-clipboard wrapper
+│   │   └── …
+│   ├── layout/
+│   │   ├── header/, sidebar/, page/, containers/
+│   │   ├── hooks/                — layout-only hooks
+│   │   └── README.md             — layout-layer conventions
 │   ├── composed/
+│   │   ├── admin/                — team-member, settings rows, …
+│   │   ├── ai/                   — citation, suggestion cards
 │   │   ├── analytics/            — Metric, MetricBar, MetricGrid,
 │   │   │                           ActivityHeatmap, MetricComparison.
 │   │   │                           Strings: analytics.strings.ts.
 │   │   ├── cards/                — domain-specific card layouts
-│   │   ├── commerce/, ai/,       — narrow domain surfaces
-│   │   │   admin/, navigation/,
-│   │   │   data-display/, …
-│   │   └── timelines/, charts/
+│   │   ├── commerce/             — order, shipment, product surfaces
+│   │   ├── dark-surfaces/        — dense dark-themed dashboards
+│   │   ├── data-display/         — KV pairs, definition lists, …
+│   │   ├── navigation/           — category-nav, breadcrumb-progress
+│   │   └── timelines/            — marker-rail timeline
 │   └── features/
+│       ├── activities/           — activity feed
+│       ├── ai-chat/              — chat shell
+│       ├── card/                 — card-builder feature
+│       ├── comments/             — composer + thread (canonical)
+│       ├── event-log/            — audit log feature
 │       ├── filters/              — provider + facets + partials
 │       │   ├── facets/           — Search/Select/Async/Date/…/Tags
 │       │   ├── partials/         — exported as composition seams
-│       │   ├── hooks/            — useAsyncOptions
-│       │   └── adapters/inertia/ — opt-in: Inertia router wiring
+│       │   └── hooks/            — useAsyncOptions
 │       ├── global-search/        — canonical example shape
 │       │   ├── partials/         — input, tabs, result-row, …
 │       │   ├── hooks/            — useGlobalSearch (headless)
-│       │   ├── adapters/         — inertia.tsx (opt-in)
 │       │   ├── *.types.ts
 │       │   └── *.strings.ts
-│       ├── comments/             — also canonical
+│       ├── mentions/             — @-mention picker + suggestions
 │       ├── overlays/             — Dialog, Drawer, AlertDialog
-│       ├── metrics/              — deprecation shim → analytics
-│       └── rich-text-editor/     — TipTap-backed (peer dep)
+│       ├── rich-text-editor/     — TipTap-backed
+│       ├── suggestions/          — typeahead suggestions
+│       └── sync/                 — sync indicators / conflict UI
 ├── hooks/                        — only cross-cutting hooks
 │                                   (use-debounce, use-mobile,
 │                                   use-event-listener, …).
@@ -237,11 +258,12 @@ src/
 ├── lib/
 │   ├── strings.ts                — useStrings deep-merge helper
 │   ├── utils.ts                  — cn (clsx + tailwind-merge)
-│   └── external-stubs/           — local fakes for peer deps so the
-│                                   showcase builds without them
+│   ├── sanitize-html.ts          — used by typography
+│   └── ui-provider/              — single zustand provider + slices
 ├── preview/                      — the showcase app (do not ship)
 │   ├── PreviewApp.tsx            — registry-driven nav
-│   ├── registry.tsx              — page registration
+│   ├── registry.tsx              — page registration (every page
+│   │                                 under pages/ MUST appear here)
 │   └── pages/                    — thin demos of the real components
 └── services/, types/             — domain types/services (largely
                                     untouched by component work)
@@ -268,12 +290,12 @@ When in doubt, model new work on these reference implementations:
   use `<FilterLayout>` for the default shape OR compose
   `<ActiveFilterItem>`, `<FilterOperatorSelect>`, `<FiltersButton>`
   themselves around `<FilterProvider>`.
-- **Opt-in framework adapter** →
-  [features/global-search/adapters/inertia.tsx](src/components/features/global-search/adapters/inertia.tsx),
-  [features/filters/adapters/inertia/](src/components/features/filters/adapters/inertia),
-  [features/comments/adapters/inertia.tsx](src/components/features/comments/adapters/inertia.tsx).
-  Adapters are NOT re-exported from the feature's main `index.ts`;
-  consumers import explicitly from the adapter path.
+- **Callback-driven feature** →
+  [features/comments/](src/components/features/comments). `onSubmit`,
+  `onDelete`, `onAfterMutate`, `onError` flow as direct props;
+  `composerSlot` is a slot for BYO editor when TipTap isn't installed;
+  `CommentsAccessors` map domain shapes (media URL/name, status label,
+  relative time formatter) without baking them into the library.
 - **Base wrapper around a shadcn primitive** →
   [base/popover/popover.tsx](src/components/base/popover/popover.tsx),
   [base/command/command.tsx](src/components/base/command/command.tsx).
@@ -282,6 +304,15 @@ When in doubt, model new work on these reference implementations:
   [base/popover-menu/popover-menu.tsx](src/components/base/popover-menu/popover-menu.tsx).
   Slots, render-prop, strings — the recurring "trigger → optional
   header → search → list" pattern, captured once.
+- **Item row primitive** →
+  [base/item/](src/components/base/item) — canonical "icon/avatar/image
+  + title/description text-stack + optional actions" row. Any composed
+  surface that hand-rolls this shape is a smell; reach for `<Item>`.
+- **FormField row primitive** →
+  [base/forms/form-field](src/components/base/forms) — canonical
+  "label + control + hint/helper/error" row. Pure presentational
+  (`<FormField>`) and react-hook-form-bound (`<ControlledFormField>`)
+  variants both live there.
 - **Token-driven typography & density** → `App.css` `@theme` block.
   Component CSS reads `var(--text-xs)` / `var(--row-py)` etc., never
   hardcoded literals.
@@ -292,16 +323,12 @@ When in doubt, model new work on these reference implementations:
   edit. Next shadcn upgrade overwrites your work.
 - `src/services/**`, `src/types/**` — domain layer; out of scope for
   component changes.
-- `src/lib/external-stubs/**` — local fakes for absent peer deps.
-  Don't "improve" them; they exist only to keep the showcase building
-  without `@inertiajs/*` etc. installed.
 - `*.test.tsx` / `*.test.ts` — only update if the test asserts a class
   name or behaviour you intentionally changed (e.g. badge size class).
 - `package.json` `peerDependencies` — already wired; only touch when
-  bumping a peer-dep range or adding a new opt-in framework.
+  bumping a peer-dep range.
 - The hooks list in `src/hooks/` — only cross-cutting hooks belong
-  there. Feature-specific hooks must live in
-  `<feature>/hooks/`.
+  there. Feature-specific hooks must live in `<feature>/hooks/`.
 
 ## Common mistakes — don't repeat these
 
@@ -318,14 +345,25 @@ When in doubt, model new work on these reference implementations:
 - **`focus:` outlines on interactive elements.** Use `focus-visible:`
   so mouse clicks don't create a focus ring.
 - **Hardcoding strings inside JSX** (`<button>Cancel</button>`). Always
-  go through the `strings` prop + `default*Strings` pattern.
-- **Adding `useQuery` / `router.visit` / `useI18n` to a default export
-  path.** That's a peer-dep — it goes in
-  `features/$feature/adapters/$framework/` only.
+  go through the `strings` prop + `default*Strings` pattern, resolved
+  via `useStrings(defaults, override)`.
+- **Adding `useQuery` / `router.visit` / `useI18n` / `navigator.language`
+  anywhere in the library.** All of these are consumer concerns. The
+  feature accepts a callback or a `Locale` prop; the consumer wires
+  their framework / i18n / locale at the call site.
+- **Pinning a literal `size`/`variant` on an inner base component
+  inside a wrapper.** Forward the resolved size so `<UIProvider>`
+  defaults can flow through.
 - **Editing the Comments preview page or any 300-line "private"
   component inside `preview/pages/**`.** That's a smell — the
   underlying feature is missing a slot or render-prop. Fix the
   feature, not the preview.
+- **Unguarded `console.error` / `console.warn`.** Wrap in
+  `if (import.meta.env?.DEV) { … }`. Surface real errors via an
+  `onError` callback for the consumer.
+- **Importing `Modules.Core.*` / `App.*` ambient types.** These are
+  consumer-app types; they don't ship in the library. Define a local
+  type and parameterize via generics.
 - **`text-[length:var(--text-xxs)]` is fine** when you need a token
   font-size on a non-`Text` element. Don't refactor those to
   `text-xxs` — they're already aligned with the token system.
@@ -356,9 +394,6 @@ When in doubt, model new work on these reference implementations:
   machine (active index, selection, keyboard nav) so consumers can
   drive a fully custom UI against the same logic
   (`useGlobalSearch`, `useFilters`, `useAsyncOptions`).
-- **Adapter** — opt-in framework wiring under
-  `features/$feature/adapters/$framework/`, NOT re-exported from the
-  feature's main `index.ts`.
 - **Strings prop** — every user-facing string in a component is
   reachable via `strings={{ … }}`, deep-merged over `default*Strings`.
 - **Density token** — `--row-py-tight | --row-py-default |
@@ -382,6 +417,4 @@ When in doubt, model new work on these reference implementations:
 This is an admin / SaaS surface. Voice is **calm, neutral, dense
 without being cramped**. No flashy colour washes. Active states
 intentional, not accidental. When picking a value, default to
-restraint. The `frontend-design` skill is the right reference when you
-want to push beyond "boring but correct" without breaking the library
-voice.
+restraint.

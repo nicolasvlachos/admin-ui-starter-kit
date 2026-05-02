@@ -34,6 +34,10 @@ export function AiInlineCitation({
 	});
 	const tooltip = title ? `${strings.sourcePrefix} ${index}: ${title}` : `${strings.sourcePrefix} ${index}`;
 
+	// Sizes here are em-relative on purpose: an inline citation chip must
+	// scale with the surrounding paragraph (whatever Text size it's nested in)
+	// rather than pick a fixed token. This is the rule-3 exception for
+	// "load-bearing inline relative units" — do NOT refactor to `text-xs`.
 	const baseCls = cn(
 		'inline-flex h-[1.25em] min-w-[1.25em] -translate-y-px items-center justify-center rounded px-1',
 		'align-middle text-[0.75em] font-medium tabular-nums',

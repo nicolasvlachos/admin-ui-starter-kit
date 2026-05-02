@@ -56,11 +56,11 @@ export function AiReasoning({
 	const headerLabel: ReactNode = streaming ? (
 		<AiShimmer>{strings.thinking}</AiShimmer>
 	) : durationSeconds !== undefined ? (
-		<Text size="sm" weight="medium">
+		<Text weight="medium">
 			{interpolate(strings.thoughtFor, { seconds: durationSeconds.toFixed(1) })}
 		</Text>
 	) : (
-		<Text size="sm" weight="medium">
+		<Text weight="medium">
 			{strings.thoughtDone}
 		</Text>
 	);

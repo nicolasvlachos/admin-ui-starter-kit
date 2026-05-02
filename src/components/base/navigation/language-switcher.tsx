@@ -1,8 +1,12 @@
 /**
  * LanguageSwitcher — locale picker with two layouts: `buttons` (chunky
  * primary buttons) and `inline` (small text links separated by dots, prefixed
- * with a globe icon). Defaults to `buttons`. Override the URL behaviour with
- * `onSelect` (otherwise pushes `?lang=<value>` to the current location).
+ * with a globe icon). Defaults to `buttons`.
+ *
+ * The library never navigates on its own. The consumer wires routing /
+ * locale switching by passing `onSelect` (e.g. a Tanstack Router
+ * `navigate(...)` or Inertia `router.visit(...)`). When `onSelect` is
+ * absent the click is a no-op.
  */
 import { Globe } from 'lucide-react';
 import { Fragment, useCallback } from 'react';
@@ -24,32 +28,13 @@ export function LanguageSwitcher({
 	variant = 'buttons',
 	onSelect,
 }: LanguageSwitcherProps) {
-	const buildUrl = useCallback((value: string): string => {
-		const url = typeof window !== 'undefined' ? `${window.location.pathname}${window.location.search}` : '/';
-		const [pathRaw, search = ''] = url.split('?');
-		const path = pathRaw.startsWith('/') ? pathRaw : `/${pathRaw}`;
-		const params = new URLSearchParams(search);
-		params.set('lang', value);
-
-		const query = params.toString();
-
-		return query.length > 0 ? `${path}?${query}` : path;
-	}, []);
-
 	const handleSelect = useCallback((value: string, isActive: boolean) => {
 		if (isActive) {
 			return;
 		}
 
-		if (onSelect) {
-			onSelect(value);
-			return;
-		}
-
-		if (typeof window !== 'undefined') {
-			window.location.assign(buildUrl(value));
-		}
-	}, [buildUrl, onSelect]);
+		onSelect?.(value);
+	}, [onSelect]);
 
 	if (locales.length === 0) {
 		return null;

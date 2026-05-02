@@ -33,13 +33,11 @@ export function EventCalendarEventCard({
 	strings: stringsProp,
 }: EventCalendarEventCardPropsWithStrings) {
 	const strings = useStrings(defaultEventCalendarEventCardStrings, stringsProp);
-	const isClickable = !!onClick || !!event.url;
+	const isClickable = !!onClick;
 
 	const handleClick = () => {
 		if (onClick) {
 			onClick();
-		} else if (event.url) {
-			window.location.href = event.url;
 		}
 	};
 

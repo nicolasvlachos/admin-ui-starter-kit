@@ -13,6 +13,8 @@ export * from './map';
 export * from './navigation';
 export * from './popover';
 export * from './popover-menu';
+export * from './sheet';
+export * from './sidebar';
 export * from './spinner';
 export * from './table';
 export * from './toaster';

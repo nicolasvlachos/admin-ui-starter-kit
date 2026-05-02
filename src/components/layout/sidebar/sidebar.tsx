@@ -8,7 +8,7 @@ import {
 	SheetDescription,
 	SheetHeader,
 	SheetTitle,
-} from '@/components/ui/sheet';
+} from '@/components/base/sheet';
 import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 

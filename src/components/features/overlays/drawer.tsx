@@ -212,7 +212,7 @@ function DrawerImpl({
 								isHorizontal && WIDTH_CLASSES[width],
 								!isHorizontal && 'max-h-[85vh]',
 								directionStyles.animation,
-								'outline-none focus:outline-none focus-visible:outline-none',
+								'outline-none focus-visible:outline-none',
 								'flex flex-col',
 								className,
 							)}

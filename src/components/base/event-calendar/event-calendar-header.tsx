@@ -53,15 +53,7 @@ const renderAction = (action: CalendarActionItem, index: number) => {
 	const key = action.id || `action-${index}`;
 
 	const handleClick = () => {
-		if (action.onClick) {
-			action.onClick();
-		} else if (action.href) {
-			try {
-				window.location.href = action.href;
-			} catch {
-				/* noop */
-			}
-		}
+		action.onClick?.();
 	};
 
 	const resolved = resolveActionButtonVariant(action.variant);

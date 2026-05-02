@@ -14,7 +14,7 @@ import {
 	SidebarMenu,
 	SidebarMenuItem,
 	SidebarSeparator,
-} from '@/components/ui/sidebar';
+} from '@/components/base/sidebar';
 import { cn } from '@/lib/utils';
 
 import { SidebarGroupedNavigation } from './components/sidebar-grouped-navigation';

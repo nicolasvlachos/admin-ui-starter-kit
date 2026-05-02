@@ -47,7 +47,7 @@ export function PageHeader({
 					<div className="flex items-center gap-2">
 						<Heading tag="h2" className="text-2xl border-0 pb-0">{title}</Heading>
 						{!!badge && (
-							<Badge variant={badge.variant ?? 'secondary'} size="sm">{badge.label}</Badge>
+							<Badge variant={badge.variant ?? 'secondary'}>{badge.label}</Badge>
 						)}
 					</div>
 					{!!description && (

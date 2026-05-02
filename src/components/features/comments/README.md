@@ -182,13 +182,24 @@ interface CommentsConfig<TUser, TMeta, TResource> {
 - `renderAttachment(att)` — per-attachment custom chip
 - `renderReference(mention)` — per-mention custom chip (overrides resource.renderChip)
 
-### Framework adapters
+### Framework wiring
 
-`./adapters/inertia.tsx` exports `<InertiaCommentsCard>` that wires
-`router.post` / `router.patch` / `router.delete` + Ziggy route helpers
-to the comments lifecycle. Opt-in — not re-exported from
-`features/comments/index.ts`. Other frameworks can adopt the same
-pattern under `./adapters/<framework>/`.
+This feature is framework-agnostic. The library does not ship
+`adapters/$framework/`. Consumers wire routing / data / optimistic
+updates / i18n at the call site:
+
+```tsx
+<CommentsCard
+    items={items}
+    onSubmit={(values) => router.post(route('comments.store'), values)}
+    onDelete={(id) => router.delete(route('comments.destroy', id))}
+    strings={{ composer: { placeholder: t('comments.placeholder') } }}
+/>
+```
+
+If a consumer pattern repeats across many mount sites they wrap the
+feature in their own `<AppCommentsCard>` that forwards their defaults
+— the library never ships that wrapper.
 
 ---
 

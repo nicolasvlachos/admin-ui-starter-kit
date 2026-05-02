@@ -2,10 +2,12 @@
 export { FilterProvider, useFilters } from './filter-context';
 export { FilterLayout } from './filter-layout';
 
-// NOTE: framework adapters live under `./adapters/$framework/` and are
-// NOT re-exported here. Consumers using Inertia opt in explicitly:
-//   import { InertiaFilterProvider, useInertiaFilters }
-//     from '@/components/features/filters/adapters/inertia';
+// NOTE: this feature is framework-agnostic. The library no longer ships
+// `adapters/$framework/` folders. Consumers wire routing / persisted-
+// state / debounced URL writes at the call site by composing their own
+// provider on top of `FilterProvider` (or by reading state via
+// `useFilters()` and dispatching their router/query-cache calls
+// themselves).
 
 // Types
 export type {

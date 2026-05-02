@@ -8,7 +8,7 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
-} from '@/components/ui/sidebar';
+} from '@/components/base/sidebar';
 import { Text } from '@/components/typography';
 import { cn } from '@/lib/utils';
 

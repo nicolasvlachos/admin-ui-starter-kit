@@ -16,7 +16,7 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
-} from '@/components/ui/sidebar';
+} from '@/components/base/sidebar';
 import { useStrings } from '@/lib/strings';
 
 import type { LayoutUser } from '../../layout.types';

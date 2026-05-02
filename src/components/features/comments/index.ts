@@ -80,6 +80,8 @@ export type {
     CommentsSlots,
 } from './comments.types';
 
-// NOTE: framework adapters live under `./adapters/$framework.tsx` and are
-// NOT re-exported here. Consumers using Inertia opt in explicitly:
-//   import { InertiaCommentsCard } from '@/components/features/comments/adapters/inertia';
+// NOTE: this feature is framework-agnostic. The library no longer ships
+// `adapters/$framework/` folders. Consumers wire routing / data /
+// optimistic-update / i18n at the call site by passing `onSubmit`,
+// `onDelete`, `onAfterMutate`, `onError`, `accessors`, and `strings`
+// directly to `<Comments>` / `<CommentsCard>`.

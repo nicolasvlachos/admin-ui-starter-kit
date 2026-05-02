@@ -120,7 +120,7 @@ function TreeRow({
 				<span
 					className={cn(
 						'inline-flex size-4 shrink-0 items-center justify-center rounded',
-						'text-[0.625rem] font-bold leading-none uppercase',
+						'text-[length:var(--text-xxs)] font-bold leading-none uppercase',
 						tint?.pill,
 					)}
 				>

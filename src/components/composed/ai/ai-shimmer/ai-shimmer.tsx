@@ -18,7 +18,7 @@ export function AiShimmer({
 }: AiShimmerProps) {
 	if (paused) {
 		return (
-			<Text size="sm" type="secondary" className={className}>
+			<Text type="secondary" className={className}>
 				{children}
 			</Text>
 		);

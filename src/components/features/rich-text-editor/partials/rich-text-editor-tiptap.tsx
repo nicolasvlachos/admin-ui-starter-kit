@@ -99,7 +99,7 @@ export const TiptapRichTextEditor = forwardRef<RichTextEditorHandle, RichTextEdi
 		},
 		editorProps: {
 			attributes: {
-				class: 'prose prose-sm prose-p:my-0.5 prose-p:leading-relaxed prose-headings:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 max-w-none px-3 py-2 text-sm focus:outline-none dark:prose-invert',
+				class: 'prose prose-sm prose-p:my-0.5 prose-p:leading-relaxed prose-headings:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 max-w-none px-3 py-2 text-sm focus-visible:outline-none dark:prose-invert',
 			},
 		},
 	});
@@ -316,7 +316,7 @@ export const TiptapRichTextEditor = forwardRef<RichTextEditorHandle, RichTextEdi
 					disabled={disabled}
 					spellCheck={false}
 					className={cn(
-						'bg-muted/50 w-full resize-y px-3 py-2 font-mono text-xs leading-relaxed focus:outline-none',
+						'bg-muted/50 w-full resize-y px-3 py-2 font-mono text-xs leading-relaxed focus-visible:outline-none',
 						disabled && 'cursor-not-allowed',
 					)}
 					style={contentStyle}

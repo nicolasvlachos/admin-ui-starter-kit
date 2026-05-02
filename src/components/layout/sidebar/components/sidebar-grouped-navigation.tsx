@@ -11,7 +11,7 @@ import {
 	SidebarMenuSubButton,
 	SidebarMenuSubItem,
 	SidebarSeparator,
-} from '@/components/ui/sidebar';
+} from '@/components/base/sidebar';
 import { Text } from '@/components/typography';
 import { cn } from '@/lib/utils';
 

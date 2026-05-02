@@ -2,13 +2,17 @@ import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 /**
- * Calendar action item
+ * Calendar action item.
+ *
+ * The library never navigates on its own — there is no `href` shortcut.
+ * The consumer wires routing into `onClick` (e.g. a Tanstack Router
+ * `navigate(...)` or Inertia `router.visit(...)`), or supplies a fully
+ * pre-rendered element via `element`.
  */
 export interface CalendarActionItem {
 	id?: string;
 	label: string;
 	onClick?: () => void;
-	href?: string;
 	disabled?: boolean;
 	element?: ReactNode;
 	icon?: LucideIcon;

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { Separator } from '@/components/base/display/separator';
 import { Breadcrumbs } from '@/components/base/navigation/breadcrumbs';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarTrigger } from '@/components/base/sidebar';
 import { cn } from '@/lib/utils';
 
 import { useLayoutLinkRenderer } from '../../hooks';

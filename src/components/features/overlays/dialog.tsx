@@ -188,7 +188,7 @@ function DialogImpl({
 								SIZE_CLASSES[size],
 								'animate-in fade-in-0 zoom-in-95 duration-200',
 								'[&.closing]:animate-out [&.closing]:fade-out-0 [&.closing]:zoom-out-95 [&.closing]:duration-150',
-								'outline-none focus:outline-none focus-visible:outline-none',
+								'outline-none focus-visible:outline-none',
 								emphasis && toneStyles.classes,
 								className,
 							)}

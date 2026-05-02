@@ -14,8 +14,9 @@
  * Framework-agnostic:
  *   - No router import, no i18n SDK import. Routing is up to the consumer
  *     via `onResultSelect`. Strings live in the `strings` prop.
- *   - Opt-in adapter at `features/global-search/adapters/inertia.tsx`
- *     wires Inertia's router + (optional) bundled-i18n bridge.
+ *   - The library no longer ships `adapters/$framework/`. Consumers map
+ *     their router (Inertia, Tanstack Router, RR7, Next, …) to
+ *     `onResultSelect(result)` directly at the call site.
  */
 import * as React from 'react';
 

@@ -157,6 +157,14 @@ export function MediaGallery({
 
 	const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
 
+	// Track the live preview-URL set in a ref so the unmount cleanup sees the
+	// latest values without depending on render-time `items`. Without this,
+	// the cleanup closes over the initial empty array and any object URLs
+	// created during the lifetime of the component leak (the browser will
+	// still hold them until the document unloads).
+	const itemsRef = useRef<InternalItem[]>([]);
+	itemsRef.current = items;
+
 	// Reflect controlled value
 	useEffect(() => {
 		if (!value) return;
@@ -173,15 +181,13 @@ export function MediaGallery({
 				previewUrl: URL.createObjectURL(file),
 			}));
 		});
-		 
 	}, [value]);
 
-	// Cleanup on unmount
+	// Cleanup on unmount — revoke whatever previews were live at the time.
 	useEffect(() => {
 		return () => {
-			items.forEach((it) => URL.revokeObjectURL(it.previewUrl));
+			itemsRef.current.forEach((it) => URL.revokeObjectURL(it.previewUrl));
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const emit = useCallback(

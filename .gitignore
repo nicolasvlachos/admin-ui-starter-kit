@@ -89,16 +89,21 @@ Desktop.ini
 *.sln
 
 # ── Local-only repo state ─────────────────────────────────────────────
-# `references/` holds AI-assisted reference copies of consuming-app code
-# during migration work. Never published.
-references/
+# Top-level `references/` holds AI-assisted reference copies of consuming-app
+# code during migration work. Never published. Scoped to the repo root so it
+# doesn't shadow legitimate `references/` subfolders inside skills.
+/references/
 
-# `.claude/` worktrees from `/loop` and parallel agent runs.
-.claude/worktrees/
+# `.claude/` — local Claude Code state (worktrees, settings, scheduled
+# tasks, transient skill copies). Skills authored as part of the repo
+# live in `.agents/skills/` and ARE checked in. The mandatory skill
+# (`component-library-rules`) is symlinked from `.claude/skills/` into
+# `.agents/skills/` for local convenience; the symlinks themselves are
+# not tracked.
+.claude/
 
 # Lockfile for slash-command / skill state. Local-only.
 skills-lock.json
-.claude/scheduled_tasks.lock
 
 # Misc local-only files
 *.local

@@ -45,7 +45,7 @@ export function FilterOperatorSelect({
                 <Button
                     variant="secondary"
                     buttonStyle="ghost"
-                    className="text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground h-full rounded-none px-3 text-xs"
+                    className="text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground h-full rounded-none px-3 text-xs"
                     onClick={handleTriggerClick}
                     type="button"
                 >
