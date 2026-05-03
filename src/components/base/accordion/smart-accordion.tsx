@@ -19,26 +19,17 @@ import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion';
+import {
+	ACCORDION_CONTENT_PADDING,
+	ACCORDION_ITEM_VARIANT_CLASS,
+	ACCORDION_ROOT_VARIANT_CLASS,
+	ACCORDION_TRIGGER_BASE,
+} from './accordion-variants';
 import { defaultSmartAccordionStrings } from './accordion.strings';
 import type {
 	SmartAccordionIconStyle,
 	SmartAccordionProps,
-	SmartAccordionVariant,
 } from './accordion.types';
-
-const ROOT_VARIANT_CLASS: Record<SmartAccordionVariant, string> = {
-	card: 'space-y-2 border-0 rounded-none overflow-visible',
-	bordered: 'rounded-lg border border-border bg-card overflow-hidden',
-	flat: 'border-0 rounded-none bg-transparent overflow-visible',
-};
-
-const ITEM_VARIANT_CLASS: Record<SmartAccordionVariant, string> = {
-	card: 'border border-border bg-card rounded-md not-last:border-b data-open:bg-card',
-	bordered: 'bg-transparent data-open:bg-muted/40',
-	flat: 'border-0 bg-transparent data-open:bg-muted/30 rounded-md',
-};
-
-const TRIGGER_BASE = 'gap-3 px-3 py-(--row-py) text-left hover:no-underline';
 
 export function SmartAccordion({
 	items,
@@ -66,16 +57,16 @@ export function SmartAccordion({
 					: undefined
 			}
 			aria-label={strings.regionAriaLabel}
-			className={cn(ROOT_VARIANT_CLASS[variant], className)}
+			className={cn(ACCORDION_ROOT_VARIANT_CLASS[variant], className)}
 		>
 			{items.map((item) => (
 				<AccordionItem
 					key={item.value}
 					value={item.value}
-					className={cn(ITEM_VARIANT_CLASS[variant], itemClassName)}
+					className={cn(ACCORDION_ITEM_VARIANT_CLASS[variant], itemClassName)}
 				>
 					<AccordionTrigger
-						className={cn(TRIGGER_BASE, triggerClassName)}
+						className={cn(ACCORDION_TRIGGER_BASE, triggerClassName)}
 						disabled={item.disabled}
 					>
 						<div className="flex min-w-0 flex-1 items-center gap-3">
@@ -90,8 +81,9 @@ export function SmartAccordion({
 					</AccordionTrigger>
 					<AccordionContent
 						className={cn(
-							'pt-0',
-							iconStyle === 'medallion' ? 'pl-14 pr-3' : 'pl-3 pr-3',
+							iconStyle === 'medallion'
+								? ACCORDION_CONTENT_PADDING.withMedallion
+								: ACCORDION_CONTENT_PADDING.withoutMedallion,
 							contentClassName,
 						)}
 					>

@@ -22,6 +22,11 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/base/accordion';
+import {
+	ACCORDION_CONTENT_PADDING,
+	ACCORDION_ITEM_VARIANT_CLASS,
+	ACCORDION_ROOT_VARIANT_CLASS,
+} from '@/components/base/accordion/accordion-variants';
 import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
@@ -32,22 +37,9 @@ import {
 } from './checklist.strings';
 import type {
 	OnboardingChecklistProps,
-	OnboardingChecklistVariant,
 	OnboardingStepStatus,
 } from './checklist.types';
 import { StepStatusIndicator } from './partials/step-status-indicator';
-
-const ROOT_VARIANT_CLASS: Record<OnboardingChecklistVariant, string> = {
-	card: 'space-y-2 border-0 rounded-none overflow-visible',
-	bordered: 'rounded-lg border border-border bg-card overflow-hidden',
-	flat: 'border-0 rounded-none bg-transparent overflow-visible',
-};
-
-const ITEM_VARIANT_CLASS: Record<OnboardingChecklistVariant, string> = {
-	card: 'border border-border bg-card rounded-md',
-	bordered: 'bg-transparent not-last:border-b border-border',
-	flat: 'border-0 bg-transparent data-open:bg-muted/30 rounded-md',
-};
 
 const TITLE_TONE_CLASS: Record<OnboardingStepStatus, string> = {
 	completed: 'text-foreground',
@@ -137,17 +129,17 @@ export function OnboardingChecklist({
 			value={expanded}
 			onValueChange={handleValueChange}
 			aria-label={strings.regionAriaLabel}
-			className={cn(ROOT_VARIANT_CLASS[variant], className)}
+			className={cn(ACCORDION_ROOT_VARIANT_CLASS[variant], className)}
 		>
 			{steps.map((step) => (
 				<AccordionItem
 					key={step.id}
 					value={step.id}
-					className={cn(ITEM_VARIANT_CLASS[variant], stepClassName)}
+					className={cn(ACCORDION_ITEM_VARIANT_CLASS[variant], stepClassName)}
 				>
 					<AccordionTrigger
 						disabled={step.disabled}
-						className="gap-3 px-4 py-(--row-py) hover:no-underline"
+						className="gap-3 px-3 py-(--row-py) hover:no-underline"
 					>
 						<div className="flex w-full min-w-0 items-center gap-3 pr-2">
 							<StepStatusIndicator
@@ -167,7 +159,7 @@ export function OnboardingChecklist({
 						</div>
 					</AccordionTrigger>
 					{!!step.content && (
-						<AccordionContent className="pl-12 pr-4 pt-0">
+						<AccordionContent className={ACCORDION_CONTENT_PADDING.withMedallion}>
 							<Text type="secondary" className="leading-relaxed" tag="div">
 								{step.content}
 							</Text>
