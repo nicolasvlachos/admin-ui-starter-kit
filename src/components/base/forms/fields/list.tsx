@@ -1,13 +1,17 @@
-import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, Plus, Trash2 } from 'lucide-react';
-import React, { useCallback } from 'react';
+/**
+ * List — RHF-driven sortable list of plain strings. Identical use-case to
+ * `<StringRepeater sortable>` and now built on the same `<Repeater>`
+ * primitive so the visual chrome (drag handle, ghost X remove, dashed
+ * empty state, "+ add" button) matches the rest of the repeater family
+ * exactly. Kept as a separate export because it ships with `sortable`
+ * on by default — `<StringRepeater>` ships with sortable off.
+ */
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { Button } from '@/components/base/buttons';
-import { Text } from '@/components/typography';
+
 import { useStrings, type StringsProp } from '@/lib/strings';
+
 import { Input } from './input';
+import { Repeater } from './repeater';
 import { defaultRepeaterStrings } from './repeaters.strings';
 
 export interface ListStrings {
@@ -15,69 +19,14 @@ export interface ListStrings {
     emptyState: string;
     dragHandle: string;
     removeAriaLabel: string;
-    removeTitle: string;
 }
 
 export const defaultListStrings: ListStrings = {
     addButton: 'Add item',
     emptyState: defaultRepeaterStrings.emptyState,
     dragHandle: 'Drag to reorder',
-    removeAriaLabel: 'Remove item',
-    removeTitle: 'Remove',
+    removeAriaLabel: defaultRepeaterStrings.removeAriaLabel,
 };
-
-interface SortableItemProps {
-    id: string;
-    name: string;
-    index: number;
-    placeholder?: string;
-    invalid?: boolean;
-    onRemove: () => void;
-    strings: ListStrings;
-}
-
-function SortableItem({ id, name, index, placeholder, invalid, onRemove, strings }: SortableItemProps) {
-    const { register } = useFormContext();
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
-
-    const style: React.CSSProperties = {
-        transform: CSS.Transform.toString(transform),
-        transition,
-    };
-
-    return (
-        <div
-            ref={setNodeRef}
-            style={style}
-            className={`flex items-center gap-2 ${isDragging ? 'opacity-50' : ''}`}
-        >
-            <button
-                type="button"
-                className="inline-flex h-9 w-9 shrink-0 cursor-grab items-center justify-center rounded-md border bg-background text-muted-foreground hover:bg-muted hover:text-foreground active:cursor-grabbing"
-                aria-label={strings.dragHandle}
-                {...attributes}
-                {...listeners}
-            >
-                <GripVertical className="h-4 w-4" />
-            </button>
-
-            <div className="min-w-0 flex-1">
-                <Input {...register(`${name}.${index}`)} placeholder={placeholder} invalid={invalid} className="w-full" />
-            </div>
-
-            <Button
-                type="button"
-                variant="error"
-                buttonStyle="ghost"
-                size="icon-sm"
-                icon={Trash2}
-                onClick={onRemove}
-                aria-label={strings.removeAriaLabel}
-                title={strings.removeTitle}
-            >{''}</Button>
-        </div>
-    );
-}
 
 export interface ListProps {
     /** Field name in form */
@@ -92,6 +41,9 @@ export interface ListProps {
     /** @deprecated Use `strings.emptyState` instead. */
     emptyMessage?: string;
 
+    /** Disable drag-to-reorder. Default `false` (sortable on). */
+    disableSort?: boolean;
+
     /** Error state for styling (passed from FormField) */
     invalid?: boolean;
 
@@ -104,6 +56,7 @@ export function List({
     placeholder,
     addButtonText,
     emptyMessage,
+    disableSort = false,
     invalid,
     strings: stringsProp,
 }: ListProps) {
@@ -112,61 +65,30 @@ export function List({
         ...(emptyMessage !== undefined ? { emptyState: emptyMessage } : {}),
         ...(stringsProp ?? {}),
     });
-    const { control } = useFormContext();
+    const { control, register } = useFormContext();
     const { fields, append, remove, move } = useFieldArray({ control, name });
 
-    const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
-
-    const items = fields.map((field) => field.id);
-
-    const onDragEnd = useCallback(
-        (event: DragEndEvent) => {
-            const { active, over } = event;
-            if (!over || active.id === over.id) return;
-
-            const fromIndex = items.indexOf(String(active.id));
-            const toIndex = items.indexOf(String(over.id));
-            if (fromIndex === -1 || toIndex === -1) return;
-
-            move(fromIndex, toIndex);
-        },
-        [items, move]
-    );
-
     return (
-        <div className="space-y-3">
-            {fields.length === 0 ? (
-                <div className={`rounded-md border border-dashed p-4 ${invalid ? 'border-destructive' : ''}`}>
-                    <Text type="secondary">
-                        {strings.emptyState}
-                    </Text>
-                </div>
-            ) : (
-                <DndContext sensors={sensors} onDragEnd={onDragEnd}>
-                    <SortableContext items={items} strategy={verticalListSortingStrategy}>
-                        <div className="space-y-2">
-                            {fields.map((field, index) => (
-                                <SortableItem
-                                    key={field.id}
-                                    id={field.id}
-                                    name={name}
-                                    index={index}
-                                    placeholder={placeholder}
-                                    invalid={invalid}
-                                    onRemove={() => remove(index)}
-                                    strings={strings}
-                                />
-                            ))}
-                        </div>
-                    </SortableContext>
-                </DndContext>
+        <Repeater
+            items={fields}
+            sortable={!disableSort}
+            onAdd={() => append('')}
+            onRemove={(index) => remove(index)}
+            onMove={(from, to) => move(from, to)}
+            strings={{
+                emptyState: strings.emptyState,
+                addButton: strings.addButton,
+                removeAriaLabel: strings.removeAriaLabel,
+                dragHandleAriaLabel: strings.dragHandle,
+            }}
+            renderRow={(_field, { index }) => (
+                <Input
+                    {...register(`${name}.${index}`)}
+                    placeholder={placeholder}
+                    invalid={invalid}
+                />
             )}
-
-            <Button type="button" variant="secondary" buttonStyle="outline" onClick={() => append('')}>
-                <Plus className="h-4 w-4 mr-2" />
-                {strings.addButton}
-            </Button>
-        </div>
+        />
     );
 }
 
