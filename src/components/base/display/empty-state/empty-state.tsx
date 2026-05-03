@@ -23,6 +23,8 @@
  * Adaptive shape per resource: pass a different `media` per surface.
  * Don't fork the component.
  */
+import { forwardRef } from 'react';
+
 import { Heading, Text } from '@/components/typography';
 import {
 	Empty,
@@ -60,7 +62,7 @@ const MEDIA_EXTRA_CLASS: Record<EmptyStateMediaVariant, string | undefined> = {
 	illustration: 'mb-4',
 };
 
-export function EmptyState({
+export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(function EmptyState({
 	title,
 	description,
 	media,
@@ -73,7 +75,7 @@ export function EmptyState({
 	className,
 	strings: stringsProp,
 	ariaLabel,
-}: EmptyStateProps) {
+}, ref) {
 	const strings = useStrings(defaultEmptyStateStrings, stringsProp);
 
 	const resolvedTitle = title ?? strings.title;
@@ -84,6 +86,7 @@ export function EmptyState({
 
 	return (
 		<Empty
+			ref={ref}
 			role="status"
 			aria-label={ariaLabel ?? strings.ariaLabel}
 			className={cn(
@@ -127,6 +130,6 @@ export function EmptyState({
 			)}
 		</Empty>
 	);
-}
+});
 
 EmptyState.displayName = 'EmptyState';

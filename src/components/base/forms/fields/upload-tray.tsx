@@ -16,7 +16,7 @@
  * Pair with `useFiles` (the existing client-side validation hook) at
  * the call site if you want pre-flight size/type rejection.
  */
-import { useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 
 import { Badge } from '@/components/base/badge';
 import { Button } from '@/components/base/buttons';
@@ -95,7 +95,7 @@ function countStatus(items: UploadItem[]) {
 	return { completed, failed, uploading, queued };
 }
 
-export function UploadTray({
+export const UploadTray = forwardRef<HTMLDivElement, UploadTrayProps>(function UploadTray({
 	items,
 	onAddFiles,
 	onCancel,
@@ -106,7 +106,7 @@ export function UploadTray({
 	className,
 	strings: stringsProp,
 	listStrings,
-}: UploadTrayProps) {
+}, ref) {
 	const strings = useStrings(defaultUploadTrayStrings, stringsProp);
 	const { completed, failed, uploading, queued } = countStatus(items);
 
@@ -120,7 +120,7 @@ export function UploadTray({
 	const hasItems = items.length > 0;
 
 	return (
-		<div className={cn('flex flex-col gap-4', className)}>
+		<div ref={ref} className={cn('flex flex-col gap-4', className)}>
 			<Dropzone
 				onDrop={handleDrop}
 				accept={dropzone?.accept}
@@ -178,6 +178,6 @@ export function UploadTray({
 
 		</div>
 	);
-}
+});
 
 UploadTray.displayName = 'UploadTray';

@@ -47,7 +47,7 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { useCallback, useMemo, useState } from 'react';
+import { forwardRef, useCallback, useMemo, useState } from 'react';
 
 import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
@@ -300,12 +300,26 @@ export function KanbanItem({
 
 KanbanItem.displayName = 'KanbanItem';
 
-export function KanbanItemHandle({ className, children }: KanbanItemHandleProps) {
+export const KanbanItemHandle = forwardRef<HTMLButtonElement, KanbanItemHandleProps>(function KanbanItemHandle({ className, children }, forwardedRef) {
 	const { setActivatorNodeRef, listeners, attributes } = useKanbanItemContext();
+	// Merge dnd-kit's activator ref with the consumer's forwarded ref so a
+	// `<Tooltip><KanbanItemHandle ref={…}/></Tooltip>` wiring still gets a
+	// real ref to the button element.
+	const setMergedRef = useCallback(
+		(node: HTMLButtonElement | null) => {
+			setActivatorNodeRef(node);
+			if (typeof forwardedRef === 'function') {
+				forwardedRef(node);
+			} else if (forwardedRef) {
+				forwardedRef.current = node;
+			}
+		},
+		[setActivatorNodeRef, forwardedRef],
+	);
 	return (
 		<button
 			type="button"
-			ref={setActivatorNodeRef}
+			ref={setMergedRef}
 			data-slot="kanban-item-handle"
 			className={cn(
 				'inline-flex cursor-grab items-center justify-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 active:cursor-grabbing',
@@ -317,7 +331,7 @@ export function KanbanItemHandle({ className, children }: KanbanItemHandleProps)
 			{children}
 		</button>
 	);
-}
+});
 
 KanbanItemHandle.displayName = 'KanbanItemHandle';
 

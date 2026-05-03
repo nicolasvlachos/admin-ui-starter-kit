@@ -10,9 +10,11 @@
  */
 import { Info, MoreHorizontal } from 'lucide-react';
 import {
+	type ComponentPropsWithRef,
 	type ComponentPropsWithoutRef,
 	type ReactNode,
 	Fragment,
+	forwardRef,
 	isValidElement,
 } from 'react';
 
@@ -158,7 +160,7 @@ function hasRenderableContent(content?: ReactNode): boolean {
 // a single set of default classes, no business logic.
 // ──────────────────────────────────────────────────────────────────────────
 
-function CardShell({ className, ...props }: ComponentPropsWithoutRef<'div'>) {
+function CardShell({ className, ...props }: ComponentPropsWithRef<'div'>) {
 	return (
 		<CardPrimitive
 			className={cn(
@@ -444,7 +446,7 @@ function SmartCardAlert({ alert, alertVariant, hasHeader, padding }: AlertSlotPr
 // SmartCard — public component
 // ──────────────────────────────────────────────────────────────────────────
 
-export function SmartCard({
+export const SmartCard = forwardRef<HTMLDivElement, SmartCardProps>(function SmartCard({
 	icon,
 	title,
 	titleSuffix,
@@ -468,7 +470,7 @@ export function SmartCard({
 	headerClassName,
 	contentClassName,
 	footerClassName,
-}: SmartCardProps) {
+}, ref) {
 	const { defaultPadding } = useCardConfig();
 	const resolvedPadding: CardPadding = padding ?? defaultPadding ?? 'sm';
 	const tokens = PADDING[resolvedPadding];
@@ -493,6 +495,7 @@ export function SmartCard({
 
 	return (
 		<CardShell
+			ref={ref}
 			className={cn(
 				tokens.shell,
 				transparent && 'border-none bg-transparent shadow-none',
@@ -551,7 +554,7 @@ export function SmartCard({
 			)}
 		</CardShell>
 	);
-}
+});
 
 SmartCard.displayName = 'SmartCard';
 

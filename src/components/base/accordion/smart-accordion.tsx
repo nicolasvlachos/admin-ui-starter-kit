@@ -13,6 +13,8 @@
  *     import { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
  *       from '@/components/base/accordion';
  */
+import { forwardRef } from 'react';
+
 import { IconBadge } from '@/components/base/display/icon-badge';
 import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
@@ -31,7 +33,7 @@ import type {
 	SmartAccordionProps,
 } from './accordion.types';
 
-export function SmartAccordion({
+export const SmartAccordion = forwardRef<HTMLDivElement, SmartAccordionProps>(function SmartAccordion({
 	items,
 	multiple = false,
 	defaultValue,
@@ -44,10 +46,11 @@ export function SmartAccordion({
 	triggerClassName,
 	contentClassName,
 	strings: stringsProp,
-}: SmartAccordionProps) {
+}, ref) {
 	const strings = useStrings(defaultSmartAccordionStrings, stringsProp);
 	return (
 		<Accordion
+			ref={ref}
 			multiple={multiple}
 			defaultValue={defaultValue}
 			value={value}
@@ -95,7 +98,7 @@ export function SmartAccordion({
 			))}
 		</Accordion>
 	);
-}
+});
 
 SmartAccordion.displayName = 'SmartAccordion';
 

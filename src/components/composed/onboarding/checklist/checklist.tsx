@@ -14,7 +14,7 @@
  * (rule 8). Per-step copy lives in the data passed to `steps` (titles,
  * badges, descriptions are consumer-controlled).
  */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
 	Accordion,
@@ -61,7 +61,7 @@ function defaultExpandedFor(steps: OnboardingChecklistProps['steps']): string[] 
 	return next ? [next.id] : [];
 }
 
-export function OnboardingChecklist({
+export const OnboardingChecklist = forwardRef<HTMLDivElement, OnboardingChecklistProps>(function OnboardingChecklist({
 	steps,
 	defaultExpanded,
 	multiple = false,
@@ -72,7 +72,7 @@ export function OnboardingChecklist({
 	className,
 	stepClassName,
 	strings: stringsProp,
-}: OnboardingChecklistProps) {
+}, ref) {
 	const strings = useStrings(defaultOnboardingChecklistStrings, stringsProp);
 	const isControlled = value !== undefined;
 	const computedDefault = useMemo(
@@ -125,6 +125,7 @@ export function OnboardingChecklist({
 
 	return (
 		<Accordion
+			ref={ref}
 			multiple={multiple}
 			value={expanded}
 			onValueChange={handleValueChange}
@@ -169,6 +170,6 @@ export function OnboardingChecklist({
 			))}
 		</Accordion>
 	);
-}
+});
 
 OnboardingChecklist.displayName = 'OnboardingChecklist';

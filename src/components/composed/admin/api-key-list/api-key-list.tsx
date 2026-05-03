@@ -15,7 +15,7 @@
  * doesn't fetch, navigate, or render delete confirmations.
  */
 import { ChevronRight, Copy, Lock, Plus, Trash2 } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/base/buttons';
@@ -35,7 +35,7 @@ import { cn } from '@/lib/utils';
 import { defaultApiKeyListStrings } from './api-key-list.strings';
 import type { ApiKeyListItem, ApiKeyListProps } from './api-key-list.types';
 
-export function ApiKeyList({
+export const ApiKeyList = forwardRef<HTMLDivElement, ApiKeyListProps>(function ApiKeyList({
 	items,
 	defaultOpen = true,
 	open,
@@ -46,7 +46,7 @@ export function ApiKeyList({
 	title,
 	className,
 	strings: stringsProp,
-}: ApiKeyListProps) {
+}, ref) {
 	const strings = useStrings(defaultApiKeyListStrings, stringsProp);
 	const isControlled = open !== undefined;
 	const [internalOpen, setInternalOpen] = useState(defaultOpen);
@@ -61,7 +61,7 @@ export function ApiKeyList({
 	);
 
 	return (
-		<SmartCard className={className}>
+		<SmartCard ref={ref} className={className}>
 			<Collapsible open={expanded} onOpenChange={handleOpenChange}>
 				<div className="flex items-center gap-2">
 					<CollapsibleTrigger asChild>
@@ -119,7 +119,7 @@ export function ApiKeyList({
 			</Collapsible>
 		</SmartCard>
 	);
-}
+});
 
 ApiKeyList.displayName = 'ApiKeyList';
 
