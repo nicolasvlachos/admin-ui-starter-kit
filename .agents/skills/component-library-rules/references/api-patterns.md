@@ -132,12 +132,14 @@ otherwise be "fork the component". Common slots:
 
 | Slot | Where | Rendered when |
 | --- | --- | --- |
-| `headerSlot` / `footerSlot` | Card-like surfaces | always (between body and outer chrome) |
+| `headerStart` / `headerEnd` / `headerAction` | Card surfaces | always — left / right / dropdown anchors of the header band |
+| `footerSlot` | Card surfaces | full-width footer band, distinct from `footerText` (text-only right-aligned line) |
 | `composerSlot` | Comments / chat | replaces the default editor |
 | `empty` / `emptyState` | Lists / feeds | when `items.length === 0` |
 | `loading` / `loadingSlot` | Async surfaces | while `isLoading` is true |
 | `recent` / `idle` | Search input | when query is empty |
 | `errorSlot` | Async surfaces | when `error` is set |
+| `media` | EmptyState / list rows | leading illustration / icon |
 
 Slots are typed `ReactNode`. If you need state-aware slots, prefer
 a render-prop:
@@ -146,6 +148,25 @@ a render-prop:
 renderResult?: (result: T, ctx: { isActive: boolean; …
 }) => ReactNode;
 ```
+
+### Boolean-flag toggles vs slots
+
+Some chrome differences are pure toggles, not slots — they don't
+take a `ReactNode`, just a `boolean` that turns a default treatment
+on. Reach for a flag when the only option a consumer wants is "yes
+or no, render that line":
+
+| Flag | Where | Effect |
+| --- | --- | --- |
+| `headerDivider` | `<SmartCard>` | renders a `border-b border-border/60` rule under the header |
+| `footerDivider` | `<SmartCard>` | renders a `border-t border-border/60` rule above the footer |
+| `transparent` | `<SmartCard>` | drops the surface background + border (nesting) |
+| `border` | `<EmptyState>` | adds a dashed border (drop-zone affordance) |
+
+Don't add a flag where a class override would do, and don't add a
+slot where a flag would do. The line: a flag turns the LIBRARY's
+default treatment on/off. A slot lets the consumer REPLACE the
+default with their own node.
 
 ## Render-props — when to use them
 
@@ -204,6 +225,51 @@ interface CommentsAccessors {
 }
 ```
 
+## Collapsible / expandable surfaces
+
+For a component that can collapse part of its body (cards with a
+"show more" toggle, sidebars that fold, panels with a chevron),
+use this exact prop shape — it gives controlled + uncontrolled
+parity, an analytics callback, and an opt-in object form for
+tuning:
+
+```ts
+interface ExpandableProps {
+    /** Pass `true` for default behavior, an object to tune (e.g. height). */
+    expandable?: boolean | { collapsedMaxHeight?: number | string };
+    /** Initial expanded state (uncontrolled). Defaults to `false`. */
+    defaultExpanded?: boolean;
+    /** Controlled expanded state. */
+    expanded?: boolean;
+    /** Change callback for controlled mode + analytics. */
+    onExpandedChange?: (expanded: boolean) => void;
+    /** sr-only labels for the toggle button. */
+    strings?: { expandLabel: string; collapseLabel: string };
+}
+```
+
+Implementation rules:
+
+- **Controlled / uncontrolled split.**
+  `const isControlled = expanded !== undefined;`
+  `const [internal, setInternal] = useState(defaultExpanded);`
+  `const value = isControlled ? expanded : internal;`
+  Never mutate `internal` while controlled.
+- **Toggle**: a single `aria-expanded`-bearing button. Sr-only label
+  flips between `expandLabel` / `collapseLabel`. Default labels in
+  English go on `defaultXxxStrings`, never inline.
+- **Animation**: `overflow-hidden` + `transition-[max-height]
+  duration-500 ease-in-out`. Collapsed `max-height` is the configured
+  value (default ~12rem); expanded is empty string (unset → auto).
+- **Fade overlay** while collapsed: a pointer-events-none absolute
+  div with `bg-linear-to-t from-background to-transparent` so users
+  see content is being clipped.
+- **Don't recompute** the collapsed height on every render — read
+  it once from `expandable` and convert numbers to `${n}px`.
+
+The canonical example is `<SmartCard expandable …>` — see
+[`smart-card.tsx`](../../../src/components/base/cards/smart-card.tsx).
+
 ## Locale + dates
 
 The library never reads `navigator.language`, never picks a locale.
@@ -257,6 +323,10 @@ Before adding a prop, ask:
 | `loginUrl` / `dashboardUrl` | Use `onSignIn()` / `onSelect()` callback. |
 | `successToast` | Use `onAfterMutate(kind, payload)`; consumer toasts. |
 | Hardcoded route in JSX | Replace with a callback. |
+| A new card component for "card with divider + footer button" | Use `<SmartCard headerDivider footerSlot footerDivider>`. |
+| A new card for "expandable usage card" | Use `<SmartCard expandable>`. |
+| `collapsible: { open, onOpenChange, defaultOpen }` | Use the standard pair: `expanded` / `defaultExpanded` / `onExpandedChange`. |
+| `showMore: boolean` to swap content | Use the `expandable` flag — same intent. |
 
 Read [`consumer-wiring.md`](./consumer-wiring.md) for what a
 consumer's wiring looks like at the call site.
