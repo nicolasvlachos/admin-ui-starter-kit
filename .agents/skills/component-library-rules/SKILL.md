@@ -35,6 +35,8 @@ These deeper guides live alongside this file under `references/`. The skill stay
 | When you're doing | Open the guide |
 | --- | --- |
 | Adding a new feature folder from scratch | [`references/new-feature.md`](references/new-feature.md) |
+| Picking the right shape for a feature (provider / slots / hook / accessors) | [`references/features-anatomy.md`](references/features-anatomy.md) |
+| Designing a prop API (callbacks, slots, render-props, fetcher, accessors) | [`references/api-patterns.md`](references/api-patterns.md) |
 | Adding/refactoring a `*.strings.ts` file | [`references/strings-pattern.md`](references/strings-pattern.md) |
 | Adding/wiring a `<UIProvider>` slice | [`references/ui-provider.md`](references/ui-provider.md) |
 | Wrapping a shadcn primitive in `base/` | [`references/base-wrapper.md`](references/base-wrapper.md) |
@@ -489,6 +491,38 @@ There is **no** `adapters/$framework/` folder, no presets folder, no recipes fol
 If a consumer pattern repeats across many mount sites, they wrap our component in their own `<AppComments>` that forwards their defaults — we do not provide that wrapper.
 
 There is **no** `src/lib/external-stubs/` folder. Anything the library imports must be a real `dependencies` (or `peerDependencies`) entry in `package.json`.
+
+### Validation libraries (Zod / Valibot / Yup)
+
+Same rule. The library MUST NOT depend on a validation library. Validators are a strong fit for the consumer-injection pattern:
+
+```ts
+// `(value) => true | string` — true when valid, string when invalid (the message).
+type Validator = (value: unknown) => boolean | string;
+```
+
+Filter facets / form fields accept that shape via
+`validation.custom`. The library ships two adapters in
+[`features/filters/validators.ts`](../../../src/components/features/filters/validators.ts):
+
+- `zodValidator(schema)` — adapts any object with a `safeParse(v) =>
+  { success, error }` method (Zod 3, Zod 4, Valibot via thin shim).
+- `predicateValidator(predicate, message)` — pairs a boolean
+  predicate with a static error message; no third-party dep needed.
+
+Pattern at the call site is the consumer's:
+
+```tsx
+import { z } from 'zod';
+import { zodValidator } from '@/components/features/filters';
+
+validation: { custom: zodValidator(z.string().email()) }
+```
+
+If a new component needs validation, follow the same shape — accept
+`(value) => boolean | string`, never `Schema` directly. See
+[`api-patterns.md`](references/api-patterns.md) for the full
+prop-shape cheat sheet.
 
 ## 10. Showcase pages reflect the components, not custom mocks
 
