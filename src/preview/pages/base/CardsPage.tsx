@@ -1,5 +1,7 @@
-import { Sparkles, Plus, Pencil, Trash2 } from 'lucide-react';
+import { Sparkles, Plus, Pencil, Trash2, Check, MoreVertical } from 'lucide-react';
+import { Button } from '@/components/base/buttons';
 import { SmartCard, SmartCardSkeleton } from '@/components/base/cards';
+import { Avatar } from '@/components/ui/avatar';
 import Text from '@/components/typography/text';
 import { Badge } from '@/components/base/badge';
 import { PreviewPage, PreviewSection, Col } from '../../PreviewLayout';
@@ -78,6 +80,103 @@ export default function CardsPage() {
 					headerAction={<Plus className="size-4 text-muted-foreground" />}
 				>
 					<Text>headerStart, headerEnd & headerAction.</Text>
+				</SmartCard>
+			</PreviewSection>
+
+			<PreviewSection title="headerDivider + footerSlot + footerDivider — three-band layout">
+				<SmartCard
+					className="max-w-sm"
+					headerDivider
+					footerDivider
+					headerStart={
+						<Badge variant="secondary">
+							<Check className="size-3" /> Live
+						</Badge>
+					}
+					headerEnd={
+						<Button variant="secondary" buttonStyle="ghost" aria-label="More options">
+							<MoreVertical className="size-4" />
+						</Button>
+					}
+					title="Integration name"
+					titleSuffix={<Badge variant="success">Installed</Badge>}
+					description="Short description of the integration and what it does in one line."
+					footerSlot={
+						<Button variant="secondary" className="w-full justify-center">
+							Open
+						</Button>
+					}
+				>
+					<div className="flex items-center -space-x-1.5 pt-2">
+						{['SC', 'MR', 'EW'].map((init) => (
+							<Avatar
+								key={init}
+								className="size-6 border border-background bg-muted text-[11px] font-medium text-muted-foreground inline-flex items-center justify-center"
+							>
+								{init}
+							</Avatar>
+						))}
+						<span className="ml-1 inline-flex size-6 items-center justify-center rounded-full border border-background bg-muted text-[10px] text-muted-foreground">
+							+3
+						</span>
+					</div>
+				</SmartCard>
+			</PreviewSection>
+
+			<PreviewSection title="Expandable — uncontrolled">
+				<SmartCard
+					className="max-w-md"
+					expandable
+					title="3 days remaining in cycle"
+					headerEnd={
+						<Button variant="secondary" buttonStyle="ghost">
+							Billing
+						</Button>
+					}
+				>
+					<div className="space-y-5">
+						<div className="rounded-lg bg-muted/60 p-4 space-y-2">
+							<div className="flex justify-between text-xs text-muted-foreground font-medium">
+								<span>Included credit</span>
+								<span>On-demand charges</span>
+							</div>
+							<div className="flex justify-between font-semibold">
+								<span>$18.08 / $20</span>
+								<span>$0</span>
+							</div>
+						</div>
+						<dl className="grid gap-3 text-sm">
+							{[
+								['Requests', '$210.84'],
+								['Active CPU', '$21.95'],
+								['Events', '$21.20'],
+								['Storage usage', '$20.45'],
+								['Bandwidth', '$0.00'],
+							].map(([k, v]) => (
+								<div key={k} className="flex justify-between">
+									<Text tag="span" weight="medium">{k}</Text>
+									<Text tag="span" type="secondary">{v}</Text>
+								</div>
+							))}
+						</dl>
+					</div>
+				</SmartCard>
+			</PreviewSection>
+
+			<PreviewSection title="Expandable — custom collapsed height + localized labels">
+				<SmartCard
+					className="max-w-md"
+					expandable={{ collapsedMaxHeight: '6rem' }}
+					title="Release notes — v0.4.2"
+					strings={{ expandLabel: 'Show full notes', collapseLabel: 'Hide details' }}
+				>
+					<Text type="secondary" className="leading-relaxed">
+						Tightened the admin density tokens, added the new
+						<code className="mx-1 rounded bg-muted px-1.5 py-0.5 text-xs">expandable</code>
+						and <code className="mx-1 rounded bg-muted px-1.5 py-0.5 text-xs">headerDivider</code>
+						flags on SmartCard, and aligned the empty-state primitive with the
+						sibling features. See the changelog for the full story.
+					</Text>
 				</SmartCard>
 			</PreviewSection>
 

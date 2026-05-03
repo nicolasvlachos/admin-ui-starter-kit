@@ -8,14 +8,17 @@
  * etc. for advanced composition (deeply customised layouts that still want
  * the design-system surface tokens).
  */
-import { Info, MoreHorizontal } from 'lucide-react';
+import { ChevronDown, Info, MoreHorizontal } from 'lucide-react';
 import {
 	type ComponentPropsWithRef,
 	type ComponentPropsWithoutRef,
+	type CSSProperties,
 	type ReactNode,
 	Fragment,
 	forwardRef,
 	isValidElement,
+	useCallback,
+	useState,
 } from 'react';
 
 import { Button } from '@/components/base/buttons';
@@ -59,6 +62,22 @@ export type SmartCardAction = {
 	disabled?: boolean;
 };
 
+/**
+ * Strings exposed by the new SmartCard features (expand toggle, footer
+ * divider). The pre-existing aria props (`tooltipAriaLabel`,
+ * `actionsLabel`) remain on the main props bag for back-compat — only
+ * net-new copy goes through this prop.
+ */
+export interface SmartCardStrings {
+	expandLabel: string;
+	collapseLabel: string;
+}
+
+export const defaultSmartCardStrings: SmartCardStrings = {
+	expandLabel: 'Expand card',
+	collapseLabel: 'Collapse card',
+};
+
 export interface SmartCardProps {
 	icon?: ReactNode;
 	title?: ReactNode;
@@ -78,11 +97,34 @@ export interface SmartCardProps {
 	headerEnd?: ReactNode;
 	contentTop?: ReactNode;
 	contentBottom?: ReactNode;
+	/**
+	 * Optional full-width footer band rendered under the content, ideal
+	 * for a single primary action ("Open", "Connect"). Pairs with
+	 * `footerDivider` to add a `border-t` rule above it.
+	 */
+	footerSlot?: ReactNode;
+	/** Render a `border-b` rule between header and content. */
+	headerDivider?: boolean;
+	/** Render a `border-t` rule between content and footer. */
+	footerDivider?: boolean;
+	/**
+	 * Make the card body collapsible. Pass `true` for default behavior
+	 * (12rem / 192px collapsed max-height with a soft fade overlay) or
+	 * an object to tune the collapsed height.
+	 */
+	expandable?: boolean | { collapsedMaxHeight?: number | string };
+	/** Initial expanded state (uncontrolled). Defaults to `false`. */
+	defaultExpanded?: boolean;
+	/** Controlled expanded state. */
+	expanded?: boolean;
+	/** Change callback for controlled mode. */
+	onExpandedChange?: (expanded: boolean) => void;
 	children: ReactNode;
 	className?: string;
 	headerClassName?: string;
 	contentClassName?: string;
 	footerClassName?: string;
+	strings?: Partial<SmartCardStrings>;
 }
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -465,16 +507,47 @@ export const SmartCard = forwardRef<HTMLDivElement, SmartCardProps>(function Sma
 	headerEnd,
 	contentTop,
 	contentBottom,
+	footerSlot,
+	headerDivider = false,
+	footerDivider = false,
+	expandable = false,
+	defaultExpanded = false,
+	expanded: expandedProp,
+	onExpandedChange,
 	children,
 	className,
 	headerClassName,
 	contentClassName,
 	footerClassName,
+	strings: stringsProp,
 }, ref) {
 	const { defaultPadding } = useCardConfig();
 	const resolvedPadding: CardPadding = padding ?? defaultPadding ?? 'sm';
 	const tokens = PADDING[resolvedPadding];
 	const cardActions = Array.isArray(actions) ? actions : [];
+	const strings: SmartCardStrings = {
+		...defaultSmartCardStrings,
+		...stringsProp,
+	};
+
+	const isExpandable = expandable !== false && expandable !== undefined;
+	const collapsedMaxHeightRaw =
+		typeof expandable === 'object' && expandable?.collapsedMaxHeight !== undefined
+			? expandable.collapsedMaxHeight
+			: '12rem';
+	const collapsedMaxHeight =
+		typeof collapsedMaxHeightRaw === 'number'
+			? `${collapsedMaxHeightRaw}px`
+			: collapsedMaxHeightRaw;
+
+	const isExpandedControlled = expandedProp !== undefined;
+	const [internalExpanded, setInternalExpanded] = useState(defaultExpanded);
+	const expanded = isExpandedControlled ? expandedProp : internalExpanded;
+	const handleToggle = useCallback(() => {
+		const next = !expanded;
+		if (!isExpandedControlled) setInternalExpanded(next);
+		onExpandedChange?.(next);
+	}, [expanded, isExpandedControlled, onExpandedChange]);
 
 	const hasHeader =
 		hasRenderableContent(icon) ||
@@ -487,11 +560,18 @@ export const SmartCard = forwardRef<HTMLDivElement, SmartCardProps>(function Sma
 
 	const hasAlert = hasRenderableContent(alert);
 	const hasFooterText = hasRenderableContent(footerText);
+	const hasFooterSlot = hasRenderableContent(footerSlot);
 	const hasContentTop = hasRenderableContent(contentTop);
 	const hasContentBottom = hasRenderableContent(contentBottom);
 
 	const tooltipLabel =
 		tooltipAriaLabel.trim().length > 0 ? tooltipAriaLabel : 'Card info';
+
+	const collapseStyle: CSSProperties | undefined = isExpandable
+		? {
+				maxHeight: expanded ? '' : collapsedMaxHeight,
+			}
+		: undefined;
 
 	return (
 		<CardShell
@@ -499,6 +579,7 @@ export const SmartCard = forwardRef<HTMLDivElement, SmartCardProps>(function Sma
 			className={cn(
 				tokens.shell,
 				transparent && 'border-none bg-transparent shadow-none',
+				isExpandable && 'relative pb-1',
 				className,
 			)}
 		>
@@ -516,7 +597,10 @@ export const SmartCard = forwardRef<HTMLDivElement, SmartCardProps>(function Sma
 					actions={cardActions}
 					actionsLabel={actionsLabel}
 					padding={resolvedPadding}
-					className={headerClassName}
+					className={cn(
+						headerDivider && 'pb-3 border-b border-border/60',
+						headerClassName,
+					)}
 				/>
 			)}
 
@@ -533,12 +617,22 @@ export const SmartCard = forwardRef<HTMLDivElement, SmartCardProps>(function Sma
 				className={cn(
 					tokens.contentX,
 					tokens.contentY,
+					isExpandable &&
+						'relative overflow-hidden transition-[max-height] duration-500 ease-in-out',
 					contentClassName,
 				)}
+				style={collapseStyle}
 			>
 				{!!hasContentTop && contentTop}
 				{children}
 				{!!hasContentBottom && contentBottom}
+
+				{!!isExpandable && !expanded && (
+					<div
+						aria-hidden="true"
+						className="from-background pointer-events-none absolute inset-x-0 bottom-0 h-20 rounded-b-lg bg-linear-to-t to-transparent"
+					/>
+				)}
 			</CardContent>
 
 			{!!hasFooterText && (
@@ -546,11 +640,53 @@ export const SmartCard = forwardRef<HTMLDivElement, SmartCardProps>(function Sma
 					className={cn(
 						'justify-end text-xs text-muted-foreground',
 						tokens.footerX,
+						footerDivider && 'pt-3 border-t border-border/60',
 						footerClassName,
 					)}
 				>
 					{footerText}
 				</CardFooter>
+			)}
+
+			{!!hasFooterSlot && (
+				<CardFooter
+					className={cn(
+						'flex-col items-stretch',
+						tokens.footerX,
+						footerDivider && 'pt-3 border-t border-border/60',
+						footerClassName,
+					)}
+				>
+					{footerSlot}
+				</CardFooter>
+			)}
+
+			{!!isExpandable && (
+				<div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-10">
+					<button
+						type="button"
+						onClick={handleToggle}
+						aria-expanded={expanded}
+						aria-label={expanded ? strings.collapseLabel : strings.expandLabel}
+						className={cn(
+							'inline-flex size-8 items-center justify-center rounded-full',
+							'border border-border bg-background text-foreground shadow-sm',
+							'hover:bg-muted/40 transition-colors',
+							'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+						)}
+					>
+						<ChevronDown
+							aria-hidden="true"
+							className={cn(
+								'size-4 transition-transform duration-300',
+								expanded && 'rotate-180',
+							)}
+						/>
+						<span className="sr-only">
+							{expanded ? strings.collapseLabel : strings.expandLabel}
+						</span>
+					</button>
+				</div>
 			)}
 		</CardShell>
 	);
