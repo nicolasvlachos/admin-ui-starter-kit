@@ -125,57 +125,57 @@ export function GlobalSearchResultRow<TGroup extends string = string>({
                     )}
                 </div>
                 {(() => {
-                    const pieces: React.ReactNode[] = [];
+                    const pieces: Array<{ key: string; node: React.ReactNode }> = [];
                     if (result.subtitle)
-                        pieces.push(
-                            <span key="subtitle">
-                                {highlightMatch(result.subtitle, query)}
-                            </span>,
-                        );
+                        pieces.push({
+                            key: 'subtitle',
+                            node: <span>{highlightMatch(result.subtitle, query)}</span>,
+                        });
                     result.meta?.forEach((m, i) => {
                         const Icon = m.icon;
-                        pieces.push(
-                            <span
-                                key={`m-${i}`}
-                                className={cn(
-                                    'inline-flex items-center gap-1',
-                                    m.mono && 'font-mono tabular-nums',
-                                )}
-                            >
-                                {!!Icon && <Icon className="size-3 shrink-0" aria-hidden="true" />}
-                                {m.label}
-                            </span>,
-                        );
+                        pieces.push({
+                            key: `m-${i}`,
+                            node: (
+                                <span
+                                    className={cn(
+                                        'inline-flex items-center gap-1',
+                                        m.mono && 'font-mono tabular-nums',
+                                    )}
+                                >
+                                    {!!Icon && <Icon className="size-3 shrink-0" aria-hidden="true" />}
+                                    {m.label}
+                                </span>
+                            ),
+                        });
                     });
                     if (result.timestamp)
-                        pieces.push(
-                            <span key="ts" className="tabular-nums">
-                                {result.timestamp}
-                            </span>,
-                        );
+                        pieces.push({
+                            key: 'ts',
+                            node: <span className="tabular-nums">{result.timestamp}</span>,
+                        });
                     result.tags?.forEach((tag) =>
-                        pieces.push(<span key={`t-${tag}`}>{tag}</span>),
+                        pieces.push({ key: `t-${tag}`, node: <span>{tag}</span> }),
                     );
                     if (result.rightValue) {
-                        pieces.push(
-                            <span
-                                key="rv"
-                                className="font-medium tabular-nums text-foreground"
-                            >
-                                {result.rightValue}
-                                {!!result.rightLabel && (
-                                    <span className="ml-1 font-normal text-muted-foreground">
-                                        {result.rightLabel.toLowerCase()}
-                                    </span>
-                                )}
-                            </span>,
-                        );
+                        pieces.push({
+                            key: 'rv',
+                            node: (
+                                <span className="font-medium tabular-nums text-foreground">
+                                    {result.rightValue}
+                                    {!!result.rightLabel && (
+                                        <span className="ml-1 font-normal text-muted-foreground">
+                                            {result.rightLabel.toLowerCase()}
+                                        </span>
+                                    )}
+                                </span>
+                            ),
+                        });
                     }
                     if (pieces.length === 0) return null;
                     return (
                         <Text size="xs" type="secondary" className="mt-0.5 truncate">
                             {pieces.map((p, i) => (
-                                <span key={i}>
+                                <span key={p.key}>
                                     {i > 0 && (
                                         <span
                                             aria-hidden="true"
@@ -184,7 +184,7 @@ export function GlobalSearchResultRow<TGroup extends string = string>({
                                             ·
                                         </span>
                                     )}
-                                    {p}
+                                    {p.node}
                                 </span>
                             ))}
                         </Text>

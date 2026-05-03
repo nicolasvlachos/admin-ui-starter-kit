@@ -209,3 +209,4 @@ function SearchFacetComponent({
 }
 
 export const SearchFacet = React.memo(SearchFacetComponent);
+SearchFacet.displayName = 'SearchFacet';

@@ -151,3 +151,4 @@ function TagsFacetComponent({
 }
 
 export const TagsFacet = React.memo(TagsFacetComponent);
+TagsFacet.displayName = 'TagsFacet';

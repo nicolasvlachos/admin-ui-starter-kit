@@ -19,6 +19,8 @@ import { useMemo } from 'react';
 import type { FC, ReactNode } from 'react';
 
 import { SmartCard } from '@/components/base/cards';
+import { Text } from '@/components/typography';
+import { useStrings } from '@/lib/strings';
 import { useDatesConfig } from '@/lib/ui-provider';
 import {
     CommentComposer,
@@ -29,6 +31,7 @@ import {
     type CommentUser,
 } from '@/components/features/comments';
 
+import { defaultEventLogStrings } from './event-log.strings';
 import { EventLogEventRow } from './partials/event-log-event-row';
 import type {
     EventLogEntry,
@@ -96,6 +99,7 @@ export function EventLog<
         onCommentReply,
         onCommentPinToggle,
         strings,
+        eventLogStrings: eventLogStringsProp,
         renderers,
         composer,
         bare = false,
@@ -114,6 +118,7 @@ export function EventLog<
         () => sortEntries(entries, order),
         [entries, order],
     );
+    const eventLogStrings = useStrings(defaultEventLogStrings, eventLogStringsProp);
 
     const { formatRelativeTime: storeFormatRelative } = useDatesConfig();
     const formatRelative = formatRelativeTime ?? storeFormatRelative ?? ((iso: string) => iso);
@@ -216,11 +221,16 @@ export function EventLog<
 
     const composerPosition = composer?.position ?? 'top';
 
-    const list = (
-        <ul className="flex flex-col gap-2.5">
-            {sorted.map((entry, idx) => renderEntry(entry, idx, sorted.length))}
-        </ul>
-    );
+    const list =
+        sorted.length === 0 ? (
+            <Text type="secondary" className="py-2">
+                {eventLogStrings.emptyMessage}
+            </Text>
+        ) : (
+            <ul aria-label={eventLogStrings.listAriaLabel} className="flex flex-col gap-2.5">
+                {sorted.map((entry, idx) => renderEntry(entry, idx, sorted.length))}
+            </ul>
+        );
 
     const inner = (
         <div className="flex flex-col gap-4">

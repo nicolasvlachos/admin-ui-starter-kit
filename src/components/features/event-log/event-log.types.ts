@@ -23,6 +23,9 @@ import type {
     Mention,
     MentionsConfig,
 } from '@/components/features/mentions';
+import type { StringsProp } from '@/lib/strings';
+
+import type { EventLogStrings } from './event-log.strings';
 
 /* ------------------------------------------------------------------ */
 /*  Entry shapes                                                       */
@@ -156,6 +159,9 @@ export interface EventLogProps<
     ) => void;
     /** Comment-specific strings (delegated to `<CommentItem>`). */
     strings?: Partial<CommentsStrings>;
+    /** Timeline-level strings (list aria label, empty state).
+     *  Comment-row copy is overridden via `strings` (above). */
+    eventLogStrings?: StringsProp<EventLogStrings>;
     /** Override the per-kind renderer table. Built-ins keyed by `kind`. */
     renderers?: Partial<
         Record<string, EventLogRenderer<TUser, TMeta, TResource>>

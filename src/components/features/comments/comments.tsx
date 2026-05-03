@@ -105,6 +105,17 @@ export function Comments<
         ) : null
     );
 
+    /*
+     * Same generic-erasure boundary as the composer block above:
+     * `<Comments<TUser, TMeta, TResource>>` is generic, but
+     * `<CommentTimeline>` types its `comments` and `onPinToggle` props
+     * against `CommentData<CommentUser, unknown, TResource>` (default
+     * `TUser`/`TMeta`). The shapes are structurally identical — `TUser`
+     * narrows the author union and `TMeta` narrows the metadata payload,
+     * neither of which the timeline reads — so the widening cast is
+     * safe. Keep the cast localised here; do not propagate into the
+     * timeline body.
+     */
     const timeline = (
         <CommentTimeline
             comments={props.comments as ReadonlyArray<CommentData<CommentUser, unknown, TResource>>}
