@@ -10,7 +10,7 @@ import { Text } from '@/components/typography';
 import { useStrings, type StringsProp } from '@/lib/strings';
 import { useFormsConfig, type FormControlSize } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
-import { formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
+import { formControlMinHeightClasses, formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
 
 export interface RichSelectStrings {
     placeholder: string;
@@ -193,7 +193,8 @@ export const RichSelect = forwardRef<HTMLButtonElement, RichSelectProps>(
         const inputClassNames = cn(
             'border-input bg-transparent w-full rounded-md border outline-none transition-[color,box-shadow]',
             formControlSizeClasses[size],
-            'h-auto min-h-(--form-element-height) py-2',
+            formControlMinHeightClasses[size],
+            'h-auto py-2',
             'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
             'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aria-invalid:text-destructive',
             'disabled:cursor-not-allowed disabled:opacity-50',

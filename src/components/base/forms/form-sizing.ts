@@ -6,6 +6,17 @@ export const formControlSizeClasses: Record<FormControlSize, string> = {
 	lg: 'h-10 text-base',
 };
 
+/**
+ * Min-heights matching `formControlSizeClasses` so multi-line trigger
+ * variants (e.g. `RichSelect` showing wrapped descriptions) can keep the
+ * size's vertical rhythm without locking to a fixed `h-{n}`.
+ */
+export const formControlMinHeightClasses: Record<FormControlSize, string> = {
+	sm: 'min-h-8',
+	base: 'min-h-9',
+	lg: 'min-h-10',
+};
+
 export const formTextareaSizeClasses: Record<FormControlSize, string> = {
 	sm: 'min-h-14 text-sm',
 	base: 'min-h-[60px] text-base md:text-sm',
