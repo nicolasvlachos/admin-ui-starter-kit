@@ -105,7 +105,7 @@ export function FormField({
 	const resolvedRequired = isRequired ?? required;
 
 	return (
-		<div className={cn('space-y-2.5', className)}>
+		<div className={cn('space-y-2', className)}>
 			{!!label && (
 				<Label htmlFor={htmlFor} className="leading-6">
 					{label}

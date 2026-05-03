@@ -57,5 +57,5 @@ export function Row({ children, className = '' }: { children: ReactNode; classNa
 }
 
 export function Col({ children, className = '' }: { children: ReactNode; className?: string }) {
-	return <div className={`flex flex-col gap-3 ${className}`}>{children}</div>;
+	return <div className={`flex flex-col gap-5 ${className}`}>{children}</div>;
 }

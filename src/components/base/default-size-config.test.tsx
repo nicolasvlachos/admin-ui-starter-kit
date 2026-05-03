@@ -93,7 +93,7 @@ describe('base component size defaults', () => {
 
 		expect(screen.getByText('Configured label')).toHaveClass('text-xs');
 		expect(screen.getByLabelText('Configured input')).toHaveClass(
-			'h-9',
+			'!h-9',
 			'text-base',
 			'md:text-sm',
 		);
@@ -106,7 +106,7 @@ describe('base component size defaults', () => {
 			.getByText('Configured select')
 			.closest('button') as HTMLElement;
 		expect(configuredSelectTrigger).toHaveClass(
-			'h-9',
+			'!h-9',
 			'text-base',
 			'md:text-sm',
 		);
@@ -134,7 +134,7 @@ describe('base component size defaults', () => {
 		);
 
 		expect(screen.getByText('Explicit label')).toHaveClass('text-base');
-		expect(screen.getByLabelText('Explicit input')).toHaveClass('h-8', 'text-sm');
+		expect(screen.getByLabelText('Explicit input')).toHaveClass('!h-8', 'text-sm');
 		expect(screen.getByLabelText('Explicit textarea')).toHaveClass(
 			'min-h-20',
 			'text-base',
@@ -143,7 +143,7 @@ describe('base component size defaults', () => {
 			.getByText('Explicit select')
 			.closest('button') as HTMLElement;
 		expect(explicitSelectTrigger).toHaveClass(
-			'h-10',
+			'!h-10',
 			'text-base',
 		);
 	});

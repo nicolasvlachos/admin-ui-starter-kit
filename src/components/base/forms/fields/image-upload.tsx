@@ -185,12 +185,16 @@ function ImageUploadImpl(
     const hasPreview = Boolean(previewUrl);
     const aspectClass = ASPECT_RATIO_CLASSES[aspectRatio] ?? ASPECT_RATIO_CLASSES.square;
     const imgFitClass = fit === 'contain' ? 'object-contain p-3' : 'object-cover';
-    const computedMaxWidth = maxWidth ? (typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth) : undefined;
-    const wrapperStyle = layout === 'inline' ? undefined : computedMaxWidth ? { maxWidth: computedMaxWidth } : undefined;
+    // Default max-width caps the preview at a sensible thumbnail size — without
+    // this, an `aspect-square` preview inside a wide form column becomes a
+    // huge square (`w-full` × 1:1 ratio = container width tall). Consumers
+    // can override via the `maxWidth` prop.
+    const computedMaxWidth = maxWidth ? (typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth) : '240px';
+    const wrapperStyle = layout === 'inline' ? undefined : { maxWidth: computedMaxWidth };
     const inlinePreviewStyle =
         layout === 'inline'
             ? {
-                  maxWidth: computedMaxWidth ?? '185px',
+                  maxWidth: maxWidth ? computedMaxWidth : '185px',
                   width: '100%',
               }
             : undefined;

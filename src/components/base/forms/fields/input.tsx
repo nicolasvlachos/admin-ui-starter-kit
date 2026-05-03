@@ -228,7 +228,7 @@ function InputImpl(
                 className={cn(
                     // Base styles
                     'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground',
-                    'border-input flex w-full min-w-0 rounded-md border py-1 shadow-xs',
+                    'border-input flex w-full min-w-0 rounded-md border py-1',
                     'transition-[color,box-shadow] outline-none',
                     'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
                     formControlSizeClasses[size],

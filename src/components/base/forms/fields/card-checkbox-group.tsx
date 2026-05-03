@@ -110,11 +110,11 @@ export function CardCheckboxGroup({
 							disabled={isDisabled}
 							data-selected={isSelected}
 							className={cn(
-								'group relative flex w-full flex-col items-start text-start outline-none',
-								'rounded-lg border bg-card transition-[color,box-shadow,background,border-color] duration-150',
-								'border-border hover:border-foreground/20 hover:bg-muted/30',
-								'focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-1',
-								'data-[selected=true]:border-primary data-[selected=true]:bg-primary/5',
+								'group relative flex w-full flex-col items-start text-start outline-none cursor-pointer',
+								'rounded-md border bg-card transition-[color,box-shadow,background,border-color] duration-150',
+								'border-input hover:border-foreground/30',
+								'focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50',
+								'data-[selected=true]:border-primary data-[selected=true]:ring-2 data-[selected=true]:ring-primary/20',
 								tokens.padding,
 								tokens.gap,
 								'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
@@ -123,7 +123,7 @@ export function CardCheckboxGroup({
 						>
 							<CircleCheck
 								className={cn(
-									'absolute top-2.5 right-2.5 h-5 w-5 text-primary fill-primary stroke-card',
+									'absolute top-2 right-2 size-4 text-primary-foreground fill-primary stroke-primary-foreground',
 									!isSelected && 'hidden',
 								)}
 							/>
@@ -139,7 +139,7 @@ export function CardCheckboxGroup({
 									<Icon className={tokens.iconSize} />
 								</span>
 							)}
-							<Text tag="span" weight="semibold" className="tracking-tight">
+							<Text tag="span" weight="medium">
 								{optionLabel}
 							</Text>
 							{!!option.description && (

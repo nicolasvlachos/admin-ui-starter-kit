@@ -5,10 +5,11 @@
  * Strings overridable for i18n.
  */
 import { useState, useRef, useCallback, memo } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { Button } from '@/components/base/buttons';
 import { Label } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
+import { cn } from '@/lib/utils';
 import { Input } from './input';
 
 export type KeyValuePair = { key: string; value: string };
@@ -88,7 +89,7 @@ const KeyValueEditorRow = memo(function KeyValueEditorRow({
     const { id, key: keyValue, value } = row;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 items-end">
             <div className="space-y-1">
                 {!!isFirst && !!keyLabel && <Label>{keyLabel}</Label>}
                 <Input
@@ -98,26 +99,28 @@ const KeyValueEditorRow = memo(function KeyValueEditorRow({
                     invalid={invalid}
                 />
             </div>
-            <div className="flex gap-2">
-                <div className="flex-1 space-y-1">
-                    {!!isFirst && !!valueLabel && <Label>{valueLabel}</Label>}
-                    <Input
-                        value={value ?? ''}
-                        placeholder={valuePlaceholder}
-                        onChange={(e) => onValueChange(id, e.target.value)}
-                        invalid={invalid}
-                    />
-                </div>
-                <Button
-                    type="button"
-                    variant="secondary"
-                    buttonStyle="solid"
-                    aria-label={removeAriaLabel}
-                    icon={Minus}
-                    onClick={() => onRemove(id)}
-                    className={isFirst && (keyLabel || valueLabel) ? 'mt-6' : ''}
-                >{''}</Button>
+            <div className="space-y-1">
+                {!!isFirst && !!valueLabel && <Label>{valueLabel}</Label>}
+                <Input
+                    value={value ?? ''}
+                    placeholder={valuePlaceholder}
+                    onChange={(e) => onValueChange(id, e.target.value)}
+                    invalid={invalid}
+                />
             </div>
+            <button
+                type="button"
+                aria-label={removeAriaLabel}
+                onClick={() => onRemove(id)}
+                className={cn(
+                    'inline-flex size-9 shrink-0 items-center justify-center rounded-md',
+                    'text-muted-foreground/70 hover:bg-destructive/10 hover:text-destructive',
+                    'outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+                    'transition-colors',
+                )}
+            >
+                <X className="size-4" aria-hidden="true" />
+            </button>
         </div>
     );
 });

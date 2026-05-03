@@ -191,7 +191,7 @@ export const RichSelect = forwardRef<HTMLButtonElement, RichSelectProps>(
         //   - `disabled:opacity-50 disabled:cursor-not-allowed` to match
         //     every other field (was `opacity-40 grayscale`).
         const inputClassNames = cn(
-            'border-input bg-transparent w-full rounded-md border outline-none transition-[color,box-shadow]',
+            'border-input bg-transparent w-full rounded-md border outline-none transition-[color,box-shadow] !shadow-none',
             formControlSizeClasses[size],
             formControlMinHeightClasses[size],
             'h-auto py-2',
@@ -218,7 +218,7 @@ export const RichSelect = forwardRef<HTMLButtonElement, RichSelectProps>(
             >
                 <baseui.SelectTrigger ref={ref} className={inputClassNames} aria-invalid={invalid}>
                     {selectedOption ? (
-                        <Text tag="span" weight="medium" className="text-left break-words whitespace-normal">
+                        <Text tag="span" className="text-left break-words whitespace-normal">
                             {selectedOption.label}
                         </Text>
                     ) : (

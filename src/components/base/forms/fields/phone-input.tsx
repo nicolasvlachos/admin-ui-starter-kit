@@ -350,7 +350,7 @@ function PhoneInputImpl(
                 <baseui.SelectTrigger
                     aria-invalid={invalid || undefined}
                     className={cn(
-                        'border-input bg-transparent shrink-0',
+                        'border-input bg-transparent shrink-0 !shadow-none',
                         formControlSizeClasses[size],
                         'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
                         'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
@@ -360,7 +360,7 @@ function PhoneInputImpl(
                 >
                     <baseui.SelectValue placeholder={prefixPlaceholder ?? strings.prefixPlaceholder}>
                         {!!currentPrefixOption && (
-                            <Text tag="span" weight="medium">
+                            <Text tag="span">
                                 {currentPrefixOption.value}
                             </Text>
                           )}

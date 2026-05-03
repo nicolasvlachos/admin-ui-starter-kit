@@ -67,6 +67,17 @@ function resolvePickerButtonProps(variant: unknown): { variant: ButtonVariant; b
 	return { variant: 'secondary', buttonStyle: 'outline' };
 }
 
+/**
+ * Field-style chrome override applied on top of `<Button>` so the
+ * picker trigger reads as a form field (square-ish corners, input
+ * border, subtle shadow) instead of the global pill-shaped button
+ * default. Mirrors `formFieldTriggerClasses` from `forms/form-sizing`
+ * — kept inline here to avoid making `date-pickers` import the forms
+ * sizing helper.
+ */
+const PICKER_TRIGGER_CHROME =
+	'!rounded-md !border-input !bg-transparent !shadow-none !h-8 !px-3 !font-normal !text-foreground hover:!bg-transparent';
+
 // Type guards
 function isSingleMode(props: DatePickerProps): props is DatepickerProps {
 	return !props.mode || props.mode === 'single';
@@ -440,6 +451,7 @@ function SingleDatePicker({
 									aria-describedby={ariaDescribedBy}
 									className={cn(
 										'w-full justify-start text-left font-normal',
+										PICKER_TRIGGER_CHROME,
 										!date && 'text-muted-foreground',
 										baseProps.error && 'border-destructive focus-visible:ring-destructive',
 										(triggerProps as { className?: string }).className,
@@ -634,6 +646,7 @@ function MultipleDatePicker({
 									aria-describedby={ariaDescribedBy}
 									className={cn(
 										'w-full justify-start text-left font-normal',
+										PICKER_TRIGGER_CHROME,
 										dates.length === 0 && 'text-muted-foreground',
 										baseProps.error && 'border-destructive focus-visible:ring-destructive',
 										(triggerProps as { className?: string }).className,
@@ -962,6 +975,7 @@ function RangeDatePicker({
 									aria-describedby={ariaDescribedBy}
 									className={cn(
 										'w-full justify-start text-left font-normal',
+										PICKER_TRIGGER_CHROME,
 										!range && 'text-muted-foreground',
 										baseProps.error && 'border-destructive focus-visible:ring-destructive',
 										(triggerProps as { className?: string }).className,

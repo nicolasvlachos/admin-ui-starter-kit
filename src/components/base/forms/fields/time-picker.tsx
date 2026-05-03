@@ -338,9 +338,12 @@ export function TimePicker({
                         aria-invalid={invalid}
                         disabled={disabled}
                         className={cn(
-                            'w-full justify-between text-left font-normal',
-                            !value && 'text-muted-foreground',
-                            'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
+                            // Field-style override (matches Input chrome,
+                            // not the global pill-shaped button default).
+                            '!rounded-md !border-input !bg-transparent !shadow-none !h-8 !px-3 !font-normal !text-foreground hover:!bg-transparent',
+                            'w-full justify-between text-left',
+                            !value && '!text-muted-foreground',
+                            'aria-invalid:!border-destructive aria-invalid:!ring-2 aria-invalid:!ring-destructive/20',
 										(triggerProps as { className?: string }).className,
                             className
                         )}

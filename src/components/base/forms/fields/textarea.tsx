@@ -203,7 +203,7 @@ const TextareaImpl = (
                     // Base styles
                     'placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground',
                     'border-input flex w-full rounded-md border bg-transparent px-3 py-2',
-                    'shadow-xs transition-[color,box-shadow] outline-none',
+                    'transition-[color,box-shadow] outline-none',
                     'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
                     formTextareaSizeClasses[size],
                     // Focus styles

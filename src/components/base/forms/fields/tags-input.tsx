@@ -344,15 +344,21 @@ export function TagsInput<T = string>({
         (tag: T, index: number, onRemove: (index: number) => void) => {
             const tagKey = `${getDisplayValue(tag)}-${index}`;
             return (
-                <Badge key={tagKey} variant="secondary" className="mr-1 mb-1">
+                <Badge key={tagKey} variant="secondary" className="gap-1 pr-1 font-normal">
                     {getDisplayValue(tag)}
                     <button
                         type="button"
-                        className="ml-1 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2"
+                        aria-label={`Remove ${getDisplayValue(tag)}`}
+                        className={cn(
+                            'inline-flex size-3.5 items-center justify-center rounded-full',
+                            'text-muted-foreground/70 hover:bg-foreground/10 hover:text-foreground',
+                            'outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+                            'disabled:opacity-50 disabled:pointer-events-none',
+                        )}
                         onClick={() => onRemove(index)}
                         disabled={disabled}
                     >
-                        <X className="h-3 w-3" />
+                        <X className="size-3" aria-hidden="true" />
                     </button>
                 </Badge>
             );
@@ -438,7 +444,7 @@ export function TagsInput<T = string>({
 
             {/* Tags container */}
             {displayValue.length > 0 && (
-                <div className="flex flex-wrap items-center gap-1 mt-2 bg-muted/10">
+                <div className="flex flex-wrap items-center gap-1.5 mt-2">
                     {displayValue.map((tag, index) =>
                         renderTag ? renderTag(tag, index, removeTag) : defaultRenderTag(tag, index, removeTag)
                     )}

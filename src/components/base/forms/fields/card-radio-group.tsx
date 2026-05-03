@@ -82,10 +82,10 @@ function CardRadioGroupImpl({
 						aria-invalid={invalid || undefined}
 						className={cn(
 							'relative group flex flex-col text-start outline-none cursor-pointer',
-							'rounded-lg border bg-card transition-[color,box-shadow,background,border-color] duration-150',
-							'border-border hover:border-foreground/20 hover:bg-muted/30',
-							'focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-1',
-							'data-[checked]:border-primary data-[checked]:bg-primary/5',
+							'rounded-md border bg-card transition-[color,box-shadow,background,border-color] duration-150',
+							'border-input hover:border-foreground/30',
+							'focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50',
+							'data-[checked]:border-primary data-[checked]:ring-2 data-[checked]:ring-primary/20',
 							tokens.padding,
 							tokens.gap,
 							'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
@@ -94,7 +94,7 @@ function CardRadioGroupImpl({
 					>
 						<RadioPrimitive.Indicator
 							render={
-								<CircleCheck className="absolute top-2.5 right-2.5 h-5 w-5 text-primary fill-primary stroke-card" />
+								<CircleCheck className="absolute top-2 right-2 size-4 text-primary-foreground fill-primary stroke-primary-foreground" />
 							}
 						/>
 
@@ -109,7 +109,7 @@ function CardRadioGroupImpl({
 								<Icon className={tokens.iconSize} />
 							</span>
 						)}
-						<Text tag="span" weight="semibold" className="tracking-tight">
+						<Text tag="span" weight="medium">
 							{optionLabel}
 						</Text>
 						{!!option.description && (

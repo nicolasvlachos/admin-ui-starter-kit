@@ -177,9 +177,11 @@ export const Select = memo(
                     ref={ref}
                     aria-invalid={resolvedInvalid || undefined}
                     className={cn(
-                        // Base styles matching Input
-                        'flex w-full items-center justify-between rounded-md border px-3 py-1',
-                        'shadow-xs transition-[color,box-shadow] outline-none',
+                        // Base styles matching Input — `!shadow-none` strips the
+                        // shadcn primitive's baked-in `shadow-xs` so the trigger
+                        // matches our flat Input chrome.
+                        'flex w-full items-center justify-between rounded-md border px-3 py-1 !shadow-none',
+                        'transition-[color,box-shadow] outline-none',
                         formControlSizeClasses[size],
                         // Background
                         'bg-transparent dark:bg-input/30',
