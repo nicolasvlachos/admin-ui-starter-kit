@@ -8,6 +8,142 @@ contributor picks the right one off the top.
 
 Severity tags: **[H]** high leverage, **[M]** medium, **[L]** low.
 
+## Forms / fields parity (2026-05-03)
+
+A focused parity sweep across `src/components/base/forms/fields/**`
+(41 files / ~8000 LOC) landed five small mechanical fixes inline:
+ring-opacity harmonized to `/50` across 6 sites; disabled opacity
+harmonized to `50` across 7 sites; destructive ring added to the 6
+static-`border-destructive` fields; redundant inner DEV guard in
+currency-input dropped. The bigger items below need their own
+focused commits with visual review.
+
+### [H] Refactor `rich-select.tsx` end-to-end
+
+Single biggest violation surface in `forms/fields/`. Stacked rule
+breaches:
+- Rule 6: raw palette tokens (`bg-error-100`, `text-error-600`,
+  `placeholder-error-600`, `border-neutral-300`, `text-neutral-400`,
+  `bg-primary-50`).
+- Rule 17: no `useFormsConfig` / no `formControlSizeClasses`
+  integration.
+- Custom `outline-3 outline-offset-3 outline-primary-400` focus
+  pattern (everywhere else uses `focus-visible:ring-*`).
+- `rounded-lg px-3 py-2` chrome divergent from sibling `<Select>`'s
+  `rounded-md` + `formControlSizeClasses[size]`.
+- `disabled:opacity-40 grayscale` pattern out-of-band from rest of
+  fields (now uniformly `opacity-50`).
+
+Ship: either route through `select.tsx`'s trigger styling or extract
+a shared `SelectTriggerChrome` helper that both consume.
+
+### [H] Unpin inner trigger sizes in composite fields
+
+Today these composites hardcode `h-9` on their inner SelectTrigger,
+producing a height mismatch when a consumer sets
+`<UIProvider forms={{ defaultControlSize: 'sm' }}>` (32px input next
+to 36px trigger):
+
+- `currency-input.tsx:153`
+- `dimensions-input.tsx:281`
+- `weight-input.tsx:144`
+- `phone-input.tsx:344`
+- `decimal-input.tsx:271,301` (stepper buttons hardcoded `h-9 w-9`)
+
+Ship: forward `resolvedSize` and reuse `formControlSizeClasses[size]`
+across each composite's inner pieces.
+
+### [H] Standardise the invalid contract on non-text-input fields
+
+The canonical invalid chrome is
+`aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive`
+(used by Input/Textarea/Select/Currency/Dimensions/Weight/Phone-input
+and now also rendered as a manual conditional in card-radio /
+card-checkbox / switch-card / list-radio / pill-radio / time-picker /
+phone-static-prefix). The static fields render the visual via
+`invalid && 'border-destructive ring-2 ring-destructive/20'` — works
+but is parent-prop-driven instead of attribute-driven. Convert to
+`aria-invalid:` selectors so consumers using RHF (which sets the
+attribute automatically) get the same styling without touching the
+`invalid` prop.
+
+### [H] `tags-input.tsx` suggestion popover hand-rolls primitives
+
+`tags-input.tsx:385` builds the suggestion popover with raw
+`<div className="rounded-md border bg-popover p-1 shadow-md">`
+instead of `base/popover`'s `PopoverContent` + `base/command`'s
+`CommandList`/`CommandItem`. Rule 5 + rule 12 violation. Refactor to
+the canonical shape; result row at `tags-input.tsx:401` becomes
+`<CommandItem>` instead of a hand-rolled `text-sm py-1.5 px-2` row.
+
+### [M] Fields with custom-shaped `onChange` (legacy bridge)
+
+Beyond the three already in this list (`weight-input`,
+`coordinates-input`, `dimensions-input`):
+
+- `switch.tsx:29` — `onCheckedChange?: (event: ImitationEvent) => void`
+  with `target: { name, value: boolean }`. Companion `ToggleSwitch`
+  (line 73) already exposes the clean `(checked: boolean) => void`
+  shape — keep `Switch` for legacy bindings, but document.
+- `slider.tsx:7-12,42-43` — `onChange?: (event: SliderImitationEvent)
+  => void` with `target: { name, value: number }`; has clean
+  `onValueChange?` co-prop. Consolidate when consumer demand is
+  clear.
+
+### [M] Fields missing the strings interface
+
+- `coordinates-input.tsx` — accepts `latLabel`, `lngLabel`,
+  `latPlaceholder`, `lngPlaceholder`, `previewLinkLabel` as direct
+  props. Should use `useStrings(defaultCoordinatesInputStrings, …)`
+  for parity with `dimensions-input`.
+- `weight-input.tsx` — `unitLabel` / `unitPlaceholder` direct props
+  with English defaults; only field with no strings story while
+  having user-visible copy.
+- `image-upload.tsx:298-300` — pluralisation `+ {n} more file{n === 1
+  ? '' : 's'}` hardcoded; not in `ImageUploadStrings`.
+- `tags-input.tsx:446` — `{value.length} / {maxTags} tags` —
+  hardcoded "tags".
+- `image-upload.tsx:254` — `alt={selected?.name || 'Selected image'}`
+  fallback not in strings.
+
+### [M] Provider-default fallback drift
+
+`card-radio-group`, `card-checkbox-group`, `list-radio-group`,
+`pill-radio-group` all read `useFormsConfig().defaultControlSize ??
+'base'` (note `'base'` fallback). `input/textarea/select` use
+`resolveFormControlSize(...)` which falls back to `'sm'`. Same
+provider, two different defaults. Pick one (recommend `'sm'`).
+
+### [M] Sister chrome drift between `Input` + `Select` + `RichSelect`
+
+- `select.tsx:181` — Trigger hardcodes `py-1` in addition to
+  `formControlSizeClasses[size]`. Drop the redundant pin.
+- `phone-input.tsx:305` + `rich-select.tsx:182` — `rounded-lg` while
+  sibling `Input` is `rounded-md`. Mismatch when phone-input renders
+  the static prefix block beside an `<Input>`.
+- `phone-input.tsx:305,344` — Use `--form-element-height` CSS
+  variable; nothing else in the folder does. Either kill the variable
+  usage and route through `formControlSizeClasses`, or document the
+  variable in `App.css` and standardise.
+
+### [L] Raw `<button>` instead of `<Button>` (rule 5)
+
+- `list.tsx:56` — drag handle.
+- `object-repeater.tsx:104-110` — delete button.
+- `tags-input.tsx:344-352` — remove-tag button (low — single-use,
+  inside a `<Badge>`).
+
+### [L] Switch `data-[state=unchecked]:border-destructive` only flips on unchecked state
+
+`switch.tsx:64,88` — checked invalid switches show no error chrome.
+Add an unconditional `aria-invalid:border-destructive` for symmetry.
+
+### [L] Avatar-upload alt text doubles as action label
+
+`avatar-upload.tsx:213` — `alt={strings.change}` ("Change photo"). The
+strings.change is an action label, not an image description. Add a
+separate `imageAlt` string.
+
 ## Visual consistency
 
 ### [H] Adopt `<SmartCard>` (or extract `<CardSurface>`) across the AI family

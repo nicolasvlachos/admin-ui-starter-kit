@@ -185,14 +185,14 @@ function AvatarUploadImpl(
 				className={cn(
 					'group relative flex shrink-0 items-center justify-center overflow-hidden rounded-full',
 					'border border-dashed transition-colors duration-150 outline-none',
-					'focus-visible:ring-2 focus-visible:ring-ring/40',
+					'focus-visible:ring-2 focus-visible:ring-ring/50',
 					hasPreview
 						? 'border-border/60 bg-muted/20'
 						: cn(
 								'bg-muted/30 hover:border-primary hover:bg-primary/5',
 								invalid ? 'border-destructive' : 'border-muted-foreground/40',
 							),
-					disabled && 'cursor-not-allowed opacity-60',
+					disabled && 'cursor-not-allowed opacity-50',
 					!disabled && isDragging && 'border-primary bg-primary/10',
 					sizes.box,
 				)}

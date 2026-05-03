@@ -98,7 +98,7 @@ export function ToggleField({
 				htmlFor={inputId}
 				className={cn(
 					'block leading-snug',
-					disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer',
+					disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
 				)}
 			>
 				{label}

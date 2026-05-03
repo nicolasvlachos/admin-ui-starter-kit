@@ -107,17 +107,13 @@ function CurrencyInputImpl(
             controlledCurrency !== defaultCurrency
         ) {
             const message = '[CurrencyInput] currency/defaultCurrency mismatch while selector is disabled.';
-            if (import.meta.env?.DEV) {
-	            console.warn(message, { currency: controlledCurrency, defaultCurrency });
-            }
+            console.warn(message, { currency: controlledCurrency, defaultCurrency });
             onConfigError?.(message, { currency: controlledCurrency, defaultCurrency, disableCurrencySelector });
         }
 
         if (disableCurrencySelector && typeof selected === 'string' && selected.trim().length === 0) {
             const message = '[CurrencyInput] disableCurrencySelector is enabled but no currency is provided.';
-            if (import.meta.env?.DEV) {
-	            console.warn(message);
-            }
+            console.warn(message);
             onConfigError?.(message, { currency: controlledCurrency, defaultCurrency, disableCurrencySelector });
         }
     }

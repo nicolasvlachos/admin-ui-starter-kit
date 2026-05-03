@@ -146,7 +146,7 @@ function DropzoneImpl(
 				chrome.padding,
 				invalid ? 'border-destructive' : 'border-muted-foreground/40',
 				'bg-muted/30 hover:border-primary hover:bg-primary/5 hover:text-primary',
-				disabled && 'cursor-not-allowed opacity-60 hover:border-muted-foreground/40 hover:bg-muted/30 hover:text-muted-foreground',
+				disabled && 'cursor-not-allowed opacity-50 hover:border-muted-foreground/40 hover:bg-muted/30 hover:text-muted-foreground',
 				!disabled && isDragging && 'border-primary bg-primary/10 text-primary',
 				className,
 			)}

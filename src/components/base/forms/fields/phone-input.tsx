@@ -304,7 +304,7 @@ function PhoneInputImpl(
                     className={cn(
                         'flex h-[--form-element-height] items-center justify-center rounded-lg border border-input bg-muted px-3',
                         disabled && 'opacity-50',
-                        invalid && 'border-destructive'
+                        invalid && 'border-destructive ring-2 ring-destructive/20'
                     )}
                 >
                     <Text tag="span" type="secondary" weight="medium">

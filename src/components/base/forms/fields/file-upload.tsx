@@ -227,7 +227,7 @@ function FileUploadImpl(
         const bgClasses = 'bg-muted/40';
         const hoverClasses = 'hover:border-primary hover:bg-primary/10 hover:text-primary';
         const disabledClasses = disabled
-            ? 'cursor-not-allowed opacity-60 hover:border-muted-foreground/60 hover:bg-muted/40 hover:text-muted-foreground'
+            ? 'cursor-not-allowed opacity-50 hover:border-muted-foreground/60 hover:bg-muted/40 hover:text-muted-foreground'
             : '';
         const draggingClasses = !disabled && isDragging ? 'border-primary bg-primary/15 text-primary' : '';
 

@@ -100,7 +100,7 @@ function SortableTile({
 				'group relative aspect-square overflow-hidden rounded-lg border border-border/60 bg-muted/30',
 				'cursor-grab active:cursor-grabbing',
 				isDragging && 'z-10 shadow-lg ring-2 ring-primary/40',
-				disabled && 'pointer-events-none opacity-60',
+				disabled && 'pointer-events-none opacity-50',
 				tileClassName,
 			)}
 			{...attributes}
@@ -329,9 +329,9 @@ export function MediaGallery({
 								onDrop={handleDrop}
 								className={cn(
 									'flex aspect-square items-center justify-center rounded-lg border border-dashed text-center outline-none transition-colors',
-									'hover:border-primary hover:bg-primary/5 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring/40',
+									'hover:border-primary hover:bg-primary/5 hover:text-primary focus-visible:ring-2 focus-visible:ring-ring/50',
 									invalid ? 'border-destructive' : 'border-muted-foreground/40',
-									disabled && 'cursor-not-allowed opacity-60',
+									disabled && 'cursor-not-allowed opacity-50',
 									!disabled && isDragging && 'border-primary bg-primary/10 text-primary',
 								)}
 							>

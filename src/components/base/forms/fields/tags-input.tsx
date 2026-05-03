@@ -343,7 +343,7 @@ export function TagsInput<T = string>({
                     {getDisplayValue(tag)}
                     <button
                         type="button"
-                        className="ml-1 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        className="ml-1 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2"
                         onClick={() => onRemove(index)}
                         disabled={disabled}
                     >

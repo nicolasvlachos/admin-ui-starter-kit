@@ -111,11 +111,11 @@ export function CardCheckboxGroup({
 								'group relative flex w-full flex-col items-start text-start outline-none',
 								'rounded-lg border bg-card transition-[color,box-shadow,background,border-color] duration-150',
 								'border-border hover:border-foreground/20 hover:bg-muted/30',
-								'focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1',
+								'focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-1',
 								'data-[selected=true]:border-primary data-[selected=true]:bg-primary/5',
 								tokens.padding,
 								tokens.gap,
-								invalid && 'border-destructive',
+								invalid && 'border-destructive ring-2 ring-destructive/20',
 								'disabled:cursor-not-allowed disabled:opacity-50',
 							)}
 						>
