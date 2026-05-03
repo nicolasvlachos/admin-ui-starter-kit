@@ -22,7 +22,7 @@ export function ShipmentTrackingCard({
     className,
 }: ShipmentTrackingCardProps) {
     return (
-        <SmartCard className={className}>
+        <SmartCard className={cn('shipment-tracking--component', className)}>
             <div className="flex items-center justify-between">
                 <Text size="xs" weight="medium" className="font-mono text-muted-foreground tracking-wide">
                     {trackingNumber}

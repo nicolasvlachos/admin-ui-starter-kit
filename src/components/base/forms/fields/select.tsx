@@ -177,6 +177,7 @@ export const Select = memo(
                     ref={ref}
                     aria-invalid={resolvedInvalid || undefined}
                     className={cn(
+                        'select--component',
                         // Base styles matching Input — `!shadow-none` strips the
                         // shadcn primitive's baked-in `shadow-xs` so the trigger
                         // matches our flat Input chrome.

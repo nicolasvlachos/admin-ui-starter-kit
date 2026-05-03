@@ -51,7 +51,7 @@ export function ContactCard({
 	const strings = useStrings(defaultContactCardStrings, stringsProp);
 	return (
 		<div
-			className={cn(
+			className={cn('contact-card--component', 
 				'overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm p-6 sm:p-7',
 				className,
 			)}

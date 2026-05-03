@@ -50,7 +50,7 @@ export function AiArtifact({
 
 	return (
 		<div
-			className={cn(
+			className={cn('ai-artifact--component', 
 				'overflow-hidden rounded-lg border border-border/60 bg-card',
 				className,
 			)}

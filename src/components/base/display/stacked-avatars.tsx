@@ -77,7 +77,7 @@ export function StackedAvatars({
 	const overflow = Math.max(0, users.length - max);
 
 	return (
-		<AvatarGroup className={className}>
+		<AvatarGroup className={cn('stacked-avatars--component', className)}>
 			{visible.map((user, index) => {
 				const initials = getInitials(user.name);
 				const gradient = pickGradient(user.id ?? user.name ?? index, user.tone);

@@ -120,7 +120,7 @@ export const UploadTray = forwardRef<HTMLDivElement, UploadTrayProps>(function U
 	const hasItems = items.length > 0;
 
 	return (
-		<div ref={ref} className={cn('flex flex-col gap-4', className)}>
+		<div ref={ref} className={cn('upload-tray--component', 'flex flex-col gap-4', className)}>
 			<Dropzone
 				onDrop={handleDrop}
 				accept={dropzone?.accept}

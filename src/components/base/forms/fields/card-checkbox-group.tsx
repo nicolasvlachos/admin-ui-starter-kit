@@ -78,7 +78,7 @@ export function CardCheckboxGroup({
 
 	return (
 		<div
-			className={cn(GRID_COLS[columns], className)}
+			className={cn('card-checkbox-group--component', GRID_COLS[columns], className)}
 			role="group"
 			aria-invalid={invalid || undefined}
 			aria-disabled={disabled || undefined}

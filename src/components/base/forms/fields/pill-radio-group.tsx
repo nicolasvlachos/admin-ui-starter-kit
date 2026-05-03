@@ -63,7 +63,7 @@ export function PillRadioGroup({
 			data-name={name}
 			role="radiogroup"
 			aria-invalid={invalid || undefined}
-			className={cn(
+			className={cn('pill-radio-group--component', 
 				'border-input inline-flex items-center overflow-hidden rounded-lg border',
 				fullWidth && 'w-full',
 				'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',

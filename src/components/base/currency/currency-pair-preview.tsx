@@ -69,7 +69,7 @@ export function CurrencyPairPreview({
 				tag={tag}
 				size={size}
 				type="secondary"
-				className={cn('tabular-nums', className)}
+				className={cn('currency-pair-preview--component', 'tabular-nums', className)}
 				{...props}
 			>
 				{emptyLabel}

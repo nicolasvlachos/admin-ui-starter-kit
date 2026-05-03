@@ -96,7 +96,7 @@ function SortableTile({
 		<div
 			ref={setNodeRef}
 			style={style}
-			className={cn(
+			className={cn('media-gallery--component', 
 				'group relative aspect-square overflow-hidden rounded-lg border border-border/60 bg-muted/30',
 				'cursor-grab active:cursor-grabbing',
 				isDragging && 'z-10 shadow-lg ring-2 ring-primary/40',

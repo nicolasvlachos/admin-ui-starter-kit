@@ -6,7 +6,7 @@ import type { VendorPerformanceCardProps } from './types';
 
 function RatingStars({ rating, maxRating = 5 }: { rating: number; maxRating?: number }) {
     return (
-        <div className="flex items-center gap-0.5">
+        <div className={cn('vendor-performance--component', 'flex items-center gap-0.5')}>
             {Array.from({ length: maxRating }, (_, i) => (
                 <svg
                     key={`star-${String(i)}`}

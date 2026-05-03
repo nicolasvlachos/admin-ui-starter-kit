@@ -39,7 +39,7 @@ export function InlineStat({
 }: InlineStatProps) {
 	if (layout === 'stacked') {
 		return (
-			<div className={cn('flex flex-col gap-0.5', className)}>
+			<div className={cn('inline-stat--component', 'flex flex-col gap-0.5', className)}>
 				<Text tag="span" size="xxs" type="secondary" className={labelClassName}>
 					{label}
 				</Text>

@@ -42,7 +42,7 @@ export function LanguageSwitcher({
 
 	if (variant === 'inline') {
 		return (
-			<div className="flex items-center justify-center gap-2.5">
+			<div className={cn('language-switcher--component', 'flex items-center justify-center gap-2.5')}>
 				<Globe className="size-4 text-muted-foreground/70" aria-hidden="true" />
 				<div className="flex items-center justify-center gap-2.5">
 					{locales.map((locale, index) => {

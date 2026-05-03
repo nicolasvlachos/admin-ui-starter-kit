@@ -150,7 +150,7 @@ export function DatePicker(props: DatePickerProps) {
 	// Render based on mode
 	if (isSingleMode(props)) {
 		return (
-			<SingleDatePicker
+			<SingleDatePicker className="date-picker--component"
 				{...props}
 				open={open}
 				setOpen={setOpen}

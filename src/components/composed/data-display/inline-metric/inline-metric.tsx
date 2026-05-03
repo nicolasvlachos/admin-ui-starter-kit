@@ -40,7 +40,7 @@ const changeSize: Record<string, 'xxs' | 'xs'> = {
 
 export function InlineMetricBadge({ metrics, className }: InlineMetricBadgeProps) {
 	return (
-		<div className={cn('flex flex-wrap gap-1.5', className)}>
+		<div className={cn('inline-metric--component', 'flex flex-wrap gap-1.5', className)}>
 			{metrics.map((m) => {
 				const sz = m.size ?? 'base';
 				return (

@@ -27,7 +27,7 @@ export function ActivityStreamCard({ items, className, strings: stringsProp }: A
 
 	if (items.length === 0) {
 		return (
-			<SmartCard icon={<Activity className="size-4" />} title={strings.title} className={className}>
+			<SmartCard icon={<Activity className="size-4" />} title={strings.title} className={cn('activity-stream--component', className)}>
 				<Text type="secondary" align="center" className="py-6">{strings.empty}</Text>
 			</SmartCard>
 		);

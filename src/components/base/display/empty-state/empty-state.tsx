@@ -89,7 +89,7 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(function E
 			ref={ref}
 			role="status"
 			aria-label={ariaLabel ?? strings.ariaLabel}
-			className={cn(
+			className={cn('empty-state--component', 
 				PADDING_CLASS[padding],
 				border ? 'border border-dashed' : 'border-0',
 				className,

@@ -12,6 +12,7 @@ import { Text } from '@/components/typography';
 import { defaultDataTableStrings } from './table.strings';
 import { type ServerPaginationProps } from './table.types';
 
+import { cn } from '@/lib/utils';
 /**
  * Generate a window of page numbers with ellipsis gaps.
  *
@@ -94,7 +95,7 @@ export function Pagination({
 	const pages = generatePageNumbers(pagination.current_page, pagination.last_page);
 
 	return (
-		<div className="flex items-center justify-between px-5 py-3">
+		<div className={cn('pagination--component', 'flex items-center justify-between px-5 py-3')}>
 			<Text size="xs" type="secondary" className="tabular-nums tracking-tight">
 				<Text tag="span" weight="medium" className="text-foreground">{firstItem}&ndash;{lastItem}</Text>{' '}
 				{paginationLabels.of}{' '}

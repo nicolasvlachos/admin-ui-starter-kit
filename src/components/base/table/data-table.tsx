@@ -33,7 +33,7 @@ import { cn } from '@/lib/utils';
  *
  * Use it from custom cells:
  *   const size = useDataTableSize();
- *   return <Text size={size}>{value}</Text>;
+ *   return <Text className="data-table--component" size={size}>{value}</Text>;
  *
  * The built-in renderers in `partials/cell-renderers` consume this hook.
  */

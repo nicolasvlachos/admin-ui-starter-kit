@@ -13,9 +13,10 @@ import { Text } from '@/components/typography/text';
 
 import type { TeamMemberRowProps } from './types';
 
+import { cn } from '@/lib/utils';
 export function TeamMemberRow({ members, className }: TeamMemberRowProps) {
     return (
-        <ItemGroup className={className}>
+        <ItemGroup className={cn('team-member--component', className)}>
             {members.map((m) => (
                 <Item key={m.name}>
                     <ItemMedia>

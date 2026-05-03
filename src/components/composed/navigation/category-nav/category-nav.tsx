@@ -20,7 +20,7 @@ import type { CategoryNavCardProps } from './types';
 
 export function CategoryNavCard({ title, items, activeId, onSelect, className }: CategoryNavCardProps) {
 	return (
-		<SmartCard title={title} padding="sm" className={className}>
+		<SmartCard title={title} padding="sm" className={cn('category-nav--component', className)}>
 			<ItemGroup>
 				{items.map((it) => {
 					const Icon = it.icon;

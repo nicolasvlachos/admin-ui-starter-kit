@@ -51,7 +51,7 @@ export function AiConfirmation({
 		<div
 			role="region"
 			aria-live="polite"
-			className={cn(
+			className={cn('ai-confirmation--component', 
 				'rounded-lg border px-3 py-2.5',
 				toneCfg.ring,
 				className,

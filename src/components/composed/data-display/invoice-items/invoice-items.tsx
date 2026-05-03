@@ -27,7 +27,7 @@ export function InvoiceItemsTable({
     className,
 }: InvoiceItemsProps) {
     return (
-        <div className={cn('rounded-xl bg-card shadow-sm overflow-hidden', className)}>
+        <div className={cn('invoice-items--component', 'rounded-xl bg-card shadow-sm overflow-hidden', className)}>
             {/* Header row */}
             <div className="grid grid-cols-[1fr_80px_100px_100px] gap-4 bg-muted/50 px-6 py-3">
                 <Text size="xs" type="secondary" weight="medium">Item</Text>

@@ -36,7 +36,7 @@ export function EventCalendarLegend({
 		<div
 			role={enableFiltering ? 'group' : undefined}
 			aria-label={enableFiltering ? 'Filter event categories' : undefined}
-			className="flex flex-wrap items-center gap-1.5 py-1"
+			className={cn('event-calendar-legend--component', 'flex flex-wrap items-center gap-1.5 py-1')}
 		>
 			{categories.map((category) => {
 				const isVisible = isCategoryVisible(category.id);

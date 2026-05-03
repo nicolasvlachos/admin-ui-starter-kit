@@ -155,7 +155,7 @@ function SearchFacetComponent({
     };
 
     return (
-        <div className={cn('search-facet bg-background relative min-w-80', className)}>
+        <div className={cn('search-facet--component', 'search-facet bg-background relative min-w-80', className)}>
             <Input
                 type="text"
                 value={inputValue}

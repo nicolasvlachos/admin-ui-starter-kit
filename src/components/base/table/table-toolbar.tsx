@@ -30,7 +30,7 @@ function ToolbarIconButton({ label, onClick, disabled, className, children }: To
         <button
             type="button"
             aria-label={label}
-            className={cn(btnBase, className)}
+            className={cn('table-toolbar--component', btnBase, className)}
             onClick={onClick}
             disabled={disabled}
         >

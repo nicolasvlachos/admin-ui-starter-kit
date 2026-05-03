@@ -62,7 +62,7 @@ export function DateFacet({
         placeholder,
         disablePortal: true,
         numberOfMonths: 1,
-        className: cn('w-full', className),
+        className: cn('date-facet--component', 'w-full', className),
     };
 
     const handleSingleChange = (output: DateOutput) => {

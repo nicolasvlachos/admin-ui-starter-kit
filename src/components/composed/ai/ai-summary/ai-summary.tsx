@@ -19,7 +19,7 @@ const confidenceBars: Record<ConfidenceLevel, number> = {
 function ConfidenceBars({ level, label }: { level: ConfidenceLevel; label: string }) {
     const filled = confidenceBars[level];
     return (
-        <div className="flex items-center gap-1.5">
+        <div className={cn('ai-summary--component', 'flex items-center gap-1.5')}>
             <div className="flex items-center gap-0.5">
                 {Array.from({ length: 3 }, (_, i) => (
                     <div

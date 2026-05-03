@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { Input } from './input';
 import { Textarea } from './textarea';
 
+import { cn } from '@/lib/utils';
 export interface LocalizedStringFieldProps {
     /** Field name (path in form values) - should point to object with locale keys (e.g., 'en' and 'bg') */
     name: string;
@@ -54,7 +55,7 @@ export function LocalizedStringField({
                 placeholder={placeholder}
                 minRows={3}
                 invalid={invalid}
-                className={className}
+                className={cn('localized-string-field--component', className)}
             />
         );
     }

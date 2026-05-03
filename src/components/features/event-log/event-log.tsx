@@ -39,6 +39,7 @@ import type {
     EventLogRenderer,
 } from './event-log.types';
 
+import { cn } from '@/lib/utils';
 /**
  * Bridge between `<CommentComposer onSubmit={(values) => …}>` (values
  * only) and the richer `EventLogComposerConfig.onSubmit` signature
@@ -144,7 +145,7 @@ export function EventLog<
             return (
                 <li
                     key={commentEntry.id}
-                    className="relative"
+                    className={cn('event-log--component', 'relative')}
                     data-event-id={commentEntry.id}
                 >
                     <CommentItem

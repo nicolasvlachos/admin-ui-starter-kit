@@ -344,7 +344,7 @@ export function TagsInput<T = string>({
         (tag: T, index: number, onRemove: (index: number) => void) => {
             const tagKey = `${getDisplayValue(tag)}-${index}`;
             return (
-                <Badge key={tagKey} variant="secondary" className="gap-1 pr-1 font-normal">
+                <Badge key={tagKey} variant="secondary" className={cn('tags-input--component', 'gap-1 pr-1 font-normal')}>
                     {getDisplayValue(tag)}
                     <button
                         type="button"

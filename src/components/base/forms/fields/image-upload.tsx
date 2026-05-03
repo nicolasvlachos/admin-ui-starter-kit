@@ -232,7 +232,7 @@ function ImageUploadImpl(
     }, [selected, remove, onChange]);
 
     return (
-        <div className="space-y-3" style={wrapperStyle}>
+        <div className={cn('image-upload--component', 'space-y-3')} style={wrapperStyle}>
             <input
                 ref={(node) => { inputRef.current = node; if (typeof forwardedRef === "function") forwardedRef(node); else if (forwardedRef) forwardedRef.current = node; }}
                 id={inputId}

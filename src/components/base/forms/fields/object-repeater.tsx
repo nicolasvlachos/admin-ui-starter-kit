@@ -16,6 +16,7 @@ import { Repeater } from './repeater';
 import { defaultRepeaterStrings } from './repeaters.strings';
 import { Textarea } from './textarea';
 
+import { cn } from '@/lib/utils';
 export interface ObjectRepeaterStrings {
     addButton: string;
     emptyState: string;
@@ -106,7 +107,7 @@ export function ObjectRepeater({
                 removeAriaLabel: strings.removeAriaLabel,
             }}
             renderRow={(_field, { index }) => (
-                <div className="space-y-3">
+                <div className={cn('object-repeater--component', 'space-y-3')}>
                     {fieldDefs.map((fieldDef) => {
                         const fieldPath = `${name}.${index}.${fieldDef.name}`;
                         return (

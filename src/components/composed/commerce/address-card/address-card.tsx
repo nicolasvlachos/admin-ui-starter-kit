@@ -19,6 +19,7 @@ import {
 	type AddressKind,
 } from './types';
 
+import { cn } from '@/lib/utils';
 export function AddressCard({
 	kind = 'shipping',
 	name,
@@ -79,7 +80,7 @@ export function AddressCard({
 				isDefault ? <Badge variant="primary">{strings.defaultBadge}</Badge> : null
 			}
 			actions={actions.length > 0 ? actions : undefined}
-			className={className}
+			className={cn('address-card--component', className)}
 		>
 			<div className="space-y-0.5">
 				<Text weight="semibold">{name}</Text>

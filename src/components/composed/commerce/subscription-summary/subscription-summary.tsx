@@ -25,6 +25,7 @@ import {
 	type SubscriptionSummaryCardProps,
 } from './types';
 
+import { cn } from '@/lib/utils';
 export function SubscriptionSummaryCard({
 	planName,
 	priceLabel,
@@ -44,7 +45,7 @@ export function SubscriptionSummaryCard({
 			icon={<Repeat className="size-4" />}
 			title={strings.title}
 			headerEnd={statusLabel ? <Badge variant="success">{statusLabel}</Badge> : null}
-			className={className}
+			className={cn('subscription-summary--component', className)}
 		>
 			<div className="rounded-lg border border-border/60 bg-muted/30 p-4">
 				<Text size="xxs" type="secondary" weight="medium" className="uppercase tracking-wider">

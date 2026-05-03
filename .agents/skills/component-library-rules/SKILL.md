@@ -827,6 +827,48 @@ Forbidden:
 
 Fix: define the type **locally** in the library (`@/lib/ui-provider/types.ts` or the component's `types.ts`), and parameterize via generics where the consumer needs to pass their own shape.
 
+## 24. BEM-style class hooks — public DOM contract on every component
+
+Every public component in `base/`, `features/`, and `composed/` adds a stable `{kebab-name}--component` class to its outermost rendered element, plus `{kebab-name}--{region}` on named subregions (header, body, footer, title, description, alert, trigger, item, etc.).
+
+The class **never carries styling** — it's only there as a stable identifier consumers can target in CSS, tests, analytics, and DevTools, independent of shadcn's `data-slot` internals (which we don't own).
+
+Always added via `cn()` alongside existing utility classes:
+
+```tsx
+// ✅ correct
+<div className={cn('kanban-item--component', 'rounded-md border …')}>
+
+// ❌ wrong — replaces existing classes
+<div className="kanban-item--component">
+```
+
+For richer components like `SmartCard`, extract a `*_BEM` constant (see `smart-card.tokens.ts → CARD_BEM`). For simpler ones an inline string is fine.
+
+The hook lands on the **actual rendered DOM element**, not on a structural wrapper like `<Context.Provider>`, `<Suspense>`, `<DropdownMenu>` root, or a generic `<Component<T>>`:
+
+```tsx
+// ❌ wrong — Provider has no DOM
+<KanbanContextProvider value={ctx} className="kanban--component">
+
+// ✅ right — hook on the inner real element
+<KanbanContextProvider value={ctx}>
+  <div role="application" className={cn('kanban--component', 'w-full')}>
+    {children}
+  </div>
+</KanbanContextProvider>
+```
+
+**Skip:**
+- `src/components/ui/*` — shadcn primitives, framework internals.
+- `src/components/typography/*` — too granular.
+- Internal partials inside `partials/` folders that aren't exported.
+- Pure pass-through re-export wrappers.
+- Hook / provider / context files with no DOM.
+- Components rendering a fragment with no single DOM root.
+
+See [`src/components/CONVENTIONS.md` §8](../../../src/components/CONVENTIONS.md) for naming rules and the full rationale.
+
 ## Workflow when you spot a problem
 
 1. **Identify which layer owns the issue.** Is it a primitive (`ui/`), a wrapper (`base/`), a composed surface (`composed/`), or a feature (`features/`)?
@@ -868,5 +910,6 @@ Fix: define the type **locally** in the library (`@/lib/ui-provider/types.ts` or
 - ❌ "Edit failed with 'string not found' but it looks identical." → Tabs vs. spaces. Re-Read the file fresh; if the diff is genuinely indistinguishable on screen, fall back to a `python3` patch via Bash.
 - ❌ "Console shows `ReferenceError` after my fix." → Almost always stale Vite logs from a prior bad save (`?t=…` URL is the timestamp from BEFORE your latest reload). Check the rendered DOM, not the log tail.
 - ❌ "I'll commit my changes." → Don't commit unless explicitly asked. Same for push, PR creation, branch deletion.
+- ❌ "I'll skip the `{name}--component` BEM class — it's just an identifier." → Add it. Every public `base/`, `features/`, `composed/` component carries the hook on its outermost real DOM element via `cn(...)` (rule 24).
 
 When you're about to do any of these, stop and pick the proper path.

@@ -85,7 +85,7 @@ export function Breadcrumbs({ breadcrumbs, size = 'md', className, renderLink = 
 		sizeConfig[size] ?? sizeConfig.md;
 
 	return (
-		<Breadcrumb className={cn(baseColorClass, className)}>
+		<Breadcrumb className={cn('breadcrumbs--component', baseColorClass, className)}>
 			<BreadcrumbList className={cn('flex flex-wrap items-center break-words', listSpacingClass)}>
 				{breadcrumbs.map((item, index) => {
 					const isLast = index === breadcrumbs.length - 1;

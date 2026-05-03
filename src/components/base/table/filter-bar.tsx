@@ -10,6 +10,7 @@ import {
 import { defaultDataTableStrings } from './table.strings';
 import { type DataTableFilterBarProps } from './table.types';
 
+import { cn } from '@/lib/utils';
 export function DataTableFilterBar<TData>({
 											  table,
 											  filterColumn,
@@ -25,7 +26,7 @@ export function DataTableFilterBar<TData>({
 	const searchPlaceholder = filterPlaceholder ?? strings.filter.searchPlaceholder;
 
 	return (
-		<div className="flex items-center justify-between p-4">
+		<div className={cn('filter-bar--component', 'flex items-center justify-between p-4')}>
 			<div className="flex flex-1 items-center space-x-2">
 				{/* Filter input */}
 				{!!filterColumn && (

@@ -34,7 +34,7 @@ export function PageHeader({
 	withSeparator = true,
 }: PageHeaderProps) {
 	return (
-		<header className={cn('w-full', className)}>
+		<header className={cn('page-header--component', 'w-full', className)}>
 			{!!breadcrumbs && <div className="mb-3">{breadcrumbs}</div>}
 
 			<div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">

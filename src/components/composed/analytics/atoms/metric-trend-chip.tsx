@@ -69,7 +69,7 @@ export function MetricTrendChip({
 
 	if (variant === 'inline') {
 		return (
-			<Text tag="span" size={TEXT_SIZE[size]} weight="medium" className={cn(palette.text, 'tabular-nums', className)}>
+			<Text tag="span" size={TEXT_SIZE[size]} weight="medium" className={cn('metric-trend-chip--component', palette.text, 'tabular-nums', className)}>
 				{sign}{valueText}
 			</Text>
 		);

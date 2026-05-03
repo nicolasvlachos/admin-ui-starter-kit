@@ -40,7 +40,7 @@ export function SectionNav({ items, rootMargin = '-40% 0px -50% 0px', className,
 	}, [items, rootMargin]);
 
 	return (
-		<nav className={cn('flex flex-col gap-0.5', className)} aria-label="Section navigation">
+		<nav className={cn('section-nav--component', 'flex flex-col gap-0.5', className)} aria-label="Section navigation">
 			{items.map((it) => {
 				const Icon = it.icon;
 				const isActive = active === it.id;

@@ -38,7 +38,7 @@ export function DarkPaymentConfirmation({
     const [expanded, setExpanded] = useState(true);
 
     return (
-        <div className={cn('dark rounded-3xl bg-card text-card-foreground p-6 shadow-lg ring-1 ring-border', className)}>
+        <div className={cn('dark-payment--component', 'dark rounded-3xl bg-card text-card-foreground p-6 shadow-lg ring-1 ring-border', className)}>
                 <div className="flex flex-col items-center text-center">
                     <IconBadge icon={Check} tone="success" size="lg" className="size-14 [&>svg]:size-7" />
                     <Heading tag="h5" className="mt-3 !border-0 !pb-0">{strings.successTitle}</Heading>

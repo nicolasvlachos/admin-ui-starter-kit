@@ -25,7 +25,7 @@ export function MetricSkeleton({
 	if (variant === 'card' || variant === 'bordered' || variant === 'accent' || variant === 'colored') {
 		return (
 			<div
-				className={cn(
+				className={cn('metric-skeleton--component', 
 					'rounded-xl border border-border bg-card shadow-sm',
 					padding,
 					className,

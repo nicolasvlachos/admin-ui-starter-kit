@@ -23,7 +23,7 @@ export function Toaster(props: ToasterProps) {
     const resolvedPosition = props.position ?? position;
 
     return (
-        <PrimitiveToaster
+        <PrimitiveToaster className="toaster--component"
             {...props}
             duration={resolvedDuration}
             position={resolvedPosition}

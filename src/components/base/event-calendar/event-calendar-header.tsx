@@ -46,7 +46,7 @@ const renderAction = (action: CalendarActionItem, index: number) => {
 	if (!action) return null;
 
 	if (action.element) {
-		return <div key={action.id || index}>{action.element}</div>;
+		return <div className="event-calendar-header--component" key={action.id || index}>{action.element}</div>;
 	}
 
 	const IconComponent = action.icon;

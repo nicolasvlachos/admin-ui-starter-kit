@@ -6,6 +6,7 @@ import { ControlledFormField } from './form-field';
 import { Input } from './fields';
 import { Text } from '@/components/typography';
 
+import { cn } from '@/lib/utils';
 export type ErrorBag = Record<string, string | string[] | undefined>;
 
 export interface OperationPasswordFormProps {
@@ -48,7 +49,7 @@ export function OperationPasswordForm(props: OperationPasswordFormProps) {
 		<form
 			id={formId}
 			onSubmit={handleSubmit(submit)}
-			className="space-y-4"
+			className={cn('operation-password-form--component', 'space-y-4')}
 		>
 			{Boolean(topLevelError) && (
 				<Text

@@ -87,7 +87,7 @@ export function AiAgent({
 	if (variant === 'card') {
 		return (
 			<div
-				className={cn(
+				className={cn('ai-agent--component', 
 					'flex items-center gap-3 rounded-lg border border-border/60 bg-card px-3 py-2.5',
 					className,
 				)}

@@ -34,7 +34,7 @@ export function EventCalendarDayCell({
 	const remainingCount = Math.max(0, eventCount - maxEvents);
 
 	return (
-		<div className="p-0 relative w-full border-r border-b border-border last:border-r-0 [&:nth-child(7n)]:border-r-0">
+		<div className={cn('event-calendar-day-cell--component', 'p-0 relative w-full border-r border-b border-border last:border-r-0 [&:nth-child(7n)]:border-r-0')}>
 			<div
 				role="button"
 				tabIndex={0}

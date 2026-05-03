@@ -44,7 +44,7 @@ export function MetricSparkline({
 	}, [data]);
 
 	if (chartData.length === 0) {
-		return <div className={cn('w-full', className)} aria-hidden="true" />;
+		return <div className={cn('metric-sparkline--component', 'w-full', className)} aria-hidden="true" />;
 	}
 
 	return (

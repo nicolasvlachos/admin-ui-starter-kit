@@ -54,7 +54,7 @@ export function EmailDisplay({
 	});
 	if (!email || email.trim().length === 0) {
 		return (
-			<Text size={size} type="secondary" tag={tag} className={className} {...props}>
+			<Text size={size} type="secondary" tag={tag} className={cn('email-display--component', className)} {...props}>
 				{emptyLabel}
 			</Text>
 		);

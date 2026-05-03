@@ -53,7 +53,7 @@ export function PaymentMethodCard({
 			icon={<CreditCard className="size-4" />}
 			title={strings.title}
 			titleSuffix={isDefault ? <Badge variant="primary">{strings.default}</Badge> : null}
-			className={className}
+			className={cn('payment-method--component', className)}
 		>
 			{/* Mini card mock */}
 			<div

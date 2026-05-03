@@ -77,7 +77,7 @@ export function RangeFacet({
     };
 
     return (
-        <div className={cn('space-y-2', className)}>
+        <div className={cn('range-facet--component', 'space-y-2', className)}>
             <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
                     <Label htmlFor={`${instanceId}-min`}>

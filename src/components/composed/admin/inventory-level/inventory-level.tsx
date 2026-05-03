@@ -46,7 +46,7 @@ export function InventoryLevelCard({
             : strings.statusInStock;
 
     return (
-        <SmartCard className={className}>
+        <SmartCard className={cn('inventory-level--component', className)}>
             <Item size="xs" className="px-0">
                 <ItemContent>
                     <ItemTitle>{productName}</ItemTitle>

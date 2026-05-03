@@ -57,7 +57,7 @@ export function VendorProfileCard({
 
 	return (
 		<div
-			className={cn(
+			className={cn('vendor-profile--component', 
 				'flex flex-col gap-5 rounded-xl border border-border bg-gradient-to-b from-muted/30 to-card p-5 shadow-sm',
 				className,
 			)}

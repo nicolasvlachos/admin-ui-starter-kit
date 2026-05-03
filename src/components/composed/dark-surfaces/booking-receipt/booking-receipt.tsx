@@ -26,7 +26,7 @@ export function BookingReceiptDark({
     const strings = useStrings(defaultBookingReceiptDarkStrings, stringsProp);
     const resolvedStatus = status ?? strings.statusConfirmed;
     return (
-        <div className={cn('dark rounded-3xl bg-card text-card-foreground p-6 shadow-lg ring-1 ring-border', className)}>
+        <div className={cn('booking-receipt--component', 'dark rounded-3xl bg-card text-card-foreground p-6 shadow-lg ring-1 ring-border', className)}>
                 <div className="flex items-center justify-between">
                     <Heading tag="h6" className="!border-0 !pb-0">{strings.title}</Heading>
                     <Text size="xs" weight="medium" className="flex items-center gap-1.5 rounded-full bg-success/15 px-2.5 py-1 text-success">

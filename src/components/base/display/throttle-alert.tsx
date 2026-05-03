@@ -41,7 +41,7 @@ export function ThrottleAlert({
 	return (
 		<div
 			role="alert"
-			className={cn(
+			className={cn('throttle-alert--component', 
 				'flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3',
 				className,
 			)}

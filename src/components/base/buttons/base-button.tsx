@@ -145,7 +145,7 @@ const BaseButton = React.forwardRef<HTMLButtonElement, BaseButtonProps>(
                 ref={ref}
                 variant={primitiveVariant}
                 size={size}
-                className={cn(
+                className={cn('base-button--component', 
                     resolvedStyleClass,
                     'inline-flex items-center justify-center',
                     Icon && iconSpacing,

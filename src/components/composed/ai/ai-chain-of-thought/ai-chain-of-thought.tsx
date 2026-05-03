@@ -53,7 +53,7 @@ export function AiChainOfThought({
 	const strings = useStrings(defaultAiChainOfThoughtStrings, stringsProp);
 
 	return (
-		<div className={cn('rounded-lg border border-border/60 bg-card', className)}>
+		<div className={cn('ai-chain-of-thought--component', 'rounded-lg border border-border/60 bg-card', className)}>
 			{!hideHeader && (
 				<div className="flex items-center gap-2 border-b border-border/60 px-3 py-2">
 					<Text size="xs" type="secondary" weight="medium" className="uppercase tracking-wider">

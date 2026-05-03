@@ -29,7 +29,7 @@ export function ErrorMessage({
 
 	return (
 		<p
-			className={cn('text-destructive', sizeClasses[size], className)}
+			className={cn('error-message--component', 'text-destructive', sizeClasses[size], className)}
 			role="alert"
 			aria-live="polite"
 		>

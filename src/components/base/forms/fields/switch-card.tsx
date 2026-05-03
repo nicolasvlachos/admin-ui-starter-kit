@@ -79,7 +79,7 @@ export function SwitchCard({
 					handleToggle(!checked);
 				}
 			}}
-			className={cn(
+			className={cn('switch-card--component', 
 				'group relative flex items-start gap-3 rounded-lg border bg-card p-4 transition-[background,border-color,box-shadow] duration-150',
 				'border-border',
 				checked && 'border-primary bg-primary/[0.04]',

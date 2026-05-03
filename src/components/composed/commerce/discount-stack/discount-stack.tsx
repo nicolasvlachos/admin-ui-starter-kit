@@ -20,6 +20,7 @@ import { useStrings } from '@/lib/strings';
 
 import { defaultDiscountStackStrings, type DiscountStackPreviewProps } from './types';
 
+import { cn } from '@/lib/utils';
 export function DiscountStackPreview({
 	discounts,
 	totalSavings,
@@ -28,7 +29,7 @@ export function DiscountStackPreview({
 }: DiscountStackPreviewProps) {
 	const strings = useStrings(defaultDiscountStackStrings, stringsProp);
 	return (
-		<SmartCard title={strings.title} className={className}>
+		<SmartCard title={strings.title} className={cn('discount-stack--component', className)}>
 			<ItemGroup className="mt-4">
 				{discounts.map((d) => (
 					<Item key={d.type} size="xs" className="px-0">

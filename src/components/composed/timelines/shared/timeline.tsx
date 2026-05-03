@@ -66,7 +66,7 @@ const STATUS_TONE: Record<TimelineStatus, { bg: string; text: string; ring: stri
 
 export function Timeline({ items, dotSize = 'base', className }: TimelineProps) {
 	return (
-		<ol className={cn('relative space-y-4', className)}>
+		<ol className={cn('timeline--component', 'relative space-y-4', className)}>
 			{items.map((item, i) => {
 				const status = item.status ?? 'neutral';
 				const tone = STATUS_TONE[status];

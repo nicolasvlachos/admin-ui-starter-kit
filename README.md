@@ -72,6 +72,11 @@ exactly your tool.**
 5. **Composability through slots, render-props, and exported partials.**
    Every non-trivial component exposes its internal pieces so consumers can
    reshape without forking.
+6. **Stable DOM contract.** Every public `base/` / `features/` / `composed/`
+   component carries a `{kebab-name}--component` class on its outermost
+   element (e.g. `.kanban-item--component`, `.comments--component`,
+   `.card--header`), independent of shadcn's internal `data-slot`
+   attributes. Use these for CSS theming, tests, analytics, and DevTools.
 
 ## What this is not
 

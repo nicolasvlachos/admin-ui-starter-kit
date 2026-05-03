@@ -16,7 +16,7 @@ export function BreadcrumbProgress({ steps, currentIndex, onStepClick, className
 	const strings = useStrings(defaultBreadcrumbProgressStrings, stringsProp);
 
 	return (
-		<div className={cn('w-full', className)}>
+		<div className={cn('breadcrumb-progress--component', 'w-full', className)}>
 			<div className="flex items-center justify-between mb-2">
 				<Text size="xs" type="secondary" weight="medium" className="uppercase tracking-wider">
 					{strings.stepLabel} {currentIndex + 1} {strings.ofLabel} {steps.length}

@@ -177,7 +177,7 @@ const TextareaImpl = (
     const showClearButton = clearable && hasValue && !isLoading;
 
     return (
-        <div className="relative w-full">
+        <div className={cn('textarea--component', 'relative w-full')}>
             <textarea
                 ref={(node) => {
                     if (typeof forwardedRef === 'function') {

@@ -120,7 +120,7 @@ export function GlobalSearch<TGroup extends string = string>({
 
     return (
         <div
-            className={cn(
+            className={cn('global-search--component', 
                 'overflow-hidden rounded-xl border border-border bg-card shadow-2xl',
                 className,
             )}

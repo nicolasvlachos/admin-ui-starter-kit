@@ -56,7 +56,7 @@ export function AiInlineCitation({
 				rel="noopener noreferrer"
 				title={tooltip}
 				aria-label={ariaLabel}
-				className={baseCls}
+				className={cn('ai-inline-citation--component', baseCls)}
 			>
 				<Text tag="span" size="xxs" weight="medium" className="leading-none">
 					{index}

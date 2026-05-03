@@ -107,7 +107,7 @@ export function SelectFacet({
         : strings.noOptionsFound;
 
     return (
-        <div className={cn('relative', className)}>
+        <div className={cn('select-facet--component', 'relative', className)}>
             <PopoverMenu
                 open={open}
                 onOpenChange={setOpen}

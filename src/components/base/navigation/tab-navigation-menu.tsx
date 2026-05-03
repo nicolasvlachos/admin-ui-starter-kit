@@ -41,7 +41,7 @@ function TabNavigationMenu({ items, currentPath, className, ariaLabel = 'Tab nav
 	}, [activePath, items]);
 
 	return (
-		<div className={cn('w-full', className)}>
+		<div className={cn('tab-navigation-menu--component', 'w-full', className)}>
 			<nav className="inline-flex bg-muted rounded-full items-center gap-1 p-1" aria-label={ariaLabel}>
 				{normalizedItems.map(({ key, item, isActive, iconNode, ariaCurrent }) => (
 					<a

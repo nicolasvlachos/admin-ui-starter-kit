@@ -60,7 +60,7 @@ export const Switch = forwardRef<SwitchElement, SwitchProps>(function Switch(
             id={resolvedId}
             name={name}
             aria-invalid={invalid || undefined}
-            className={cn(
+            className={cn('switch--component', 
                 invalid && 'data-[state=unchecked]:border-destructive',
                 className
             )}

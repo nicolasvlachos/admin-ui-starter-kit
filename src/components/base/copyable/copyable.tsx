@@ -59,7 +59,7 @@ export function Copyable({
 					void handleCopy();
 				}
 			}}
-			className={cn(
+			className={cn('copyable--component', 
 				'group inline-flex cursor-pointer items-center gap-1.5 rounded px-1 -mx-1 transition-colors hover:bg-muted',
 				className,
 			)}

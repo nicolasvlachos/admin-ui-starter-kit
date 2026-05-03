@@ -145,7 +145,7 @@ export function AiChat({
 				return slots.renderMessage(message, ctx);
 			}
 			return (
-				<AiChatMessage
+				<AiChatMessage className="ai-chat--component"
 					message={message}
 					strings={strings.message}
 					onCopy={

@@ -30,7 +30,7 @@ export function DarkInfoPanel({
     const [open, setOpen] = useState(defaultOpen);
 
     return (
-        <div className={cn('dark rounded-3xl bg-card text-card-foreground p-5 shadow-lg ring-1 ring-border', className)}>
+        <div className={cn('dark-info-panel--component', 'dark rounded-3xl bg-card text-card-foreground p-5 shadow-lg ring-1 ring-border', className)}>
                 <Button
                     variant="light"
                     buttonStyle="ghost"

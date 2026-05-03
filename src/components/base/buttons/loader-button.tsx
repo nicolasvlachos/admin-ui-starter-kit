@@ -85,7 +85,7 @@ const LoaderButton = React.forwardRef<HTMLButtonElement, LoaderButtonProps>(
 		};
 
 		return (
-			<BaseButton
+			<BaseButton className="loader-button--component"
 				{...props}
 				ref={ref}
 				disabled={disabled || isLoading}

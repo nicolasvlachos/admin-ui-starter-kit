@@ -128,7 +128,7 @@ function SliderFieldImpl(
     const sliderDefaultValue = defaultValue !== undefined ? [defaultValue] : [min];
 
     return (
-        <div className={cn('flex items-center gap-3', className)}>
+        <div className={cn('slider--component', 'flex items-center gap-3', className)}>
             <SliderPrimitive
                 ref={ref}
                 id={resolvedId}

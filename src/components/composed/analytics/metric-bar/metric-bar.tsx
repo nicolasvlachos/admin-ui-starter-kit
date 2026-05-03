@@ -78,7 +78,7 @@ export function MetricBar({
 	if (variant === 'gradient') {
 		return (
 			<div
-				className={cn(
+				className={cn('metric-bar--component', 
 					'rounded-xl bg-gradient-to-r from-primary/8 via-info/5 to-success/8 p-[1px]',
 					className,
 				)}

@@ -310,7 +310,7 @@ export function DimensionsInput({
     );
 
     return (
-        <div className={cn('space-y-2', className)}>
+        <div className={cn('dimensions-input--component', 'space-y-2', className)}>
             {/* Dimensions Inputs */}
             <div
                 className={cn(

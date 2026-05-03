@@ -33,7 +33,7 @@ export function RoundingModeSelect({ value, onChange, labels, placeholder, ...pr
         [onChange]
     );
 
-    return <Select options={options} value={value} onChange={handleChange} placeholder={placeholder} {...props} />;
+    return <Select className="rounding-mode-select--component" options={options} value={value} onChange={handleChange} placeholder={placeholder} {...props} />;
 }
 
 RoundingModeSelect.displayName = 'RoundingModeSelect';

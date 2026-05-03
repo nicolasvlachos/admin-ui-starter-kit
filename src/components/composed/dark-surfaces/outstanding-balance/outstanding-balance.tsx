@@ -28,7 +28,7 @@ export function OutstandingBalanceCard({
 }: OutstandingBalanceCardProps) {
     const strings = useStrings(defaultOutstandingBalanceCardStrings, stringsProp);
     return (
-        <div className={cn('dark rounded-3xl bg-card text-card-foreground p-6 shadow-lg ring-1 ring-border', className)}>
+        <div className={cn('outstanding-balance--component', 'dark rounded-3xl bg-card text-card-foreground p-6 shadow-lg ring-1 ring-border', className)}>
                 <Text size="xs" weight="medium" type="secondary" className="uppercase tracking-wider">
                     {strings.title}
                 </Text>

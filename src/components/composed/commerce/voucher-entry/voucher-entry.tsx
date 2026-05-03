@@ -24,6 +24,7 @@ import { useStrings } from '@/lib/strings';
 
 import { defaultVoucherEntryStrings, type VoucherEntryCardProps } from './types';
 
+import { cn } from '@/lib/utils';
 export function VoucherEntryCard({
 	appliedCode,
 	balance,
@@ -42,7 +43,7 @@ export function VoucherEntryCard({
 			<SmartCard
 				icon={<Gift className="size-4" />}
 				title={strings.title}
-				className={className}
+				className={cn('voucher-entry--component', className)}
 			>
 				<Item variant="muted" className="border border-success/30 bg-success/8">
 					<ItemMedia>

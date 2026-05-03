@@ -151,7 +151,7 @@ export function WeightInput({
     const hasUnitLabel = strings.unitLabel !== '';
 
     return (
-        <div className={cn('flex items-start gap-2', className)}>
+        <div className={cn('weight-input--component', 'flex items-start gap-2', className)}>
             <div className="flex-1">
                 <DecimalInput
                     size={size}

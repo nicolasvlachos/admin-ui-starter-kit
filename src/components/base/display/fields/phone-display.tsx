@@ -58,7 +58,7 @@ export function PhoneDisplay({
 	});
 	if (!phone || phone.trim().length === 0) {
 		return (
-			<Text size={size} type="secondary" tag={tag} className={className} {...props}>
+			<Text size={size} type="secondary" tag={tag} className={cn('phone-display--component', className)} {...props}>
 				{emptyLabel}
 			</Text>
 		);

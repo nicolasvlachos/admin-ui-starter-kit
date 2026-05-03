@@ -132,7 +132,7 @@ export function DataTableActions<TData>(props: DataTableActionsProps<TData>) {
 
     if (mode === 'inline') {
         return (
-            <div className="flex items-center gap-1">
+            <div className={cn('table-actions--component', 'flex items-center gap-1')}>
                 {sortedActions.map((action, idx) => {
                     const key = action.id || `${action.label}-${idx}`;
                     const resolved = resolveActionButtonVariant(action.variant ?? 'ghost');

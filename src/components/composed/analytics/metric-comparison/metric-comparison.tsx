@@ -87,7 +87,7 @@ export function MetricComparison({
 	};
 
 	return (
-		<SmartCard title={strings.title} className={className}>
+		<SmartCard title={strings.title} className={cn('metric-comparison--component', className)}>
 			{!!(currentPeriod || previousPeriod) && (
 				<div className="flex flex-wrap items-center gap-1.5">
 					{!!currentPeriod && (

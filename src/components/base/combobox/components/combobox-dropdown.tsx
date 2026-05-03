@@ -130,7 +130,7 @@ export function ComboboxDropdown<T>({
 										: group;
 
 								return (
-									<ComboboxGroup key={group} items={groupItems}>
+									<ComboboxGroup className="combobox-dropdown--component" key={group} items={groupItems}>
 										<ComboboxGroupLabel>{groupLabel}</ComboboxGroupLabel>
 										<ComboboxCollection>
 											{(item: T) => (

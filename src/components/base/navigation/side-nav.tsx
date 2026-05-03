@@ -93,7 +93,7 @@ export function SideNav({
 			: 'bg-primary/5 text-primary';
 
 	return (
-		<nav className={cn('flex flex-col gap-4', className)} aria-label={ariaLabel}>
+		<nav className={cn('side-nav--component', 'flex flex-col gap-4', className)} aria-label={ariaLabel}>
 			{groups.map((group) => {
 				const isCollapsed = group.collapsible !== false && collapsed[group.id];
 				const showLabel = !!group.label;

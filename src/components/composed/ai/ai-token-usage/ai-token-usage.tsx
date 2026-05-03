@@ -11,6 +11,7 @@ import { InlineStat } from '@/components/base/display';
 
 import { defaultAiTokenUsageStrings, type AiTokenUsageCardProps } from './types';
 
+import { cn } from '@/lib/utils';
 export function AiTokenUsageCard({
 	model,
 	inputTokens,
@@ -29,7 +30,7 @@ export function AiTokenUsageCard({
 			icon={<Cpu className="size-4" />}
 			title={strings.title}
 			titleSuffix={!!model && <Badge variant="secondary">{model}</Badge>}
-			className={className}
+			className={cn('ai-token-usage--component', className)}
 		>
 			<div className="grid grid-cols-3 gap-2">
 				{[

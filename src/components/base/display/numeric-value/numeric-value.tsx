@@ -78,7 +78,7 @@ export function NumericValue({
 				size={size}
 				weight={weight}
 				type={type ?? 'secondary'}
-				className={cn('tabular-nums', alignClass, className)}
+				className={cn('numeric-value--component', 'tabular-nums', alignClass, className)}
 				{...props}
 			>
 				{emptyLabel}

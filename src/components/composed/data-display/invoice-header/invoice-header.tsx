@@ -30,7 +30,7 @@ function PartyBlock({
 	location?: string;
 }) {
 	return (
-		<div className="space-y-1">
+		<div className={cn('invoice-header--component', 'space-y-1')}>
 			<Text
 				size="xxs"
 				type="secondary"

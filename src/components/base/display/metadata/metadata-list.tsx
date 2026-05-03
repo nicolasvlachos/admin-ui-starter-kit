@@ -157,7 +157,7 @@ export function MetadataList({
 		const wrapClass = wrap ? 'flex-wrap' : 'flex-nowrap';
 
 		return (
-			<div className={cn('metadata-list-container space-y-3', className)}>
+			<div className={cn('metadata-list--component', 'metadata-list-container space-y-3', className)}>
 				{!!hasTitle && (
 					<Heading
 						tag="h6"

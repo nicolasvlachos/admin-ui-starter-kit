@@ -67,7 +67,7 @@ export function AiReasoning({
 
 	return (
 		<div
-			className={cn(
+			className={cn('ai-reasoning--component', 
 				'overflow-hidden rounded-lg border border-border/60 bg-muted/20',
 				className,
 			)}

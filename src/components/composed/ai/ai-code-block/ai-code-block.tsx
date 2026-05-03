@@ -49,7 +49,7 @@ export function AiCodeBlock({
 
 	return (
 		<div
-			className={cn(
+			className={cn('ai-code-block--component', 
 				'overflow-hidden rounded-lg border border-border/60 bg-card',
 				className,
 			)}

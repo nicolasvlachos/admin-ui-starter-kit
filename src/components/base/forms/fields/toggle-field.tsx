@@ -115,7 +115,7 @@ export function ToggleField({
 		<div
 			role="group"
 			onClick={onRowClick}
-			className={cn(
+			className={cn('toggle-field--component', 
 				'flex items-start gap-3 rounded-md py-1',
 				disabled && 'pointer-events-none',
 				className,

@@ -15,7 +15,7 @@ export function ScaleBar({
 	label?: string;
 }) {
 	return (
-		<div className="flex items-center gap-1">
+		<div className={cn('helpers--component', 'flex items-center gap-1')}>
 			{Array.from({ length: max }, (_, i) => (
 				<div
 					key={i}

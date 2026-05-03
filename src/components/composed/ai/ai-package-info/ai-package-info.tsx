@@ -39,7 +39,7 @@ export function AiPackageInfo({
 	return (
 		<Wrapper
 			{...wrapperProps}
-			className={cn(
+			className={cn('ai-package-info--component', 
 				'block w-full rounded-lg border border-border/60 bg-card text-left',
 				onSelect &&
 					'transition-[border-color,background] duration-150 hover:border-foreground/20 hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',

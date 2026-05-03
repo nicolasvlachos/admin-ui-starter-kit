@@ -56,7 +56,7 @@ export function BooleanIndicator({
 
 	return (
 		<div
-			className={cn(
+			className={cn('boolean-indicator--component', 
 				'flex items-center justify-between rounded-md border border-border/60 bg-muted/30 px-3 py-2',
 				className,
 			)}

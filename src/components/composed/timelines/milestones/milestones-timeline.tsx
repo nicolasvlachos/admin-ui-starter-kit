@@ -92,7 +92,7 @@ export function MilestonesTimelineCard({
 		<SmartCard
 			icon={<Flag className="size-4" />}
 			title={strings.title}
-			className={className}
+			className={cn('milestones-timeline--component', className)}
 		>
 			<Timeline items={items} dotSize="base" />
 		</SmartCard>

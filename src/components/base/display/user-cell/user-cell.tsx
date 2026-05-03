@@ -58,7 +58,7 @@ export function UserCell({
 	);
 
 	return (
-		<div className={cn('flex items-center', sizes.gap, className)}>
+		<div className={cn('user-cell--component', 'flex items-center', sizes.gap, className)}>
 			{avatarNode}
 			<div className="min-w-0 flex-1">
 				<Text size={sizes.nameSize} weight="semibold" className="truncate">

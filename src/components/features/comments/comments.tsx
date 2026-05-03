@@ -31,6 +31,7 @@ import { CommentComposer } from './partials/comment-composer';
 import { CommentEmpty } from './partials/comment-empty';
 import { CommentTimeline } from './partials/comment-timeline';
 
+import { cn } from '@/lib/utils';
 export function Comments<
     TUser extends CommentUser = CommentUser,
     TMeta = unknown,
@@ -164,7 +165,7 @@ export function Comments<
             title={cardTitle === false ? undefined : cardTitle}
             description={strings.subtitle || undefined}
             padding="sm"
-            className={props.className}
+            className={cn('comments--component', props.className)}
         >
             {inner}
         </SmartCard>

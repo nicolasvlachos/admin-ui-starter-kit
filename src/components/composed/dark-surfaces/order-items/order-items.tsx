@@ -30,7 +30,7 @@ export function OrderItemsCard({
 }: OrderItemsCardProps) {
     const strings = useStrings(defaultOrderItemsCardStrings, stringsProp);
     return (
-        <div className={cn('dark rounded-3xl bg-card text-card-foreground p-5 shadow-lg ring-1 ring-border', className)}>
+        <div className={cn('order-items--component', 'dark rounded-3xl bg-card text-card-foreground p-5 shadow-lg ring-1 ring-border', className)}>
                 <Heading tag="h6" className="!border-0 !pb-0">{strings.title}</Heading>
 
                 <ItemGroup className="mt-4 gap-3">

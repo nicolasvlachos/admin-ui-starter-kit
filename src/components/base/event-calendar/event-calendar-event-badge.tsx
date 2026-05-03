@@ -36,7 +36,7 @@ export function EventCalendarEventBadge({
 				e.stopPropagation();
 				onClick?.();
 			}}
-			className={cn(
+			className={cn('event-calendar-event-badge--component', 
 				'group/event flex w-full min-w-0 items-center gap-1 rounded-md border border-border/60 bg-card px-1.5',
 				'text-left transition-colors hover:bg-accent/50',
 				compact ? 'h-5' : 'h-6',

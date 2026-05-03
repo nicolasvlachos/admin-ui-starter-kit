@@ -110,7 +110,7 @@ export function AiAttachment({
 
 	return (
 		<div
-			className={cn(
+			className={cn('ai-attachment--component', 
 				'group inline-flex max-w-full items-center gap-2.5 rounded-lg border border-border/60 bg-card px-2.5 py-2',
 				errored && 'border-destructive/40 bg-destructive/5',
 				className,

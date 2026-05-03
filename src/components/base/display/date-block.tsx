@@ -104,7 +104,7 @@ export function DateBlock({
 	if (layout === 'inline') {
 		return (
 			<span
-				className={cn(
+				className={cn('date-block--component', 
 					'inline-flex items-center gap-1.5 tabular-nums',
 					useBox && cn('rounded-md border px-2 py-1', tones.bg, tones.border),
 					className,

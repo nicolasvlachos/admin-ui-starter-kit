@@ -168,7 +168,7 @@ export function EnhancedCombobox<T>({
 	);
 
 	return (
-		<div>
+		<div className="enhanced-combobox--component">
 			<BaseCombobox
 				items={core.allItems}
 				value={selectedValue}

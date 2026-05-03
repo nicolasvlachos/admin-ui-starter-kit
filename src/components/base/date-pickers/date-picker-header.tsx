@@ -13,7 +13,7 @@ export function DatePickerHeader({ config, className }: DatePickerHeaderProps) {
 
 	return (
 		<div
-			className={cn(
+			className={cn('date-picker-header--component', 
 				'border-b p-4',
 				align === 'center' ? 'text-center' : 'text-left',
 				className

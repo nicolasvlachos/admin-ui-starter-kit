@@ -63,7 +63,7 @@ export default function AsideNavigationMenu({
 			?.normalizedPath ?? null;
 
 	return (
-		<nav className="flex flex-col space-y-1 space-x-0">
+		<nav className={cn('aside-navigation-menu--component', 'flex flex-col space-y-1 space-x-0')}>
 			{normalizedItems.map(({ item, normalizedPath }) => {
 				const isActive = normalizedPath === activeItemPath;
 

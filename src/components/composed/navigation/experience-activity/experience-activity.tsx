@@ -34,7 +34,7 @@ export function ExperienceActivityCard({
                     </Button>
                   )
             }
-            className={cn('bg-gradient-to-b from-muted/30 to-card', className)}
+            className={cn('experience-activity--component', 'bg-gradient-to-b from-muted/30 to-card', className)}
         >
             <ItemGroup>
                 {activities.map((a, i) => (

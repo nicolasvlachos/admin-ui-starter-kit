@@ -87,7 +87,7 @@ export function FilterLayout({
 
     return (
         <div
-            className={cn(
+            className={cn('filter-layout--component', 
                 variant === 'compact' ? 'space-y-2' : 'space-y-4',
                 className,
             )}

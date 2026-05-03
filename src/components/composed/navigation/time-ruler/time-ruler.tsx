@@ -18,7 +18,7 @@ export function TimeDistributionRuler({ hours, currentHour, className, strings: 
     }
 
     return (
-        <div className={cn('space-y-1.5', className)}>
+        <div className={cn('time-ruler--component', 'space-y-1.5', className)}>
             {/* Ruler bar */}
             <div className="relative flex h-8 gap-[1px] rounded-md overflow-hidden">
                 {hours.map((count, hour) => (

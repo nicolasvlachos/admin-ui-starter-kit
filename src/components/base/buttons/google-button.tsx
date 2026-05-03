@@ -55,7 +55,7 @@ function GoogleButton({ children, className, type = 'button', href, ...props }: 
 
 	if (href) {
 		return (
-			<a href={href} className="inline-flex w-full">
+			<a href={href} className={cn('google-button--component', 'inline-flex w-full')}>
 				{button}
 			</a>
 		);

@@ -44,7 +44,7 @@ export function AiSources({
 				max={maxAvatars}
 				title={titleText}
 				onSelect={onSelect}
-				className={className}
+				className={cn('ai-sources--component', className)}
 			/>
 		);
 	}

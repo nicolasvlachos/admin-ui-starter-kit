@@ -137,7 +137,7 @@ export function MoneyInput({
     ) : inputNode;
 
     return (
-        <div className={cn('space-y-2', className)}>
+        <div className={cn('money-input--component', 'space-y-2', className)}>
             {renderedInput}
 
             {!!showOriginalHintBlock && (

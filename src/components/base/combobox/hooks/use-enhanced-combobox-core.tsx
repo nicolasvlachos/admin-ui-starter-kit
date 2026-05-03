@@ -25,6 +25,7 @@ import { useDebouncedSearch } from './use-debounced-search';
 import { useGroupedItems } from './use-grouped-items';
 import { useLoadMore } from './use-load-more';
 
+import { cn } from '@/lib/utils';
 // ============================================================================
 // Types
 // ============================================================================
@@ -210,7 +211,7 @@ export function useEnhancedComboboxCore<T>({
 			if (isCreateOption(item)) {
 				const value = getCreateOptionValue(item);
 				return (
-					<span className="flex items-center gap-2">
+					<span className={cn('use-enhanced-combobox-core--component', 'flex items-center gap-2')}>
 						<PlusIcon className="size-4" />
 						{strings.createNew.includes('{value}') ? (
 							strings.createNew.replace('{value}', value)

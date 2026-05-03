@@ -22,6 +22,7 @@ import {
 	type ChangelogTimelineCardProps,
 } from './types';
 
+import { cn } from '@/lib/utils';
 const KIND_TO_STATUS: Record<ChangelogEntryKind, TimelineStatus> = {
 	added: 'success',
 	removed: 'error',
@@ -93,7 +94,7 @@ export function ChangelogTimelineCard({
 		<SmartCard
 			icon={<GitCommit className="size-4" />}
 			title={strings.title}
-			className={className}
+			className={cn('changelog-timeline--component', className)}
 		>
 			<Timeline items={items} dotSize="base" />
 		</SmartCard>

@@ -189,7 +189,7 @@ function CurrencyInputImpl(
     );
 
     return (
-        <div className="flex items-start gap-2">
+        <div className={cn('currency-input--component', 'flex items-start gap-2')}>
             {currencyPosition === 'start' && currencySelector}
 
             <div className="flex-1">

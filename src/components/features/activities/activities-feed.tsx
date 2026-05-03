@@ -141,7 +141,7 @@ export function ActivityFeed<TData = unknown>(props: ActivityFeedProps<TData>) {
 
     if (loading) {
         return (
-            <div className={cn('px-2 py-4', className)}>
+            <div className={cn('activities-feed--component', 'px-2 py-4', className)}>
                 {slots?.loading ?? (
                     <Text type="secondary" align="center">
                         {strings.loading}

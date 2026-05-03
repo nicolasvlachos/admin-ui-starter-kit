@@ -45,7 +45,7 @@ interface ChartTooltipPayload {
 function ChartTooltip({ active, payload, label }: { active?: boolean; payload?: ChartTooltipPayload[]; label?: string }) {
 	if (!active || !payload?.length) return null;
 	return (
-		<div className="rounded-lg bg-foreground/95 px-3 py-2 shadow-lg backdrop-blur-sm">
+		<div className={cn('metric-gradient--component', 'rounded-lg bg-foreground/95 px-3 py-2 shadow-lg backdrop-blur-sm')}>
 			{!!label && <Text size="xxs" className="text-background/60 mb-1">{label}</Text>}
 			{payload.map((entry, idx) => (
 				<div key={`tt-${idx}`} className="flex items-center gap-2">

@@ -30,7 +30,7 @@ export function AiConfidenceCard({ score, model, factors, className, strings: st
 			icon={<Sparkles className="size-4" />}
 			title={strings.title}
 			titleSuffix={!!model && <Badge variant="secondary">{model}</Badge>}
-			className={className}
+			className={cn('ai-confidence--component', className)}
 		>
 			<div className="flex items-center gap-4">
 				<div className="relative shrink-0">

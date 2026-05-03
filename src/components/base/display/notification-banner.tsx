@@ -102,7 +102,7 @@ export function NotificationBanner({
 	return (
 		<div
 			role="status"
-			className={cn(
+			className={cn('notification-banner--component', 
 				'flex w-full items-start gap-3 rounded-lg border px-4 py-3',
 				'animate-in fade-in-0 slide-in-from-bottom-1 duration-200',
 				tone.wrapper,

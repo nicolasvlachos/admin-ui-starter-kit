@@ -19,7 +19,7 @@ export type PercentageInputProps = Omit<
 export const PercentageInput = forwardRef<HTMLInputElement, PercentageInputProps>(
     function PercentageInput({ decimalPlaces = 2, min = 0, max = 100, step, ...props }, ref) {
         return (
-            <DecimalInput
+            <DecimalInput className="percentage-input--component"
                 ref={ref}
                 decimalPlaces={decimalPlaces}
                 allowNegative={false}

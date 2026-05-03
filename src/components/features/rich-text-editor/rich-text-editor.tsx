@@ -29,7 +29,7 @@ export const RichTextEditor = forwardRef<RichTextEditorHandle, RichTextEditorPro
 	ref,
 ) {
 	if (!hasTiptapRuntime) {
-		return <FallbackRichTextEditor {...props} ref={ref} />;
+		return <FallbackRichTextEditor className="rich-text-editor--component" {...props} ref={ref} />;
 	}
 
 	return <TiptapRichTextEditor {...props} ref={ref} />;

@@ -68,7 +68,7 @@ export function AiToolCall({
 
 	return (
 		<div
-			className={cn(
+			className={cn('ai-tool-call--component', 
 				'overflow-hidden rounded-lg border border-border/60 bg-card',
 				status === 'error' && 'border-destructive/40 bg-destructive/5',
 				className,

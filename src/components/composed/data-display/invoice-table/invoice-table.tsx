@@ -115,7 +115,7 @@ export function InvoiceTable<TItem = InvoiceLineItem>({
 	const gridTemplate = resolvedColumns.map((c) => c.width ?? '1fr').join(' ');
 
 	return (
-		<div className={cn('overflow-hidden rounded-3xl bg-card', wrapperGlass, className)}>
+		<div className={cn('invoice-table--component', 'overflow-hidden rounded-3xl bg-card', wrapperGlass, className)}>
 			{/* Header */}
 			<div
 				className="grid gap-2 bg-muted/50 px-5 py-3"

@@ -66,7 +66,7 @@ export function StringRepeater({
     });
 
     return (
-        <Repeater
+        <Repeater className="string-repeater--component"
             items={fields}
             sortable={sortable}
             onAdd={() => append('')}

@@ -51,7 +51,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
 				buttonStyle="ghost"
 				size={baseButtonSizeMap[resolvedSize]}
 				disabled={disabled}
-				className={cn(
+				className={cn('text-button--component', 
 					'inline-flex items-center justify-center underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current',
 					'text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
 					'disabled:pointer-events-none disabled:opacity-50',

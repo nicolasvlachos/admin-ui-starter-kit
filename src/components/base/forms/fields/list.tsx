@@ -69,7 +69,7 @@ export function List({
     const { fields, append, remove, move } = useFieldArray({ control, name });
 
     return (
-        <Repeater
+        <Repeater className="list--component"
             items={fields}
             sortable={!disableSort}
             onAdd={() => append('')}

@@ -19,6 +19,7 @@ import {
 
 import type { SettingsToggleRowProps } from './types';
 
+import { cn } from '@/lib/utils';
 export function SettingsToggleRow({ settings, values, onChange, className }: SettingsToggleRowProps) {
     const [internalValues, setInternalValues] = useState<Record<string, boolean>>(() => {
         const defaults: Record<string, boolean> = {};
@@ -40,7 +41,7 @@ export function SettingsToggleRow({ settings, values, onChange, className }: Set
     };
 
     return (
-        <SmartCard className={className}>
+        <SmartCard className={cn('settings-toggle--component', className)}>
             <ItemGroup>
                 {settings.map((s) => {
                     const Icon = s.icon;

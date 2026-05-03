@@ -169,7 +169,7 @@ export function DateRangePicker({
 	}, [range, readableFormat, dateFnsLocale]);
 
 	return (
-		<div className={cn('flex flex-col gap-2', className)}>
+		<div className={cn('date-range-picker--component', 'flex flex-col gap-2', className)}>
 			{!!label && (
     <Label
 					htmlFor="date-range-picker-trigger"

@@ -42,7 +42,7 @@ export const PageActionButton = React.forwardRef<
 			variant={resolvedVariant}
 			buttonStyle={resolvedStyle}
 			size={baseButtonSizeMap[resolvedSize]}
-			className={cn(sizeClasses[resolvedSize], 'shadow-none', className)}
+			className={cn('page-action-button--component', sizeClasses[resolvedSize], 'shadow-none', className)}
 			{...props}
 		/>
 	);

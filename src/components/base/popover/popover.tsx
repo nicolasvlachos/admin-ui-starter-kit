@@ -39,7 +39,7 @@ function PopoverContent({
     return (
         <PopoverContentPrimitive
             sideOffset={sideOffset}
-            className={cn(
+            className={cn('popover--component', 
                 // Tighter than the primitive's `p-4` default, density-tokenized.
                 'p-(--popover-content-pad)',
                 // Single chrome layer: 1px hairline border + soft shadow. The

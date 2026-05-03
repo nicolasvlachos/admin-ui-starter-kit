@@ -154,7 +154,7 @@ export function AsyncSelectFacet({
 	const emptyMessage = useMemo(() => {
 		if (isLoading || isFetching) {
 			return (
-				<div className="flex items-center justify-center gap-2 py-4">
+				<div className={cn('async-select-facet--component', 'flex items-center justify-center gap-2 py-4')}>
 					<Loader2 className="text-muted-foreground size-4 animate-spin" />
 					<Text
 						tag="span"

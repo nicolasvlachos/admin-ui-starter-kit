@@ -118,7 +118,7 @@ function TagsFacetComponent({
     ) : null;
 
     return (
-        <div className={cn('space-y-3', className)}>
+        <div className={cn('tags-facet--component', 'space-y-3', className)}>
             {/* Input section */}
             <div className="flex gap-2">
                 <div className="relative flex-1">

@@ -88,7 +88,7 @@ export function LocalizedStringRepeater({
     });
 
     return (
-        <Repeater
+        <Repeater className="localized-string-repeater--component"
             items={fields}
             sortable={sortable}
             onAdd={() => append('')}

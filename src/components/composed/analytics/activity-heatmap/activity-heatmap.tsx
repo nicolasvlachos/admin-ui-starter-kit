@@ -93,7 +93,7 @@ export function ActivityHeatmap({
 	const { weeks, monthLabels } = buildCalendar(data, strings.heatmapMonthNames);
 
 	return (
-		<SmartCard title={title} description={description} className={className}>
+		<SmartCard title={title} description={description} className={cn('activity-heatmap--component', className)}>
 			<div className="overflow-x-auto">
 				<div className="relative mb-1" style={{ paddingLeft: '28px', height: '12px' }}>
 					<div className="relative flex" style={{ width: `${weeks.length * 15}px` }}>

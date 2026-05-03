@@ -298,7 +298,7 @@ function PhoneInputImpl(
                     onBlur={handleBlur}
                     invalid={invalid}
                     disabled={disabled}
-                    className={className}
+                    className={cn('phone-input--component', className)}
                     {...props}
                 />
             );

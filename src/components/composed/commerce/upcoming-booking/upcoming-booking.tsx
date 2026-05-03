@@ -21,6 +21,7 @@ import {
 
 import type { BookingEntry, UpcomingBookingRowProps } from './types';
 
+import { cn } from '@/lib/utils';
 function resolveDate(entry: BookingEntry): Date | string | number | null {
 	if (entry.date != null) return entry.date;
 	if (entry.day && entry.month) {
@@ -39,7 +40,7 @@ export function UpcomingBookingRow({
 	timePlacement = 'below',
 }: UpcomingBookingRowProps) {
 	return (
-		<ItemGroup className={className}>
+		<ItemGroup className={cn('upcoming-booking--component', className)}>
 			{bookings.map((b, idx) => {
 				const dateInput = resolveDate(b);
 				return (

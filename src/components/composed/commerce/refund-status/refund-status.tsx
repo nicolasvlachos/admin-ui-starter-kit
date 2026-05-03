@@ -38,7 +38,7 @@ export function RefundStatusCard({
 		<SmartCard
 			icon={<RotateCcw className="size-4" />}
 			title={strings.title}
-			className={className}
+			className={cn('refund-status--component', className)}
 		>
 			<div className="rounded-lg bg-muted/40 px-4 py-3">
 				<Text size="xxs" type="secondary" weight="medium" className="uppercase tracking-wider">

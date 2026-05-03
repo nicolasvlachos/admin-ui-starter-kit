@@ -46,7 +46,7 @@ const PIE_PALETTE = ['var(--success)', 'var(--info)', 'var(--warning)'];
 function MicroBars({ data, color }: { data: readonly number[]; color: string }) {
 	const max = Math.max(...data, 1);
 	return (
-		<div className="flex h-5 items-end gap-[2px]">
+		<div className={cn('metric-micro-grid--component', 'flex h-5 items-end gap-[2px]')}>
 			{data.slice(0, 6).map((v, i) => (
 				<div
 					key={`bar-${i}`}

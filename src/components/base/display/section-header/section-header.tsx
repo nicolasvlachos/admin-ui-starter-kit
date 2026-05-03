@@ -36,7 +36,7 @@ export function SectionHeader({
 }: SectionHeaderProps) {
 	return (
 		<div
-			className={cn(
+			className={cn('section-header--component', 
 				'flex items-start justify-between',
 				dense ? 'gap-2' : 'gap-3',
 				className,

@@ -84,7 +84,7 @@ export function AiMessageBubble({
 	);
 
 	return (
-		<div className={cn('flex w-full items-start gap-2', tone.wrap, className)}>
+		<div className={cn('ai-message-bubble--component', 'flex w-full items-start gap-2', tone.wrap, className)}>
 			{renderedAvatar}
 
 			<div className="flex max-w-[80%] flex-col gap-1">

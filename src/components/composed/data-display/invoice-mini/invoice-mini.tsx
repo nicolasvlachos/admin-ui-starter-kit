@@ -30,7 +30,7 @@ export function InvoiceMiniCard({
 	};
 
 	return (
-		<SmartCard padding="sm" className={className}>
+		<SmartCard padding="sm" className={cn('invoice-mini--component', className)}>
 			<div className="space-y-2.5">
 				<div className="flex items-center justify-between gap-3">
 					<Text

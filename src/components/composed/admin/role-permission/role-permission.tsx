@@ -32,7 +32,7 @@ export function RolePermissionCard({
             title={roleName}
             description={description}
             headerEnd={memberCount !== undefined && <Badge variant="info">{strings.formatMemberCount(memberCount)}</Badge>}
-            className={className}
+            className={cn('role-permission--component', className)}
         >
             <div className="mt-5 space-y-4">
                 {sections.map((section) => (

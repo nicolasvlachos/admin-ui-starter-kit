@@ -32,7 +32,7 @@ type CommandRootProps = React.ComponentProps<typeof CommandPrimitive>;
 function Command({ className, ...props }: CommandRootProps) {
     return (
         <CommandPrimitive
-            className={cn(
+            className={cn('command--component', 
                 // Tighter than the primitive; popover-content already pads the outer.
                 'rounded-md! p-0 bg-transparent',
                 className,

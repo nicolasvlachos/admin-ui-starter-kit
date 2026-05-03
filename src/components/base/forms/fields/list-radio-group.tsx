@@ -51,7 +51,7 @@ export function ListRadioGroup({
 			name={name}
 			disabled={disabled}
 			aria-invalid={invalid || undefined}
-			className={cn(
+			className={cn('list-radio-group--component', 
 				'overflow-hidden rounded-md border [&>[role=radio]~[role=radio]]:border-t',
 				'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
 				disabled && 'pointer-events-none opacity-50',

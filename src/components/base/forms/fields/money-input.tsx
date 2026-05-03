@@ -38,7 +38,7 @@ export const MoneyInput = forwardRef<HTMLInputElement, MoneyInputProps>(function
     );
 
     return (
-        <CurrencyInput
+        <CurrencyInput className="money-input--component"
             ref={ref}
             currencies={currencies}
             currency={currency}

@@ -216,7 +216,7 @@ export const RichSelect = forwardRef<HTMLButtonElement, RichSelectProps>(
                 defaultValue={normalizedDefaultValue}
                 {...valueProps}
             >
-                <baseui.SelectTrigger ref={ref} className={inputClassNames} aria-invalid={invalid}>
+                <baseui.SelectTrigger ref={ref} className={cn('rich-select--component', inputClassNames)} aria-invalid={invalid}>
                     {selectedOption ? (
                         <Text tag="span" className="text-left break-words whitespace-normal">
                             {selectedOption.label}

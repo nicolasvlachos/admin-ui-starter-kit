@@ -100,7 +100,7 @@ export function UrlDisplay({
 
 	if (!url || url.trim().length === 0) {
 		return (
-			<Text size={size} type="secondary" tag={tag} className={className} {...props}>
+			<Text size={size} type="secondary" tag={tag} className={cn('url-display--component', className)} {...props}>
 				{emptyLabel}
 			</Text>
 		);

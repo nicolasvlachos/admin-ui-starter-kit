@@ -33,7 +33,7 @@ export function FeatureAnnouncementCard({
 	className,
 }: FeatureAnnouncementCardProps) {
 	return (
-		<SmartCard className={cn('bg-gradient-to-b from-muted/30 to-card', className)}>
+		<SmartCard className={cn('feature-announcement--component', 'bg-gradient-to-b from-muted/30 to-card', className)}>
 			<Item size="default" className="px-0 items-start">
 				<ItemMedia>
 					<IconBadge icon={Icon} tone="primary" size="lg" shape="square" className="rounded-xl ring-1 ring-primary/15" />

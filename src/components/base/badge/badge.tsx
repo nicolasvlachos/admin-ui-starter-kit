@@ -119,7 +119,7 @@ export function Badge({
   return (
     <BaseBadge
       variant="secondary"
-      className={cn(
+      className={cn('badge--component', 
         theme.color,
         theme.background,
         defaultClassNames,

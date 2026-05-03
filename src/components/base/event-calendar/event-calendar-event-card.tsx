@@ -106,7 +106,7 @@ export function EventCalendarEventCard({
 
 	if (isClickable) {
 		return (
-			<button type="button" onClick={handleClick} className={commonClassName}>
+			<button type="button" onClick={handleClick} className={cn('event-calendar-event-card--component', commonClassName)}>
 				{cardContent}
 			</button>
 		);

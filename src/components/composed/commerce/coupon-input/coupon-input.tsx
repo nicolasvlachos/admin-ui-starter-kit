@@ -25,6 +25,7 @@ import { useStrings } from '@/lib/strings';
 
 import { defaultCouponInputStrings, type CouponInputCardProps } from './types';
 
+import { cn } from '@/lib/utils';
 const stripLeadingMinus = (value: string): string => value.replace(/^[\s−-]+/, '');
 
 export function CouponInputCard({
@@ -42,7 +43,7 @@ export function CouponInputCard({
 
 	if (appliedCode) {
 		return (
-			<SmartCard icon={<TicketPercent className="size-4" />} title={strings.title} className={className}>
+			<SmartCard icon={<TicketPercent className="size-4" />} title={strings.title} className={cn('coupon-input--component', className)}>
 				<Item variant="muted" className="border border-success/30 bg-success/8">
 					<ItemMedia>
 						<IconBadge icon={Check} tone="success" size="md" className="ring-1 ring-success/20" />

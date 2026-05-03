@@ -61,7 +61,7 @@ export const ApiKeyList = forwardRef<HTMLDivElement, ApiKeyListProps>(function A
 	);
 
 	return (
-		<SmartCard ref={ref} className={className}>
+		<SmartCard ref={ref} className={cn('api-key-list--component', className)}>
 			<Collapsible open={expanded} onOpenChange={handleOpenChange}>
 				<div className="flex items-center gap-2">
 					<CollapsibleTrigger asChild>

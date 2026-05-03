@@ -49,7 +49,7 @@ export function DateTimeInput({
     );
 
     return (
-        <DatePicker
+        <DatePicker className="date-time-input--component"
             mode="single"
             disabled={disabled}
             error={errorValue}

@@ -42,7 +42,7 @@ export function AiFeedback({
 	if (submitted) {
 		return (
 			<div
-				className={cn(
+				className={cn('ai-feedback--component', 
 					'inline-flex items-center gap-2 rounded-full bg-success/10 px-3 py-1.5',
 					className,
 				)}

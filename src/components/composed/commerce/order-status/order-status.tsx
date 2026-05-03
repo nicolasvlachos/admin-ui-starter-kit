@@ -45,7 +45,7 @@ export function OrderStatusCard({
 			title={strings.title}
 			titleSuffix={<Badge variant={variant} className="capitalize">{status}</Badge>}
 			description={`#${orderNumber}`}
-			className={className}
+			className={cn('order-status--component', className)}
 		>
 			<div className="overflow-x-auto pb-1">
 				<div className="flex min-w-full items-start">

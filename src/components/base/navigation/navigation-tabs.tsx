@@ -43,7 +43,7 @@ function NavigationTabs({ items, currentUrl: currentUrlProp, strings: stringsPro
 
 	const clsDefault = 'whitespace-nowrap flex items-center gap-1 leading-tight rounded-full border border-transparent px-4 py-1.5 text-sm bg-background text-foreground hover:text-background hover:bg-primary transition-all duration-150';
 	return (
-		<div className="navigation-tabs-container w-full my-5">
+		<div className={cn('navigation-tabs--component', 'navigation-tabs-container w-full my-5')}>
 			<nav className="inline-flex bg-muted rounded-4xl items-center gap-3 p-3" aria-label={strings.tabsAria}>
 				{items.map((item) => {
 					const itemUrl = normalizeUrl(item.url);

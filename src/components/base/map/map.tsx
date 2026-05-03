@@ -210,6 +210,7 @@ function Map({
             attributionControl={false}
             zoomControl={false}
             className={cn(
+                'map--component',
                 "z-50 size-full min-h-96 flex-1 rounded-md",
                 className
             )}

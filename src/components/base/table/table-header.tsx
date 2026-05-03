@@ -77,7 +77,7 @@ export function DataTableHeader<TData>(
 		});
 
 		return (
-			<TableRow className="border-b border-border">
+			<TableRow className={cn('table-header--component', 'border-b border-border')}>
 				{groupCells}
 			</TableRow>
 		);

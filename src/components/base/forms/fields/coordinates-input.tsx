@@ -174,7 +174,7 @@ export function CoordinatesInput({
     }, [lat, lng]);
 
     return (
-        <div className={cn('space-y-3', className)}>
+        <div className={cn('coordinates-input--component', 'space-y-3', className)}>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 <div className="space-y-2">
                     {!!strings.latLabel && <Label>{strings.latLabel}</Label>}

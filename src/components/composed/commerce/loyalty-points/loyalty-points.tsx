@@ -39,7 +39,7 @@ export function LoyaltyPointsCard({
 		...stringsProp,
 	});
 	return (
-		<SmartCard className={className}>
+		<SmartCard className={cn('loyalty-points--component', className)}>
 			<InlineStat
 				label={strings.balanceLabel}
 				value={

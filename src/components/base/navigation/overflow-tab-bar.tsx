@@ -142,7 +142,7 @@ export function OverflowTabBar({
 					data-tab-id={item.id}
 					aria-current={isActive ? 'page' : undefined}
 					onClick={() => handleSelect(item)}
-					className={className}
+					className={cn('overflow-tab-bar--component', className)}
 				>
 					{inner}
 				</a>

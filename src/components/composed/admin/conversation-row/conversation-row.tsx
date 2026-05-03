@@ -12,9 +12,10 @@ import { Text } from '@/components/typography/text';
 
 import type { RecentConversationRowProps } from './types';
 
+import { cn } from '@/lib/utils';
 export function RecentConversationRow({ conversations, className }: RecentConversationRowProps) {
     return (
-        <ItemGroup className={className}>
+        <ItemGroup className={cn('conversation-row--component', className)}>
             {conversations.map((c) => (
                 <Item key={c.name} className="cursor-pointer">
                     <ItemMedia>

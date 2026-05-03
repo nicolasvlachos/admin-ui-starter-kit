@@ -22,8 +22,8 @@ const TooltipButton = React.forwardRef<HTMLButtonElement, TooltipButtonProps>(
 							{...triggerProps}
 							ref={ref}
 							// `render` merges props, but className needs manual merge.
-							 
-							className={cn((triggerProps as { className?: string }).className, props.className)}
+
+							className={cn('tooltip-button--component', (triggerProps as { className?: string }).className, props.className)}
 						/>
 					)}
 				/>

@@ -40,7 +40,7 @@ export function DataTableBody<TData>({
 
 	if (!tableRows.length) {
 		return (
-			<TableBody>
+			<TableBody className="table-body--component">
 				<TableRow className="hover:bg-transparent">
 					<TableCell
 						className="h-24 text-center"

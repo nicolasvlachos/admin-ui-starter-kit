@@ -227,7 +227,7 @@ export function MoneyDisplay({
 				size={size}
 				type="secondary"
 				align={resolvedAlign}
-				className={cn(
+				className={cn('money-display--component', 
 					'money--display inline-flex flex-col tabular-nums',
 					alignmentClass,
 					className,

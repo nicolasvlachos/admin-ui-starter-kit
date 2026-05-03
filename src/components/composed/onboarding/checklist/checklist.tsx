@@ -130,7 +130,7 @@ export const OnboardingChecklist = forwardRef<HTMLDivElement, OnboardingChecklis
 			value={expanded}
 			onValueChange={handleValueChange}
 			aria-label={strings.regionAriaLabel}
-			className={cn(ACCORDION_ROOT_VARIANT_CLASS[variant], className)}
+			className={cn('checklist--component', ACCORDION_ROOT_VARIANT_CLASS[variant], className)}
 		>
 			{steps.map((step) => (
 				<AccordionItem

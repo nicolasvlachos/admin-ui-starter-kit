@@ -56,7 +56,7 @@ const Item = forwardRef<ComponentRef<typeof BaseItem>, ItemProps>(function Item(
 			size={resolvedSize}
 			variant={resolvedVariant}
 			render={render}
-			className={className}
+			className={cn('item--component', className)}
 			{...props}
 		/>
 	);

@@ -74,7 +74,7 @@ export function MetricGrid({
 	const columnsClass = columns === 'auto' ? autoColumnsFor(metrics.length) : COLUMN_CLASS[columns];
 
 	return (
-		<div className={cn('grid', columnsClass, GAP_CLASS[gap], className)}>
+		<div className={cn('metric-grid--component', 'grid', columnsClass, GAP_CLASS[gap], className)}>
 			{metrics.map((metric) => (
 				<Metric
 					key={metric.id}

@@ -29,7 +29,7 @@ function renderItemValue(value: ReactNode): ReactNode {
 		typeof value === 'number' ||
 		typeof value === 'bigint'
 	) {
-		return <Text>{String(value)}</Text>;
+		return <Text className="booking-calendar-event-card--component">{String(value)}</Text>;
 	}
 
 	return value;

@@ -141,8 +141,9 @@ export const ActionMenu = ({
 						buttonStyle={buttonStyle}
 						size={size}
 						className={cn(
+							'action-menu--component',
 							triggerClassName,
-							 
+
 							(dropdownTriggerProps as { className?: string }).className,
 						)}
 					>

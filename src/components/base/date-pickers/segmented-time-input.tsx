@@ -313,7 +313,7 @@ export function SegmentedTimeInput({
 	}, [format, segments.period]);
 
 	return (
-		<div className={cn('flex items-center gap-2', className)}>
+		<div className={cn('segmented-time-input--component', 'flex items-center gap-2', className)}>
 			{activeOrder.map((segmentKey, index) => {
 				const fallbackValue = segmentKey === 'hours' && format === '12' ? DEFAULT_12H : DEFAULT_24H;
 				const displayValue = segments[segmentKey] ?? fallbackValue;

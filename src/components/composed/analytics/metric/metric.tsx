@@ -101,7 +101,7 @@ export function Metric(props: MetricProps) {
 	const formattedValue = useMemo(() => formatMetricValue(data), [data]);
 	const trend = useMemo(() => resolveTrend(data), [data]);
 
-	if (loading) return <MetricSkeleton variant={variant} size={size} className={className} />;
+	if (loading) return <MetricSkeleton variant={variant} size={size} className={cn('metric--component', className)} />;
 	if (error) {
 		return (
 			<div className={cn('flex items-center justify-center rounded-lg border border-border bg-card p-4 text-muted-foreground', className)}>

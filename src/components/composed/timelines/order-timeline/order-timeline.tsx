@@ -11,7 +11,7 @@ const timelineStatusDot: Record<OrderTimelineEvent['status'], string> = {
 
 export function OrderTimelineCard({ title, description, events, footerText, className }: OrderTimelineCardProps) {
     return (
-        <SmartCard title={title} description={description} footerText={footerText} className={className}>
+        <SmartCard title={title} description={description} footerText={footerText} className={cn('order-timeline--component', className)}>
             <div className="relative space-y-0">
                 {events.map((event, index) => {
                     const isLast = index === events.length - 1;

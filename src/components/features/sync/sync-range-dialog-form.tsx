@@ -13,6 +13,7 @@ import type {
     SyncRangeDialogFormValues,
 } from './sync.types';
 
+import { cn } from '@/lib/utils';
 export const SyncRangeDialogForm = (props: SyncRangeDialogFormProps) => {
     const {
         formId,
@@ -47,7 +48,7 @@ export const SyncRangeDialogForm = (props: SyncRangeDialogFormProps) => {
     };
 
     return (
-        <form id={formId} onSubmit={handleSubmit(submit)} className="space-y-4">
+        <form id={formId} onSubmit={handleSubmit(submit)} className={cn('sync-range-dialog-form--component', 'space-y-4')}>
             <Controller
                 name="hours"
                 control={control}

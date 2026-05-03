@@ -59,7 +59,7 @@ export function AiTask({
 }: AiTaskProps) {
 	const strings = useStrings(defaultAiTaskStrings, stringsProp);
 	return (
-		<div className={cn('rounded-lg border border-border/60 bg-card', className)}>
+		<div className={cn('ai-task--component', 'rounded-lg border border-border/60 bg-card', className)}>
 			<TaskRow
 				item={task}
 				depth={0}

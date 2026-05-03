@@ -190,7 +190,7 @@ export function Kanban<T>({
 				<div
 					role="application"
 					aria-label={strings.boardAria}
-					className={cn('w-full', className)}
+					className={cn('kanban--component', 'w-full', className)}
 				>
 					{children}
 				</div>

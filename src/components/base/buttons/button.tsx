@@ -27,7 +27,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
 		if (loading !== undefined || handlesLoading) {
 			if (withTooltip) {
 				return (
-					<TooltipButton ref={ref} withTooltip={withTooltip} {...props}>
+					<TooltipButton className="button--component" ref={ref} withTooltip={withTooltip} {...props}>
 						<LoaderButton loading={loading} handlesLoading={handlesLoading} {...props} />
 					</TooltipButton>
 				);

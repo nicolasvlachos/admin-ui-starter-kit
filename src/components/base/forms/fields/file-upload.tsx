@@ -235,7 +235,7 @@ function FileUploadImpl(
     }, [disabled, isDragging, invalid]);
 
     return (
-        <div className="space-y-3">
+        <div className={cn('file-upload--component', 'space-y-3')}>
             <div
                 role="button"
                 tabIndex={disabled ? -1 : 0}

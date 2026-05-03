@@ -262,7 +262,7 @@ function DecimalInputImpl(
 	if (showSteppers) {
 		return (
 			<div
-				className={cn(
+				className={cn('decimal-input--component', 
 					// Stepper segmented group — input + adjacent − / + buttons
 					// share a single border radius so the group reads as one
 					// control instead of three loose chips.

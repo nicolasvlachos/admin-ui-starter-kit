@@ -135,7 +135,7 @@ export function MonthYearPicker({
 	}, [selection, readableFormat, dateFnsLocale, placeholder, t.selectMonthYear]);
 
 	return (
-		<div className={cn('flex flex-col gap-2', className)}>
+		<div className={cn('month-year-picker--component', 'flex flex-col gap-2', className)}>
 			{!!label && (
     <Label
 					htmlFor="month-year-picker-trigger"

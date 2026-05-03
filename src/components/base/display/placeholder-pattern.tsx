@@ -5,6 +5,7 @@
  */
 import { useId } from 'react';
 
+import { cn } from '@/lib/utils';
 export interface PlaceholderPatternProps {
 	className?: string;
 }
@@ -14,7 +15,7 @@ export function PlaceholderPattern({ className }: PlaceholderPatternProps) {
 
 	return (
 		<svg
-			className={className}
+			className={cn('placeholder-pattern--component', className)}
 			fill="none"
 			stroke="currentColor"
 			aria-hidden="true"

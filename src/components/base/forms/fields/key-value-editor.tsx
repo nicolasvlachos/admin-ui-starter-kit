@@ -88,7 +88,7 @@ const KeyValueEditorRow = memo(function KeyValueEditorRow({
     const { id, key: keyValue, value } = row;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className={cn('key-value-editor--component', 'grid grid-cols-1 md:grid-cols-2 gap-2')}>
             <Input
                 value={keyValue ?? ''}
                 placeholder={keyPlaceholder}

@@ -12,7 +12,7 @@ const glass = 'ring-1 ring-border/50 shadow-sm';
 
 export function MiniKpiRow({ kpis, className }: MiniKpiRowProps) {
     return (
-        <div className={cn('inline-flex items-center divide-x divide-border/50 rounded-xl bg-card px-2 py-2', glass, className)}>
+        <div className={cn('mini-kpi--component', 'inline-flex items-center divide-x divide-border/50 rounded-xl bg-card px-2 py-2', glass, className)}>
             {kpis.map((kpi) => (
                 <div key={kpi.label} className="flex flex-col items-center px-4">
                     <Text weight="bold" className="tabular-nums">

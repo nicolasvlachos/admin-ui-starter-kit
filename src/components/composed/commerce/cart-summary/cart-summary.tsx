@@ -24,6 +24,7 @@ import { useStrings } from '@/lib/strings';
 
 import { defaultCartSummaryStrings, type CartSummaryCardProps } from './types';
 
+import { cn } from '@/lib/utils';
 const stripLeadingMinus = (value: string): string => value.replace(/^[\s−-]+/, '');
 
 export function CartSummaryCard({
@@ -41,7 +42,7 @@ export function CartSummaryCard({
 	const hasBreakdown = !!(subtotal || tax || shipping || discount);
 
 	return (
-		<SmartCard icon={<ShoppingBag className="size-4" />} title={strings.title} className={className}>
+		<SmartCard icon={<ShoppingBag className="size-4" />} title={strings.title} className={cn('cart-summary--component', className)}>
 			<ItemGroup>
 				{items.map((it) => (
 					<Item key={it.id} size="xs" className="px-0">

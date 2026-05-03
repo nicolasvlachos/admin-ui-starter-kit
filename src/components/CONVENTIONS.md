@@ -188,3 +188,94 @@ component-name/
 
 Single-file components are fine for primitives (`badge.tsx`, `label.tsx`).
 Anything that needs a `Strings` interface or partials gets a folder.
+
+---
+
+## 8. BEM-style class hooks (public DOM contract)
+
+Every public component in `base/`, `features/`, and `composed/` adds a stable
+`{kebab-name}--component` class to its outermost rendered element. Components
+with named subregions (header, body, footer, title, description, alert,
+trigger, item, etc.) add `{kebab-name}--{region}` to those regions.
+
+The class is **always added via `cn()`** alongside existing styling — never as
+a replacement for utility classes. It carries no styling on its own; it is
+purely an identifier for consumers.
+
+```tsx
+// base/cards/smart-card.tsx
+<CardShell className={cn(
+  CARD_BEM.root,            // 'card--component'
+  SURFACE_CLASSES[surface],
+  ...
+)}>
+  <SmartCardHeaderRow className={cn(CARD_BEM.header, ...)}>
+    <CardTitle className={cn(CARD_BEM.title, ...)}>{title}</CardTitle>
+    <CardDescription className={cn(CARD_BEM.description, ...)}>
+      {description}
+    </CardDescription>
+  </SmartCardHeaderRow>
+  <CardContent className={cn(CARD_BEM.content, ...)}>{children}</CardContent>
+  <CardFooter className={cn(CARD_BEM.footer, ...)}>{footer}</CardFooter>
+</CardShell>
+```
+
+### Why
+
+1. **Stable public DOM contract.** Independent of shadcn's `data-slot`
+   internals (which we don't own — they may change between primitive
+   versions).
+2. **Visual debugging.** `document.querySelectorAll('.kanban-item--component')`
+   instantly highlights every kanban card on the page.
+3. **CSS overrides.** Consumer apps theme regions semantically:
+   `.card--header { border-bottom: 2px solid var(--brand) }`.
+4. **Tests / E2E.** Selectors stay stable across primitive upgrades.
+5. **Analytics.** Heatmap tools target regions semantically.
+
+### Naming
+
+- Component name in **kebab-case**, taken from the file name —
+  `kanban-item.tsx` → `kanban-item`, `event-log-event-row.tsx` →
+  `event-log-event-row`.
+- Region names lowercase, kebab-case, **semantic** — `header`, `body`,
+  `content`, `footer`, `title`, `description`, `alert`, `actions`, `item`,
+  `row`, `list`, `divider`, `trigger`, `panel`, `media`, `meta`, `controls`.
+- For richer components like `SmartCard`, extract a `*_BEM` constant (see
+  `smart-card.tokens.ts → CARD_BEM`) and reference fields. For simpler ones
+  an inline string is fine.
+
+### Where to apply
+
+**DO** apply BEM hooks to every component in:
+- `src/components/base/{folder}/{component}.tsx`
+- `src/components/features/{folder}/{component}.tsx`
+- `src/components/composed/{folder}/{component}.tsx`
+
+**DO NOT** apply to:
+- `src/components/ui/*` — shadcn primitives, framework internals.
+- `src/components/typography/*` — too granular.
+- Internal partials inside `partials/` folders that aren't exported as
+  public components.
+- Pure pass-through re-export wrappers (e.g. `base/accordion/accordion.tsx`
+  that just re-exports `@/components/ui/accordion`).
+- Hook / provider files with no DOM (`*-context.tsx`, `*-provider.tsx`).
+- Components that render a fragment with no single DOM root
+  (e.g. `gradient-card`).
+
+### Layering
+
+The hook lands on the **actual rendered DOM element**, not on a structural
+wrapper like `<Context.Provider>` or `<Suspense>`. When the root JSX is a
+non-DOM element, walk down to the first real element:
+
+```tsx
+// ❌ wrong — Provider has no DOM
+<KanbanContextProvider value={ctx} className="kanban--component">
+
+// ✅ right — hook is on the inner div
+<KanbanContextProvider value={ctx}>
+  <div role="application" className={cn('kanban--component', 'w-full')}>
+    {children}
+  </div>
+</KanbanContextProvider>
+```

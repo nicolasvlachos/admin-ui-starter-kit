@@ -217,7 +217,7 @@ function Row<T extends RepeaterItem>({
             <div
                 ref={ref}
                 style={style}
-                className={cn(
+                className={cn('repeater--component', 
                     'relative rounded-md border border-input bg-card p-4',
                     sortable && 'pl-2',
                 )}

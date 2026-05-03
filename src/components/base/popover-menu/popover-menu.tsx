@@ -130,7 +130,7 @@ export function PopoverMenu<T = unknown>({
             <PopoverContent
                 align={align}
                 sideOffset={sideOffset}
-                className={cn('w-56 p-0 overflow-hidden', contentClassName)}
+                className={cn('popover-menu--component', 'w-56 p-0 overflow-hidden', contentClassName)}
             >
                 <Command shouldFilter={!onSearchChange}>
                     {!!header && (

@@ -230,7 +230,7 @@ export function SharedResourceCard<TResource, TSuggestion>({
                 icon={icon}
                 title={title}
                 description={description}
-                className={cn('!gap-3', className)}
+                className={cn('shared-resource-card--component', '!gap-3', className)}
                 contentClassName={contentClassName}
                 alert={alert}
                 alertVariant={alertVariant}

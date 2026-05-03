@@ -44,10 +44,10 @@ Read it once for context; it is not a live roadmap.
 
 The **only** mandatory skill in this repo is
 [`component-library-rules`](.agents/skills/component-library-rules/SKILL.md).
-It encodes 23 rules covering layer order, typography, density, tokens,
+It encodes 24 rules covering layer order, typography, density, tokens,
 strings/i18n, framework-agnostic contracts, slot/render-prop
-composability, locale-agnosticism, console hygiene, and the visual
-evaluation pass. Read it before touching any component in
+composability, locale-agnosticism, console hygiene, the visual
+evaluation pass, and the BEM-style `{name}--component` DOM contract. Read it before touching any component in
 `src/components/**`. The Claude harness auto-loads it; you must read it
 through and follow it.
 
@@ -347,6 +347,13 @@ When in doubt, model new work on these reference implementations:
 - **Hardcoding strings inside JSX** (`<button>Cancel</button>`). Always
   go through the `strings` prop + `default*Strings` pattern, resolved
   via `useStrings(defaults, override)`.
+- **Skipping the `{name}--component` BEM hook.** Every public component
+  in `base/`, `features/`, `composed/` adds a stable `{kebab-name}--component`
+  class to its outermost real DOM element via `cn(...)`. Named subregions
+  (header, body, footer, title, description, alert, trigger, item, …)
+  get `{name}--{region}`. The hook lands on the actual DOM node, never on
+  a `<Context.Provider>` or other non-DOM wrapper. See rule 24 in the
+  skill and §8 of `src/components/CONVENTIONS.md`.
 - **Adding `useQuery` / `router.visit` / `useI18n` / `navigator.language`
   anywhere in the library.** All of these are consumer concerns. The
   feature accepts a callback or a `Locale` prop; the consumer wires

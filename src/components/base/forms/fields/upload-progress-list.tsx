@@ -104,7 +104,7 @@ export function UploadProgressList({
 	if (items.length === 0) return null;
 
 	return (
-		<ul className={cn('space-y-2', className)}>
+		<ul className={cn('upload-progress-list--component', 'space-y-2', className)}>
 			{items.map((item) => {
 				const tone = STATUS_TONE[item.status];
 				const Icon = tone.icon;

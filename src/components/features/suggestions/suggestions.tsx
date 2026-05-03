@@ -57,6 +57,7 @@ export function SuggestionsCombobox<T>(props: SuggestionsComboboxProps<T>) {
 
 	return (
 		<EnhancedCombobox<T>
+			className="suggestions--component"
 			items={items}
 			searchValue={searchValue}
 			onSearchValueChange={setSearchValue}

@@ -83,7 +83,7 @@ export function LazyImage({
     // No src or error — render fallback
     if (!src || errored) {
         return (
-            <div className={cn('relative overflow-hidden', containerClassName)}>
+            <div className={cn('lazy-image--component', 'relative overflow-hidden', containerClassName)}>
                 {fallback ?? (
                     <Skeleton
                         className={cn('h-full w-full', skeletonClassName)}

@@ -69,7 +69,7 @@ function CardRadioGroupImpl({
 			name={name}
 			disabled={disabled}
 			aria-invalid={invalid || undefined}
-			className={gridClassName}
+			className={cn('card-radio-group--component', gridClassName)}
 		>
 			{options.map((option) => {
 				const Icon = option.icon;

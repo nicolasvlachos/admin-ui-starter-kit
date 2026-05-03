@@ -6,7 +6,7 @@ import type { PaymentTimelineCardProps } from './types';
 
 export function PaymentTimelineCard({ events, className }: PaymentTimelineCardProps) {
     return (
-        <SmartCard title="Payment Timeline" className={className}>
+        <SmartCard title="Payment Timeline" className={cn('payment-timeline--component', className)}>
             <div className="mt-5 space-y-0">
                 {events.map((evt, i) => {
                     const Icon = evt.icon;

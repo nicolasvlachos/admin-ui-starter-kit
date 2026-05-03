@@ -12,7 +12,7 @@ export function KanbanMicroBoard({ columns, className }: KanbanMicroBoardProps) 
         <SmartCard
             title="Pipeline Overview"
             titleSuffix={<Badge variant="secondary">{totalItems} items</Badge>}
-            className={className}
+            className={cn('kanban-board--component', className)}
         >
             <div className="grid grid-cols-4 gap-1.5">
                 {columns.map((col, colIdx) => (

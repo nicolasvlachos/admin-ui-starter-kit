@@ -23,7 +23,7 @@ export function LoadingMore({
 
 	return (
 		<div
-			className={cn(
+			className={cn('loading-more--component', 
 				'flex items-center justify-center gap-2 py-2 text-sm text-muted-foreground',
 				className
 			)}

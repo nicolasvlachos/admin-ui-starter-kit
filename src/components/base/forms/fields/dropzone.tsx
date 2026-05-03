@@ -140,7 +140,7 @@ function DropzoneImpl(
 			onDragOver={handleDragEnter}
 			onDragLeave={handleDragLeave}
 			onDrop={handleDrop}
-			className={cn(
+			className={cn('dropzone--component', 
 				'relative flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed text-center transition-colors duration-150',
 				chrome.minH,
 				chrome.padding,

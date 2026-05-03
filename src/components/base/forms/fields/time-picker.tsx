@@ -338,6 +338,7 @@ export function TimePicker({
                         aria-invalid={invalid}
                         disabled={disabled}
                         className={cn(
+                            'time-picker--component',
                             // Field-style override (matches Input chrome,
                             // not the global pill-shaped button default).
                             '!rounded-md !border-input !bg-transparent !shadow-none !h-9 !px-3 !font-normal !text-foreground hover:!bg-transparent',

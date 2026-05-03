@@ -170,7 +170,7 @@ function AvatarUploadImpl(
 	);
 
 	return (
-		<div className={cn('inline-flex flex-col items-center gap-2', className)}>
+		<div className={cn('avatar-upload--component', 'inline-flex flex-col items-center gap-2', className)}>
 			<div
 				role="button"
 				tabIndex={disabled ? -1 : 0}

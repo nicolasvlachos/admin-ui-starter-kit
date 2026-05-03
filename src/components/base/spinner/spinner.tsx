@@ -34,7 +34,7 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(function Spinner
 	const variant: SpinnerVariant = variantProp ?? defaultVariant ?? 'default';
 
 	return (
-		<div ref={ref} className="flex items-center justify-center p-8" style={style}>
+		<div ref={ref} className={cn('spinner--component', 'flex items-center justify-center p-8')} style={style}>
 			<div className="flex flex-col items-center justify-center gap-2 text-center">
 				{variant === 'default' && <SpinnerDefault className={className} />}
 				{variant === 'shimmer' && <SpinnerShimmer className={className} />}

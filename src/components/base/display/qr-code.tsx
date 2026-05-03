@@ -89,7 +89,7 @@ export function QRCode({
 
 	return (
 		<div
-			className={cn('size-full', '[&_svg]:size-full', className)}
+			className={cn('qr-code--component', 'size-full', '[&_svg]:size-full', className)}
 			dangerouslySetInnerHTML={{ __html: svg }}
 			{...props}
 		/>

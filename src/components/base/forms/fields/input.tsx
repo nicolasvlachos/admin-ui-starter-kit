@@ -215,7 +215,7 @@ function InputImpl(
     const showEndAddon = hasEndAddon && !isClearable && !showCount && !isShowingLoading;
 
     return (
-        <div className="relative">
+        <div className={cn('input--component', 'relative')}>
             <input
                 ref={setRefs}
                 id={id}

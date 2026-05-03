@@ -12,7 +12,7 @@ export function TabSwitcherCard({ title, tabs, defaultTab, className }: TabSwitc
     const [activeTab, setActiveTab] = useState<string>(defaultTab ?? tabKeys[0] ?? '');
 
     return (
-        <SmartCard title={title} className={cn('bg-gradient-to-b from-muted/30 to-card', className)}>
+        <SmartCard title={title} className={cn('tab-switcher--component', 'bg-gradient-to-b from-muted/30 to-card', className)}>
             {/* Pill tabs */}
             <div className="mt-4 flex gap-1 rounded-full bg-muted/50 p-1">
                 {tabKeys.map((t) => (

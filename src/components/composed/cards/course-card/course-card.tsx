@@ -58,7 +58,7 @@ export function CourseCard({
 
 	if (variant === 'minimal') {
 		return (
-			<Item variant="outline" className={cn('hover:bg-muted/30 transition-colors', className)}>
+			<Item variant="outline" className={cn('course-card--component', 'hover:bg-muted/30 transition-colors', className)}>
 				<ItemContent>
 					<ItemTitle>{title}</ItemTitle>
 					{!!description && <ItemDescription clamp={1}>{description}</ItemDescription>}

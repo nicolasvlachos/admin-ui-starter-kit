@@ -14,6 +14,7 @@ import { useStrings } from '@/lib/strings';
 
 import { defaultTaxBreakdownStrings, type TaxBreakdownCardProps } from './types';
 
+import { cn } from '@/lib/utils';
 export function TaxBreakdownCard({
 	subtotal,
 	taxes,
@@ -28,7 +29,7 @@ export function TaxBreakdownCard({
 		<SmartCard
 			icon={<Receipt className="size-4" />}
 			title={strings.title}
-			className={className}
+			className={cn('tax-breakdown--component', className)}
 		>
 			<InlineStat
 				label={strings.subtotal}

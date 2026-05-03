@@ -33,6 +33,7 @@ export function ColumnVisibilityToggle<TData>({
                         variant="secondary"
                         buttonStyle="outline"
                         className={cn(
+                            'column-visibility-toggle--component',
                             'h-8 flex items-center gap-2',
                              
                             (triggerProps as { className?: string }).className,

@@ -57,7 +57,7 @@ export function AiFileTree({
 	const strings = useStrings(defaultAiFileTreeStrings, stringsProp);
 	return (
 		<div
-			className={cn(
+			className={cn('ai-file-tree--component', 
 				'overflow-hidden rounded-lg border border-border/60 bg-card font-mono text-xs',
 				className,
 			)}

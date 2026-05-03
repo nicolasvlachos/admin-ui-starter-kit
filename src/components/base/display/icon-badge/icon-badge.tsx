@@ -85,7 +85,7 @@ export function IconBadge({
 	return (
 		<span
 			aria-hidden={!props['aria-label']}
-			className={cn(
+			className={cn('icon-badge--component', 
 				'inline-flex shrink-0 items-center justify-center',
 				shape === 'circle' ? 'rounded-full' : 'rounded-md',
 				sizes.box,

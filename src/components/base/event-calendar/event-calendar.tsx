@@ -155,7 +155,7 @@ export function EventCalendar({
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center py-12">
+			<div className={cn('event-calendar--component', 'flex items-center justify-center py-12')}>
 				<Text type="secondary">
 					{strings.loading}
 				</Text>

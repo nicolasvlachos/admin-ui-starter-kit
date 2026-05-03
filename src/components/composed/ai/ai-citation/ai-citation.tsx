@@ -45,7 +45,7 @@ export function AiCitation({
 	const hidden = sources.length - visible.length;
 
 	return (
-		<div className={cn('space-y-2', className)}>
+		<div className={cn('ai-citation--component', 'space-y-2', className)}>
 			<button
 				type="button"
 				onClick={() => setExpanded((v) => !v)}

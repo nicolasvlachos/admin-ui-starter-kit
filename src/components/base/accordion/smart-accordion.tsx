@@ -60,7 +60,7 @@ export const SmartAccordion = forwardRef<HTMLDivElement, SmartAccordionProps>(fu
 					: undefined
 			}
 			aria-label={strings.regionAriaLabel}
-			className={cn(ACCORDION_ROOT_VARIANT_CLASS[variant], className)}
+			className={cn('smart-accordion--component', ACCORDION_ROOT_VARIANT_CLASS[variant], className)}
 		>
 			{items.map((item) => (
 				<AccordionItem

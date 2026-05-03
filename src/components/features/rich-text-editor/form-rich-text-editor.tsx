@@ -11,7 +11,7 @@ export function FormRichTextEditor({ name, ...props }: FormRichTextEditorProps) 
     const { field } = useController({ name, control });
 
     return (
-        <RichTextEditor
+        <RichTextEditor className="form-rich-text-editor--component"
             {...props}
             value={typeof field.value === 'string' ? field.value : ''}
             onChange={field.onChange}
