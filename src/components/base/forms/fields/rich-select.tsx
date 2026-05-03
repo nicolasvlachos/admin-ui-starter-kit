@@ -8,7 +8,9 @@ import {
 import * as baseui from '@/components/ui/select';
 import { Text } from '@/components/typography';
 import { useStrings, type StringsProp } from '@/lib/strings';
+import { useFormsConfig, type FormControlSize } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
+import { formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
 
 export interface RichSelectStrings {
     placeholder: string;
@@ -71,6 +73,9 @@ export interface RichSelectProps {
 
     /** Open change handler */
     onOpenChange?: (open: boolean) => void;
+
+    /** Form control size — flows through `useFormsConfig().defaultControlSize`. */
+    size?: FormControlSize;
 }
 
 // Internal value for "empty" selection
@@ -97,9 +102,12 @@ export const RichSelect = forwardRef<HTMLButtonElement, RichSelectProps>(
             defaultValue,
             allowClear = false,
             invalid,
+            size: sizeProp,
         },
         ref
     ) => {
+        const { defaultControlSize } = useFormsConfig();
+        const size = resolveFormControlSize(sizeProp, defaultControlSize);
         const strings = useStrings(defaultRichSelectStrings, stringsProp);
         const resolvedPlaceholder = placeholder ?? strings.placeholder;
         const mapToInternalValue = useCallback(
@@ -170,17 +178,26 @@ export const RichSelect = forwardRef<HTMLButtonElement, RichSelectProps>(
             [isControlled, onChange, mapFromInternalValue]
         );
 
+        // Trigger chrome aligned with `Select`'s canonical shape:
+        //   - `border-input bg-transparent rounded-md` (was raw `neutral-300`
+        //     palette + `rounded-lg`).
+        //   - `formControlSizeClasses[size]` so density flows through
+        //     `<UIProvider forms={{ defaultControlSize }}>` (rule 17).
+        //   - `focus-visible:border-ring + ring-ring/50 + ring-[3px]` (was a
+        //     bespoke `outline-3 outline-primary-400` pattern).
+        //   - `aria-invalid:` selectors for invalid chrome (was a manual
+        //     `invalid && '…'` conditional with raw `error-100/300/600`
+        //     palette tokens — rule 6 violation).
+        //   - `disabled:opacity-50 disabled:cursor-not-allowed` to match
+        //     every other field (was `opacity-40 grayscale`).
         const inputClassNames = cn(
-            {
-                'focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-primary-400 focus-visible:bg-primary-50 focus-visible:border-primary-300 selection:bg-primary-600 selection:text-white':
-                    !disabled && !invalid,
-                'bg-error-100 focus-visible:bg-error-100 focus-visible:ring-error-300 focus-visible:ring-opacity-40 ring-error-300 border-error-300 focus-visible:border-error-300 text-error-600 placeholder-error-600 placeholder:opacity-50':
-                    !disabled && invalid,
-                'disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed disabled:placeholder-neutral-500 disabled:border-neutral-200 opacity-40 grayscale select-none':
-                    disabled,
-            },
-            'bg-transparent leading-snug peer w-full relative overflow-hidden min-h-[--form-element-height] h-auto px-3 py-2 rounded-lg border border-neutral-300 outline-none ease-out duration-200 text-sm',
-            className
+            'border-input bg-transparent w-full rounded-md border outline-none transition-[color,box-shadow]',
+            formControlSizeClasses[size],
+            'h-auto min-h-(--form-element-height) py-2',
+            'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+            'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aria-invalid:text-destructive',
+            'disabled:cursor-not-allowed disabled:opacity-50',
+            className,
         );
         const valueProps = isControlled
             ? { value: normalizedValue }
