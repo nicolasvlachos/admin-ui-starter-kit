@@ -12,6 +12,7 @@ import { useState, useRef, useCallback, memo } from 'react';
 
 import { Label } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
+import { cn } from '@/lib/utils';
 
 import { Input } from './input';
 import { Repeater } from './repeater';
@@ -69,11 +70,8 @@ const generateId = (): string => {
 
 interface KeyValueEditorRowProps {
     row: KeyValueRow;
-    isFirst: boolean;
     keyPlaceholder: string;
     valuePlaceholder: string;
-    keyLabel?: string;
-    valueLabel?: string;
     invalid?: boolean;
     onKeyChange: (id: string, value: string) => void;
     onValueChange: (id: string, value: string) => void;
@@ -81,11 +79,8 @@ interface KeyValueEditorRowProps {
 
 const KeyValueEditorRow = memo(function KeyValueEditorRow({
     row,
-    isFirst,
     keyPlaceholder,
     valuePlaceholder,
-    keyLabel,
-    valueLabel,
     invalid,
     onKeyChange,
     onValueChange,
@@ -94,24 +89,18 @@ const KeyValueEditorRow = memo(function KeyValueEditorRow({
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <div className="space-y-1">
-                {!!isFirst && !!keyLabel && <Label className="flex items-center">{keyLabel}</Label>}
-                <Input
-                    value={keyValue ?? ''}
-                    placeholder={keyPlaceholder}
-                    onChange={(e) => onKeyChange(id, e.target.value)}
-                    invalid={invalid}
-                />
-            </div>
-            <div className="space-y-1">
-                {!!isFirst && !!valueLabel && <Label className="flex items-center">{valueLabel}</Label>}
-                <Input
-                    value={value ?? ''}
-                    placeholder={valuePlaceholder}
-                    onChange={(e) => onValueChange(id, e.target.value)}
-                    invalid={invalid}
-                />
-            </div>
+            <Input
+                value={keyValue ?? ''}
+                placeholder={keyPlaceholder}
+                onChange={(e) => onKeyChange(id, e.target.value)}
+                invalid={invalid}
+            />
+            <Input
+                value={value ?? ''}
+                placeholder={valuePlaceholder}
+                onChange={(e) => onValueChange(id, e.target.value)}
+                invalid={invalid}
+            />
         </div>
     );
 });
@@ -222,32 +211,45 @@ export function KeyValueEditor({
         [emit]
     );
 
+    // Render the column labels OUTSIDE the repeater so the per-row drag
+    // handle + remove button stay aligned with the input baseline. Gutter
+    // padding (left for sortable handle, right for remove X) matches the
+    // `<Repeater>` row's `gap-2` + `size-9` button widths.
+    const showHeader = !!strings.keyLabel || !!strings.valueLabel;
+    const leftGutter = sortable ? 'pl-11' : '';
+    const rightGutter = 'pr-11';
+
     return (
-        <Repeater
-            items={rows}
-            sortable={sortable}
-            onAdd={addRow}
-            onRemove={removeRow}
-            onMove={moveRow}
-            strings={{
-                emptyState: strings.emptyState,
-                addButton: strings.addButton,
-                removeAriaLabel: strings.removeRowAriaLabel,
-            }}
-            renderRow={(row, { index }) => (
-                <KeyValueEditorRow
-                    row={row}
-                    isFirst={index === 0}
-                    keyPlaceholder={strings.keyPlaceholder}
-                    valuePlaceholder={strings.valuePlaceholder}
-                    keyLabel={strings.keyLabel}
-                    valueLabel={strings.valueLabel}
-                    invalid={invalid}
-                    onKeyChange={handleKeyChange}
-                    onValueChange={handleValueChange}
-                />
+        <div className="space-y-2">
+            {showHeader && (
+                <div className={cn('grid grid-cols-1 md:grid-cols-2 gap-2', leftGutter, rightGutter)}>
+                    {!!strings.keyLabel && <Label className="flex items-center">{strings.keyLabel}</Label>}
+                    {!!strings.valueLabel && <Label className="flex items-center">{strings.valueLabel}</Label>}
+                </div>
             )}
-        />
+            <Repeater
+                items={rows}
+                sortable={sortable}
+                onAdd={addRow}
+                onRemove={removeRow}
+                onMove={moveRow}
+                strings={{
+                    emptyState: strings.emptyState,
+                    addButton: strings.addButton,
+                    removeAriaLabel: strings.removeRowAriaLabel,
+                }}
+                renderRow={(row) => (
+                    <KeyValueEditorRow
+                        row={row}
+                        keyPlaceholder={strings.keyPlaceholder}
+                        valuePlaceholder={strings.valuePlaceholder}
+                        invalid={invalid}
+                        onKeyChange={handleKeyChange}
+                        onValueChange={handleValueChange}
+                    />
+                )}
+            />
+        </div>
     );
 }
 
