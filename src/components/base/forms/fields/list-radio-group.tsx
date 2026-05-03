@@ -12,6 +12,7 @@ import { Circle } from 'lucide-react';
 import { Text } from '@/components/typography';
 import { cn } from '@/lib/utils';
 import { useFormsConfig } from '@/lib/ui-provider';
+import { resolveFormControlSize } from '../form-sizing';
 import {
 	choiceListSizeTokens,
 	type ChoiceGroupBaseProps,
@@ -39,7 +40,7 @@ export function ListRadioGroup({
 	className,
 }: ListRadioGroupProps) {
 	const { defaultControlSize } = useFormsConfig();
-	const size = sizeProp ?? defaultControlSize ?? 'base';
+	const size = resolveFormControlSize(sizeProp, defaultControlSize);
 
 	const rowPadding = choiceListSizeTokens[size];
 	return (

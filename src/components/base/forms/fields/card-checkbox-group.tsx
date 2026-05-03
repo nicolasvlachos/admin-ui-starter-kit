@@ -12,6 +12,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { Text } from '@/components/typography';
 import { cn } from '@/lib/utils';
 import { useFormsConfig } from '@/lib/ui-provider';
+import { resolveFormControlSize } from '../form-sizing';
 import {
 	choiceCardSizeTokens,
 	type ChoiceGroupBaseProps,
@@ -53,7 +54,7 @@ export function CardCheckboxGroup({
 	className,
 }: CardCheckboxGroupProps) {
 	const { defaultControlSize } = useFormsConfig();
-	const size = sizeProp ?? defaultControlSize ?? 'base';
+	const size = resolveFormControlSize(sizeProp, defaultControlSize);
 
 	const isControlled = value !== undefined;
 	const [internal, setInternal] = useState<string[]>(defaultValue ?? []);

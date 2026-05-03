@@ -27,7 +27,7 @@ export interface ChoiceGroupBaseProps {
 	disabled?: boolean;
 	/** Show error styling. */
 	invalid?: boolean;
-	/** Density / control size. Default `'base'`. */
+	/** Density / control size. Default `'sm'` (resolves through `useFormsConfig().defaultControlSize`). */
 	size?: ChoiceSize;
 	className?: string;
 }

@@ -11,6 +11,7 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 import { useFormsConfig } from '@/lib/ui-provider';
+import { resolveFormControlSize } from '../form-sizing';
 import {
 	choicePillSizeTokens,
 	type ChoiceGroupBaseProps,
@@ -44,7 +45,7 @@ export function PillRadioGroup({
 	className,
 }: PillRadioGroupProps) {
 	const { defaultControlSize } = useFormsConfig();
-	const size = sizeProp ?? defaultControlSize ?? 'base';
+	const size = resolveFormControlSize(sizeProp, defaultControlSize);
 
 	const handleClick = React.useCallback(
 		(optionValue: string) => {
