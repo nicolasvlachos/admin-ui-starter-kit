@@ -2,12 +2,25 @@ import * as React from 'react';
 import { useState, useMemo, useCallback } from 'react';
 import * as baseui from '@/components/ui/select';
 import { Label } from '@/components/typography';
+import { useStrings, type StringsProp } from '@/lib/strings';
 import { useFormsConfig, type FormControlSize } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
 import { formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
 import { DecimalInput } from './decimal-input';
 
 export type WeightUnit = 'g' | 'kg' | 'lb' | 'oz';
+
+export interface WeightInputStrings {
+    /** Above-field label for the unit selector. Empty string hides it. */
+    unitLabel: string;
+    /** Placeholder shown in the unit selector. */
+    unitPlaceholder: string;
+}
+
+export const defaultWeightInputStrings: WeightInputStrings = {
+    unitLabel: '',
+    unitPlaceholder: '',
+};
 
 export interface WeightInputProps {
     /** Controlled value */
@@ -43,11 +56,14 @@ export interface WeightInputProps {
     /** Disable unit selector */
     disableUnitSelector?: boolean;
 
-    /** Label for unit selector (sub-label) */
+    /** @deprecated Use `strings.unitLabel`. */
     unitLabel?: string;
 
-    /** Placeholder for unit selector */
+    /** @deprecated Use `strings.unitPlaceholder`. */
     unitPlaceholder?: string;
+
+    /** Override default strings (unit selector label + placeholder). */
+    strings?: StringsProp<WeightInputStrings>;
 
     /** Width of unit selector */
     unitWidth?: string;
@@ -87,6 +103,7 @@ export function WeightInput({
     unitLabel,
     unitPlaceholder,
     unitWidth = 'w-24',
+    strings: stringsProp,
     invalid,
     disabled = false,
     size: sizeProp,
@@ -94,6 +111,11 @@ export function WeightInput({
 }: WeightInputProps) {
     const { defaultControlSize } = useFormsConfig();
     const size = resolveFormControlSize(sizeProp, defaultControlSize);
+    const strings = useStrings(defaultWeightInputStrings, {
+        ...(unitLabel !== undefined ? { unitLabel } : {}),
+        ...(unitPlaceholder !== undefined ? { unitPlaceholder } : {}),
+        ...stringsProp,
+    });
     const isValueControlled = controlledValue !== undefined;
     const isUnitControlled = controlledUnit !== undefined;
 
@@ -126,7 +148,7 @@ export function WeightInput({
     );
 
     const unitOptions = useMemo(() => UNIT_OPTIONS, []);
-    const hasUnitLabel = unitLabel !== undefined && unitLabel !== null && unitLabel !== '';
+    const hasUnitLabel = strings.unitLabel !== '';
 
     return (
         <div className={cn('flex items-start gap-2', className)}>
@@ -145,7 +167,7 @@ export function WeightInput({
             </div>
             {!!showUnitSelector && (
                 <div className="space-y-2">
-                    {!!hasUnitLabel && <Label className="leading-6">{unitLabel}</Label>}
+                    {!!hasUnitLabel && <Label className="leading-6">{strings.unitLabel}</Label>}
                     <baseui.Select value={unit} onValueChange={(value) => handleUnitChange(value)} disabled={disabled || disableUnitSelector}>
                         <baseui.SelectTrigger
                             aria-invalid={invalid || undefined}
@@ -158,7 +180,7 @@ export function WeightInput({
                                 unitWidth
                             )}
                         >
-                            <baseui.SelectValue placeholder={unitPlaceholder} />
+                            <baseui.SelectValue placeholder={strings.unitPlaceholder || undefined} />
                         </baseui.SelectTrigger>
                         <baseui.SelectContent>
                             <baseui.SelectGroup>

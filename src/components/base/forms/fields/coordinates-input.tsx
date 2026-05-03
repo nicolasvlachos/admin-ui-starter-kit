@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { Label, TextLink } from '@/components/typography';
+import { useStrings, type StringsProp } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 import { DecimalInput } from './decimal-input';
 
@@ -9,6 +10,27 @@ export interface CoordinatesObjectValue {
 }
 
 export type CoordinatesValue = string | CoordinatesObjectValue;
+
+export interface CoordinatesInputStrings {
+    /** Above-field label for the latitude input. Empty string hides it. */
+    latLabel: string;
+    /** Above-field label for the longitude input. Empty string hides it. */
+    lngLabel: string;
+    /** Placeholder shown in the latitude input. */
+    latPlaceholder: string;
+    /** Placeholder shown in the longitude input. */
+    lngPlaceholder: string;
+    /** Anchor text for the Google Maps preview link. Empty string hides it. */
+    previewLinkLabel: string;
+}
+
+export const defaultCoordinatesInputStrings: CoordinatesInputStrings = {
+    latLabel: '',
+    lngLabel: '',
+    latPlaceholder: '',
+    lngPlaceholder: '',
+    previewLinkLabel: '',
+};
 
 export interface CoordinatesInputProps {
     /** Controlled value */
@@ -23,16 +45,16 @@ export interface CoordinatesInputProps {
     /** Change handler */
     onChange?: (e: { target: { value: CoordinatesValue } }) => void;
 
-    /** Label for latitude field */
+    /** @deprecated Use `strings.latLabel`. */
     latLabel?: string;
 
-    /** Label for longitude field */
+    /** @deprecated Use `strings.lngLabel`. */
     lngLabel?: string;
 
-    /** Placeholder for latitude field */
+    /** @deprecated Use `strings.latPlaceholder`. */
     latPlaceholder?: string;
 
-    /** Placeholder for longitude field */
+    /** @deprecated Use `strings.lngPlaceholder`. */
     lngPlaceholder?: string;
 
     /** Number of decimal places */
@@ -41,8 +63,11 @@ export interface CoordinatesInputProps {
     /** Show preview link to Google Maps */
     showPreviewLink?: boolean;
 
-    /** Label for preview link */
+    /** @deprecated Use `strings.previewLinkLabel`. */
     previewLinkLabel?: string;
+
+    /** Override default strings (labels + placeholders + preview link). */
+    strings?: StringsProp<CoordinatesInputStrings>;
 
     /** Error state for styling (passed from FormField) */
     invalid?: boolean;
@@ -99,10 +124,19 @@ export function CoordinatesInput({
     decimalPlaces = 6,
     showPreviewLink = true,
     previewLinkLabel,
+    strings: stringsProp,
     invalid,
     className,
     disabled,
 }: CoordinatesInputProps) {
+    const strings = useStrings(defaultCoordinatesInputStrings, {
+        ...(latLabel !== undefined ? { latLabel } : {}),
+        ...(lngLabel !== undefined ? { lngLabel } : {}),
+        ...(latPlaceholder !== undefined ? { latPlaceholder } : {}),
+        ...(lngPlaceholder !== undefined ? { lngPlaceholder } : {}),
+        ...(previewLinkLabel !== undefined ? { previewLinkLabel } : {}),
+        ...stringsProp,
+    });
     const isControlled = controlledValue !== undefined;
 
     const initialParsed = parseValue(isControlled ? controlledValue : defaultValue, format);
@@ -143,9 +177,9 @@ export function CoordinatesInput({
         <div className={cn('space-y-3', className)}>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 <div className="space-y-2">
-                    {!!latLabel && <Label>{latLabel}</Label>}
+                    {!!strings.latLabel && <Label>{strings.latLabel}</Label>}
                     <DecimalInput
-                        placeholder={latPlaceholder}
+                        placeholder={strings.latPlaceholder || undefined}
                         value={lat}
                         onChange={(e) => update(e.target.value, lng)}
                         decimalPlaces={decimalPlaces}
@@ -157,9 +191,9 @@ export function CoordinatesInput({
                     />
                 </div>
                 <div className="space-y-2">
-                    {!!lngLabel && <Label>{lngLabel}</Label>}
+                    {!!strings.lngLabel && <Label>{strings.lngLabel}</Label>}
                     <DecimalInput
-                        placeholder={lngPlaceholder}
+                        placeholder={strings.lngPlaceholder || undefined}
                         value={lng}
                         onChange={(e) => update(lat, e.target.value)}
                         decimalPlaces={decimalPlaces}
@@ -172,9 +206,9 @@ export function CoordinatesInput({
                 </div>
             </div>
 
-            {!!showPreviewLink && !!mapUrl && !!previewLinkLabel && (
+            {!!showPreviewLink && !!mapUrl && !!strings.previewLinkLabel && (
                 <TextLink href={mapUrl} type="secondary" underline={false}>
-                    {previewLinkLabel}
+                    {strings.previewLinkLabel}
                 </TextLink>
               )}
         </div>

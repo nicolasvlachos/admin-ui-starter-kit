@@ -23,12 +23,17 @@ export interface TagsInputStrings {
 	placeholder: string;
 	emptyRecommendations: string;
 	clearAll: string;
+	/** Summary line shown when `maxTags` + `showMaxTags` are set. Receives
+	 *  `current` (number of tags entered) and `max` (the limit). The
+	 *  default is English `"{current} / {max} tags"` — override for i18n. */
+	summary: (current: number, max: number) => string;
 }
 
 export const defaultTagsInputStrings: TagsInputStrings = {
 	placeholder: 'Add a tag…',
 	emptyRecommendations: 'No recommendations found.',
 	clearAll: 'Clear all',
+	summary: (current, max) => `${current} / ${max} tags`,
 };
 
 export interface TagsInputProps<T = string> {
@@ -453,7 +458,7 @@ export function TagsInput<T = string>({
 
             {!!maxTags && !!showMaxTags && (
                 <Text size="xs" type="secondary" className="mt-1">
-                    {value.length} / {maxTags} tags
+                    {strings.summary(value.length, maxTags)}
                 </Text>
               )}
         </div>

@@ -35,6 +35,12 @@ export interface ImageUploadStrings {
     /** Template for the supports-text. `{ext}` is the comma-separated allowed
      *  extensions; `{size}` is the max-size MB number. */
     supportsTemplate: string;
+    /** Summary line when `multiple` is set and more than one file is selected.
+     *  Receives the count of files beyond the displayed one — e.g. `count=3`
+     *  for "+ 3 more files". Override to swap the English plural-`s` rule
+     *  (`'+ ' + count + ' more file' + (count === 1 ? '' : 's')`) for the
+     *  consumer locale. */
+    moreFiles: (count: number) => string;
 }
 
 export const defaultImageUploadStrings: ImageUploadStrings = {
@@ -44,6 +50,7 @@ export const defaultImageUploadStrings: ImageUploadStrings = {
     noSelection: 'No file selected yet.',
     keepCurrent: 'Current image stays until you upload a new one.',
     supportsTemplate: 'Supports {ext} files up to {size} MB.',
+    moreFiles: (count) => `+ ${count} more file${count === 1 ? '' : 's'}`,
 };
 
 export interface ImageUploadProps {
@@ -295,7 +302,7 @@ function ImageUploadImpl(
                             </Text>
                             {!!multiple && files.length > 1 && (
                                 <Text size="xs" type="secondary">
-                                    + {files.length - 1} more file{files.length - 1 === 1 ? '' : 's'}
+                                    {strings.moreFiles(files.length - 1)}
                                 </Text>
                               )}
                             <Button
