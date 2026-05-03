@@ -23,15 +23,21 @@ export function useKanbanContext<T = unknown>(): KanbanContextShape<T> {
 /**
  * Internal context exposed by `<KanbanItem>` so the optional
  * `<KanbanItemHandle>` knows which listeners + accessibility props to
- * wire to the dedicated drag handle. The shapes match @dnd-kit's own
- * `useSortable()` return values; we widen them to the unknown
- * superset so the consuming component can spread them onto an
- * arbitrary HTMLElement.
+ * wire to the dedicated drag handle. Also carries the resolved
+ * domain item so `<KanbanItemActions>` (and any other item-aware
+ * subcomponent) can render per-item content without prop drilling.
+ *
+ * The dnd-kit shapes are widened to `unknown` so consumers can spread
+ * them onto any HTMLElement.
  */
 interface KanbanItemContextShape {
 	listeners: unknown;
 	attributes: unknown;
 	setActivatorNodeRef: (node: HTMLElement | null) => void;
+	/** Stable id (the value returned by `getItemValue`). */
+	itemId: string;
+	/** The domain item itself — null if it can't be resolved. */
+	item: unknown;
 }
 
 const KanbanItemContext = createContext<KanbanItemContextShape | null>(null);
@@ -42,7 +48,7 @@ export function useKanbanItemContext(): KanbanItemContextShape {
 	const ctx = useContext(KanbanItemContext);
 	if (!ctx) {
 		throw new Error(
-			'<KanbanItemHandle> must be rendered inside a <KanbanItem>.',
+			'<KanbanItemHandle> / <KanbanItemActions> must be rendered inside a <KanbanItem>.',
 		);
 	}
 	return ctx;

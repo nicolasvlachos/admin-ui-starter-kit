@@ -61,6 +61,22 @@ export function ActiveFilterItem({
         }
     };
 
+    // Inside the pill, segment buttons must not paint their own border or
+    // focus ring — the pill itself is the visual container. The global
+    // `<Button>` primitive bakes in `border border-transparent
+    // focus-visible:border-ring focus-visible:ring-3`, so without these
+    // overrides every segment paints a full 1px box (showing as a
+    // double-border just inside the pill chrome) and a rounded focus ring
+    // when the popover opens.
+    const SEGMENT_RESET =
+        '!border-0 !rounded-none !shadow-none focus-visible:!ring-0 focus-visible:!border-transparent';
+
+    // Explicit 1px divider — the segment buttons use `!border-0` (so they
+    // don't paint an inner full-box decoration) which would also wipe a
+    // `divide-x` border. A standalone separator div is unambiguous and
+    // doesn't fight with the buttons' baseline chrome.
+    const Divider = () => <div aria-hidden className="w-px self-stretch bg-border" />;
+
     return (
         <div
             role="group"
@@ -76,7 +92,10 @@ export function ActiveFilterItem({
                 type="button"
                 variant="secondary"
                 buttonStyle="ghost"
-                className="border-border hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring flex h-full items-center rounded-none border-r px-3 focus-visible:outline-none focus-visible:ring-2"
+                className={cn(
+                    SEGMENT_RESET,
+                    'flex h-full items-center px-3 hover:bg-accent hover:text-accent-foreground',
+                )}
                 onClick={handleLabelClick}
             >
                 {!!filter.icon && (
@@ -88,24 +107,29 @@ export function ActiveFilterItem({
                 <ChevronDown className="ml-1 h-4 w-4" />
             </Button>
 
-            {/* Show operator with vertical divider as a separate component */}
-            <div className="border-border h-full border-r">
-                <FilterOperatorSelect
-                    operator={operator}
-                    operators={operators}
-                    onOperatorChange={onOperatorChange}
-                />
-            </div>
+            <Divider />
+
+            {/* Operator dropdown */}
+            <FilterOperatorSelect
+                operator={operator}
+                operators={operators}
+                onOperatorChange={onOperatorChange}
+                segmentResetClass={SEGMENT_RESET}
+            />
+
+            <Divider />
 
             {/* Value display with icons and count when multiple selected - explicitly non-interactive */}
             <div className="pointer-events-none flex flex-1 items-center px-2">
                 <FilterValueDisplay filter={filter} value={value} />
             </div>
 
+            <Divider />
+
             {/* Clear button */}
             <Button
                 variant="secondary" buttonStyle="ghost"
-                className="h-full w-8 rounded-none rounded-r-md px-0"
+                className={cn(SEGMENT_RESET, 'h-full w-8 px-0 rounded-r-md')}
                 onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

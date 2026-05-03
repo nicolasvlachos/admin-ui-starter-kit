@@ -17,6 +17,8 @@ export interface KanbanStrings {
 	dragHandleAria: string;
 	/** Aria label on the board landmark. */
 	boardAria: string;
+	/** Aria label on the per-item actions trigger (`⋮`). */
+	itemActionsAria: string;
 }
 
 export const defaultKanbanStrings: KanbanStrings = {
@@ -26,6 +28,7 @@ export const defaultKanbanStrings: KanbanStrings = {
 	announceDragCancel: 'Cancelled drag of {name}.',
 	dragHandleAria: 'Drag handle',
 	boardAria: 'Kanban board',
+	itemActionsAria: 'Item actions',
 };
 
 export function interpolateKanbanString(

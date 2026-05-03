@@ -47,8 +47,10 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { forwardRef, useCallback, useMemo, useState } from 'react';
+import { MoreHorizontal } from 'lucide-react';
+import { forwardRef, useCallback, useMemo, useState, type MouseEvent } from 'react';
 
+import { PopoverMenu } from '@/components/base/popover-menu';
 import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
@@ -65,6 +67,9 @@ import type {
 	KanbanBoardProps,
 	KanbanColumnContentProps,
 	KanbanColumnProps,
+	KanbanItemAction,
+	KanbanItemActionsConfig,
+	KanbanItemActionsProps,
 	KanbanItemHandleProps,
 	KanbanItemProps,
 	KanbanOverlayProps,
@@ -76,6 +81,8 @@ export function Kanban<T>({
 	onValueChange,
 	getItemValue,
 	onItemMove,
+	itemActions,
+	onItemClick,
 	strings: stringsProp,
 	className,
 	children,
@@ -144,8 +151,10 @@ export function Kanban<T>({
 			activeId,
 			activeItem: activeItem as unknown,
 			findItem: findItem as (id: string) => { columnId: string; index: number; item: unknown } | undefined,
+			itemActions: itemActions as KanbanItemActionsConfig<unknown> | undefined,
+			onItemClick: onItemClick as ((item: unknown) => void) | undefined,
 		}),
-		[value, onValueChange, getItemValue, activeId, activeItem, findItem],
+		[value, onValueChange, getItemValue, activeId, activeItem, findItem, itemActions, onItemClick],
 	);
 
 	return (
@@ -245,6 +254,7 @@ export function KanbanItem({
 	value,
 	className,
 	disabled = false,
+	onClick,
 	children,
 }: KanbanItemProps) {
 	const ctx = useKanbanContext();
@@ -274,9 +284,32 @@ export function KanbanItem({
 			listeners,
 			attributes,
 			setActivatorNodeRef,
+			itemId: value,
+			item: found?.item ?? null,
 		}),
-		[listeners, attributes, setActivatorNodeRef],
+		[listeners, attributes, setActivatorNodeRef, value, found?.item],
 	);
+
+	const rootClick = ctx.onItemClick;
+	const handleClick = useCallback(
+		(event: MouseEvent<HTMLDivElement>) => {
+			// `<KanbanItemHandle>` and `<KanbanItemActions>` mark themselves
+			// with `data-stop-item-click` so a click on the drag handle or
+			// the actions menu doesn't bubble up as a card click.
+			const target = event.target as HTMLElement | null;
+			if (target?.closest('[data-stop-item-click]')) return;
+			if (onClick) {
+				onClick();
+				return;
+			}
+			if (rootClick && found?.item !== undefined) {
+				rootClick(found.item);
+			}
+		},
+		[onClick, rootClick, found?.item],
+	);
+
+	const isClickable = Boolean(onClick || rootClick);
 
 	// When no <KanbanItemHandle> is used, the whole row is the activator.
 	// We attach listeners + attributes here as the default — KanbanItemHandle
@@ -288,7 +321,12 @@ export function KanbanItem({
 				style={style}
 				data-slot="kanban-item"
 				data-dragging={isDragging ? 'true' : undefined}
-				className={cn('touch-none select-none', className)}
+				className={cn(
+					'touch-none select-none',
+					isClickable && 'cursor-pointer',
+					className,
+				)}
+				onClick={isClickable ? handleClick : undefined}
 				{...attributes}
 				{...listeners}
 			>
@@ -321,6 +359,8 @@ export const KanbanItemHandle = forwardRef<HTMLButtonElement, KanbanItemHandlePr
 			type="button"
 			ref={setMergedRef}
 			data-slot="kanban-item-handle"
+			data-stop-item-click
+			onClick={(event) => event.stopPropagation()}
 			className={cn(
 				'inline-flex cursor-grab items-center justify-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 active:cursor-grabbing',
 				className,
@@ -334,6 +374,107 @@ export const KanbanItemHandle = forwardRef<HTMLButtonElement, KanbanItemHandlePr
 });
 
 KanbanItemHandle.displayName = 'KanbanItemHandle';
+
+/**
+ * Per-item actions menu (`⋮` trigger → popover with the actions
+ * registered at the `<Kanban itemActions>` root). Place inside any
+ * `<KanbanItem>` — typically in the card's top-right corner.
+ *
+ * The trigger marks itself with `data-stop-item-click` so opening the
+ * menu doesn't fire the parent `onItemClick` callback.
+ */
+export function KanbanItemActions({
+	className,
+	icon,
+	ariaLabel,
+}: KanbanItemActionsProps) {
+	const [open, setOpen] = useState(false);
+	const ctx = useKanbanContext();
+	const itemCtx = useKanbanItemContext();
+	const strings = useStrings(defaultKanbanStrings, undefined);
+
+	const item = itemCtx.item;
+	const rawActions = ctx.itemActions;
+	const actions = useMemo(() => {
+		if (!rawActions || item === null || item === undefined) return [] as ReadonlyArray<KanbanItemAction<unknown>>;
+		const list = typeof rawActions === 'function' ? rawActions(item) : rawActions;
+		return list.filter((action) =>
+			action.isVisible ? action.isVisible(item) : true,
+		);
+	}, [rawActions, item]);
+
+	if (actions.length === 0) return null;
+
+	return (
+		<PopoverMenu
+			open={open}
+			onOpenChange={setOpen}
+			search={false}
+			contentClassName="w-44"
+			trigger={
+				<button
+					type="button"
+					data-slot="kanban-item-actions-trigger"
+					data-stop-item-click
+					aria-label={ariaLabel ?? strings.itemActionsAria}
+					onClick={(event) => event.stopPropagation()}
+					onPointerDown={(event) => event.stopPropagation()}
+					className={cn(
+						'inline-flex size-7 items-center justify-center rounded-md',
+						'text-muted-foreground/70 hover:bg-muted hover:text-foreground',
+						'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+						'transition-colors',
+						className,
+					)}
+				>
+					{icon ?? <MoreHorizontal className="size-4" aria-hidden="true" />}
+				</button>
+			}
+			items={actions.map((action) => ({
+				value: action.id,
+				label: action.label,
+				icon: action.icon,
+				disabled: action.isDisabled?.(item) ?? false,
+				data: action,
+			}))}
+			renderItem={(menuItem) => {
+				const action = menuItem.data as KanbanItemAction<unknown>;
+				const isDestructive = action.variant === 'destructive';
+				return (
+					<>
+						{!!action.icon && (
+							<span
+								className={cn(
+									'shrink-0',
+									isDestructive ? 'text-destructive' : 'text-muted-foreground',
+								)}
+							>
+								{action.icon}
+							</span>
+						)}
+						<Text
+							tag="span"
+							size="xs"
+							className={cn(
+								'truncate',
+								isDestructive && 'text-destructive',
+							)}
+						>
+							{action.label}
+						</Text>
+					</>
+				);
+			}}
+			onSelect={(menuItem) => {
+				const action = menuItem.data as KanbanItemAction<unknown> | undefined;
+				action?.onSelect(item);
+				setOpen(false);
+			}}
+		/>
+	);
+}
+
+KanbanItemActions.displayName = 'KanbanItemActions';
 
 export function KanbanOverlay({ className, render }: KanbanOverlayProps) {
 	const { activeItem, activeId, findItem } = useKanbanContext();

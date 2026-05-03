@@ -1,5 +1,5 @@
-import { ArrowUp } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowUp, Copy, Edit3, Eye, Trash2 } from 'lucide-react';
+import { useCallback, useState } from 'react';
 
 import { Badge } from '@/components/base/badge';
 import { SmartCard } from '@/components/base/cards';
@@ -9,7 +9,9 @@ import {
 	KanbanColumn,
 	KanbanColumnContent,
 	KanbanItem,
+	KanbanItemActions,
 	KanbanOverlay,
+	type KanbanItemAction,
 	type KanbanValue,
 } from '@/components/features/kanban';
 import { Heading, Text } from '@/components/typography';
@@ -52,10 +54,13 @@ const INITIAL: KanbanValue<Feature> = {
 
 function FeatureCard({ feature }: { feature: Feature }) {
 	return (
-		<SmartCard padding="sm" className="cursor-grab gap-2">
-			<Text weight="semibold" tag="div" className="text-sm">
-				{feature.title}
-			</Text>
+		<SmartCard padding="sm" className="gap-2">
+			<div className="flex items-start gap-2">
+				<Text weight="semibold" tag="div" className="text-sm flex-1 min-w-0">
+					{feature.title}
+				</Text>
+				<KanbanItemActions />
+			</div>
 			<Text size="xs" type="secondary" className="line-clamp-2">
 				{feature.description}
 			</Text>
@@ -82,18 +87,68 @@ function FeatureCard({ feature }: { feature: Feature }) {
 
 export default function KanbanPage() {
 	const [columns, setColumns] = useState(INITIAL);
+	const [lastEvent, setLastEvent] = useState<string>('—');
+
+	const removeFeature = useCallback((target: Feature) => {
+		setColumns((current) => {
+			const next: KanbanValue<Feature> = {};
+			for (const [col, items] of Object.entries(current)) {
+				next[col] = items.filter((f) => f.id !== target.id);
+			}
+			return next;
+		});
+		setLastEvent(`Deleted "${target.title}"`);
+	}, []);
+
+	const itemActions = useCallback(
+		(_feature: Feature): KanbanItemAction<Feature>[] => [
+			{
+				id: 'view',
+				label: 'View details',
+				icon: <Eye className="size-3.5" />,
+				onSelect: (f) => setLastEvent(`Viewed "${f.title}"`),
+			},
+			{
+				id: 'edit',
+				label: 'Edit',
+				icon: <Edit3 className="size-3.5" />,
+				onSelect: (f) => setLastEvent(`Edited "${f.title}"`),
+			},
+			{
+				id: 'duplicate',
+				label: 'Duplicate',
+				icon: <Copy className="size-3.5" />,
+				isDisabled: (f) => f.progress === 100,
+				onSelect: (f) => setLastEvent(`Duplicated "${f.title}"`),
+			},
+			{
+				id: 'delete',
+				label: 'Delete',
+				icon: <Trash2 className="size-3.5" />,
+				variant: 'destructive',
+				isVisible: (f) => f.progress < 100,
+				onSelect: removeFeature,
+			},
+		],
+		[removeFeature],
+	);
 
 	return (
 		<PreviewPage
 			title="Features · Kanban"
-			description="Drag-and-drop board with multi-column item sorting and cross-column moves. Generic in T — pass your domain shape + a `getItemValue` accessor. Headless via `useKanban`; slots: KanbanBoard / KanbanColumn / KanbanColumnContent / KanbanItem / KanbanItemHandle / KanbanOverlay."
+			description="Drag-and-drop board, generic in T. Pass `itemActions` (static array or per-item factory) for the ⋮ menu, `onItemClick` for whole-card click. Headless via `useKanban`; slots: KanbanBoard / KanbanColumn / KanbanColumnContent / KanbanItem / KanbanItemHandle / KanbanItemActions / KanbanOverlay."
 		>
-			<PreviewSection title="Roadmap board" span="full">
+			<PreviewSection title="Roadmap board · with actions + onItemClick" span="full">
 				<Col>
+					<div className="rounded-md border border-dashed border-border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
+						Last event: <span className="font-medium text-foreground">{lastEvent}</span>
+					</div>
 					<Kanban<Feature>
 						value={columns}
 						onValueChange={setColumns}
 						getItemValue={(f) => f.id}
+						onItemClick={(f) => setLastEvent(`Clicked "${f.title}"`)}
+						itemActions={itemActions}
 					>
 						<KanbanBoard className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
 							{Object.entries(columns).map(([colId, features]) => {

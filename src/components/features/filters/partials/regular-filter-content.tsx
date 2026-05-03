@@ -104,7 +104,7 @@ export function RegularFilterContent({
                         <ArrowLeft className="size-3.5" />
                     </Button>
                 )}
-                <Text tag="span" weight="semibold" className="truncate">
+                <Text tag="span" size="xs" weight="semibold" className="truncate">
                     {filter.label}
                 </Text>
             </div>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/base/buttons';
 import { PopoverMenu } from '@/components/base/popover-menu';
 import { Text } from '@/components/typography';
+import { cn } from '@/lib/utils';
 
 import { useFilters } from '../filter-context';
 import type { FilterOperator, OperatorOption } from '../filters.types';
@@ -11,6 +12,10 @@ interface FilterOperatorSelectProps {
     operator: FilterOperator;
     operators: OperatorOption[];
     onOperatorChange: (operator: FilterOperator) => void;
+    /** Segment-reset classes forwarded by the parent pill so the trigger
+     *  drops its base border + focus ring (it lives inside a segmented
+     *  pill, not as a standalone button). */
+    segmentResetClass?: string;
 }
 
 /**
@@ -25,6 +30,7 @@ export function FilterOperatorSelect({
     operator,
     operators,
     onOperatorChange,
+    segmentResetClass,
 }: FilterOperatorSelectProps) {
     const [open, setOpen] = useState(false);
     const { strings } = useFilters();
@@ -45,7 +51,10 @@ export function FilterOperatorSelect({
                 <Button
                     variant="secondary"
                     buttonStyle="ghost"
-                    className="text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground h-full rounded-none px-3 text-xs"
+                    className={cn(
+                        segmentResetClass,
+                        'text-muted-foreground hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground h-full px-3 text-xs',
+                    )}
                     onClick={handleTriggerClick}
                     type="button"
                 >
@@ -53,7 +62,7 @@ export function FilterOperatorSelect({
                 </Button>
             }
             header={
-                <Text tag="span" weight="semibold">
+                <Text tag="span" size="xs" weight="semibold">
                     {strings.operator}
                 </Text>
             }

@@ -57,6 +57,7 @@ export interface FilterStrings {
     searchPlaceholder: string; // "Search {filterLabel}..."
     noOptionsFound: string;
     selected: string; // "{count} {filterLabel} selected"
+    nothingSelected: string; // pill value text when nothing has been picked yet
 
     // Tags
     enterTag: string;
@@ -146,6 +147,7 @@ export const defaultFilterStrings: FilterStrings = {
     searchPlaceholder: 'Search {filterLabel}...',
     noOptionsFound: 'No options found',
     selected: '{count} {filterLabel} selected',
+    nothingSelected: 'Nothing selected',
 
     // Tags
     enterTag: 'Enter tag',

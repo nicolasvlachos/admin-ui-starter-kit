@@ -19,7 +19,6 @@ import {
 	WeightInput,
 	DimensionsInput,
 	RichSelect,
-	KeyValue,
 	KeyValueEditor,
 	SwitchCard,
 	ToggleField,
@@ -32,6 +31,7 @@ import {
 	LocalizedStringField,
 	RoundingModeSelect,
 } from '@/components/base/forms/fields';
+import { MetadataList } from '@/components/base/display/metadata';
 import { PreviewPage, PreviewSection, Col } from '../../PreviewLayout';
 
 function FormDemoProvider({
@@ -216,13 +216,13 @@ export default function FormsPage() {
 				</Col>
 			</PreviewSection>
 
-			<PreviewSection title="Tags / KeyValue display" span="full">
+			<PreviewSection title="Tags / Metadata display" span="full">
 				<Col>
 					<FormField label="Tags" hint="Comma or Enter to add">
 						<TagsInput value={tags} onChange={setTags} placeholder="Add tag…" />
 					</FormField>
-					<FormField label="Key/value display">
-						<KeyValue
+					<FormField label="Metadata (MetadataList)">
+						<MetadataList
 							columns={2}
 							items={[
 								{ label: 'Order ID', value: 'ORD-2026-0412' },

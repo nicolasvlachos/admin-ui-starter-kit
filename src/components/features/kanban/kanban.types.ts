@@ -11,6 +11,42 @@ import type { KanbanStrings } from './kanban.strings';
  */
 export type KanbanValue<T = unknown> = Record<string, T[]>;
 
+/**
+ * A single action available on a Kanban item — surfaces inside the
+ * `<KanbanItemActions>` (`⋮`) popover. Mirrors the `ActionItem` shape
+ * used by `DataTable.rowActions` so consumers can re-use the same
+ * action definitions across both surfaces.
+ */
+export interface KanbanItemAction<T = unknown> {
+	/** Stable id used as React key + data-action attribute. */
+	id: string;
+	/** Visible label inside the popover. */
+	label: string;
+	/** Optional leading icon node. */
+	icon?: ReactNode;
+	/** Visual variant. `destructive` tints the row red. */
+	variant?: 'default' | 'destructive';
+	/** Click handler — receives the item that owns this action. */
+	onSelect: (item: T) => void;
+	/** Hide this action for some items (defaults to always visible). */
+	isVisible?: (item: T) => boolean;
+	/** Disable this action for some items. */
+	isDisabled?: (item: T) => boolean;
+}
+
+/**
+ * Static array OR factory that produces actions per item — same
+ * pattern as `DataTable.rowActions`. Use the factory form when the
+ * available actions depend on item state (e.g. a "Reopen" action only
+ * for items in the `done` column).
+ *
+ * (The exported name is `KanbanItemActionsConfig` so it doesn't clash
+ * with the runtime component `<KanbanItemActions>`.)
+ */
+export type KanbanItemActionsConfig<T = unknown> =
+	| ReadonlyArray<KanbanItemAction<T>>
+	| ((item: T) => ReadonlyArray<KanbanItemAction<T>>);
+
 export interface KanbanContextShape<T = unknown> {
 	value: KanbanValue<T>;
 	onValueChange: (next: KanbanValue<T>) => void;
@@ -21,6 +57,11 @@ export interface KanbanContextShape<T = unknown> {
 	activeItem: T | null;
 	/** Resolve a (columnId, itemId) lookup → the item, or undefined. */
 	findItem: (id: string) => { columnId: string; index: number; item: T } | undefined;
+	/** Item-level actions registered at the `<Kanban>` root, if any. */
+	itemActions?: KanbanItemActionsConfig<T>;
+	/** Item-level click handler. Fires on whole-card click; the drag
+	 *  handle and action menu stop propagation so they don't trigger it. */
+	onItemClick?: (item: T) => void;
 }
 
 export interface KanbanProps<T = unknown> {
@@ -32,6 +73,18 @@ export interface KanbanProps<T = unknown> {
 	 * the change to your backend / optimistic update layer.
 	 */
 	onItemMove?: (event: KanbanItemMoveEvent<T>) => void;
+	/**
+	 * Item-level actions surfaced through `<KanbanItemActions>`. Pass a
+	 * static array for actions that always appear, or a factory for
+	 * per-item conditional actions (e.g. "Reopen" only on shipped items).
+	 */
+	itemActions?: KanbanItemActionsConfig<T>;
+	/**
+	 * Fires when the consumer clicks anywhere on a `<KanbanItem>` other
+	 * than the drag handle or actions menu. Use to open a detail
+	 * drawer, navigate, etc.
+	 */
+	onItemClick?: (item: T) => void;
 	/** Strings for screen-reader announcements. */
 	strings?: StringsProp<KanbanStrings>;
 	className?: string;
@@ -74,12 +127,26 @@ export interface KanbanItemProps {
 	 * mid-mutation.
 	 */
 	disabled?: boolean;
+	/**
+	 * Per-item override for the root-level `onItemClick`. Falls back to
+	 * the `onItemClick` registered on `<Kanban>` if omitted.
+	 */
+	onClick?: () => void;
 	children?: ReactNode;
 }
 
 export interface KanbanItemHandleProps {
 	className?: string;
 	children?: ReactNode;
+}
+
+export interface KanbanItemActionsProps {
+	/** Optional class on the trigger button. */
+	className?: string;
+	/** Override the trigger icon (defaults to a `⋮` MoreHorizontal). */
+	icon?: ReactNode;
+	/** aria-label on the trigger button. Defaults to `strings.itemActionsAria`. */
+	ariaLabel?: string;
 }
 
 export interface KanbanOverlayProps {

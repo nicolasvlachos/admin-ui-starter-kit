@@ -28,6 +28,16 @@ interface FilterValueDisplayProps {
 export function FilterValueDisplay({ filter, value }: FilterValueDisplayProps) {
     const { strings } = useFilters();
 
+    // Empty state — render the localized "Nothing selected" instead of an
+    // empty cell so the pill never collapses to no-value text.
+    if (value.length === 0 && filter.type !== FilterType.DATE) {
+        return (
+            <Text tag="span" size="xs" type="secondary">
+                {strings.nothingSelected}
+            </Text>
+        );
+    }
+
     // For ASYNC_SELECT — always show "N selected"
     if (filter.type === FilterType.ASYNC_SELECT && !filter.options?.length) {
         return (

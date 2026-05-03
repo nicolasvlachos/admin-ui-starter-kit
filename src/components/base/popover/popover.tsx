@@ -42,8 +42,10 @@ function PopoverContent({
             className={cn(
                 // Tighter than the primitive's `p-4` default, density-tokenized.
                 'p-(--popover-content-pad)',
-                // Crisper border treatment for the library; primitive only ships a faint ring.
-                'border border-border/60 shadow-md',
+                // Single chrome layer: 1px hairline border + soft shadow. The
+                // primitive ships its own `ring-1 ring-foreground/10`; we
+                // suppress it so the popover doesn't read as a 2px outline.
+                'border border-border/60 shadow-md ring-0',
                 className,
             )}
             style={style}

@@ -6,6 +6,7 @@ export {
 	type SmartCardProps,
 	type SmartCardSkeletonProps,
 	type SmartCardStrings,
+	type SmartCardSurface,
 	// Primitive parts for advanced composition
 	CardShell,
 	CardHeader,

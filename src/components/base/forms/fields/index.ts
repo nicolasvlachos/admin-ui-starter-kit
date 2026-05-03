@@ -120,8 +120,7 @@ export {
 	type UploadTrayStrings,
 } from './upload-tray';
 
-// Key-Value
-export { KeyValue, type KeyValueProps, type KeyValueItem } from './key-value';
+// Key-Value editor (display side lives in `base/display/metadata` as `<MetadataList>`)
 export { KeyValueEditor, type KeyValueEditorProps, type KeyValuePair } from './key-value-editor';
 
 // Repeaters & Lists

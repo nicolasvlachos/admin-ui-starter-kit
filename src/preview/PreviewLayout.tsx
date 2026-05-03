@@ -1,17 +1,22 @@
 import { type ReactNode } from 'react';
 import Heading from '@/components/typography/heading';
 import { Text } from '@/components/typography/text';
+import { SmartCard, type SmartCardSurface } from '@/components/base/cards';
 
 export function PreviewSection({
 	title,
 	description,
 	children,
 	span = 'auto',
+	surface = 'card',
 }: {
 	title: string;
 	description?: string;
 	children: ReactNode;
 	span?: 'auto' | 'full';
+	/** Pass through to the inner `<SmartCard>` so each preview can opt into
+	 *  the `framed` chrome / a flat surface. Defaults to the canonical card. */
+	surface?: SmartCardSurface;
 }) {
 	return (
 		<section className={span === 'full' ? 'col-span-full space-y-3' : 'space-y-3'}>
@@ -21,9 +26,9 @@ export function PreviewSection({
 					<Text size="xs" type="secondary" className="mt-0.5">{description}</Text>
 				)}
 			</div>
-			<div className="rounded-lg border border-border bg-card p-5 shadow-xs">
+			<SmartCard surface={surface} padding="base">
 				{children}
-			</div>
+			</SmartCard>
 		</section>
 	);
 }

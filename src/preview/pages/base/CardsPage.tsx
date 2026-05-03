@@ -1,7 +1,7 @@
-import { Sparkles, Plus, Pencil, Trash2, Check, MoreVertical } from 'lucide-react';
+import { ArrowUpRight, BellRing, CreditCard, MoreVertical, Pencil, Plus, Sparkles, Trash2, Check, TrendingUp, Users } from 'lucide-react';
 import { Button } from '@/components/base/buttons';
 import { SmartCard, SmartCardSkeleton } from '@/components/base/cards';
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import Text from '@/components/typography/text';
 import { Badge } from '@/components/base/badge';
 import { PreviewPage, PreviewSection, Col } from '../../PreviewLayout';
@@ -107,16 +107,13 @@ export default function CardsPage() {
 						</Button>
 					}
 				>
-					<div className="flex items-center -space-x-1.5 pt-2">
+					<div className="flex items-center -space-x-2 pt-2">
 						{['SC', 'MR', 'EW'].map((init) => (
-							<Avatar
-								key={init}
-								className="size-6 border border-background bg-muted text-[11px] font-medium text-muted-foreground inline-flex items-center justify-center"
-							>
-								{init}
+							<Avatar key={init} size="sm" className="ring-2 ring-background">
+								<AvatarFallback>{init}</AvatarFallback>
 							</Avatar>
 						))}
-						<span className="ml-1 inline-flex size-6 items-center justify-center rounded-full border border-background bg-muted text-[10px] text-muted-foreground">
+						<span className="ml-2 inline-flex size-6 items-center justify-center rounded-full border border-background bg-muted text-xs text-muted-foreground">
 							+3
 						</span>
 					</div>
@@ -182,6 +179,103 @@ export default function CardsPage() {
 
 			<PreviewSection title="Skeleton">
 				<SmartCardSkeleton />
+			</PreviewSection>
+
+			<PreviewSection
+				title="Surface variants"
+				description="`surface='card' | 'flat' | 'framed'`. The framed treatment uses a soft 5px outer border tinted from `--border` plus a 1px hairline inner border drawn via `before:`. All values flow through theme tokens."
+				span="full"
+			>
+				<Col>
+					<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+						<SmartCard surface="card" title="Card (default)" description="Bordered + soft shadow.">
+							<Text type="secondary">Canonical card chrome.</Text>
+						</SmartCard>
+						<SmartCard surface="flat" title="Flat" description="No border, no shadow.">
+							<Text type="secondary">Use when nesting inside another surface.</Text>
+						</SmartCard>
+						<SmartCard surface="framed" title="Framed" description="Matted polaroid look.">
+							<Text type="secondary">5px outer border + 1px hairline inner.</Text>
+						</SmartCard>
+					</div>
+				</Col>
+			</PreviewSection>
+
+			<PreviewSection
+				title="Metric / KPI card"
+				description="Hero number with delta + sparkline-style sublabel. Uses `headerEnd` for the badge and a Text-backed metric value."
+			>
+				<SmartCard
+					icon={<TrendingUp className="size-4" />}
+					title="Monthly revenue"
+					headerEnd={<Badge variant="success">+12.4%</Badge>}
+					footerText="Updated 5 minutes ago"
+				>
+					<div className="space-y-1">
+						<Text size="xl" weight="semibold" lineHeight="none" className="text-3xl tabular-nums">
+							$48,290
+						</Text>
+						<Text size="xs" type="secondary">vs. $42,950 last month</Text>
+					</div>
+				</SmartCard>
+			</PreviewSection>
+
+			<PreviewSection
+				title="Notification card"
+				description="Inline alert + actions for an actionable system message. The footerSlot hosts a primary + dismiss action pair."
+			>
+				<SmartCard
+					icon={<BellRing className="size-4" />}
+					title="Backup ready to restore"
+					alert="A snapshot from 12 minutes ago is available."
+					alertVariant="info"
+					footerSlot={
+						<div className="flex justify-end gap-2">
+							<Button variant="secondary" buttonStyle="ghost">Dismiss</Button>
+							<Button variant="primary">Restore</Button>
+						</div>
+					}
+				>
+					<Text type="secondary">
+						Restoring will replace the current state with the snapshot's
+						contents. This action can be undone within 24 hours.
+					</Text>
+				</SmartCard>
+			</PreviewSection>
+
+			<PreviewSection
+				title="Stat row · clickable"
+				description="Three stacked cards with a trailing arrow. Click takes the consumer's `onClick` — wire it to a router push at the call site."
+				span="full"
+			>
+				<Col>
+					<div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+						<SmartCard
+							icon={<Users className="size-4" />}
+							title="Active customers"
+							headerEnd={<ArrowUpRight className="size-4 text-muted-foreground" />}
+							className="cursor-pointer transition-colors hover:bg-muted/40"
+						>
+							<Text size="xl" weight="semibold" className="tabular-nums">2,194</Text>
+						</SmartCard>
+						<SmartCard
+							icon={<CreditCard className="size-4" />}
+							title="Pending invoices"
+							headerEnd={<ArrowUpRight className="size-4 text-muted-foreground" />}
+							className="cursor-pointer transition-colors hover:bg-muted/40"
+						>
+							<Text size="xl" weight="semibold" className="tabular-nums">$12,840</Text>
+						</SmartCard>
+						<SmartCard
+							icon={<Sparkles className="size-4" />}
+							title="New signups"
+							headerEnd={<ArrowUpRight className="size-4 text-muted-foreground" />}
+							className="cursor-pointer transition-colors hover:bg-muted/40"
+						>
+							<Text size="xl" weight="semibold" className="tabular-nums">87</Text>
+						</SmartCard>
+					</div>
+				</Col>
 			</PreviewSection>
 		</PreviewPage>
 	);
