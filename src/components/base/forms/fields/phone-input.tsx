@@ -3,7 +3,9 @@ import { useState, useCallback, useMemo, memo } from 'react';
 import * as baseui from '@/components/ui/select';
 import { Text } from '@/components/typography';
 import { useStrings, type StringsProp } from '@/lib/strings';
+import { useFormsConfig } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
+import { formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
 import { Input, type InputProps } from './input';
 
 export interface PhoneInputStrings {
@@ -186,11 +188,14 @@ function PhoneInputImpl(
         invalid,
         disabled,
         className,
+        size: sizeProp,
         strings: stringsProp,
         ...props
     }: PhoneInputProps,
     forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
+    const { defaultControlSize } = useFormsConfig();
+    const size = resolveFormControlSize(sizeProp, defaultControlSize);
     const strings = useStrings(defaultPhoneInputStrings, stringsProp);
     // Normalize prefix options from mixed input (ISO codes or full objects)
     const normalizedPrefixes = useMemo(() => normalizePrefixes(prefixes), [prefixes]);
@@ -285,6 +290,7 @@ function PhoneInputImpl(
             return (
                 <Input
                     ref={forwardedRef}
+                    size={size}
                     type="tel"
                     autoComplete="tel"
                     inputMode="tel"
@@ -303,7 +309,8 @@ function PhoneInputImpl(
                 <div
                     aria-invalid={invalid || undefined}
                     className={cn(
-                        'flex h-[--form-element-height] items-center justify-center rounded-lg border border-input bg-muted px-3',
+                        'flex items-center justify-center rounded-md border border-input bg-muted px-3',
+                        formControlSizeClasses[size],
                         disabled && 'opacity-50',
                         'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20'
                     )}
@@ -315,6 +322,7 @@ function PhoneInputImpl(
                 <div className="flex-1">
                     <Input
                         ref={forwardedRef}
+                        size={size}
                         type="tel"
                         autoComplete="tel"
                         inputMode="tel"
@@ -342,7 +350,8 @@ function PhoneInputImpl(
                 <baseui.SelectTrigger
                     aria-invalid={invalid || undefined}
                     className={cn(
-                        'h-[--form-element-height] border-input bg-transparent shrink-0',
+                        'border-input bg-transparent shrink-0',
+                        formControlSizeClasses[size],
                         'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
                         'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
                         prefixWidth,
@@ -383,6 +392,7 @@ function PhoneInputImpl(
             <div className="flex-1">
                 <Input
                     ref={forwardedRef}
+                    size={size}
                     type="tel"
                     autoComplete="tel"
                     inputMode="tel"

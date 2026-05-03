@@ -1,7 +1,9 @@
 import { useState, useCallback, useMemo, memo, forwardRef, type ForwardedRef } from 'react';
 import * as baseui from '@/components/ui/select';
 import { Label } from '@/components/typography';
+import { useFormsConfig } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
+import { formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
 import { DecimalInput, type DecimalInputProps } from './decimal-input';
 
 export interface CurrencyOption {
@@ -91,10 +93,13 @@ function CurrencyInputImpl(
         invalid,
         disabled,
         onConfigError,
+        size: sizeProp,
         ...decimalInputProps
     }: CurrencyInputProps,
     forwardedRef: ForwardedRef<HTMLInputElement>,
 ) {
+    const { defaultControlSize } = useFormsConfig();
+    const size = resolveFormControlSize(sizeProp, defaultControlSize);
     // Dev warnings (only in development)
     if (import.meta.env?.DEV) {
         const selected = controlledCurrency ?? defaultCurrency;
@@ -142,17 +147,20 @@ function CurrencyInputImpl(
         [isCurrencyControlled, onCurrencyChange]
     );
 
-    // Memoize trigger class names
+    // Memoize trigger class names. Size flows through `formControlSizeClasses[size]`
+    // so the trigger height matches the inner DecimalInput when a consumer sets
+    // `<UIProvider forms={{ defaultControlSize }}>`.
     const triggerClassName = useMemo(
         () =>
             cn(
-                'h-9 border-input bg-transparent',
+                'border-input bg-transparent',
+                formControlSizeClasses[size],
                 'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
                 'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
                 currencyWidth,
                 disabled && 'opacity-50 cursor-not-allowed'
             ),
-        [currencyWidth, disabled]
+        [size, currencyWidth, disabled]
     );
 
     // Currency selector component
@@ -187,6 +195,7 @@ function CurrencyInputImpl(
             <div className="flex-1">
                 <DecimalInput
                     ref={forwardedRef}
+                    size={size}
                     decimalPlaces={2}
                     allowNegative={false}
                     disabled={disabled}

@@ -22,7 +22,9 @@ import * as React from 'react';
 import { useCallback } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { useStrings, type StringsProp } from '@/lib/strings';
+import { useFormsConfig, type FormControlSize } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
+import { resolveFormControlSize } from '../form-sizing';
 import { Input, type InputProps } from './input';
 
 export type DecimalRoundingMode = 'round' | 'floor' | 'ceil' | 'half-even';
@@ -159,6 +161,12 @@ function fireChange(
 	onChange(event);
 }
 
+const STEPPER_SIZE_CLASS: Record<FormControlSize, string> = {
+	sm: 'h-8 w-8',
+	base: 'h-9 w-9',
+	lg: 'h-10 w-10',
+};
+
 function DecimalInputImpl(
 	{
 		decimalPlaces = 2,
@@ -176,11 +184,14 @@ function DecimalInputImpl(
 		value: controlledValue,
 		defaultValue,
 		disabled,
+		size: sizeProp,
 		strings: stringsProp,
 		...props
 	}: DecimalInputProps,
 	forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
+	const { defaultControlSize } = useFormsConfig();
+	const size: FormControlSize = resolveFormControlSize(sizeProp, defaultControlSize);
 	const strings = useStrings(defaultDecimalInputStrings, stringsProp);
 	const validDecimalPlaces = Math.min(12, Math.max(0, decimalPlaces));
 	const inputRef = React.useRef<HTMLInputElement | null>(null);
@@ -268,7 +279,8 @@ function DecimalInputImpl(
 					disabled={disabled}
 					onClick={() => adjust(-1)}
 					className={cn(
-						'inline-flex h-9 w-9 shrink-0 items-center justify-center border-r border-input text-muted-foreground transition-colors',
+						'inline-flex shrink-0 items-center justify-center border-r border-input text-muted-foreground transition-colors',
+						STEPPER_SIZE_CLASS[size],
 						'hover:bg-muted hover:text-foreground',
 						'disabled:cursor-not-allowed disabled:opacity-50',
 					)}
@@ -276,6 +288,7 @@ function DecimalInputImpl(
 					<Minus className="size-3.5" />
 				</button>
 				<Input
+					size={size}
 					ref={(node) => { inputRef.current = node; if (typeof forwardedRef === "function") forwardedRef(node); else if (forwardedRef) forwardedRef.current = node; }}
 					type="text"
 					inputMode={validDecimalPlaces > 0 ? 'decimal' : 'numeric'}
@@ -298,7 +311,8 @@ function DecimalInputImpl(
 					disabled={disabled}
 					onClick={() => adjust(1)}
 					className={cn(
-						'inline-flex h-9 w-9 shrink-0 items-center justify-center border-l border-input text-muted-foreground transition-colors',
+						'inline-flex shrink-0 items-center justify-center border-l border-input text-muted-foreground transition-colors',
+						STEPPER_SIZE_CLASS[size],
 						'hover:bg-muted hover:text-foreground',
 						'disabled:cursor-not-allowed disabled:opacity-50',
 					)}
@@ -311,6 +325,7 @@ function DecimalInputImpl(
 
 	return (
 		<Input
+			size={size}
 			ref={(node) => { inputRef.current = node; if (typeof forwardedRef === "function") forwardedRef(node); else if (forwardedRef) forwardedRef.current = node; }}
 			type="text"
 			inputMode={validDecimalPlaces > 0 ? 'decimal' : 'numeric'}

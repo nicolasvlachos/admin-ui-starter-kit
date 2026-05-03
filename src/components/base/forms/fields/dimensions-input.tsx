@@ -2,7 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import * as baseui from '@/components/ui/select';
 import { Label, Text } from '@/components/typography';
 import { useStrings, type StringsProp } from '@/lib/strings';
+import { useFormsConfig, type FormControlSize } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
+import { formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
 import { DecimalInput } from './decimal-input';
 
 export interface DimensionObject {
@@ -72,6 +74,9 @@ export interface DimensionsInputProps {
 
     /** Placeholder for depth */
     depthPlaceholder?: string;
+
+    /** Form control size — flows through `useFormsConfig().defaultControlSize`. */
+    size?: FormControlSize;
 
     /** Callback when value changes */
     onChange?: (e: { target: { value: DimensionValue } }) => void;
@@ -181,8 +186,11 @@ export function DimensionsInput({
     invalid,
     disabled = false,
     className,
+    size: sizeProp,
     strings: stringsProp,
 }: DimensionsInputProps) {
+    const { defaultControlSize } = useFormsConfig();
+    const size = resolveFormControlSize(sizeProp, defaultControlSize);
     const strings = useStrings(defaultDimensionsInputStrings, stringsProp);
     const resolvedWidthLabel = widthLabel ?? strings.width;
     const resolvedHeightLabel = heightLabel ?? strings.height;
@@ -278,7 +286,8 @@ export function DimensionsInput({
                 <baseui.SelectTrigger
                     aria-invalid={invalid || undefined}
                     className={cn(
-                        'h-9 border-input bg-transparent',
+                        'border-input bg-transparent',
+                        formControlSizeClasses[size],
                         'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
                         'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
                         'w-32',
@@ -313,6 +322,7 @@ export function DimensionsInput({
                 <div className="flex-1 space-y-1">
                     {!!shouldShowVerticalLabels && !!widthFieldLabel && <Label>{widthFieldLabel}</Label>}
                     <DecimalInput
+                        size={size}
                         value={widthValue}
                         onChange={(e) => handleDimensionChange('width', e.target.value)}
                         placeholder={resolvedWidthPlaceholder}
@@ -341,6 +351,7 @@ export function DimensionsInput({
                 <div className="flex-1 space-y-1">
                     {!!shouldShowVerticalLabels && !!heightFieldLabel && <Label>{heightFieldLabel}</Label>}
                     <DecimalInput
+                        size={size}
                         value={heightValue}
                         onChange={(e) => handleDimensionChange('height', e.target.value)}
                         placeholder={resolvedHeightPlaceholder}
@@ -369,6 +380,7 @@ export function DimensionsInput({
                 <div className="flex-1 space-y-1">
                     {!!shouldShowVerticalLabels && !!depthFieldLabel && <Label>{depthFieldLabel}</Label>}
                     <DecimalInput
+                        size={size}
                         value={depthValue}
                         onChange={(e) => handleDimensionChange('depth', e.target.value)}
                         placeholder={resolvedDepthPlaceholder}

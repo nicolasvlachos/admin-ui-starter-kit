@@ -2,7 +2,9 @@ import * as React from 'react';
 import { useState, useMemo, useCallback } from 'react';
 import * as baseui from '@/components/ui/select';
 import { Label } from '@/components/typography';
+import { useFormsConfig, type FormControlSize } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
+import { formControlSizeClasses, resolveFormControlSize } from '../form-sizing';
 import { DecimalInput } from './decimal-input';
 
 export type WeightUnit = 'g' | 'kg' | 'lb' | 'oz';
@@ -56,6 +58,9 @@ export interface WeightInputProps {
     /** Disabled state */
     disabled?: boolean;
 
+    /** Form control size — flows through `useFormsConfig().defaultControlSize`. */
+    size?: FormControlSize;
+
     /** Additional class names */
     className?: string;
 }
@@ -84,8 +89,11 @@ export function WeightInput({
     unitWidth = 'w-24',
     invalid,
     disabled = false,
+    size: sizeProp,
     className,
 }: WeightInputProps) {
+    const { defaultControlSize } = useFormsConfig();
+    const size = resolveFormControlSize(sizeProp, defaultControlSize);
     const isValueControlled = controlledValue !== undefined;
     const isUnitControlled = controlledUnit !== undefined;
 
@@ -124,6 +132,7 @@ export function WeightInput({
         <div className={cn('flex items-start gap-2', className)}>
             <div className="flex-1">
                 <DecimalInput
+                    size={size}
                     value={value}
                     onChange={handleValueChange}
                     decimalPlaces={decimalPlaces}
@@ -141,7 +150,8 @@ export function WeightInput({
                         <baseui.SelectTrigger
                             aria-invalid={invalid || undefined}
                             className={cn(
-                                'h-9 border-input bg-transparent',
+                                'border-input bg-transparent',
+                                formControlSizeClasses[size],
                                 'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
                                 'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
                                 (disabled || disableUnitSelector) && 'opacity-50 cursor-not-allowed',
