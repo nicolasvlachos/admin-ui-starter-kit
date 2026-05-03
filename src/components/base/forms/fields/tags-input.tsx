@@ -380,12 +380,20 @@ export function TagsInput<T = string>({
                     className="w-full"
                 />
 
-                {/* Dropdown for recommendations */}
+                {/* Recommendations dropdown — mirrors PopoverContent + CommandItem
+                    surface tokens (bg-popover, text-popover-foreground, ring-1
+                    ring-foreground/10, shadow-md, rounded-md) so it reads
+                    identically to a real popover. The hand-rolled wrapper
+                    stays because the dropdown is tightly bound to the
+                    Input's keyboard handler (selectedIndex, arrow nav). */}
                 {!!recommendations && !!open && (
-                    <div className="absolute top-full left-0 right-0 z-50 mt-1 max-h-[200px] overflow-y-auto rounded-md border bg-popover p-1 shadow-md">
+                    <div className="absolute top-full left-0 right-0 z-50 mt-1 max-h-[200px] overflow-y-auto rounded-md bg-popover text-popover-foreground p-1 text-sm shadow-md ring-1 ring-foreground/10">
                         {filteredRecommendations.length > 0 ? (
                             filteredRecommendations.map((rec, idx) => {
                                 const recommendationKey = getDisplayValue(rec.value);
+                                const isPicked = value.some(
+                                    (v) => getDisplayValue(v) === getDisplayValue(rec.value),
+                                );
                                 return (
                                     <button
                                         key={recommendationKey}
@@ -398,24 +406,26 @@ export function TagsInput<T = string>({
                                         }}
                                         onMouseEnter={() => setSelectedIndex(idx)}
                                         className={cn(
-                                            'relative flex w-full cursor-pointer items-center justify-between rounded px-2 py-1.5 text-sm hover:bg-accent',
-                                            selectedIndex === idx && 'bg-accent'
+                                            'relative flex w-full cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-(--row-py) text-[length:var(--text-xs)]',
+                                            'hover:bg-accent hover:text-accent-foreground',
+                                            'focus-visible:outline-none',
+                                            selectedIndex === idx && 'bg-accent text-accent-foreground',
                                         )}
                                     >
                                         <span>{rec.label}</span>
                                         <Check
                                             className={cn(
-                                                'ml-auto h-4 w-4',
-                                                value.some((v) => getDisplayValue(v) === getDisplayValue(rec.value))
-                                                    ? 'opacity-100'
-                                                    : 'opacity-0'
+                                                'ml-auto size-4',
+                                                isPicked ? 'opacity-100' : 'opacity-0',
                                             )}
                                         />
                                     </button>
                                 );
                             })
                         ) : (
-                            <Text tag="div" type="secondary" className="px-2 py-1.5">{strings.emptyRecommendations}</Text>
+                            <Text tag="div" size="xs" type="secondary" className="px-2 py-(--row-py)">
+                                {strings.emptyRecommendations}
+                            </Text>
                         )}
                     </div>
                   )}
