@@ -76,7 +76,7 @@ function resolvePickerButtonProps(variant: unknown): { variant: ButtonVariant; b
  * sizing helper.
  */
 const PICKER_TRIGGER_CHROME =
-	'!rounded-md !border-input !bg-transparent !shadow-none !h-8 !px-3 !font-normal !text-foreground hover:!bg-transparent';
+	'!rounded-md !border-input !bg-transparent !shadow-none !h-9 !px-3 !font-normal !text-foreground hover:!bg-transparent';
 
 // Type guards
 function isSingleMode(props: DatePickerProps): props is DatepickerProps {

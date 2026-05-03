@@ -6,9 +6,9 @@ import type { FormControlSize, FormLabelSize } from '@/lib/ui-provider';
 // attribute-selector specificity beats our class-selector and every
 // non-Input field renders 4px taller than Input.
 export const formControlSizeClasses: Record<FormControlSize, string> = {
-	sm: '!h-8 text-sm',
-	base: '!h-9 text-base md:text-sm',
-	lg: '!h-10 text-base',
+	sm: '!h-9 text-sm',
+	base: '!h-10 text-base md:text-sm',
+	lg: '!h-11 text-base',
 };
 
 /**
@@ -17,9 +17,9 @@ export const formControlSizeClasses: Record<FormControlSize, string> = {
  * size's vertical rhythm without locking to a fixed `h-{n}`.
  */
 export const formControlMinHeightClasses: Record<FormControlSize, string> = {
-	sm: 'min-h-8',
-	base: 'min-h-9',
-	lg: 'min-h-10',
+	sm: 'min-h-9',
+	base: 'min-h-10',
+	lg: 'min-h-11',
 };
 
 /**

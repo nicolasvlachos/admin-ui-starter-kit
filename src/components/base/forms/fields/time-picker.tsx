@@ -340,7 +340,7 @@ export function TimePicker({
                         className={cn(
                             // Field-style override (matches Input chrome,
                             // not the global pill-shaped button default).
-                            '!rounded-md !border-input !bg-transparent !shadow-none !h-8 !px-3 !font-normal !text-foreground hover:!bg-transparent',
+                            '!rounded-md !border-input !bg-transparent !shadow-none !h-9 !px-3 !font-normal !text-foreground hover:!bg-transparent',
                             'w-full justify-between text-left',
                             !value && '!text-muted-foreground',
                             'aria-invalid:!border-destructive aria-invalid:!ring-2 aria-invalid:!ring-destructive/20',
