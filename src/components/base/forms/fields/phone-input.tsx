@@ -301,10 +301,11 @@ function PhoneInputImpl(
         return (
             <div className="flex items-start gap-2">
                 <div
+                    aria-invalid={invalid || undefined}
                     className={cn(
                         'flex h-[--form-element-height] items-center justify-center rounded-lg border border-input bg-muted px-3',
                         disabled && 'opacity-50',
-                        invalid && 'border-destructive ring-2 ring-destructive/20'
+                        'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20'
                     )}
                 >
                     <Text tag="span" type="secondary" weight="medium">

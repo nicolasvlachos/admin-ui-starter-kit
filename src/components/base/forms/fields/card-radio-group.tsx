@@ -78,6 +78,7 @@ function CardRadioGroupImpl({
 						key={option.value}
 						value={option.value}
 						disabled={disabled || option.disabled}
+						aria-invalid={invalid || undefined}
 						className={cn(
 							'relative group flex flex-col text-start outline-none cursor-pointer',
 							'rounded-lg border bg-card transition-[color,box-shadow,background,border-color] duration-150',
@@ -86,7 +87,7 @@ function CardRadioGroupImpl({
 							'data-[checked]:border-primary data-[checked]:bg-primary/5',
 							tokens.padding,
 							tokens.gap,
-							invalid && 'border-destructive ring-2 ring-destructive/20',
+							'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
 							'disabled:cursor-not-allowed disabled:opacity-50',
 						)}
 					>

@@ -52,7 +52,7 @@ export function ListRadioGroup({
 			aria-invalid={invalid || undefined}
 			className={cn(
 				'overflow-hidden rounded-md border [&>[role=radio]~[role=radio]]:border-t',
-				invalid && 'border-destructive ring-2 ring-destructive/20',
+				'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
 				disabled && 'pointer-events-none opacity-50',
 				className,
 			)}

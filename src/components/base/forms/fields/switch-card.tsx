@@ -71,6 +71,7 @@ export function SwitchCard({
 		<div
 			role="button"
 			tabIndex={disabled ? -1 : 0}
+			aria-invalid={invalid || undefined}
 			onClick={handleCardClick}
 			onKeyDown={(e) => {
 				if (e.key === 'Enter' || e.key === ' ') {
@@ -82,7 +83,7 @@ export function SwitchCard({
 				'group relative flex items-start gap-3 rounded-lg border bg-card p-4 transition-[background,border-color,box-shadow] duration-150',
 				'border-border',
 				checked && 'border-primary bg-primary/[0.04]',
-				invalid && 'border-destructive ring-2 ring-destructive/20',
+				'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
 				!disabled && 'cursor-pointer hover:border-foreground/20 hover:bg-muted/30',
 				disabled && 'cursor-not-allowed opacity-50',
 				'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',

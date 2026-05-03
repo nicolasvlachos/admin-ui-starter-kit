@@ -61,10 +61,11 @@ export function PillRadioGroup({
 		<div
 			data-name={name}
 			role="radiogroup"
+			aria-invalid={invalid || undefined}
 			className={cn(
 				'border-input inline-flex items-center overflow-hidden rounded-lg border',
 				fullWidth && 'w-full',
-				invalid && 'border-destructive ring-destructive/20 ring-2',
+				'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
 				disabled && 'pointer-events-none opacity-50',
 				className,
 			)}

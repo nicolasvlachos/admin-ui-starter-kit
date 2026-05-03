@@ -104,6 +104,7 @@ export function CardCheckboxGroup({
 						<button
 							type="button"
 							aria-pressed={isSelected}
+							aria-invalid={invalid || undefined}
 							onClick={() => toggle(option.value)}
 							disabled={isDisabled}
 							data-selected={isSelected}
@@ -115,7 +116,7 @@ export function CardCheckboxGroup({
 								'data-[selected=true]:border-primary data-[selected=true]:bg-primary/5',
 								tokens.padding,
 								tokens.gap,
-								invalid && 'border-destructive ring-2 ring-destructive/20',
+								'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
 								'disabled:cursor-not-allowed disabled:opacity-50',
 							)}
 						>

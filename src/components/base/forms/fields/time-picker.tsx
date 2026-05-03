@@ -340,7 +340,7 @@ export function TimePicker({
                         className={cn(
                             'w-full justify-between text-left font-normal',
                             !value && 'text-muted-foreground',
-                            invalid && 'border-destructive ring-2 ring-destructive/20',
+                            'aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20',
 										(triggerProps as { className?: string }).className,
                             className
                         )}
