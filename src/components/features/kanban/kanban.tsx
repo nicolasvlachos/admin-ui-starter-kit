@@ -49,6 +49,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { useCallback, useMemo, useState } from 'react';
 
+import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 
@@ -337,7 +338,7 @@ export function KanbanOverlay({ className, render }: KanbanOverlayProps) {
 								className,
 							)}
 						>
-							<span className="text-xs font-medium text-primary/80">{activeId}</span>
+							<Text tag="span" size="xs" weight="medium" className="text-primary/80">{activeId}</Text>
 						</div>
 					)
 				: null}

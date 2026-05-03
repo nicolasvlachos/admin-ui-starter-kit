@@ -16,6 +16,7 @@
  */
 import { ChevronRight, Copy, Lock, Plus, Trash2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/base/buttons';
 import { SmartCard } from '@/components/base/cards';
@@ -25,7 +26,7 @@ import {
 	CollapsibleTrigger,
 } from '@/components/base/display/collapsible';
 import { ActionMenu, MenuAction } from '@/components/base/navigation/action-menu';
-import { Heading, Text } from '@/components/typography';
+import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 
@@ -58,7 +59,7 @@ export function ApiKeyList({
 	);
 
 	return (
-		<SmartCard padding="sm" className={className}>
+		<SmartCard className={className}>
 			<Collapsible open={expanded} onOpenChange={handleOpenChange}>
 				<div className="flex items-center gap-2">
 					<CollapsibleTrigger asChild>
@@ -73,9 +74,9 @@ export function ApiKeyList({
 									expanded && 'rotate-90',
 								)}
 							/>
-							<Heading tag="h4" className="border-0 pb-0 text-sm font-semibold">
+							<Text tag="span" weight="semibold">
 								{title ?? strings.title}
-							</Heading>
+							</Text>
 						</button>
 					</CollapsibleTrigger>
 					{!!onAdd && (
@@ -91,7 +92,7 @@ export function ApiKeyList({
 				</div>
 				<CollapsibleContent className="pt-3">
 					{items.length === 0 ? (
-						<Text size="sm" type="secondary">
+						<Text type="secondary">
 							{strings.emptyMessage}
 						</Text>
 					) : (
@@ -150,13 +151,13 @@ function ApiKeyRow({
 			await navigator.clipboard.writeText(item.value);
 			setCopied(true);
 			setTimeout(() => setCopied(false), 1500);
-			onCopy?.(item.id, item);
-			// Lazy import sonner so this row doesn't pull it for every render.
-			const { toast } = await import('sonner');
 			toast.success(copyToastSuccess);
-		} catch {
-			const { toast } = await import('sonner');
+			onCopy?.(item.id, item);
+		} catch (err) {
 			toast.error(copyToastError);
+			if (import.meta.env?.DEV) {
+				console.warn('[ApiKeyList] copy failed', err);
+			}
 		}
 	}, [item, onCopy, copyToastSuccess, copyToastError]);
 

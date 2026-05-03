@@ -6,6 +6,7 @@
  */
 import { useState, useMemo } from 'react';
 import Text from '@/components/typography/text';
+import { useDatesConfig } from '@/lib/ui-provider';
 import { cn } from '@/lib/utils';
 import { EventCalendarDayCell } from './event-calendar-day-cell';
 import { EventCalendarHeader } from './event-calendar-header';
@@ -39,7 +40,7 @@ export function EventCalendar({
 	showLegend = true,
 	showHeader = true,
 	showWeekends = true,
-	weekStartsOn = 1,
+	weekStartsOn: weekStartsOnProp,
 	locale,
 	enableCategoryFilter = false,
 	visibleCategories: controlledVisibleCategories,
@@ -74,6 +75,11 @@ export function EventCalendar({
 	const [internalVisibleCategories, setInternalVisibleCategories] = useState<string[]>([]);
 
 	const visibleCategories = controlledVisibleCategories ?? internalVisibleCategories;
+
+	// Resolve start-of-week against the consumer's <UIProvider> dates
+	// slice. Library default is 1 (Monday) when no consumer override is set.
+	const { weekStartsOn: configWeekStartsOn } = useDatesConfig();
+	const weekStartsOn = (weekStartsOnProp ?? configWeekStartsOn ?? 1) as 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 	const handleToggleCategory = (categoryId: string) => {
 		const newCategories = visibleCategories.includes(categoryId)

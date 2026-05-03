@@ -6,6 +6,7 @@ import type { DateRange } from 'react-day-picker';
 
 import { Button, type ButtonVariant, type ButtonStyle } from '@/components/base/buttons';
 import { Calendar } from '@/components/ui/calendar';
+import { useDatesConfig } from '@/lib/ui-provider';
 import {
 	Popover,
 	PopoverContent,
@@ -80,7 +81,13 @@ function isRangeMode(props: DatePickerProps): props is DateRangePickerProps {
 }
 
 // Default preset ranges — labels resolved from DatePickerTranslations.
-function getDefaultPresets(t: DatePickerTranslations): PresetDateRange[] {
+// `weekStartsOn` is the resolved value from the resolution chain
+// (`prop ?? useDatesConfig().weekStartsOn ?? 1`); passed in by the
+// caller so this stays a pure function.
+function getDefaultPresets(
+	t: DatePickerTranslations,
+	weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+): PresetDateRange[] {
 	return [
 		{
 			label: t.today,
@@ -89,8 +96,8 @@ function getDefaultPresets(t: DatePickerTranslations): PresetDateRange[] {
 		{
 			label: t.thisWeek,
 			getValue: () => ({
-				from: startOfWeek(new Date(), { weekStartsOn: 1 }),
-				to: endOfWeek(new Date(), { weekStartsOn: 1 })
+				from: startOfWeek(new Date(), { weekStartsOn }),
+				to: endOfWeek(new Date(), { weekStartsOn })
 			}),
 		},
 		{
@@ -719,7 +726,11 @@ function RangeDatePicker({
 	dateFnsLocale: DateFnsLocale;
 	captionLayout: 'label' | 'dropdown';
 }) {
-	const presets = presetsProp ?? getDefaultPresets(t);
+	// Resolve the start-of-week so the "This week" preset honors the
+	// consumer's <UIProvider dates={{ weekStartsOn: 0 }}> setting.
+	// Library default is 1 (Monday).
+	const { weekStartsOn = 1 } = useDatesConfig();
+	const presets = presetsProp ?? getDefaultPresets(t, weekStartsOn);
 	const triggerId = React.useId();
 	const describedBy = `${triggerId}-description`;
 	const hasError = baseProps.error !== undefined && baseProps.error !== null && baseProps.error !== '';

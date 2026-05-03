@@ -13,7 +13,8 @@
  *     import { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
  *       from '@/components/base/accordion';
  */
-import { Heading, Text } from '@/components/typography';
+import { IconBadge } from '@/components/base/display/icon-badge';
+import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 
@@ -79,12 +80,9 @@ export function SmartAccordion({
 					>
 						<div className="flex min-w-0 flex-1 items-center gap-3">
 							<SmartAccordionIcon iconStyle={iconStyle} icon={item.icon} />
-							<Heading
-								tag="h4"
-								className="border-0 pb-0 text-sm font-semibold"
-							>
+							<Text tag="span" weight="semibold">
 								{item.title}
-							</Heading>
+							</Text>
 							{!!item.badge && (
 								<span className="ml-1 inline-flex shrink-0">{item.badge}</span>
 							)}
@@ -97,7 +95,7 @@ export function SmartAccordion({
 							contentClassName,
 						)}
 					>
-						<Text size="sm" type="secondary" className="leading-relaxed">
+						<Text type="secondary" className="leading-relaxed">
 							{item.content}
 						</Text>
 					</AccordionContent>
@@ -121,11 +119,8 @@ function SmartAccordionIcon({
 		return <span className="inline-flex shrink-0 text-muted-foreground">{icon}</span>;
 	}
 	return (
-		<span
-			aria-hidden="true"
-			className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground"
-		>
+		<IconBadge size="sm" tone="muted" shape="circle" aria-hidden="true">
 			{icon}
-		</span>
+		</IconBadge>
 	);
 }

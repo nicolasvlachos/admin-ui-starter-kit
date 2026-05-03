@@ -207,7 +207,7 @@ export interface EventCalendarProps {
 	showLegend?: boolean;
 	showHeader?: boolean;
 	showWeekends?: boolean;
-	weekStartsOn?: 0 | 1;
+	weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 	/** Optional date-fns Locale object passed to inner date pickers. */
 	locale?: import('date-fns').Locale;
 	enableCategoryFilter?: boolean;
@@ -341,7 +341,7 @@ export interface UseEventCalendarReturn {
  * Data transformation hook options
  */
 export interface UseEventCalendarDataOptions {
-	weekStartsOn?: 0 | 1;
+	weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 	showWeekends?: boolean;
 	visibleCategories?: string[];
 }

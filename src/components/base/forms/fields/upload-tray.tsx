@@ -20,7 +20,7 @@ import { useCallback } from 'react';
 
 import { Badge } from '@/components/base/badge';
 import { Button } from '@/components/base/buttons';
-import { Heading } from '@/components/typography';
+import { Text } from '@/components/typography';
 import { useStrings, type StringsProp } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 
@@ -135,9 +135,9 @@ export function UploadTray({
 				<>
 					<div className="flex flex-wrap items-center justify-between gap-2">
 						<div className="flex flex-wrap items-center gap-2">
-							<Heading tag="h4" className="border-0 pb-0 text-sm font-semibold">
+							<Text tag="span" weight="semibold">
 								{strings.heading}
-							</Heading>
+							</Text>
 							{completed > 0 && (
 								<Badge variant="success">
 									{strings.completedLabel}: {completed}

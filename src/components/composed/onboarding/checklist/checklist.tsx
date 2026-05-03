@@ -22,7 +22,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/base/accordion';
-import { Heading, Text } from '@/components/typography';
+import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
 import { cn } from '@/lib/utils';
 
@@ -85,18 +85,34 @@ export function OnboardingChecklist({
 	const isControlled = value !== undefined;
 	const computedDefault = useMemo(
 		() => defaultExpanded ?? defaultExpandedFor(steps),
-		// `steps` only matters at first render; if the consumer passes new
-		// steps after mount, they should drive expansion via `value`.
+		// First-mount default. Re-resolution when `steps` arrives async is
+		// handled by the effect below — that effect picks the next pending
+		// step and opens it, but only if the user hasn't already toggled
+		// anything.
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[],
 	);
 	const [internalValue, setInternalValue] = useState<string[]>(computedDefault);
+	const userInteractedRef = useRef(false);
 	const expanded = isControlled ? value : internalValue;
 	const previouslyExpanded = useRef<Set<string>>(new Set(computedDefault));
+
+	// When `steps` is loaded asynchronously (consumer passes [] then
+	// populates), promote the next-pending step the first time real
+	// steps arrive — but never overwrite an explicit user toggle.
+	useEffect(() => {
+		if (isControlled || userInteractedRef.current) return;
+		if (defaultExpanded !== undefined) return;
+		if (steps.length === 0) return;
+		if (internalValue.length > 0) return;
+		const next = defaultExpandedFor(steps);
+		if (next.length > 0) setInternalValue(next);
+	}, [steps, isControlled, defaultExpanded, internalValue.length]);
 
 	const handleValueChange = useCallback(
 		(next: unknown) => {
 			const nextArr = (next as string[]) ?? [];
+			userInteractedRef.current = true;
 			if (!isControlled) setInternalValue(nextArr);
 			onValueChange?.(nextArr);
 		},
@@ -138,15 +154,13 @@ export function OnboardingChecklist({
 								status={step.status}
 								ariaLabel={pickStatusAria(step.status, strings)}
 							/>
-							<Heading
-								tag="h4"
-								className={cn(
-									'border-0 pb-0 text-sm font-semibold',
-									TITLE_TONE_CLASS[step.status],
-								)}
+							<Text
+								tag="span"
+								weight="semibold"
+								className={cn(TITLE_TONE_CLASS[step.status])}
 							>
 								{step.title}
-							</Heading>
+							</Text>
 							{!!step.badge && (
 								<span className="ml-auto inline-flex shrink-0">{step.badge}</span>
 							)}
@@ -154,7 +168,7 @@ export function OnboardingChecklist({
 					</AccordionTrigger>
 					{!!step.content && (
 						<AccordionContent className="pl-12 pr-4 pt-0">
-							<Text size="sm" type="secondary" className="leading-relaxed" tag="div">
+							<Text type="secondary" className="leading-relaxed" tag="div">
 								{step.content}
 							</Text>
 						</AccordionContent>
