@@ -216,13 +216,10 @@ export default function FormsPage() {
 				</Col>
 			</PreviewSection>
 
-			<PreviewSection title="Tags / KeyValue" span="full">
+			<PreviewSection title="Tags / KeyValue display" span="full">
 				<Col>
 					<FormField label="Tags" hint="Comma or Enter to add">
 						<TagsInput value={tags} onChange={setTags} placeholder="Add tag…" />
-					</FormField>
-					<FormField label="Key/value editor">
-						<KeyValueEditor value={kvObj} onChange={setKvObj} />
 					</FormField>
 					<FormField label="Key/value display">
 						<KeyValue
@@ -309,7 +306,11 @@ export default function FormsPage() {
 				</Col>
 			</PreviewSection>
 
-			<PreviewSection title="Repeaters & localized (RHF-driven)" span="full">
+			<PreviewSection
+				title="Repeaters (shared chrome — sortable, ghost remove, dashed empty)"
+				description="StringRepeater · KeyValueEditor · LocalizedStringField · List all flow through the same <Repeater> primitive."
+				span="full"
+			>
 				<FormDemoProvider
 					defaultValues={{
 						aliases: ['First alias', 'Second alias'],
@@ -318,8 +319,16 @@ export default function FormsPage() {
 					}}
 				>
 					<Col>
-						<FormField label="Aliases (StringRepeater)">
-							<StringRepeater name="aliases" addButtonText="Add alias" placeholder="Alias…" />
+						<FormField label="Aliases (StringRepeater · sortable)" hint="Drag the handle to reorder.">
+							<StringRepeater
+								name="aliases"
+								sortable
+								addButtonText="Add alias"
+								placeholder="Alias…"
+							/>
+						</FormField>
+						<FormField label="Metadata (KeyValueEditor · sortable)">
+							<KeyValueEditor sortable value={kvObj} onChange={setKvObj} />
 						</FormField>
 						<FormField label="Todos (List)">
 							<List name="todos" addButtonText="Add todo" placeholder="Todo…" />

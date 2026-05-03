@@ -1,20 +1,20 @@
 /**
  * ObjectRepeater — RHF-driven repeater for arrays of homogeneous objects.
  * Field definitions describe the shape of each row (label, type, placeholder,
- * required, hint); the repeater wires each cell through `useFieldArray`.
- * Rows render as bordered cards with a top-right delete affordance.
+ * required, hint); the repeater wires each cell through `useFieldArray` and
+ * renders rows as bordered cards via the shared `<Repeater>` primitive.
  * Strings overridable for i18n.
  */
-import { Trash2, Plus } from 'lucide-react';
 import { useCallback } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { Button } from '@/components/base/buttons';
+
 import { FormField } from '@/components/base/forms/form-field';
-import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
+
 import { Input } from './input';
-import { Textarea } from './textarea';
+import { Repeater } from './repeater';
 import { defaultRepeaterStrings } from './repeaters.strings';
+import { Textarea } from './textarea';
 
 export interface ObjectRepeaterStrings {
     addButton: string;
@@ -51,6 +51,8 @@ export interface ObjectRepeaterProps {
     name: string;
     fields: ObjectFieldDef[];
     invalid?: boolean;
+    /** Enable drag-to-reorder. Default `false`. */
+    sortable?: boolean;
     /** Override default strings (button labels, empty state). */
     strings?: Partial<ObjectRepeaterStrings>;
     /** @deprecated Use `strings.addButton` instead. */
@@ -65,6 +67,7 @@ export function ObjectRepeater({
     addButtonText,
     emptyMessage,
     invalid,
+    sortable = false,
     strings: stringsProp,
 }: ObjectRepeaterProps) {
     const strings = useStrings(defaultObjectRepeaterStrings, {
@@ -73,7 +76,7 @@ export function ObjectRepeater({
         ...stringsProp,
     });
     const { control, register } = useFormContext();
-    const { fields, append, remove } = useFieldArray({
+    const { fields, append, remove, move } = useFieldArray({
         control,
         name,
     });
@@ -89,71 +92,54 @@ export function ObjectRepeater({
     }, [fieldDefs]);
 
     return (
-        <div className="space-y-3">
-            {fields.length === 0 ? (
-                <div className={`rounded-md border border-dashed p-4 ${invalid ? 'border-destructive' : ''}`}>
-                    <Text type="secondary">
-                        {strings.emptyState}
-                    </Text>
-                </div>
-            ) : (
-                <div className="space-y-4">
-                    {fields.map((field, index) => (
-                        <div key={field.id} className="relative rounded-md border p-4 pt-10">
-                            {/* Delete button - positioned in top right */}
-                            <button
-                                type="button"
-                                onClick={() => remove(index)}
-                                className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground/60 transition-colors hover:bg-destructive/10 hover:text-destructive"
-                                aria-label={strings.removeAriaLabel}
-                                title={strings.removeAriaLabel}
+        <Repeater
+            items={fields}
+            sortable={sortable}
+            rowVariant="card"
+            removeVariant="ghost"
+            onAdd={() => append(createEmptyObject())}
+            onRemove={(index) => remove(index)}
+            onMove={(from, to) => move(from, to)}
+            strings={{
+                emptyState: strings.emptyState,
+                addButton: strings.addButton,
+                removeAriaLabel: strings.removeAriaLabel,
+            }}
+            renderRow={(_field, { index }) => (
+                <div className="space-y-3">
+                    {fieldDefs.map((fieldDef) => {
+                        const fieldPath = `${name}.${index}.${fieldDef.name}`;
+                        return (
+                            <FormField
+                                key={fieldDef.name}
+                                label={fieldDef.label}
+                                required={fieldDef.required}
+                                hint={fieldDef.hint}
+                                htmlFor={fieldPath}
                             >
-                                <Trash2 className="h-4 w-4" />
-                            </button>
-
-                            {/* Fields */}
-                            <div className="space-y-4">
-                                {fieldDefs.map((fieldDef) => {
-                                    const fieldPath = `${name}.${index}.${fieldDef.name}`;
-                                    return (
-                                        <FormField
-                                            key={fieldDef.name}
-                                            label={fieldDef.label}
-                                            required={fieldDef.required}
-                                            hint={fieldDef.hint}
-                                            htmlFor={fieldPath}
-                                        >
-                                            {fieldDef.type === 'textarea' ? (
-                                                <Textarea
-                                                    {...register(fieldPath)}
-                                                    id={fieldPath}
-                                                    placeholder={fieldDef.placeholder}
-                                                    minRows={3}
-                                                    invalid={invalid}
-                                                />
-                                            ) : (
-                                                <Input
-                                                    {...register(fieldPath)}
-                                                    id={fieldPath}
-                                                    type={fieldDef.type || 'text'}
-                                                    placeholder={fieldDef.placeholder}
-                                                    invalid={invalid}
-                                                />
-                                            )}
-                                        </FormField>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    ))}
+                                {fieldDef.type === 'textarea' ? (
+                                    <Textarea
+                                        {...register(fieldPath)}
+                                        id={fieldPath}
+                                        placeholder={fieldDef.placeholder}
+                                        minRows={3}
+                                        invalid={invalid}
+                                    />
+                                ) : (
+                                    <Input
+                                        {...register(fieldPath)}
+                                        id={fieldPath}
+                                        type={fieldDef.type || 'text'}
+                                        placeholder={fieldDef.placeholder}
+                                        invalid={invalid}
+                                    />
+                                )}
+                            </FormField>
+                        );
+                    })}
                 </div>
             )}
-
-            <Button type="button" variant="secondary" buttonStyle="outline" onClick={() => append(createEmptyObject())}>
-                <Plus className="h-4 w-4 mr-2" />
-                {strings.addButton}
-            </Button>
-        </div>
+        />
     );
 }
 

@@ -1,9 +1,15 @@
-import { Plus, Trash2 } from 'lucide-react';
+/**
+ * LocalizedStringRepeater — bilingual variant of `<StringRepeater>`. The
+ * `name` prop points at an object whose keys are locale codes and whose
+ * values are string arrays; `activeLocale` selects which locale's array to
+ * edit. Built on the shared `<Repeater>` primitive for visual parity with
+ * the rest of the repeater family.
+ */
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
-import { Button } from '@/components/base/buttons';
-import { Text } from '@/components/typography';
 import { useStrings, type StringsProp } from '@/lib/strings';
+
+import { Repeater } from './repeater';
 import { defaultRepeaterStrings } from './repeaters.strings';
 import { Textarea } from './textarea';
 
@@ -11,12 +17,14 @@ export interface LocalizedStringRepeaterStrings {
     placeholder: string;
     addButton: string;
     emptyState: string;
+    removeAriaLabel: string;
 }
 
 export const defaultLocalizedStringRepeaterStrings: LocalizedStringRepeaterStrings = {
     placeholder: 'Enter value',
     addButton: defaultRepeaterStrings.addItem,
     emptyState: defaultRepeaterStrings.emptyState,
+    removeAriaLabel: defaultRepeaterStrings.removeAriaLabel,
 };
 
 export interface LocalizedStringRepeaterProps {
@@ -41,6 +49,9 @@ export interface LocalizedStringRepeaterProps {
     /** Current active locale ('primary' or 'secondary') */
     activeLocale: 'primary' | 'secondary';
 
+    /** Enable drag-to-reorder. Default `false`. */
+    sortable?: boolean;
+
     /** Error state for styling (passed from FormField) */
     invalid?: boolean;
 
@@ -48,9 +59,6 @@ export interface LocalizedStringRepeaterProps {
     strings?: StringsProp<LocalizedStringRepeaterStrings>;
 }
 
-/**
- * LocalizedStringRepeater - Repeater for bilingual string arrays
- */
 export function LocalizedStringRepeater({
     name,
     placeholder,
@@ -60,6 +68,7 @@ export function LocalizedStringRepeater({
     secondaryLocale,
     activeLocale,
     invalid,
+    sortable = false,
     strings: stringsProp,
 }: LocalizedStringRepeaterProps) {
     const strings = useStrings(defaultLocalizedStringRepeaterStrings, {
@@ -73,49 +82,32 @@ export function LocalizedStringRepeater({
     const localeKey = activeLocale === 'primary' ? primaryLocale : secondaryLocale;
     const fieldName = `${name}.${localeKey}`;
 
-    const { fields, append, remove } = useFieldArray({
+    const { fields, append, remove, move } = useFieldArray({
         control,
         name: fieldName,
     });
 
     return (
-        <div className="space-y-3">
-            {fields.length === 0 ? (
-                <div className={`rounded-md border border-dashed p-4 ${invalid ? 'border-destructive' : ''}`}>
-                    <Text type="secondary">
-                        {strings.emptyState}
-                    </Text>
-                </div>
-            ) : (
-                <div className="space-y-3">
-                    {fields.map((field, index) => (
-                        <div key={field.id} className="flex gap-2 items-start">
-                            <Textarea
-                                {...register(`${fieldName}.${index}`)}
-                                placeholder={strings.placeholder}
-                                className="flex-1"
-                                minRows={2}
-                                invalid={invalid}
-                            />
-                            <Button
-                                type="button"
-                                variant="secondary"
-                                buttonStyle="outline"
-                                onClick={() => remove(index)}
-                                className="shrink-0"
-                            >
-                                <Trash2 className="h-4 w-4" />
-                            </Button>
-                        </div>
-                    ))}
-                </div>
+        <Repeater
+            items={fields}
+            sortable={sortable}
+            onAdd={() => append('')}
+            onRemove={(index) => remove(index)}
+            onMove={(from, to) => move(from, to)}
+            strings={{
+                emptyState: strings.emptyState,
+                addButton: strings.addButton,
+                removeAriaLabel: strings.removeAriaLabel,
+            }}
+            renderRow={(_field, { index }) => (
+                <Textarea
+                    {...register(`${fieldName}.${index}`)}
+                    placeholder={strings.placeholder}
+                    minRows={2}
+                    invalid={invalid}
+                />
             )}
-
-            <Button type="button" variant="secondary" buttonStyle="outline" onClick={() => append('')}>
-                <Plus className="h-4 w-4 mr-2" />
-                {strings.addButton}
-            </Button>
-        </div>
+        />
     );
 }
 

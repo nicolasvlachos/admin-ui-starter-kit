@@ -2,40 +2,48 @@
  * KeyValueEditor — dynamic editor for arbitrary key→value string pairs. Emits
  * a `Record<string, string>` to consumers; rows with empty keys are dropped
  * from the output. Use for metadata, environment vars, or feature flags.
- * Strings overridable for i18n.
+ *
+ * Built on the shared `<Repeater>` primitive so it visually matches the
+ * `StringRepeater` / `ObjectRepeater` / `LocalizedStringRepeater` family —
+ * same row chrome, same remove icon, same add-button styling, optional
+ * drag-to-reorder.
  */
 import { useState, useRef, useCallback, memo } from 'react';
-import { Plus, X } from 'lucide-react';
-import { Button } from '@/components/base/buttons';
+
 import { Label } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
-import { cn } from '@/lib/utils';
+
 import { Input } from './input';
+import { Repeater } from './repeater';
 
 export type KeyValuePair = { key: string; value: string };
 
 export interface KeyValueEditorStrings {
-	keyLabel: string;
-	valueLabel: string;
-	keyPlaceholder: string;
-	valuePlaceholder: string;
-	addButton: string;
-	removeRowAriaLabel: string;
+    keyLabel: string;
+    valueLabel: string;
+    keyPlaceholder: string;
+    valuePlaceholder: string;
+    addButton: string;
+    removeRowAriaLabel: string;
+    emptyState: string;
 }
 
 export const defaultKeyValueEditorStrings: KeyValueEditorStrings = {
-	keyLabel: 'Key',
-	valueLabel: 'Value',
-	keyPlaceholder: 'key',
-	valuePlaceholder: 'value',
-	addButton: 'Add row',
-	removeRowAriaLabel: 'Remove row',
+    keyLabel: 'Key',
+    valueLabel: 'Value',
+    keyPlaceholder: 'key',
+    valuePlaceholder: 'value',
+    addButton: 'Add row',
+    removeRowAriaLabel: 'Remove row',
+    emptyState: 'No rows yet.',
 };
 
 export interface KeyValueEditorProps {
     value?: Record<string, string>;
     onChange?: (val: Record<string, string>) => void;
     invalid?: boolean;
+    /** Enable drag-to-reorder. Default `false`. */
+    sortable?: boolean;
     /** Override default strings (labels, placeholders, button text). */
     strings?: Partial<KeyValueEditorStrings>;
     /** @deprecated Use `strings.keyPlaceholder` instead. */
@@ -66,11 +74,9 @@ interface KeyValueEditorRowProps {
     valuePlaceholder: string;
     keyLabel?: string;
     valueLabel?: string;
-    removeAriaLabel: string;
     invalid?: boolean;
     onKeyChange: (id: string, value: string) => void;
     onValueChange: (id: string, value: string) => void;
-    onRemove: (id: string) => void;
 }
 
 const KeyValueEditorRow = memo(function KeyValueEditorRow({
@@ -80,18 +86,16 @@ const KeyValueEditorRow = memo(function KeyValueEditorRow({
     valuePlaceholder,
     keyLabel,
     valueLabel,
-    removeAriaLabel,
     invalid,
     onKeyChange,
     onValueChange,
-    onRemove,
 }: KeyValueEditorRowProps) {
     const { id, key: keyValue, value } = row;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="space-y-1">
-                {!!isFirst && !!keyLabel && <Label>{keyLabel}</Label>}
+                {!!isFirst && !!keyLabel && <Label className="flex items-center">{keyLabel}</Label>}
                 <Input
                     value={keyValue ?? ''}
                     placeholder={keyPlaceholder}
@@ -100,7 +104,7 @@ const KeyValueEditorRow = memo(function KeyValueEditorRow({
                 />
             </div>
             <div className="space-y-1">
-                {!!isFirst && !!valueLabel && <Label>{valueLabel}</Label>}
+                {!!isFirst && !!valueLabel && <Label className="flex items-center">{valueLabel}</Label>}
                 <Input
                     value={value ?? ''}
                     placeholder={valuePlaceholder}
@@ -108,19 +112,6 @@ const KeyValueEditorRow = memo(function KeyValueEditorRow({
                     invalid={invalid}
                 />
             </div>
-            <button
-                type="button"
-                aria-label={removeAriaLabel}
-                onClick={() => onRemove(id)}
-                className={cn(
-                    'inline-flex size-9 shrink-0 items-center justify-center rounded-md',
-                    'text-muted-foreground/70 hover:bg-destructive/10 hover:text-destructive',
-                    'outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
-                    'transition-colors',
-                )}
-            >
-                <X className="size-4" aria-hidden="true" />
-            </button>
         </div>
     );
 });
@@ -129,6 +120,7 @@ export function KeyValueEditor({
     value,
     onChange,
     invalid,
+    sortable = false,
     keyPlaceholder,
     valuePlaceholder,
     keyLabel,
@@ -168,7 +160,6 @@ export function KeyValueEditor({
             });
             isInternalChange.current = true;
             onChange?.(obj);
-            // Reset flag after microtask to allow React to process the update
             queueMicrotask(() => {
                 isInternalChange.current = false;
             });
@@ -207,9 +198,9 @@ export function KeyValueEditor({
     }, [emit]);
 
     const removeRow = useCallback(
-        (id: string) => {
+        (index: number) => {
             setRows((prev) => {
-                const next = prev.filter((row) => row.id !== id);
+                const next = prev.filter((_, i) => i !== index);
                 const result = next.length ? next : [{ id: generateId(), key: '', value: '' }];
                 emit(result);
                 return result;
@@ -218,30 +209,45 @@ export function KeyValueEditor({
         [emit]
     );
 
+    const moveRow = useCallback(
+        (from: number, to: number) => {
+            setRows((prev) => {
+                const next = [...prev];
+                const [moved] = next.splice(from, 1);
+                next.splice(to, 0, moved);
+                emit(next);
+                return next;
+            });
+        },
+        [emit]
+    );
+
     return (
-        <div className="space-y-3">
-            {rows.map((row, index) => (
+        <Repeater
+            items={rows}
+            sortable={sortable}
+            onAdd={addRow}
+            onRemove={removeRow}
+            onMove={moveRow}
+            strings={{
+                emptyState: strings.emptyState,
+                addButton: strings.addButton,
+                removeAriaLabel: strings.removeRowAriaLabel,
+            }}
+            renderRow={(row, { index }) => (
                 <KeyValueEditorRow
-                    key={row.id}
                     row={row}
                     isFirst={index === 0}
                     keyPlaceholder={strings.keyPlaceholder}
                     valuePlaceholder={strings.valuePlaceholder}
                     keyLabel={strings.keyLabel}
                     valueLabel={strings.valueLabel}
-                    removeAriaLabel={strings.removeRowAriaLabel}
                     invalid={invalid}
                     onKeyChange={handleKeyChange}
                     onValueChange={handleValueChange}
-                    onRemove={removeRow}
                 />
-            ))}
-            <div>
-                <Button type="button" icon={Plus} onClick={addRow}>
-                    {strings.addButton}
-                </Button>
-            </div>
-        </div>
+            )}
+        />
     );
 }
 

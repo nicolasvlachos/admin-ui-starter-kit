@@ -125,6 +125,15 @@ export { KeyValue, type KeyValueProps, type KeyValueItem } from './key-value';
 export { KeyValueEditor, type KeyValueEditorProps, type KeyValuePair } from './key-value-editor';
 
 // Repeaters & Lists
+export {
+	Repeater,
+	defaultRepeaterPrimitiveStrings,
+	type RepeaterProps,
+	type RepeaterStrings,
+	type RepeaterItem,
+	type RepeaterRowVariant,
+	type RepeaterRemoveVariant,
+} from './repeater';
 export { StringRepeater, type StringRepeaterProps } from './string-repeater';
 export { ObjectRepeater, type ObjectRepeaterProps, type ObjectFieldDef } from './object-repeater';
 export { List, type ListProps } from './list';
