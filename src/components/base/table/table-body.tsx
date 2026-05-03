@@ -114,9 +114,8 @@ export function DataTableBody<TData>({
 										stickyFirstColumn,
 										cellIndex === 0,
 									),
-									dense
-										? 'py-1.5 px-2 first:pl-3 last:pr-3 text-xxs leading-3'
-										: 'py-2 px-3 first:pl-5 last:pr-5 text-xs',
+									'first:pl-5 last:pr-5',
+									dense && 'py-1.5 px-2 first:pl-3 last:pr-3 text-xxs leading-3',
 								)}
 							>
 								{flexRender(

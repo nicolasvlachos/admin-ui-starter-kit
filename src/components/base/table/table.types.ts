@@ -142,10 +142,37 @@ export interface DataTableToolbarProps<TData> {
  */
 export type DataTableSize = 'xs' | 'sm' | 'base';
 
+/**
+ * Outer surface chrome for the DataTable wrapper.
+ *
+ * - `card` (default): rounded card with `border-border bg-card` and a
+ *   soft shadow — the canonical admin treatment.
+ * - `glass`: a hairline `border-border/60 rounded-md` outline with no
+ *   shadow and no card background — pairs with consumer-supplied
+ *   surrounding chrome (e.g. dropping into an existing SmartCard or
+ *   Frame). Background remains transparent so a glassy parent shows
+ *   through.
+ * - `flat`: no chrome at all — the consumer wraps the table in their
+ *   own surface.
+ */
+export type DataTableSurface = 'card' | 'glass' | 'flat';
+
 // Component props
 export interface DataTableProps<TData extends object, TValue> {
 	/** Typography size for the table; cells inherit. Default `xs`. */
 	size?: DataTableSize;
+	/**
+	 * Outer wrapper chrome. Defaults to `card` for back-compat. Switch
+	 * to `glass` when the table is inside another card/Frame; `flat`
+	 * when you want zero chrome.
+	 */
+	surface?: DataTableSurface;
+	/**
+	 * Drop the muted header-row background. The default header has
+	 * `bg-muted` to anchor it visually; a transparent header reads
+	 * cleaner inside small cards / dense dashboards.
+	 */
+	headerTransparent?: boolean;
 	// Core data
 	/**
 	 * Column definitions for the table.
@@ -318,4 +345,5 @@ export interface DataTableHeaderProps<TData> {
 	stickyFirstColumn?: boolean;
 	columnGroups?: ColumnGroup[];
 	dense?: boolean;
+	headerTransparent?: boolean;
 }

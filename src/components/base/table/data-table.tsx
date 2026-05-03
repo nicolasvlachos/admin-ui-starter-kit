@@ -52,19 +52,28 @@ import { mergeDataTableStrings } from './table.strings';
 import { type DataTableProps } from './table.types';
 import { Separator } from '@/components/base/display/separator';
 
-// Class applied to the `<table>` element. Cell renderers using
-// `<Text size="inherit">` pick up the font-size via CSS inheritance so a
-// `<DataTable size="sm">` automatically renders all of its rows at sm.
-// We also tighten/loosen the inner padding via descendant selectors so
-// the row height actually reflects the chosen density.
+// Class applied to the `<table>` element.
+//
+// Body cells get an explicit `[&_td]:text-{size}` so deeply nested
+// elements that use `<Text size="inherit">` (or any plain `<span>`)
+// inherit the right font-size from the cell rather than relying on
+// the table-level inheritance chain (which breaks the moment any
+// descendant has its own text-size class).
+//
+// Header cells stay at `text-xxs` regardless of body density — the
+// canonical admin pattern is "tiny uppercase eyebrow header,
+// variable body density." A consumer who wants matched header sizing
+// can override via `headerClassName`.
 const sizeClassByDataTableSize: Record<NonNullable<DataTableProps<object, unknown>['size']>, string> = {
-	xs: 'text-xs [&_th]:py-1.5 [&_td]:py-1.5 [&_th]:px-2 [&_td]:px-2 [&_th]:h-8',
-	sm: 'text-sm [&_th]:py-2 [&_td]:py-2 [&_th]:px-2.5 [&_td]:px-2.5 [&_th]:h-10',
-	base: 'text-base [&_th]:py-3 [&_td]:py-3 [&_th]:px-3 [&_td]:px-3 [&_th]:h-12',
+	xs:   '[&_th]:text-xxs [&_td]:text-xs   [&_th]:py-1.5 [&_td]:py-1.5 [&_th]:px-2   [&_td]:px-2   [&_th]:h-8',
+	sm:   '[&_th]:text-xxs [&_td]:text-sm   [&_th]:py-2   [&_td]:py-2   [&_th]:px-2.5 [&_td]:px-2.5 [&_th]:h-10',
+	base: '[&_th]:text-xs  [&_td]:text-base [&_th]:py-3   [&_td]:py-3   [&_th]:px-3   [&_td]:px-3   [&_th]:h-12',
 };
 
 export function DataTable<TData extends object, TValue = unknown>({
 	size,
+	surface = 'card',
+	headerTransparent = false,
 	columns,
 	data,
 	columnGroups,
@@ -315,7 +324,15 @@ export function DataTable<TData extends object, TValue = unknown>({
 		<div className={cn(
 			dense
 				? 'fixed inset-0 z-50 bg-background flex flex-col overflow-hidden p-6'
-				: `w-full ${wrapperClassName} rounded-xl overflow-hidden border border-border bg-card shadow-[0_1px_3px_0_rgb(0_0_0/0.04)]`,
+				: cn(
+					'w-full',
+					surface === 'card' &&
+						'rounded-xl overflow-hidden border border-border bg-card shadow-[0_1px_3px_0_rgb(0_0_0/0.04)]',
+					surface === 'glass' &&
+						'rounded-md overflow-hidden border border-border/60',
+					// `flat` renders no chrome — consumer wraps.
+					wrapperClassName,
+				),
 		)}>
 			{!!(topbarContent || enableColumnVisibility) && (
 				<div className="relative">
@@ -363,6 +380,7 @@ export function DataTable<TData extends object, TValue = unknown>({
 						stickyFirstColumn={stickyFirstColumn}
 						columnGroups={columnGroups}
 						dense={dense}
+						headerTransparent={headerTransparent}
 					/>
 					<DataTableBody
 						table={table}

@@ -21,6 +21,7 @@ export function DataTableHeader<TData>(
 		stickyFirstColumn = false,
 		columnGroups,
 		dense = false,
+		headerTransparent = false,
 	}: DataTableHeaderProps<TData>) {
 
 	const headerGroups = table.getHeaderGroups();
@@ -86,7 +87,9 @@ export function DataTableHeader<TData>(
 		<TableHeader
 			className={cn(
 				stickyHeader &&
-					'sticky top-[var(--topbar-height)] z-10 bg-muted backdrop-blur-md shadow-[0_1px_0_0_var(--border)]',
+					(headerTransparent
+						? 'sticky top-[var(--topbar-height)] z-10 bg-background/80 backdrop-blur-md shadow-[0_1px_0_0_var(--border)]'
+						: 'sticky top-[var(--topbar-height)] z-10 bg-muted backdrop-blur-md shadow-[0_1px_0_0_var(--border)]'),
 				headerClassName,
 			)}
 		>
@@ -94,7 +97,12 @@ export function DataTableHeader<TData>(
 			{headerGroups.map((headerGroup) => (
 				<TableRow
 					key={headerGroup.id}
-					className="border-b border-border bg-muted hover:bg-muted"
+					className={cn(
+						'border-b border-border',
+						headerTransparent
+							? 'bg-transparent hover:bg-transparent'
+							: 'bg-muted hover:bg-muted',
+					)}
 				>
 					{headerGroup.headers.map((header, index) => {
 						const cellClasses = cn(
@@ -105,10 +113,9 @@ export function DataTableHeader<TData>(
 								stickyFirstColumn,
 								index === 0,
 							),
-							dense
-								? 'px-2 py-1.5 first:pl-3 last:pr-3'
-								: 'px-3 py-2 first:pl-5 last:pr-5',
-							'text-xxs text-muted-foreground font-medium uppercase tracking-wider whitespace-nowrap',
+							'first:pl-5 last:pr-5',
+							dense && 'px-2 py-1.5 first:pl-3 last:pr-3 text-xxs',
+							'text-muted-foreground font-medium uppercase tracking-wider whitespace-nowrap',
 							'bg-transparent',
 						);
 						const headerStyle = enableResizing

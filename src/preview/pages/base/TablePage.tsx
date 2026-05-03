@@ -101,6 +101,36 @@ export default function TablePage() {
 				<DataTable<Order> size="base" columns={columns} data={data} />
 			</PreviewSection>
 
+			<PreviewSection title="surface='glass' + headerTransparent — clean outline, no muted header" span="full">
+				<DataTable<Order>
+					columns={columns}
+					data={data}
+					surface="glass"
+					headerTransparent
+				/>
+			</PreviewSection>
+
+			<PreviewSection title="surface='flat' inside SmartCard — table renders no chrome" span="full">
+				<div className="rounded-lg border border-border bg-card p-1">
+					<DataTable<Order>
+						columns={columns}
+						data={data}
+						surface="flat"
+						headerTransparent
+					/>
+				</div>
+			</PreviewSection>
+
+			<PreviewSection title="size='sm' + glass — explicit cell text scaling" span="full">
+				<DataTable<Order>
+					columns={columns}
+					data={data}
+					size="sm"
+					surface="glass"
+					headerTransparent
+				/>
+			</PreviewSection>
+
 			<PreviewSection title="With sorting + row actions" span="full">
 				<DataTable<Order>
 					columns={columns}
