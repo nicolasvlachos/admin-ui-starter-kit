@@ -32,6 +32,13 @@ export interface IconBadgeProps extends Omit<ComponentProps<'span'>, 'children'>
 	tone?: IconBadgeTone;
 	/** When true, fills the badge with the tone color and inverts the icon. */
 	solid?: boolean;
+	/**
+	 * When true, renders a hairline `border-border/60` around the badge.
+	 * Useful for compact "secret list" / "key list" rows where the icon
+	 * needs a subtle outline against the surrounding card surface
+	 * (see `composed/admin/api-key-list`).
+	 */
+	bordered?: boolean;
 }
 
 const SIZE_MAP: Record<IconBadgeSize, { box: string; icon: string }> = {
@@ -68,6 +75,7 @@ export function IconBadge({
 	shape = 'circle',
 	tone = 'primary',
 	solid = false,
+	bordered = false,
 	className,
 	...props
 }: IconBadgeProps) {
@@ -82,6 +90,7 @@ export function IconBadge({
 				shape === 'circle' ? 'rounded-full' : 'rounded-md',
 				sizes.box,
 				tones,
+				bordered && 'border border-border/60',
 				className,
 			)}
 			{...props}

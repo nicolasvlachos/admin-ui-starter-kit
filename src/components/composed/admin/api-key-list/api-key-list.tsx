@@ -25,6 +25,8 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from '@/components/base/display/collapsible';
+import { IconBadge } from '@/components/base/display/icon-badge';
+import { Item, ItemActions, ItemContent, ItemMedia } from '@/components/base/item';
 import { ActionMenu, MenuAction } from '@/components/base/navigation/action-menu';
 import { Text } from '@/components/typography';
 import { useStrings } from '@/lib/strings';
@@ -164,46 +166,53 @@ function ApiKeyRow({
 	const display = item.displayValue ?? item.value;
 
 	return (
-		<div className="flex items-center justify-between gap-3" data-slot="api-key-row">
-			<div className="flex min-w-0 flex-1 items-center gap-2.5">
-				<span
-					aria-hidden="true"
-					className="flex size-6 shrink-0 items-center justify-center rounded-sm border border-border/60 bg-muted text-success"
+		<Item size="xs" data-slot="api-key-row">
+			<ItemMedia variant="icon">
+				<IconBadge
+					size="xs"
+					shape="square"
+					tone="muted"
+					bordered
+					className="text-success"
 				>
 					{item.icon ?? <Lock className="size-3.5" />}
-				</span>
+				</IconBadge>
+			</ItemMedia>
+			<ItemContent className="flex-row items-center gap-2.5">
 				<Text tag="span" size="xs" weight="medium" className="w-16 shrink-0 truncate">
 					{item.name}
 				</Text>
 				<span className="min-w-0 flex-1 truncate rounded-sm bg-muted px-2 py-1 font-mono text-xs">
 					{display}
 				</span>
-			</div>
-			<ActionMenu
-				srText={rowMenuAria}
-				align="end"
-				closeOnSelect
-				buttonProps={{ buttonStyle: 'ghost', variant: 'secondary' }}
-			>
-				<MenuAction
-					label={copied ? copiedMenuLabel : copyMenuLabel}
-					icon={Copy}
-					onClick={() => {
-						void handleCopy();
-					}}
-					disabled={item.disabled}
-				/>
-				{!!onDelete && (
+			</ItemContent>
+			<ItemActions>
+				<ActionMenu
+					srText={rowMenuAria}
+					align="end"
+					closeOnSelect
+					buttonProps={{ buttonStyle: 'ghost', variant: 'secondary' }}
+				>
 					<MenuAction
-						label={deleteMenuLabel}
-						icon={Trash2}
-						variant="error"
+						label={copied ? copiedMenuLabel : copyMenuLabel}
+						icon={Copy}
+						onClick={() => {
+							void handleCopy();
+						}}
 						disabled={item.disabled}
-						onClick={() => onDelete(item.id, item)}
 					/>
-				)}
-			</ActionMenu>
-		</div>
+					{!!onDelete && (
+						<MenuAction
+							label={deleteMenuLabel}
+							icon={Trash2}
+							variant="error"
+							disabled={item.disabled}
+							onClick={() => onDelete(item.id, item)}
+						/>
+					)}
+				</ActionMenu>
+			</ItemActions>
+		</Item>
 	);
 }
 
