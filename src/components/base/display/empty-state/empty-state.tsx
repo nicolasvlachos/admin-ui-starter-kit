@@ -4,7 +4,8 @@
  * (rule 1, rule 12) and applies our typography, density, and tokens:
  *
  * - Headline through `<Heading tag="h3">` (admin scale, no marketing inflation)
- * - Description through `<Text size="sm" type="secondary">`
+ * - Description through `<Text size="xs" type="secondary">` — matches
+ *   the four sibling empty-states across the library
  * - Padding presets driven by props, not arbitrary literals
  * - Optional dashed-border affordance for "this slot is a drop zone"
  *
@@ -105,7 +106,7 @@ export function EmptyState({
 				</Heading>
 				{!!resolvedDescription && (
 					<Text
-						size="sm"
+						size="xs"
 						type="secondary"
 						className="leading-relaxed [&>a]:text-primary [&>a]:underline [&>a]:underline-offset-4 hover:[&>a]:no-underline"
 						data-slot="empty-description"

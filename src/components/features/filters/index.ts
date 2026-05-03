@@ -82,3 +82,14 @@ export {
     type UseFilterGroupsOptions,
     type UseFilterGroupsResult,
 } from './hooks';
+
+// Validator adapters for `FilterConfig.validation.custom`.
+// `zodValidator` plugs any Zod-like `safeParse` schema into the existing
+// `(value) => boolean | string` shape; `predicateValidator` pairs a
+// predicate with a static error message for consumers who don't want
+// a validation library.
+export {
+    zodValidator,
+    predicateValidator,
+    type SafeParseSchema,
+} from './validators';
