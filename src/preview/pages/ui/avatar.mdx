@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './avatar.examples';
+import examplesSource from './avatar.examples?raw';
+
+<DocsPage
+	title="UI · Avatar"
+	description="Avatar with fallback, image, sizes, group, badge."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Sizes" source={examplesSource}>
+	<Examples.Sizes />
+</Example>
+
+<Example name="WithImageFallback" source={examplesSource}>
+	<Examples.WithImageFallback />
+</Example>
+
+<Example name="WithBadge" source={examplesSource}>
+	<Examples.WithBadge />
+</Example>
+
+<Example name="Group" source={examplesSource}>
+	<Examples.Group />
+</Example>
+
+</Section>
+
+</DocsPage>

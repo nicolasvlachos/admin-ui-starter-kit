@@ -1,0 +1,70 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './timelines.examples';
+import examplesSource from './timelines.examples?raw';
+
+<DocsPage
+	title="Composed · Timelines"
+	description="Read-only tracking timelines — steps, order, payment, activity stream, release changelog, project milestones. For interactive activity (segments, mass-config, resource registry, callbacks) see Features → Activity feed."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="StepsVertical" source={examplesSource}>
+	<Examples.StepsVertical />
+</Example>
+
+<Example name="StepsHorizontalExample" source={examplesSource}>
+	<Examples.StepsHorizontalExample />
+</Example>
+
+<Example name="OrderTimeline" source={examplesSource}>
+	<Examples.OrderTimeline />
+</Example>
+
+<Example name="PaymentTimeline" source={examplesSource}>
+	<Examples.PaymentTimeline />
+</Example>
+
+<Example name="ActivityStreamReadOnlyTracking" source={examplesSource}>
+	<Examples.ActivityStreamReadOnlyTracking />
+</Example>
+
+<Example name="Changelog" source={examplesSource}>
+	<Examples.Changelog />
+</Example>
+
+<Example name="Milestones" source={examplesSource}>
+	<Examples.Milestones />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### ActivityStreamCard
+<PropsTable component="ActivityStreamCard" />
+
+#### ChangelogTimelineCard
+<PropsTable component="ChangelogTimelineCard" />
+
+#### MilestonesTimelineCard
+<PropsTable component="MilestonesTimelineCard" />
+
+#### OrderTimelineCard
+<PropsTable component="OrderTimelineCard" />
+
+#### PaymentTimelineCard
+<PropsTable component="PaymentTimelineCard" />
+
+#### StepsCard
+<PropsTable component="StepsCard" />
+
+#### StepsHorizontal
+<PropsTable component="StepsHorizontal" />
+
+</Section>
+
+</DocsPage>

@@ -154,6 +154,42 @@ import { UIProvider } from 'admin-ui-starter-kit/ui-provider';
 
 The provider is locked at first mount; pass everything once at the root.
 
+### 6. Install the AI agent skill (optional)
+
+This package ships a `component-library-rules` skill for Claude Code and other
+AI agents. After installing the package:
+
+```bash
+npx admin-ui-starter-kit-install-skill
+```
+
+Copies the skill into your project's `.claude/skills/component-library-rules/`
+and `.agents/skills/component-library-rules/`. Run again to update after a
+package upgrade.
+
+Flags:
+- `--target=claude|agents|both` (default `both`) — pick which directory to install into.
+- `--force` — overwrite without prompting.
+
+---
+
+## Browse the component showcase
+
+Every component shipped with this package has a docs page (preview + code tab + props table). To browse the full showcase locally:
+
+```bash
+npx admin-ui-starter-kit-showcase
+```
+
+Opens `http://127.0.0.1:7654` with sidebar navigation across UI / Base / Composed / Features / Layout, search, and per-component examples + APIs.
+
+Flags:
+- `--port <n>` — pick a port (default 7654)
+- `--host <h>` — bind to a different host (default 127.0.0.1)
+- `--no-open` — do not auto-open a browser
+
+The bundle is shipped pre-built inside the package; no build step required.
+
 ---
 
 ## Architecture

@@ -1,0 +1,56 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './giftcard-cards.examples';
+import examplesSource from './giftcard-cards.examples?raw';
+
+<DocsPage
+	title="Composed · Giftcard cards"
+	description="Five visual variants — gradient, compact, minimal, dark, illustrated."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="GradientDefault" source={examplesSource}>
+	<Examples.GradientDefault />
+</Example>
+
+<Example name="Minimal" source={examplesSource}>
+	<Examples.Minimal />
+</Example>
+
+<Example name="Dark" source={examplesSource}>
+	<Examples.Dark />
+</Example>
+
+<Example name="Illustrated" source={examplesSource}>
+	<Examples.Illustrated />
+</Example>
+
+<Example name="CompactActiveExpired" source={examplesSource}>
+	<Examples.CompactActiveExpired />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### GiftcardCard
+<PropsTable component="GiftcardCard" />
+
+#### GiftcardCompact
+<PropsTable component="GiftcardCompact" />
+
+#### GiftcardCardMinimal
+<PropsTable component="GiftcardCardMinimal" />
+
+#### GiftcardCardDark
+<PropsTable component="GiftcardCardDark" />
+
+#### GiftcardCardIllustrated
+<PropsTable component="GiftcardCardIllustrated" />
+
+</Section>
+
+</DocsPage>

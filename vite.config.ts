@@ -6,6 +6,7 @@
  * config — for that, see `vite.lib.config.ts`.
  *
  * Plugins:
+ *   - `@mdx-js/rollup`        — MDX support (must run BEFORE React plugin).
  *   - `@vitejs/plugin-react`  — Fast Refresh + JSX transform.
  *   - `@tailwindcss/vite`     — Tailwind v4 (compiles `src/App.css`).
  *
@@ -14,10 +15,16 @@
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import mdx from '@mdx-js/rollup';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	plugins: [react(), tailwindcss()],
+	plugins: [
+		// MDX must run BEFORE the React plugin so JSX-from-MDX is transformed correctly.
+		{ enforce: 'pre', ...mdx({ providerImportSource: '@mdx-js/react' }) },
+		react(),
+		tailwindcss(),
+	],
 	resolve: {
 		alias: [
 			{ find: '@', replacement: path.resolve(__dirname, './src') },

@@ -1,0 +1,56 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './navigation.examples';
+import examplesSource from './navigation.examples?raw';
+
+<DocsPage
+	title="Composed · Navigation & boards"
+	description="Kanban, tab switcher, time ruler, vendor performance, experience activity."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="KanbanMicroBoardExample" source={examplesSource}>
+	<Examples.KanbanMicroBoardExample />
+</Example>
+
+<Example name="TabSwitcherCardExample" source={examplesSource}>
+	<Examples.TabSwitcherCardExample />
+</Example>
+
+<Example name="TimeDistributionRulerExample" source={examplesSource}>
+	<Examples.TimeDistributionRulerExample />
+</Example>
+
+<Example name="VendorPerformance" source={examplesSource}>
+	<Examples.VendorPerformance />
+</Example>
+
+<Example name="ExperienceActivity" source={examplesSource}>
+	<Examples.ExperienceActivity />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### KanbanMicroBoard
+<PropsTable component="KanbanMicroBoard" />
+
+#### TabSwitcherCard
+<PropsTable component="TabSwitcherCard" />
+
+#### TimeDistributionRuler
+<PropsTable component="TimeDistributionRuler" />
+
+#### VendorPerformanceCard
+<PropsTable component="VendorPerformanceCard" />
+
+#### ExperienceActivityCard
+<PropsTable component="ExperienceActivityCard" />
+
+</Section>
+
+</DocsPage>

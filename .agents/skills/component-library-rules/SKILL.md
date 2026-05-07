@@ -5,6 +5,8 @@ description: Use whenever modifying any component in this `admin-ui-starter-kit`
 
 # Component library rules — read before touching ANY component
 
+> This skill ships with the [`admin-ui-starter-kit`](https://www.npmjs.com/package/admin-ui-starter-kit) npm package. Consumers install it into their project with `npx admin-ui-starter-kit-install-skill`.
+
 This is a reusable component library. Code lives in many projects via this package — fixes propagate everywhere. That means **every change is leverage, good or bad**. Follow these rules.
 
 ## Goal & target distribution
@@ -53,6 +55,49 @@ These deeper guides live alongside this file under `references/`. The skill stay
 | Looking for the next high-leverage piece of work | [`references/audit-followups.md`](references/audit-followups.md) |
 
 Don't read all of them — find the matching guide for the immediate task, follow it, return.
+
+## Component reference index
+
+Every component documented in the showcase has a generated markdown
+reference under
+[`references/components/`](references/components/). The directory ships
+two index surfaces — one for humans, one for agents — plus a per-component
+`.md` with full prose and verbatim example source.
+
+**Agents: use this three-step discovery pattern. Do NOT bulk-load the
+whole directory.**
+
+1. **Read [`references/components/INDEX.json`](references/components/INDEX.json)**
+   first. It is the small, structured surface (~45KB, one JSON entry per
+   component, one entry per line for grep-friendliness). Each entry has:
+   `id`, `title`, `description`, `layer`, `family`, `tags`, `sourcePath`,
+   `examples` (named export list), and `doc` (relative path to the full
+   `.md`).
+2. **Filter by `tags` / `layer` / `family` / `description`** to find
+   candidates. Tags include the layer, family slug, source-path tail
+   segment, and 2-4 keyword tags inferred from the title and description
+   (stopwords stripped). When unsure which existing component covers your
+   need, this is the first place to look — don't write fresh JSX before
+   checking.
+3. **For each candidate, read the per-component file** linked via the
+   `doc` field (e.g. `./base__badge.md`). Each file has YAML front-matter
+   (the same metadata in machine-readable form) followed by full prose,
+   the verbatim `*.examples.tsx` source, and the list of named example
+   exports.
+
+[`references/components/INDEX.md`](references/components/INDEX.md) is the
+human-readable equivalent of `INDEX.json`, grouped by section. Prefer
+the JSON when filtering programmatically.
+
+**Per-file budget.** Individual `.md` files vary in size — some are large
+(`composed/timelines.md`, `features/kanban.md`). Load only the candidates
+you matched in step 2; never read the full directory.
+
+When designing a new feature, **read the relevant component file first**
+to see how the library uses it before writing fresh code.
+
+The references are generated from the MDX showcase by
+`npm run docs:sync-skill`; CI runs the freshness check via `npm run verify`.
 
 ## This is the only skill in this repo
 

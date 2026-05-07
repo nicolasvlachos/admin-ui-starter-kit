@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-heatmap.examples';
+import examplesSource from './metrics-heatmap.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Activity heatmap"
+	description="`ActivityHeatmap` — GitHub-style daily-activity calendar with success-tinted intensity cells."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="OrderActivity" source={examplesSource}>
+	<Examples.OrderActivity />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### ActivityHeatmap
+<PropsTable component="ActivityHeatmap" />
+
+</Section>
+
+</DocsPage>

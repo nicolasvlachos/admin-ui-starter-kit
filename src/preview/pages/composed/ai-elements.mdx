@@ -1,0 +1,112 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './ai-elements.examples';
+import examplesSource from './ai-elements.examples?raw';
+
+<DocsPage
+	title="Composed · AI (elements)"
+	description="Standalone surfaces ported from elements.ai-sdk.dev: shimmer, code-block, agent, package-info, reasoning, chain-of-thought, sources, inline-citation, task, artifact, file-tree, confirmation, attachment."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="AiShimmerExample" source={examplesSource}>
+	<Examples.AiShimmerExample />
+</Example>
+
+<Example name="AiAgentExample" source={examplesSource}>
+	<Examples.AiAgentExample />
+</Example>
+
+<Example name="AiCodeBlockExample" source={examplesSource}>
+	<Examples.AiCodeBlockExample />
+</Example>
+
+<Example name="AiAttachmentExample" source={examplesSource}>
+	<Examples.AiAttachmentExample />
+</Example>
+
+<Example name="AiInlineCitationExample" source={examplesSource}>
+	<Examples.AiInlineCitationExample />
+</Example>
+
+<Example name="AiSourcesExample" source={examplesSource}>
+	<Examples.AiSourcesExample />
+</Example>
+
+<Example name="AiReasoningExample" source={examplesSource}>
+	<Examples.AiReasoningExample />
+</Example>
+
+<Example name="AiChainOfThoughtExample" source={examplesSource}>
+	<Examples.AiChainOfThoughtExample />
+</Example>
+
+<Example name="AiTaskExample" source={examplesSource}>
+	<Examples.AiTaskExample />
+</Example>
+
+<Example name="AiArtifactExample" source={examplesSource}>
+	<Examples.AiArtifactExample />
+</Example>
+
+<Example name="AiFileTreeExample" source={examplesSource}>
+	<Examples.AiFileTreeExample />
+</Example>
+
+<Example name="AiPackageInfoExample" source={examplesSource}>
+	<Examples.AiPackageInfoExample />
+</Example>
+
+<Example name="AiConfirmationExample" source={examplesSource}>
+	<Examples.AiConfirmationExample />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### AiAgent
+<PropsTable component="AiAgent" />
+
+#### AiArtifact
+<PropsTable component="AiArtifact" />
+
+#### AiAttachment
+<PropsTable component="AiAttachment" />
+
+#### AiChainOfThought
+<PropsTable component="AiChainOfThought" />
+
+#### AiCodeBlock
+<PropsTable component="AiCodeBlock" />
+
+#### AiConfirmation
+<PropsTable component="AiConfirmation" />
+
+#### AiFileTree
+<PropsTable component="AiFileTree" />
+
+#### AiInlineCitation
+<PropsTable component="AiInlineCitation" />
+
+#### AiPackageInfo
+<PropsTable component="AiPackageInfo" />
+
+#### AiReasoning
+<PropsTable component="AiReasoning" />
+
+#### AiShimmer
+<PropsTable component="AiShimmer" />
+
+#### AiSources
+<PropsTable component="AiSources" />
+
+#### AiTask
+<PropsTable component="AiTask" />
+
+</Section>
+
+</DocsPage>

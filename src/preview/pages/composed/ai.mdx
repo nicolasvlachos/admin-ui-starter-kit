@@ -1,0 +1,35 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './ai.examples';
+import examplesSource from './ai.examples?raw';
+
+<DocsPage
+	title="Composed · AI"
+	description="Summary block + classification panel."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="AISummary" source={examplesSource}>
+	<Examples.AISummary />
+</Example>
+
+<Example name="AIClassification" source={examplesSource}>
+	<Examples.AIClassification />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### AiSummaryBlock
+<PropsTable component="AiSummaryBlock" />
+
+#### AiClassificationPanel
+<PropsTable component="AiClassificationPanel" />
+
+</Section>
+
+</DocsPage>

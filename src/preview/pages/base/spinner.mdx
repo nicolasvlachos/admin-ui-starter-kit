@@ -1,0 +1,65 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './spinner.examples';
+import examplesSource from './spinner.examples?raw';
+
+<DocsPage
+	title="Spinner"
+	description="Loading indicator with three visual variants. Pairs with content placeholders, route transitions, and Suspense fallbacks."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/spinner"
+>
+
+<Section title="Overview" id="overview">
+
+`Spinner` ships three variants — `default` (rotating SVG), `shimmer` (round
+shimmer dot), `progress` (slim animated bar). The variant resolves through
+`useSpinnerConfig().defaultVariant`, so a consumer can pin the look at the
+`UIProvider` root and override per call. Pass an optional `label` for screen
+readers and a visible status message.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Variants" id="variants">
+
+<Example name="Variants" source={examplesSource}>
+	<Examples.Variants />
+</Example>
+
+</Section>
+
+<Section title="Composition" id="composition">
+
+<Example name="WithLabel" source={examplesSource}>
+	<Examples.WithLabel />
+</Example>
+
+<Example name="CustomColour" source={examplesSource}>
+	<Examples.CustomColour />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="SectionPlaceholder" source={examplesSource}>
+	<Examples.SectionPlaceholder />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="Spinner" />
+
+</Section>
+
+</DocsPage>

@@ -1,0 +1,229 @@
+---
+id: composed/commerce-extras
+title: "Composed · Commerce (extras)"
+description: "Cart, coupon, order status, payment, tax breakdown, subscription, refund, address, voucher."
+layer: composed
+family: "Commerce"
+examples:
+  - CartSummaryCardExample
+  - CouponInputCardEmptyApplied
+  - OrderStatusCardExample
+  - PaymentMethodCardExample
+  - TaxBreakdownCardExample
+  - SubscriptionSummaryCardExample
+  - RefundStatusCardExample
+  - AddressCardExample
+  - VoucherEntryCardExample
+imports:
+  - @/components/composed/commerce
+tags:
+  - composed
+  - commerce
+  - extras
+  - cart
+  - coupon
+  - order
+---
+
+# Composed · Commerce (extras)
+
+Cart, coupon, order status, payment, tax breakdown, subscription, refund, address, voucher.
+
+**Layer:** `composed`  
+
+## Examples
+
+```tsx
+// @ts-nocheck
+import { useState } from 'react';
+import { Sparkles, Star, Zap } from 'lucide-react';
+import {
+	AddressCard,
+	CartSummaryCard,
+	CouponInputCard,
+	OrderStatusCard,
+	PaymentMethodCard,
+	RefundStatusCard,
+	SubscriptionSummaryCard,
+	TaxBreakdownCard,
+	VoucherEntryCard,
+} from '@/components/composed/commerce';
+
+export function CartSummaryCardExample() {
+	return (
+		<>
+			<CartSummaryCard
+								items={[
+									{ id: '1', name: 'Wine Tasting Tour', qty: 2, price: '370 USD' },
+									{ id: '2', name: 'Spa Day Voucher', qty: 1, price: '180 USD' },
+									{ id: '3', name: 'Gift Wrap', qty: 1, price: '15 USD' },
+								]}
+								subtotal="565 USD"
+								tax="113 USD"
+								shipping="0 USD"
+								discount="50 USD"
+								total="628 USD"
+								onCheckout={() => {}}
+							/>
+		</>
+	);
+}
+
+export function CouponInputCardEmptyApplied() {
+	return (
+		<>
+			<div className="grid gap-4 md:grid-cols-2">
+								<CouponInputCard onApply={() => {}} />
+								<CouponInputCard appliedCode="SPRING2026" appliedDiscount="88.40 USD" onRemove={() => {}} />
+							</div>
+		</>
+	);
+}
+
+export function OrderStatusCardExample() {
+	return (
+		<>
+			<OrderStatusCard
+								orderNumber="ORD-2026-0412"
+								status="shipped"
+								currentEta="Mar 29, 2026"
+								events={[
+									{ label: 'Placed', timestamp: 'Mar 24', complete: true },
+									{ label: 'Paid', timestamp: 'Mar 24', complete: true },
+									{ label: 'Fulfilled', timestamp: 'Mar 25', complete: true },
+									{ label: 'Shipped', timestamp: 'Mar 26', complete: true },
+									{ label: 'Delivered', complete: false },
+								]}
+							/>
+		</>
+	);
+}
+
+export function PaymentMethodCardExample() {
+	return (
+		<>
+			<PaymentMethodCard brand="visa" last4="4242" expiry="04/27" holderName="Sarah Smitha" isDefault onChange={() => {}} />
+		</>
+	);
+}
+
+export function TaxBreakdownCardExample() {
+	return (
+		<>
+			<TaxBreakdownCard
+								subtotal="565.00 USD"
+								taxes={[
+									{ label: 'VAT (standard)', rate: '20%', amount: '94.20 USD' },
+									{ label: 'Tourist tax', rate: '€1.50/night', amount: '4.50 USD' },
+									{ label: 'Service charge', rate: '5%', amount: '14.30 USD' },
+								]}
+								totalTax="113.00 USD"
+								total="678.00 USD"
+							/>
+		</>
+	);
+}
+
+export function SubscriptionSummaryCardExample() {
+	return (
+		<>
+			<SubscriptionSummaryCard
+								planName="Pro Annual"
+								priceLabel="€29"
+								cycleLabel="/ month"
+								nextBillingDate="May 12, 2026"
+								statusLabel="Active"
+								perks={[
+									{ icon: Sparkles, label: 'AI assist included' },
+									{ icon: Star, label: 'Priority support' },
+									{ icon: Zap, label: 'Unlimited bookings' },
+								]}
+								onManage={() => {}}
+								onUpgrade={() => {}}
+							/>
+		</>
+	);
+}
+
+export function RefundStatusCardExample() {
+	return (
+		<>
+			<RefundStatusCard
+								stage="processing"
+								amount="180.00 USD"
+								reason="Customer cancelled within 48h window"
+								method="Visa ending 4242"
+								eta="Apr 14, 2026"
+								requestedAt="Apr 8, 2026"
+							/>
+		</>
+	);
+}
+
+export function AddressCardExample() {
+	return (
+		<>
+			<div className="grid gap-3 md:grid-cols-2">
+								<AddressCard
+									kind="shipping"
+									name="Sarah Smitha"
+									line1="ul. Vitosha 24, ap. 5"
+									city="New York"
+									postalCode="1000"
+									country="USA"
+									phone="+1 888 123 456"
+									isDefault
+									onEdit={() => {}}
+									onRemove={() => {}}
+								/>
+								<AddressCard
+									kind="billing"
+									name="Daniel Smith"
+									line1="ul. Slavyanska 9"
+									line2="floor 3"
+									city="Los Angeles"
+									postalCode="4000"
+									country="USA"
+									onEdit={() => {}}
+									onRemove={() => {}}
+									onMakeDefault={() => {}}
+								/>
+							</div>
+		</>
+	);
+}
+
+export function VoucherEntryCardExample() {
+	const [voucherApplied, setVoucherApplied] = useState(false);
+	return (
+		<>
+			<div className="grid gap-3 md:grid-cols-2">
+								<VoucherEntryCard
+									onCheck={() => setVoucherApplied(true)}
+									{...(voucherApplied
+										? { appliedCode: 'GCT-2026-PETROV', balance: '120.00 USD', onRemove: () => setVoucherApplied(false) }
+										: {})}
+								/>
+								<VoucherEntryCard
+									appliedCode="GCT-A4B7-C9E2"
+									balance="250.00 USD"
+									onRemove={() => {}}
+								/>
+							</div>
+		</>
+	);
+}
+```
+
+## Example exports
+
+- `CartSummaryCardExample`
+- `CouponInputCardEmptyApplied`
+- `OrderStatusCardExample`
+- `PaymentMethodCardExample`
+- `TaxBreakdownCardExample`
+- `SubscriptionSummaryCardExample`
+- `RefundStatusCardExample`
+- `AddressCardExample`
+- `VoucherEntryCardExample`
+

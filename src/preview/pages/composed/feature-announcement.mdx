@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './feature-announcement.examples';
+import examplesSource from './feature-announcement.examples?raw';
+
+<DocsPage
+	title="Composed · Feature announcement"
+	description="Highlight a new feature with tags and an action."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="WithIconTagsAction" source={examplesSource}>
+	<Examples.WithIconTagsAction />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### FeatureAnnouncementCard
+<PropsTable component="FeatureAnnouncementCard" />
+
+</Section>
+
+</DocsPage>

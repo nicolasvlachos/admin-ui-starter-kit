@@ -1,0 +1,57 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './map.examples';
+import examplesSource from './map.examples?raw';
+
+<DocsPage
+	title="Map"
+	description="Leaflet-backed map primitives — Map shell, MapTileLayer, MapMarker, MapPopup. Always wrap in a fixed-height container."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/map"
+>
+
+<Section title="Overview" id="overview">
+
+The map components are thin React wrappers around Leaflet. Always wrap a
+`<Map>` in a parent with a fixed height (Leaflet renders absolute children).
+Compose `<MapTileLayer />` for the basemap, `<MapMarker>` for a pin, and
+`<MapPopup>` inside a marker for the click bubble.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Multiple markers" id="markers">
+
+<Example name="MultipleMarkers" source={examplesSource}>
+	<Examples.MultipleMarkers />
+</Example>
+
+</Section>
+
+<Section title="Sizes & zoom" id="sizes">
+
+<Example name="TighterZoom" source={examplesSource}>
+	<Examples.TighterZoom />
+</Example>
+
+<Example name="CompactSize" source={examplesSource}>
+	<Examples.CompactSize />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="Map" />
+<PropsTable component="MapMarker" />
+
+</Section>
+
+</DocsPage>

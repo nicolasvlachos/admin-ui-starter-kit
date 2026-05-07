@@ -1,0 +1,24 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './separator.examples';
+import examplesSource from './separator.examples?raw';
+
+<DocsPage
+	title="UI · Separator"
+	description="Horizontal & vertical dividers."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Horizontal" source={examplesSource}>
+	<Examples.Horizontal />
+</Example>
+
+<Example name="Vertical" source={examplesSource}>
+	<Examples.Vertical />
+</Example>
+
+</Section>
+
+</DocsPage>

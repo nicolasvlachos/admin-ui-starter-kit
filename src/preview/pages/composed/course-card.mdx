@@ -1,0 +1,44 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './course-card.examples';
+import examplesSource from './course-card.examples?raw';
+
+<DocsPage
+	title="Composed · Course card"
+	description="Group experience with participants & progress."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="DefaultWithEverything" source={examplesSource}>
+	<Examples.DefaultWithEverything />
+</Example>
+
+<Example name="GradientVioletFuchsiaPinkDefault" source={examplesSource}>
+	<Examples.GradientVioletFuchsiaPinkDefault />
+</Example>
+
+<Example name="GradientCustomCyanEmerald" source={examplesSource}>
+	<Examples.GradientCustomCyanEmerald />
+</Example>
+
+<Example name="GradientCustomAmberRose" source={examplesSource}>
+	<Examples.GradientCustomAmberRose />
+</Example>
+
+<Example name="Minimal" source={examplesSource}>
+	<Examples.Minimal />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### CourseCard
+<PropsTable component="CourseCard" />
+
+</Section>
+
+</DocsPage>

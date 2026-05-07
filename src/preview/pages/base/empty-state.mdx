@@ -1,0 +1,88 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './empty-state.examples';
+import examplesSource from './empty-state.examples?raw';
+
+<DocsPage
+	title="Empty state"
+	description="Adaptive zero-data surface. Wrap with the right illustration per resource — products, users, search results, inbox. Slots for media / actions / footer; consumer overrides every string."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/display/empty-state"
+>
+
+<Section title="Overview" id="overview">
+
+`EmptyState` is the canonical zero-data surface. Pass an illustration (or any
+node) via `media`, optional `actions` and `footer` slots, and tune the surface
+with `padding` (`compact` / `base` / `loose`) and `border` (dashed drop-zone
+affordance). Five built-in illustrations cover the common cases.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Common scenarios" id="scenarios">
+
+<Example name="NoProductsWithActions" source={examplesSource}>
+	<Examples.NoProductsWithActions />
+</Example>
+
+<Example name="NoTeamMembers" source={examplesSource}>
+	<Examples.NoTeamMembers />
+</Example>
+
+<Example name="NoSearchResults" source={examplesSource}>
+	<Examples.NoSearchResults />
+</Example>
+
+<Example name="InboxZero" source={examplesSource}>
+	<Examples.InboxZero />
+</Example>
+
+</Section>
+
+<Section title="Padding" id="padding">
+
+<Example name="PaddingCompact" source={examplesSource}>
+	<Examples.PaddingCompact />
+</Example>
+
+<Example name="PaddingBase" source={examplesSource}>
+	<Examples.PaddingBase />
+</Example>
+
+<Example name="PaddingLoose" source={examplesSource}>
+	<Examples.PaddingLoose />
+</Example>
+
+</Section>
+
+<Section title="Composition" id="composition">
+
+<Example name="DashedBorderDropZone" source={examplesSource}>
+	<Examples.DashedBorderDropZone />
+</Example>
+
+<Example name="StringsPropLocalisation" source={examplesSource}>
+	<Examples.StringsPropLocalisation />
+</Example>
+
+<Example name="RenderPropCustomMedia" source={examplesSource}>
+	<Examples.RenderPropCustomMedia />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="EmptyState" />
+
+</Section>
+
+</DocsPage>

@@ -1,0 +1,35 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './badge.examples';
+import examplesSource from './badge.examples?raw';
+
+<DocsPage
+	title="Badge"
+	description="Status pills and chips for tags, counts, and inline state."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/badge"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+<Example name="Variants" source={examplesSource}>
+	<Examples.Variants />
+</Example>
+
+<Example name="WithDot" source={examplesSource}>
+	<Examples.WithDot />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="Badge" />
+
+</Section>
+
+</DocsPage>

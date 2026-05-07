@@ -1,0 +1,64 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './upload-tray.examples';
+import examplesSource from './upload-tray.examples?raw';
+
+<DocsPage
+	title="Upload tray"
+	description="Drag-drop area + per-file progress rows + summary toolbar. Composes Dropzone and UploadProgressList. Framework-agnostic — the consumer drives the actual transfer."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/forms/fields"
+>
+
+<Section title="Overview" id="overview">
+
+`UploadTray` is the canonical drop-and-progress surface. The consumer owns
+the items array (status + progress) and wires `onAddFiles`, `onRetry`,
+`onRemove`, and `onClearAll` to their transfer mechanism. Every string is
+overridable via `strings`, `listStrings`, and `dropzone.strings`.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="States" id="states">
+
+<Example name="EmptyDropzoneOnly" source={examplesSource}>
+	<Examples.EmptyDropzoneOnly />
+</Example>
+
+<Example name="MixedItemStates" source={examplesSource}>
+	<Examples.MixedItemStates />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="LiveSimulatedUpload" source={examplesSource}>
+	<Examples.LiveSimulatedUpload />
+</Example>
+
+</Section>
+
+<Section title="Localisation" id="localisation">
+
+<Example name="LocalisedFrench" source={examplesSource}>
+	<Examples.LocalisedFrench />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="UploadTray" />
+
+</Section>
+
+</DocsPage>

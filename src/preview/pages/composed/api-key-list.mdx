@@ -1,0 +1,40 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './api-key-list.examples';
+import examplesSource from './api-key-list.examples?raw';
+
+<DocsPage
+	title="Composed · Admin · API key list"
+	description="Collapsible section with per-row dropdown menu (Copy / Delete) and an optional Add action in the header. Generic enough for any 'named secret list' — service tokens, webhook URLs, deployment hooks. Composes base/cards + base/display/collapsible + base/navigation/ActionMenu + base/copyable."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="DefaultVisibleSecretsCallbacksForAddDelete" source={examplesSource}>
+	<Examples.DefaultVisibleSecretsCallbacksForAddDelete />
+</Example>
+
+<Example name="MaskedSecretsStripeStyle" source={examplesSource}>
+	<Examples.MaskedSecretsStripeStyle />
+</Example>
+
+<Example name="EmptyState" source={examplesSource}>
+	<Examples.EmptyState />
+</Example>
+
+<Example name="LocalizedStrings" source={examplesSource}>
+	<Examples.LocalizedStrings />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### ApiKeyList
+<PropsTable component="ApiKeyList" />
+
+</Section>
+
+</DocsPage>

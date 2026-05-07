@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './menus.examples';
+import examplesSource from './menus.examples?raw';
+
+<DocsPage
+	title="UI · Menus"
+	description="DropdownMenu, ContextMenu, Command palette."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="DropdownMenuExample" source={examplesSource}>
+	<Examples.DropdownMenuExample />
+</Example>
+
+<Example name="ContextMenuRightClick" source={examplesSource}>
+	<Examples.ContextMenuRightClick />
+</Example>
+
+<Example name="CommandPalette" source={examplesSource}>
+	<Examples.CommandPalette />
+</Example>
+
+</Section>
+
+</DocsPage>

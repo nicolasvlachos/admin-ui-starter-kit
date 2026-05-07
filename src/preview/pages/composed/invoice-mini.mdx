@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './invoice-mini.examples';
+import examplesSource from './invoice-mini.examples?raw';
+
+<DocsPage
+	title="Composed · Invoice mini"
+	description="Compact invoice tile — paid / pending / overdue."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Statuses" source={examplesSource}>
+	<Examples.Statuses />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### InvoiceMiniCard
+<PropsTable component="InvoiceMiniCard" />
+
+</Section>
+
+</DocsPage>

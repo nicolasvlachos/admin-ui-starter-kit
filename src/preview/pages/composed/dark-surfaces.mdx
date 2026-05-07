@@ -1,0 +1,56 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './dark-surfaces.examples';
+import examplesSource from './dark-surfaces.examples?raw';
+
+<DocsPage
+	title="Composed · Dark surfaces"
+	description="Dark-wrapped components — payment, receipt, info panel, order items, outstanding balance."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="PaymentConfirmation" source={examplesSource}>
+	<Examples.PaymentConfirmation />
+</Example>
+
+<Example name="BookingReceipt" source={examplesSource}>
+	<Examples.BookingReceipt />
+</Example>
+
+<Example name="InfoPanel" source={examplesSource}>
+	<Examples.InfoPanel />
+</Example>
+
+<Example name="OrderItems" source={examplesSource}>
+	<Examples.OrderItems />
+</Example>
+
+<Example name="OutstandingBalance" source={examplesSource}>
+	<Examples.OutstandingBalance />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### DarkPaymentConfirmation
+<PropsTable component="DarkPaymentConfirmation" />
+
+#### BookingReceiptDark
+<PropsTable component="BookingReceiptDark" />
+
+#### DarkInfoPanel
+<PropsTable component="DarkInfoPanel" />
+
+#### OrderItemsCard
+<PropsTable component="OrderItemsCard" />
+
+#### OutstandingBalanceCard
+<PropsTable component="OutstandingBalanceCard" />
+
+</Section>
+
+</DocsPage>

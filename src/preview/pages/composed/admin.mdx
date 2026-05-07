@@ -1,0 +1,56 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './admin.examples';
+import examplesSource from './admin.examples?raw';
+
+<DocsPage
+	title="Composed · Admin"
+	description="Team list, permissions, conversations, settings, inventory."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="TeamMembers" source={examplesSource}>
+	<Examples.TeamMembers />
+</Example>
+
+<Example name="RolePermissions" source={examplesSource}>
+	<Examples.RolePermissions />
+</Example>
+
+<Example name="RecentConversations" source={examplesSource}>
+	<Examples.RecentConversations />
+</Example>
+
+<Example name="SettingsToggles" source={examplesSource}>
+	<Examples.SettingsToggles />
+</Example>
+
+<Example name="InventoryLevel" source={examplesSource}>
+	<Examples.InventoryLevel />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### TeamMemberRow
+<PropsTable component="TeamMemberRow" />
+
+#### RolePermissionCard
+<PropsTable component="RolePermissionCard" />
+
+#### RecentConversationRow
+<PropsTable component="RecentConversationRow" />
+
+#### SettingsToggleRow
+<PropsTable component="SettingsToggleRow" />
+
+#### InventoryLevelCard
+<PropsTable component="InventoryLevelCard" />
+
+</Section>
+
+</DocsPage>

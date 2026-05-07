@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './vendor-profile.examples';
+import examplesSource from './vendor-profile.examples?raw';
+
+<DocsPage
+	title="Composed · Vendor profile"
+	description="VendorProfileCard with metrics, stats and actions."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="WithEverything" source={examplesSource}>
+	<Examples.WithEverything />
+</Example>
+
+<Example name="Minimal" source={examplesSource}>
+	<Examples.Minimal />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### VendorProfileCard
+<PropsTable component="VendorProfileCard" />
+
+</Section>
+
+</DocsPage>

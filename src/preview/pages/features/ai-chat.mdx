@@ -1,0 +1,197 @@
+import { DocsPage, Section, Example, PropsTable, CodeBlock } from '@/preview/_docs';
+import * as Examples from './ai-chat.examples';
+import examplesSource from './ai-chat.examples?raw';
+
+<DocsPage
+	title="AI Chat"
+	description="Framework-agnostic AI chat surface. Ties together prompt input, conversation, message renderer, queue, and the full composed/ai/* palette (reasoning, tool calls, attachments, artifacts, confirmations)."
+	layer="features"
+	status="ready"
+	sourcePath="src/components/features/ai-chat"
+>
+
+<Section title="Overview" id="overview">
+
+`AiChat` is a controlled chat shell. The library does **not** call any
+LLM, fetch any data, or wire any router — every piece of state flows in
+as a prop and every action exits through a callback. That is what makes
+it portable across Inertia, Next.js, Remix, plain Vite, and friends.
+
+The consumer wires:
+
+- `messages` — the controlled message list (you append on submit, you
+  flip `pending` off when the assistant turn completes).
+- `inputValue` / `onInputChange` — controlled prompt input.
+- `onSubmit(values)` — fires on Enter / send. Hook this to your model
+  endpoint, tRPC mutation, queue producer, etc.
+- `onStop` — fires when the user clicks the stop button while
+  `streaming` is true.
+- `attachments` + `onAttach` / `onRemoveAttachment` — staged composer
+  attachments. The library never touches storage.
+- `queue`, `suggestions`, `onMessageRegenerate`, `onMessageCopy` —
+  optional callbacks for the surrounding surfaces.
+
+</Section>
+
+<Section title="How to use" id="how-to-use">
+
+The canonical mount: controlled state, callback-driven submission, no
+framework SDKs. Drop this in any consumer app and wire `onSubmit` to
+whatever produces assistant messages.
+
+<CodeBlock language="tsx" code={`import { useState } from 'react';
+import { Bot } from 'lucide-react';
+import {
+  AiChat,
+  type AiChatMessage,
+  type AiChatSubmitValues,
+} from '@/components/features/ai-chat';
+
+export function MyAssistant() {
+  const [messages, setMessages] = useState<AiChatMessage[]>([]);
+  const [input, setInput] = useState('');
+  const [streaming, setStreaming] = useState(false);
+
+  async function onSubmit(values: AiChatSubmitValues) {
+    if (!values.text.trim()) return;
+    const userMsg: AiChatMessage = {
+      id: \`u-\${Date.now()}\`,
+      role: 'user',
+      authorName: 'You',
+      parts: [{ type: 'text', content: values.text }],
+    };
+    const placeholder: AiChatMessage = {
+      id: \`a-\${Date.now()}\`,
+      role: 'assistant',
+      pending: true,
+      parts: [],
+    };
+    setMessages((prev) => [...prev, userMsg, placeholder]);
+    setInput('');
+    setStreaming(true);
+
+    // Wire this to YOUR backend / model API.
+    const reply = await fetch('/api/chat', {
+      method: 'POST',
+      body: JSON.stringify({ text: values.text }),
+    }).then((r) => r.json());
+
+    setMessages((prev) =>
+      prev.map((m) =>
+        m.id === placeholder.id
+          ? { ...m, pending: false, parts: [{ type: 'text', content: reply.text }] }
+          : m,
+      ),
+    );
+    setStreaming(false);
+  }
+
+  return (
+    <AiChat
+      agent={{ name: 'Atlas', icon: Bot, tone: 'primary', status: 'idle' }}
+      messages={messages}
+      inputValue={input}
+      onInputChange={setInput}
+      onSubmit={onSubmit}
+      onStop={() => setStreaming(false)}
+      streaming={streaming}
+    />
+  );
+}`} />
+
+**Slots.** Every region is a slot via the `slots` prop: `header`,
+`intro`, `belowMessages`, `empty`, `queue`, `suggestions`, `input`, plus
+a `renderMessage(message, ctx)` render-prop for fully custom message
+chrome. Anything you don't pass falls back to the library default.
+
+**Strings.** `strings` is a deep-partial of `AiChatStrings` covering
+the conversation, prompt input, queue, suggestions, and per-message
+copy (`Copy`, `Regenerate`, etc.). Map your i18n into it at the call
+site — the library never reaches for a `useI18n()` hook.
+
+**Headless mode.** For a fully custom layout, build directly against
+the partials (`AiChatConversation`, `AiChatPromptInput`,
+`AiChatEmptyState`, …) and use the `useAiChatScroll` hook to keep the
+auto-stick-to-bottom behaviour.
+
+</Section>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+<Example name="Streaming" source={examplesSource}>
+	<Examples.Streaming />
+</Example>
+
+<Example name="Empty" source={examplesSource}>
+	<Examples.Empty />
+</Example>
+
+<Example name="WithSlots" source={examplesSource}>
+	<Examples.WithSlots />
+</Example>
+
+<Example name="Headless" source={examplesSource}>
+	<Examples.Headless />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+#### AiChat
+<PropsTable component="AiChat" />
+
+#### AiChatConversation
+<PropsTable component="AiChatConversation" />
+
+#### AiChatMessage
+<PropsTable component="AiChatMessage" />
+
+#### AiChatPromptInput
+<PropsTable component="AiChatPromptInput" />
+
+#### AiChatEmptyState
+<PropsTable component="AiChatEmptyState" />
+
+#### AiChatQueue
+<PropsTable component="AiChatQueue" />
+
+#### AiChatSuggestionsRow
+<PropsTable component="AiChatSuggestionsRow" />
+
+#### AiChatAttachmentsStrip
+<PropsTable component="AiChatAttachmentsStrip" />
+
+</Section>
+
+<Section title="Notes" id="notes">
+
+- **The library does NOT call any LLM.** `onSubmit` is a callback —
+  hook it to your backend, your `tRPC` mutation, your worker queue,
+  whatever produces assistant messages. The library only renders.
+- **Messages are fully controlled.** `pending: true` swaps the bubble
+  for the shimmer placeholder; flip it off and pass real `parts` when
+  the assistant turn lands.
+- **Use `useAiChatScroll` for headless layouts.** It exposes
+  `containerRef`, `endRef`, `isAtBottom`, and `scrollToBottom` so a
+  custom shell keeps the same auto-stick-to-bottom behaviour as
+  `<AiChat>`.
+- **Streaming UI is driven by the `streaming` prop**, not by message
+  state — toggle it around your network call so the prompt input
+  shows the stop button.
+- **Attachments are staged client-side.** The library does not upload
+  anything; `onAttach` is your hook to open a file picker (or drop
+  zone) and update the controlled `attachments` array.
+- **Every partial is exported.** If the default layout doesn't fit,
+  compose `AiChatConversation` / `AiChatPromptInput` /
+  `AiChatEmptyState` / `AiChatQueue` / `AiChatSuggestionsRow` /
+  `AiChatAttachmentsStrip` directly — same data shape, full control
+  over the chrome.
+
+</Section>
+
+</DocsPage>

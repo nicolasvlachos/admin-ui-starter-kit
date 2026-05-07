@@ -1,0 +1,70 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './ai-new.examples';
+import examplesSource from './ai-new.examples?raw';
+
+<DocsPage
+	title="Composed · AI (extras)"
+	description="Confidence dial, prompt suggestions, token usage card, message bubble, tool call, citation, feedback."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="AiConfidenceCardExample" source={examplesSource}>
+	<Examples.AiConfidenceCardExample />
+</Example>
+
+<Example name="AiPromptSuggestionsExample" source={examplesSource}>
+	<Examples.AiPromptSuggestionsExample />
+</Example>
+
+<Example name="AiTokenUsageCardExample" source={examplesSource}>
+	<Examples.AiTokenUsageCardExample />
+</Example>
+
+<Example name="AiMessageBubbleExample" source={examplesSource}>
+	<Examples.AiMessageBubbleExample />
+</Example>
+
+<Example name="AiToolCallExample" source={examplesSource}>
+	<Examples.AiToolCallExample />
+</Example>
+
+<Example name="AiCitationExample" source={examplesSource}>
+	<Examples.AiCitationExample />
+</Example>
+
+<Example name="AiFeedbackExample" source={examplesSource}>
+	<Examples.AiFeedbackExample />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### AiCitation
+<PropsTable component="AiCitation" />
+
+#### AiConfidenceCard
+<PropsTable component="AiConfidenceCard" />
+
+#### AiFeedback
+<PropsTable component="AiFeedback" />
+
+#### AiMessageBubble
+<PropsTable component="AiMessageBubble" />
+
+#### AiPromptSuggestions
+<PropsTable component="AiPromptSuggestions" />
+
+#### AiTokenUsageCard
+<PropsTable component="AiTokenUsageCard" />
+
+#### AiToolCall
+<PropsTable component="AiToolCall" />
+
+</Section>
+
+</DocsPage>

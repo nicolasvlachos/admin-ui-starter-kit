@@ -1,0 +1,49 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './commerce.examples';
+import examplesSource from './commerce.examples?raw';
+
+<DocsPage
+	title="Composed · Commerce"
+	description="Bookings, loyalty, discount stacks, shipment tracking."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="UpcomingBookings" source={examplesSource}>
+	<Examples.UpcomingBookings />
+</Example>
+
+<Example name="LoyaltyPoints" source={examplesSource}>
+	<Examples.LoyaltyPoints />
+</Example>
+
+<Example name="DiscountStack" source={examplesSource}>
+	<Examples.DiscountStack />
+</Example>
+
+<Example name="ShipmentTracking" source={examplesSource}>
+	<Examples.ShipmentTracking />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### UpcomingBookingRow
+<PropsTable component="UpcomingBookingRow" />
+
+#### LoyaltyPointsCard
+<PropsTable component="LoyaltyPointsCard" />
+
+#### DiscountStackPreview
+<PropsTable component="DiscountStackPreview" />
+
+#### ShipmentTrackingCard
+<PropsTable component="ShipmentTrackingCard" />
+
+</Section>
+
+</DocsPage>

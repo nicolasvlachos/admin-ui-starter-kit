@@ -1,0 +1,44 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './filters.examples';
+import examplesSource from './filters.examples?raw';
+
+<DocsPage
+	title="Filters"
+	description="Composable filter system. Search + multi-select stay always visible; the rest collapse behind a Filters button. Provider-driven so it works with any data source."
+	layer="features"
+	status="ready"
+	sourcePath="src/components/features/filters"
+>
+
+<Section title="Overview" id="overview">
+
+`FilterProvider` owns the active-filter state machine; `FilterLayout`
+renders the strip (always-visible facets, the Filters menu for collapsed
+ones, active pills, and the Clear filters action). Each `FilterConfig`
+declares its `type` (`SEARCH`, `SELECT`, `MULTI_SELECT`, `DATE`, `RANGE`,
+`TAGS`, `ASYNC_SELECT`), its `displayConfig.display` (`always` or
+`collapsed`), and optional `options`/`fetchOptions`/`validation`.
+
+The example below mounts a search facet, a multi-select status facet, and
+an async-select customer facet wired to the in-repo mock fetcher in
+`src/preview/_mocks/fetchers.ts` (~280ms simulated delay).
+
+</Section>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="FilterProvider" />
+
+<PropsTable component="FilterLayout" />
+
+</Section>
+
+</DocsPage>

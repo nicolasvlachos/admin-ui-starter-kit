@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './invoice-table.examples';
+import examplesSource from './invoice-table.examples?raw';
+
+<DocsPage
+	title="Composed · Invoice table"
+	description="Line items with qty / price / total."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+<Example name="WithTaxRate" source={examplesSource}>
+	<Examples.WithTaxRate />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### InvoiceTable
+<PropsTable component="InvoiceTable" />
+
+</Section>
+
+</DocsPage>

@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './layout-sidebar.examples';
+import examplesSource from './layout-sidebar.examples?raw';
+
+<DocsPage
+	title="Layout · Sidebar"
+	description="Full app sidebar assembly plus reusable navigation, workspace, and footer item partials."
+	layer="layout"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="AppSidebarShell" source={examplesSource}>
+	<Examples.AppSidebarShell />
+</Example>
+
+<Example name="NavigationPartials" source={examplesSource}>
+	<Examples.NavigationPartials />
+</Example>
+
+<Example name="CustomRowRenderer" source={examplesSource}>
+	<Examples.CustomRowRenderer />
+</Example>
+
+</Section>
+
+</DocsPage>

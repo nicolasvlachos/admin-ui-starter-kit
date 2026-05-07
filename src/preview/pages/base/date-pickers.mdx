@@ -1,0 +1,100 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './date-pickers.examples';
+import examplesSource from './date-pickers.examples?raw';
+
+<DocsPage
+	title="Date pickers"
+	description="DatePicker (single / range / multiple) and MonthYearPicker — popover-based, locale-aware, with optional year dropdown and time input."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/date-pickers"
+>
+
+<Section title="Overview" id="overview">
+
+`DatePicker` covers all three calendar modes (`single`, `range`, `multiple`)
+behind one component — pass `mode` and a matching `value` / `onChange` shape.
+`MonthYearPicker` is the compact month + year combo for filters and reports.
+Both honour `useDatesConfig()` for locale and date format.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Modes" id="modes">
+
+<Example name="ModeSingle" source={examplesSource}>
+	<Examples.ModeSingle />
+</Example>
+
+<Example name="ModeRange" source={examplesSource}>
+	<Examples.ModeRange />
+</Example>
+
+<Example name="ModeMultiple" source={examplesSource}>
+	<Examples.ModeMultiple />
+</Example>
+
+</Section>
+
+<Section title="Composition" id="composition">
+
+<Example name="WithYearDropdown" source={examplesSource}>
+	<Examples.WithYearDropdown />
+</Example>
+
+<Example name="ButtonStyles" source={examplesSource}>
+	<Examples.ButtonStyles />
+</Example>
+
+</Section>
+
+<Section title="With time" id="with-time">
+
+<Example name="WithTimeInput" source={examplesSource}>
+	<Examples.WithTimeInput />
+</Example>
+
+</Section>
+
+<Section title="DateRangePicker (legacy)" id="date-range-picker">
+
+The `DateRangePicker` component predates the unified `DatePicker mode="range"`
+API and is kept exported for back-compat. New code should prefer `DatePicker`.
+
+<Example name="DateRangePickerLegacy" source={examplesSource}>
+	<Examples.DateRangePickerLegacy />
+</Example>
+
+</Section>
+
+<Section title="MonthYearPicker" id="month-year">
+
+<Example name="MonthYearPickerExample" source={examplesSource}>
+	<Examples.MonthYearPickerExample />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticDateFilter" source={examplesSource}>
+	<Examples.RealisticDateFilter />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="DatePicker" />
+<PropsTable component="MonthYearPicker" />
+
+</Section>
+
+</DocsPage>

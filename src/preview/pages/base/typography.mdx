@@ -1,0 +1,137 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './typography.examples';
+import examplesSource from './typography.examples?raw';
+
+<DocsPage
+	title="Typography"
+	description="Heading, Text, Label, and TextLink — the four typography primitives every higher layer composes from."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/typography"
+>
+
+<Section title="Overview" id="overview">
+
+The typography layer is intentionally tiny. `Heading` (h1–h6, optional
+`subHeading`), `Text` (six sizes, seven types, four weights, optional `asHTML`),
+`Label` (form captions), and `TextLink` (anchor sibling of `Text`) cover every
+typographic decision in the library. Anything outside the `typography/` folder
+that reaches for a font-size class is doing it wrong.
+
+</Section>
+
+<Section title="Heading" id="heading">
+
+<Example name="HeadingTags" source={examplesSource}>
+	<Examples.HeadingTags />
+</Example>
+
+<Example name="HeadingWithSubHeading" source={examplesSource}>
+	<Examples.HeadingWithSubHeading />
+</Example>
+
+</Section>
+
+<Section title="Text — sizes" id="text-sizes">
+
+<Example name="TextSizes" source={examplesSource}>
+	<Examples.TextSizes />
+</Example>
+
+</Section>
+
+<Section title="Text — types & weights" id="text-types">
+
+<Example name="TextTypes" source={examplesSource}>
+	<Examples.TextTypes />
+</Example>
+
+<Example name="TextWeights" source={examplesSource}>
+	<Examples.TextWeights />
+</Example>
+
+</Section>
+
+<Section title="Text — layout" id="text-layout">
+
+<Example name="TextLineHeights" source={examplesSource}>
+	<Examples.TextLineHeights />
+</Example>
+
+<Example name="TextAlignment" source={examplesSource}>
+	<Examples.TextAlignment />
+</Example>
+
+<Example name="TextTags" source={examplesSource}>
+	<Examples.TextTags />
+</Example>
+
+</Section>
+
+<Section title="Text — content prop & HTML" id="text-html">
+
+<Example name="TextContentAndHTML" source={examplesSource}>
+	<Examples.TextContentAndHTML />
+</Example>
+
+</Section>
+
+<Section title="Label" id="label">
+
+<Example name="LabelExample" source={examplesSource}>
+	<Examples.LabelExample />
+</Example>
+
+</Section>
+
+<Section title="TextLink" id="text-link">
+
+<Example name="TextLinkVariants" source={examplesSource}>
+	<Examples.TextLinkVariants />
+</Example>
+
+<Example name="TextLinkSizes" source={examplesSource}>
+	<Examples.TextLinkSizes />
+</Example>
+
+</Section>
+
+<Section title="Inline helpers — HighLight & Underline" id="inline-helpers">
+
+The `HighLight` and `Underline` helpers (from `@/components/typography/typography`)
+render small inline accents in four variants — `primary`, `success`,
+`warning`, `error`. `DangerousHTML` is the sanitised escape-hatch when you
+must render server-trusted HTML.
+
+<Example name="HighLightExample" source={examplesSource}>
+	<Examples.HighLightExample />
+</Example>
+
+<Example name="UnderlineExample" source={examplesSource}>
+	<Examples.UnderlineExample />
+</Example>
+
+<Example name="DangerousHTMLExample" source={examplesSource}>
+	<Examples.DangerousHTMLExample />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticArticle" source={examplesSource}>
+	<Examples.RealisticArticle />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="Heading" />
+<PropsTable component="Text" />
+<PropsTable component="Label" />
+<PropsTable component="TextLink" />
+
+</Section>
+
+</DocsPage>

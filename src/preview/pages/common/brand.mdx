@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './brand.examples';
+import examplesSource from './brand.examples?raw';
+
+<DocsPage
+	title="Common · Brand"
+	description="Logo + AppLogo (sized variants). Source images expected at /assets/media/gct-logo[-light].png."
+	layer="common"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="LogoExample" source={examplesSource}>
+	<Examples.LogoExample />
+</Example>
+
+<Example name="AppLogoSizes" source={examplesSource}>
+	<Examples.AppLogoSizes />
+</Example>
+
+<Example name="AppLogoVariants" source={examplesSource}>
+	<Examples.AppLogoVariants />
+</Example>
+
+</Section>
+
+</DocsPage>

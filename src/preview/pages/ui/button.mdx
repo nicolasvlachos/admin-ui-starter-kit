@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './button.examples';
+import examplesSource from './button.examples?raw';
+
+<DocsPage
+	title="UI · Button"
+	description="shadcn primitive button — variants, sizes, button group."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Variants" source={examplesSource}>
+	<Examples.Variants />
+</Example>
+
+<Example name="Sizes" source={examplesSource}>
+	<Examples.Sizes />
+</Example>
+
+<Example name="ButtonGroupExample" source={examplesSource}>
+	<Examples.ButtonGroupExample />
+</Example>
+
+</Section>
+
+</DocsPage>

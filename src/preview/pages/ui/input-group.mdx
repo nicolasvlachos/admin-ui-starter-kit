@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './input-group.examples';
+import examplesSource from './input-group.examples?raw';
+
+<DocsPage
+	title="UI · Input group"
+	description="Input with leading / trailing add-ons."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="LeadingIcon" source={examplesSource}>
+	<Examples.LeadingIcon />
+</Example>
+
+<Example name="TrailingAddon" source={examplesSource}>
+	<Examples.TrailingAddon />
+</Example>
+
+<Example name="StackedEmailPassword" source={examplesSource}>
+	<Examples.StackedEmailPassword />
+</Example>
+
+</Section>
+
+</DocsPage>

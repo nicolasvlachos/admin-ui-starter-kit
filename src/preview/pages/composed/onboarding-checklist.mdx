@@ -1,0 +1,36 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './onboarding-checklist.examples';
+import examplesSource from './onboarding-checklist.examples?raw';
+
+<DocsPage
+	title="Composed · Onboarding · Checklist"
+	description="Step-list accordion with completed / in-progress / pending status indicators. Auto-opens the next non-completed step. Strings + status ARIA fully overridable. Composes base/accordion."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="BorderedDefaultPointOfSaleOnboarding" source={examplesSource}>
+	<Examples.BorderedDefaultPointOfSaleOnboarding />
+</Example>
+
+<Example name="CardVariantWorkspaceSetupControlled" source={examplesSource}>
+	<Examples.CardVariantWorkspaceSetupControlled />
+</Example>
+
+<Example name="FlatVariantMinimal" source={examplesSource}>
+	<Examples.FlatVariantMinimal />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### OnboardingChecklist
+<PropsTable component="OnboardingChecklist" />
+
+</Section>
+
+</DocsPage>

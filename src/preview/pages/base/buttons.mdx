@@ -1,0 +1,159 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './buttons.examples';
+import examplesSource from './buttons.examples?raw';
+
+<DocsPage
+	title="Buttons"
+	description="The base button family — BaseButton (variant × style × size), the higher-level Button (loader / tooltip / link wrapper), and specialty buttons (Google, Shopify, Text, PageAction)."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/buttons"
+>
+
+<Section title="Overview" id="overview">
+
+`BaseButton` is the foundational primitive — eight semantic `variant`s (dark,
+primary, secondary, error, warning, success, light, action) crossed with three
+`buttonStyle`s (solid, outline, ghost) and four sizes (xs, sm, default, lg)
+plus four icon-only sizes. `Button` layers on optional `loading`, `withTooltip`,
+and `href` so a single component covers most call sites. The specialty buttons
+are pre-styled wrappers for common patterns.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Variants" id="variants">
+
+<Example name="AllVariantsSolid" source={examplesSource}>
+	<Examples.AllVariantsSolid />
+</Example>
+
+<Example name="AllVariantsOutline" source={examplesSource}>
+	<Examples.AllVariantsOutline />
+</Example>
+
+<Example name="AllVariantsGhost" source={examplesSource}>
+	<Examples.AllVariantsGhost />
+</Example>
+
+<Example name="VariantStyleMatrix" source={examplesSource}>
+	<Examples.VariantStyleMatrix />
+</Example>
+
+</Section>
+
+<Section title="Sizes" id="sizes">
+
+<Example name="Sizes" source={examplesSource}>
+	<Examples.Sizes />
+</Example>
+
+<Example name="IconOnlySizes" source={examplesSource}>
+	<Examples.IconOnlySizes />
+</Example>
+
+</Section>
+
+<Section title="Composition" id="composition">
+
+<Example name="WithIconLeft" source={examplesSource}>
+	<Examples.WithIconLeft />
+</Example>
+
+<Example name="WithIconRight" source={examplesSource}>
+	<Examples.WithIconRight />
+</Example>
+
+</Section>
+
+<Section title="States" id="states">
+
+<Example name="StateDisabled" source={examplesSource}>
+	<Examples.StateDisabled />
+</Example>
+
+<Example name="StateFullWidth" source={examplesSource}>
+	<Examples.StateFullWidth />
+</Example>
+
+</Section>
+
+<Section title="Button (combo wrapper)" id="combo">
+
+<Example name="ButtonComboFeatures" source={examplesSource}>
+	<Examples.ButtonComboFeatures />
+</Example>
+
+</Section>
+
+<Section title="LoaderButton" id="loader">
+
+<Example name="LoaderButtonStates" source={examplesSource}>
+	<Examples.LoaderButtonStates />
+</Example>
+
+<Example name="LoaderButtonInteractive" source={examplesSource}>
+	<Examples.LoaderButtonInteractive />
+</Example>
+
+</Section>
+
+<Section title="TooltipButton" id="tooltip">
+
+<Example name="TooltipButtonExample" source={examplesSource}>
+	<Examples.TooltipButtonExample />
+</Example>
+
+</Section>
+
+<Section title="Specialty buttons" id="specialty">
+
+<Example name="GoogleButtonExample" source={examplesSource}>
+	<Examples.GoogleButtonExample />
+</Example>
+
+<Example name="ShopifyButtonExample" source={examplesSource}>
+	<Examples.ShopifyButtonExample />
+</Example>
+
+<Example name="TextButtonSizes" source={examplesSource}>
+	<Examples.TextButtonSizes />
+</Example>
+
+<Example name="PageActionButtonVariants" source={examplesSource}>
+	<Examples.PageActionButtonVariants />
+</Example>
+
+<Example name="PageActionButtonSizes" source={examplesSource}>
+	<Examples.PageActionButtonSizes />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticToolbar" source={examplesSource}>
+	<Examples.RealisticToolbar />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="BaseButton" />
+<PropsTable component="Button" />
+<PropsTable component="LoaderButton" />
+<PropsTable component="TooltipButton" />
+<PropsTable component="TextButton" />
+<PropsTable component="PageActionButton" />
+
+</Section>
+
+</DocsPage>

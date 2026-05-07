@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './inputs.examples';
+import examplesSource from './inputs.examples?raw';
+
+<DocsPage
+	title="UI · Inputs"
+	description="Input, Textarea, Select primitives."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="InputExample" source={examplesSource}>
+	<Examples.InputExample />
+</Example>
+
+<Example name="TextareaExample" source={examplesSource}>
+	<Examples.TextareaExample />
+</Example>
+
+<Example name="SelectExample" source={examplesSource}>
+	<Examples.SelectExample />
+</Example>
+
+</Section>
+
+</DocsPage>

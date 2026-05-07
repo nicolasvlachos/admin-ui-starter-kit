@@ -1,0 +1,151 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './combobox.examples';
+import examplesSource from './combobox.examples?raw';
+
+<DocsPage
+	title="Combobox"
+	description="EnhancedCombobox and EnhancedComboboxMultiple — searchable, optionally grouped, with apply / close-on-select behaviours, async fetchers, custom rendering, and form integration."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/combobox"
+>
+
+<Section title="Overview" id="overview">
+
+The combobox primitives are intentionally generic — pass an `items` array
+(any shape), a `getItemLabel` and `getItemKey`, and own the `searchValue` and
+`selectedValue(s)` state. Optional `getItemGroup` collapses items into
+sections; `applyButton` defers commit until the user clicks Apply;
+`closeOnSelect` closes the popover after each pick. `creatable` + `onCreate`
+turn it into a free-form input. Every callback (`onSearch`, `onLoadMore`,
+`onCreate`) is an opt-in seam — no hardcoded fetcher, no opinionated wiring.
+
+</Section>
+
+<Section title="Single" id="single">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+<Example name="SingleSelect" source={examplesSource}>
+	<Examples.SingleSelect />
+</Example>
+
+<Example name="SingleHighlightMatch" source={examplesSource}>
+	<Examples.SingleHighlightMatch />
+</Example>
+
+<Example name="SingleCreatable" source={examplesSource}>
+	<Examples.SingleCreatable />
+</Example>
+
+</Section>
+
+<Section title="Multiple" id="multiple">
+
+<Example name="MultipleSelect" source={examplesSource}>
+	<Examples.MultipleSelect />
+</Example>
+
+<Example name="MultipleApplyButton" source={examplesSource}>
+	<Examples.MultipleApplyButton />
+</Example>
+
+<Example name="MultipleCloseOnSelect" source={examplesSource}>
+	<Examples.MultipleCloseOnSelect />
+</Example>
+
+</Section>
+
+<Section title="Grouped options" id="grouped">
+
+<Example name="MultipleGrouped" source={examplesSource}>
+	<Examples.MultipleGrouped />
+</Example>
+
+<Example name="GroupedTeamByRole" source={examplesSource}>
+	<Examples.GroupedTeamByRole />
+</Example>
+
+</Section>
+
+<Section title="Async / fetcher" id="async">
+
+<Example name="AsyncCustomers" source={examplesSource}>
+	<Examples.AsyncCustomers />
+</Example>
+
+<Example name="AsyncDebouncedSearch" source={examplesSource}>
+	<Examples.AsyncDebouncedSearch />
+</Example>
+
+<Example name="AsyncWithLoadMore" source={examplesSource}>
+	<Examples.AsyncWithLoadMore />
+</Example>
+
+</Section>
+
+<Section title="Custom rendering" id="custom-rendering">
+
+<Example name="CustomItemRendering" source={examplesSource}>
+	<Examples.CustomItemRendering />
+</Example>
+
+<Example name="CustomGroupLabels" source={examplesSource}>
+	<Examples.CustomGroupLabels />
+</Example>
+
+</Section>
+
+<Section title="Sizes" id="sizes">
+
+<Example name="SizeSm" source={examplesSource}>
+	<Examples.SizeSm />
+</Example>
+
+<Example name="SizeMd" source={examplesSource}>
+	<Examples.SizeMd />
+</Example>
+
+<Example name="SizeLg" source={examplesSource}>
+	<Examples.SizeLg />
+</Example>
+
+</Section>
+
+<Section title="States" id="states">
+
+<Example name="Disabled" source={examplesSource}>
+	<Examples.Disabled />
+</Example>
+
+<Example name="Invalid" source={examplesSource}>
+	<Examples.Invalid />
+</Example>
+
+<Example name="MinSearchLength" source={examplesSource}>
+	<Examples.MinSearchLength />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticCustomerPicker" source={examplesSource}>
+	<Examples.RealisticCustomerPicker />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+#### EnhancedCombobox
+<PropsTable component="EnhancedCombobox" />
+
+#### EnhancedComboboxMultiple
+<PropsTable component="EnhancedComboboxMultiple" />
+
+</Section>
+
+</DocsPage>

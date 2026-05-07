@@ -1,0 +1,36 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './global-search.examples';
+import examplesSource from './global-search.examples?raw';
+
+<DocsPage
+	title="GlobalSearch"
+	description="Async search palette with slots, render-props, and a headless useGlobalSearch hook."
+	layer="features"
+	status="ready"
+	sourcePath="src/components/features/global-search"
+>
+
+<Section title="Overview" id="overview">
+
+`GlobalSearch` is a controlled search palette. The library does not fetch
+anything — the consumer owns the `query` state and supplies the `results`
+array. The example below wires `query` to the in-repo mock fetcher in
+`src/preview/_mocks/fetchers.ts`, which simulates an API with a 280ms delay.
+
+</Section>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="GlobalSearch" />
+
+</Section>
+
+</DocsPage>

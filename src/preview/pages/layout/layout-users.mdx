@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './layout-users.examples';
+import examplesSource from './layout-users.examples?raw';
+
+<DocsPage
+	title="Layout · Users & avatars"
+	description="User identity surfaces used by layout headers, sidebars, menus, avatar groups, and status badges."
+	layer="layout"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="AvatarStates" source={examplesSource}>
+	<Examples.AvatarStates />
+</Example>
+
+<Example name="HeaderUserMenuExample" source={examplesSource}>
+	<Examples.HeaderUserMenuExample />
+</Example>
+
+<Example name="SidebarUserMenu" source={examplesSource}>
+	<Examples.SidebarUserMenu />
+</Example>
+
+<Example name="CustomTriggerCustomContent" source={examplesSource}>
+	<Examples.CustomTriggerCustomContent />
+</Example>
+
+</Section>
+
+</DocsPage>

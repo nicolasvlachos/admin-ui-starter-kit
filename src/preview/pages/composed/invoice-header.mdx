@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './invoice-header.examples';
+import examplesSource from './invoice-header.examples?raw';
+
+<DocsPage
+	title="Composed · Invoice header"
+	description="Top of an invoice — number, status, parties, amount."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Paid" source={examplesSource}>
+	<Examples.Paid />
+</Example>
+
+<Example name="Overdue" source={examplesSource}>
+	<Examples.Overdue />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### InvoiceHeaderCard
+<PropsTable component="InvoiceHeaderCard" />
+
+</Section>
+
+</DocsPage>

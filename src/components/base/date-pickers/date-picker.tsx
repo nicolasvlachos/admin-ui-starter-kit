@@ -69,14 +69,29 @@ function resolvePickerButtonProps(variant: unknown): { variant: ButtonVariant; b
 
 /**
  * Field-style chrome override applied on top of `<Button>` so the
- * picker trigger reads as a form field (square-ish corners, input
- * border, subtle shadow) instead of the global pill-shaped button
- * default. Mirrors `formFieldTriggerClasses` from `forms/form-sizing`
- * — kept inline here to avoid making `date-pickers` import the forms
- * sizing helper.
+ * picker trigger reads as a form field — visually identical to
+ * `<Input>` (same height, border, padding, focus ring, typography).
+ *
+ * Mirrors the `Input` component's chrome:
+ * - `border-input` border, `rounded-md`, `bg-transparent`
+ * - `h-9` (matches `formControlSizeClasses.sm`) + `px-3`
+ * - `text-sm` body text, normal weight, `text-foreground`
+ * - `focus-visible:border-ring ring-ring/50 ring-[3px]`
+ * - `aria-invalid:` destructive ring + border
+ * - flat (no shadow) — library is intentionally flat
+ *
+ * `!` prefix wins against the global `<Button>`'s pill-shaped default
+ * + `data-[size=*]` attribute selectors. Caret-icon sits in
+ * library-default left padding equal to `<Input startIcon>` rules.
  */
-const PICKER_TRIGGER_CHROME =
-	'!rounded-md !border-input !bg-transparent !shadow-none !h-9 !px-3 !font-normal !text-foreground hover:!bg-transparent';
+export const PICKER_TRIGGER_CHROME = [
+	'!h-9 !px-3 !rounded-md !border !border-input !bg-transparent !shadow-none',
+	'!text-sm !font-normal !text-foreground',
+	'hover:!bg-transparent',
+	'focus-visible:!border-ring focus-visible:!ring-ring/50 focus-visible:!ring-[3px]',
+	'aria-invalid:!ring-destructive/20 dark:aria-invalid:!ring-destructive/40 aria-invalid:!border-destructive',
+	'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+].join(' ');
 
 // Type guards
 function isSingleMode(props: DatePickerProps): props is DatepickerProps {

@@ -1,0 +1,180 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './display.examples';
+import examplesSource from './display.examples?raw';
+
+<DocsPage
+	title="Display"
+	description="The display layer — Avatar, IconBadge, InlineStat, Tooltip, Separator, NotificationBanner, BooleanIndicator, ShowIf, ThrottleAlert, VisuallyHidden, PlaceholderPattern."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/display"
+>
+
+<Section title="Overview" id="overview">
+
+The `display/` folder collects every "show this small thing" primitive — from
+re-exports of shadcn (`Avatar`, `Separator`, `Tooltip`) to custom presentational
+helpers (`IconBadge`, `InlineStat`, `BooleanIndicator`, `NotificationBanner`,
+`StackedAvatars`, `PlaceholderPattern`). Each is intentionally narrow.
+
+</Section>
+
+<Section title="Avatar & StackedAvatars" id="avatar">
+
+<Example name="AvatarSizes" source={examplesSource}>
+	<Examples.AvatarSizes />
+</Example>
+
+<Example name="StackedAvatarsExample" source={examplesSource}>
+	<Examples.StackedAvatarsExample />
+</Example>
+
+</Section>
+
+<Section title="IconBadge" id="icon-badge">
+
+<Example name="IconBadgeTones" source={examplesSource}>
+	<Examples.IconBadgeTones />
+</Example>
+
+<Example name="IconBadgeShapes" source={examplesSource}>
+	<Examples.IconBadgeShapes />
+</Example>
+
+<Example name="IconBadgeSizes" source={examplesSource}>
+	<Examples.IconBadgeSizes />
+</Example>
+
+</Section>
+
+<Section title="InlineStat" id="inline-stat">
+
+<Example name="InlineStatLayouts" source={examplesSource}>
+	<Examples.InlineStatLayouts />
+</Example>
+
+</Section>
+
+<Section title="Separator & Tooltip" id="separator-tooltip">
+
+<Example name="SeparatorExample" source={examplesSource}>
+	<Examples.SeparatorExample />
+</Example>
+
+<Example name="TooltipExample" source={examplesSource}>
+	<Examples.TooltipExample />
+</Example>
+
+</Section>
+
+<Section title="NotificationBanner" id="notification-banner">
+
+<Example name="NotificationBannerVariants" source={examplesSource}>
+	<Examples.NotificationBannerVariants />
+</Example>
+
+</Section>
+
+<Section title="Boolean & conditionals" id="boolean">
+
+<Example name="BooleanIndicatorExample" source={examplesSource}>
+	<Examples.BooleanIndicatorExample />
+</Example>
+
+<Example name="ShowIfExample" source={examplesSource}>
+	<Examples.ShowIfExample />
+</Example>
+
+</Section>
+
+<Section title="Misc" id="misc">
+
+<Example name="ThrottleAlertExample" source={examplesSource}>
+	<Examples.ThrottleAlertExample />
+</Example>
+
+<Example name="VisuallyHiddenExample" source={examplesSource}>
+	<Examples.VisuallyHiddenExample />
+</Example>
+
+<Example name="PlaceholderPatternExample" source={examplesSource}>
+	<Examples.PlaceholderPatternExample />
+</Example>
+
+</Section>
+
+<Section title="Alert" id="alert">
+
+<Example name="AlertExample" source={examplesSource}>
+	<Examples.AlertExample />
+</Example>
+
+</Section>
+
+<Section title="Progress & Skeleton" id="progress-skeleton">
+
+<Example name="ProgressExample" source={examplesSource}>
+	<Examples.ProgressExample />
+</Example>
+
+<Example name="SkeletonExample" source={examplesSource}>
+	<Examples.SkeletonExample />
+</Example>
+
+</Section>
+
+<Section title="Collapsible & Dialog" id="collapsible-dialog">
+
+<Example name="CollapsibleExample" source={examplesSource}>
+	<Examples.CollapsibleExample />
+</Example>
+
+<Example name="DialogExample" source={examplesSource}>
+	<Examples.DialogExample />
+</Example>
+
+</Section>
+
+<Section title="DateBlock" id="date-block">
+
+<Example name="DateBlockExample" source={examplesSource}>
+	<Examples.DateBlockExample />
+</Example>
+
+</Section>
+
+<Section title="MoneyDisplay" id="money-display">
+
+<Example name="MoneyDisplayExample" source={examplesSource}>
+	<Examples.MoneyDisplayExample />
+</Example>
+
+</Section>
+
+<Section title="QRCode" id="qr-code">
+
+<Example name="QRCodeExample" source={examplesSource}>
+	<Examples.QRCodeExample />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticUserCard" source={examplesSource}>
+	<Examples.RealisticUserCard />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="IconBadge" />
+<PropsTable component="InlineStat" />
+<PropsTable component="NotificationBanner" />
+<PropsTable component="BooleanIndicator" />
+<PropsTable component="StackedAvatars" />
+
+</Section>
+
+</DocsPage>

@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-inline-badge.examples';
+import examplesSource from './metrics-inline-badge.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Inline badge"
+	description="`InlineMetricBadge` — compact `label · value · change%` pill rows. Use as in-flow copy where a full Metric tile is too heavy."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="MixedSizesDirections" source={examplesSource}>
+	<Examples.MixedSizesDirections />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### InlineMetricBadge
+<PropsTable component="InlineMetricBadge" />
+
+</Section>
+
+</DocsPage>

@@ -1,0 +1,102 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './navigation.examples';
+import examplesSource from './navigation.examples?raw';
+
+<DocsPage
+	title="Navigation"
+	description="The navigation primitives — PageHeader, Breadcrumbs, ActionMenu, LanguageSwitcher, SectionNav, SideNav, AsideNavigationMenu, TabNavigationMenu, NavigationTabs, OverflowTabBar."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/navigation"
+>
+
+<Section title="Overview" id="overview">
+
+The `navigation/` folder bundles every cross-cutting nav surface — page
+headers, breadcrumb trails, side rails, tab bars, action menus, and the
+language switcher. All components are framework-agnostic — pass `href`s and
+let the consumer wire routing.
+
+</Section>
+
+<Section title="Page header" id="page-header">
+
+<Example name="PageHeaderExample" source={examplesSource}>
+	<Examples.PageHeaderExample />
+</Example>
+
+</Section>
+
+<Section title="Breadcrumbs" id="breadcrumbs">
+
+<Example name="BreadcrumbsSizes" source={examplesSource}>
+	<Examples.BreadcrumbsSizes />
+</Example>
+
+</Section>
+
+<Section title="Tabs" id="tabs">
+
+<Example name="TabNavigationMenuExample" source={examplesSource}>
+	<Examples.TabNavigationMenuExample />
+</Example>
+
+<Example name="NavigationTabsRound" source={examplesSource}>
+	<Examples.NavigationTabsRound />
+</Example>
+
+<Example name="OverflowTabBarResponsiveWithMoreMenu" source={examplesSource}>
+	<Examples.OverflowTabBarResponsiveWithMoreMenu />
+</Example>
+
+</Section>
+
+<Section title="Side nav & section nav" id="side-nav">
+
+<Example name="AsideNavigationMenuExample" source={examplesSource}>
+	<Examples.AsideNavigationMenuExample />
+</Example>
+
+<Example name="SideNavCollapsibleGroups" source={examplesSource}>
+	<Examples.SideNavCollapsibleGroups />
+</Example>
+
+<Example name="SectionNavSticky" source={examplesSource}>
+	<Examples.SectionNavSticky />
+</Example>
+
+</Section>
+
+<Section title="Action menu" id="action-menu">
+
+<Example name="ActionMenuExample" source={examplesSource}>
+	<Examples.ActionMenuExample />
+</Example>
+
+</Section>
+
+<Section title="Language switcher" id="language-switcher">
+
+<Example name="LanguageSwitcherButtons" source={examplesSource}>
+	<Examples.LanguageSwitcherButtons />
+</Example>
+
+<Example name="LanguageSwitcherInline" source={examplesSource}>
+	<Examples.LanguageSwitcherInline />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="PageHeader" />
+<PropsTable component="Breadcrumbs" />
+<PropsTable component="ActionMenu" />
+<PropsTable component="SectionNav" />
+<PropsTable component="SideNav" />
+<PropsTable component="OverflowTabBar" />
+<PropsTable component="LanguageSwitcher" />
+
+</Section>
+
+</DocsPage>

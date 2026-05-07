@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './alert.examples';
+import examplesSource from './alert.examples?raw';
+
+<DocsPage
+	title="UI · Alert"
+	description="shadcn alert primitive: variants, with title/description/action."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Variants" source={examplesSource}>
+	<Examples.Variants />
+</Example>
+
+<Example name="WithAlertAction" source={examplesSource}>
+	<Examples.WithAlertAction />
+</Example>
+
+<Example name="TitleOnly" source={examplesSource}>
+	<Examples.TitleOnly />
+</Example>
+
+</Section>
+
+</DocsPage>

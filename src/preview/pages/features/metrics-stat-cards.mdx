@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-stat-cards.examples';
+import examplesSource from './metrics-stat-cards.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Stat cards"
+	description="Two stat tile flavors built from the unified `Metric` component — `accent` (dark surface + sparkline) and `colored` (segmented progress bar)."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="MetricAccent" source={examplesSource}>
+	<Examples.MetricAccent />
+</Example>
+
+<Example name="MetricColored" source={examplesSource}>
+	<Examples.MetricColored />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### Metric
+<PropsTable component="Metric" />
+
+</Section>
+
+</DocsPage>

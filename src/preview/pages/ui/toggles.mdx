@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './toggles.examples';
+import examplesSource from './toggles.examples?raw';
+
+<DocsPage
+	title="UI · Toggles"
+	description="Checkbox, Switch, RadioGroup, Slider primitives."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="CheckboxExample" source={examplesSource}>
+	<Examples.CheckboxExample />
+</Example>
+
+<Example name="SwitchExample" source={examplesSource}>
+	<Examples.SwitchExample />
+</Example>
+
+<Example name="RadioGroupExample" source={examplesSource}>
+	<Examples.RadioGroupExample />
+</Example>
+
+<Example name="SliderExample" source={examplesSource}>
+	<Examples.SliderExample />
+</Example>
+
+</Section>
+
+</DocsPage>

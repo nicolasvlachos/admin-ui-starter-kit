@@ -1,0 +1,48 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './item.examples';
+import examplesSource from './item.examples?raw';
+
+<DocsPage
+	title="Item"
+	description="Canonical row primitive — icon/avatar/image media, title + description content, optional actions. Use ItemGroup to compose lists."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/item"
+>
+
+<Section title="Overview" id="overview">
+
+`Item` is the row primitive used everywhere a "media + title-stack + actions"
+shape recurs — admin rows, contact details, search results, settings toggles,
+dropdown menus. Compose `ItemMedia`, `ItemContent` (with `ItemTitle` and
+`ItemDescription`), and `ItemActions` inside an `Item`. Wrap multiple rows in
+`ItemGroup` (with optional `ItemSeparator`s between them) for a list.
+
+The `render` prop turns any `Item` into a custom element (anchor, button, link
+wrapper) without breaking focus/hover styling.
+
+</Section>
+
+<Section title="Examples" id="examples">
+
+<Example name="Basic" source={examplesSource}>
+	<Examples.Basic />
+</Example>
+
+<Example name="Variants" source={examplesSource}>
+	<Examples.Variants />
+</Example>
+
+<Example name="PolymorphicLink" source={examplesSource}>
+	<Examples.PolymorphicLink />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="Item" />
+
+</Section>
+
+</DocsPage>

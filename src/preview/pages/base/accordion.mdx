@@ -1,0 +1,96 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './accordion.examples';
+import examplesSource from './accordion.examples?raw';
+
+<DocsPage
+	title="Accordion"
+	description="Two tiers — pass-through compound parts (Accordion / AccordionItem / AccordionTrigger / AccordionContent) for full control, or SmartAccordion for the canonical icon + title + optional badge + body admin pattern."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/accordion"
+>
+
+<Section title="Overview" id="overview">
+
+`SmartAccordion` is the 90% case — pass an `items` array of `{ value, title,
+icon?, badge?, content, disabled? }` and pick a visual `variant` (`card` |
+`bordered` | `flat`) and an `iconStyle` (`medallion` | `inline` | `none`).
+Drop down to the compound `Accordion` parts for richer rows.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Variants" id="variants">
+
+<Example name="VariantCard" source={examplesSource}>
+	<Examples.VariantCard />
+</Example>
+
+<Example name="VariantBordered" source={examplesSource}>
+	<Examples.VariantBordered />
+</Example>
+
+<Example name="VariantFlat" source={examplesSource}>
+	<Examples.VariantFlat />
+</Example>
+
+</Section>
+
+<Section title="Icon styles" id="icon-styles">
+
+<Example name="IconStyleMedallion" source={examplesSource}>
+	<Examples.IconStyleMedallion />
+</Example>
+
+<Example name="IconStyleInline" source={examplesSource}>
+	<Examples.IconStyleInline />
+</Example>
+
+<Example name="IconStyleNone" source={examplesSource}>
+	<Examples.IconStyleNone />
+</Example>
+
+</Section>
+
+<Section title="States" id="states">
+
+<Example name="MultipleOpen" source={examplesSource}>
+	<Examples.MultipleOpen />
+</Example>
+
+<Example name="WithBadgeAndDisabled" source={examplesSource}>
+	<Examples.WithBadgeAndDisabled />
+</Example>
+
+</Section>
+
+<Section title="Compound API" id="compound">
+
+<Example name="CompoundApi" source={examplesSource}>
+	<Examples.CompoundApi />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticFAQ" source={examplesSource}>
+	<Examples.RealisticFAQ />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="SmartAccordion" />
+
+</Section>
+
+</DocsPage>

@@ -2,6 +2,7 @@ import { Clock } from 'lucide-react';
 import * as React from 'react';
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/base/buttons';
+import { PICKER_TRIGGER_CHROME } from '@/components/base/date-pickers/date-picker';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/base/popover';
 import { Label, Text } from '@/components/typography';
 import { useStrings, type StringsProp } from '@/lib/strings';
@@ -339,12 +340,10 @@ export function TimePicker({
                         disabled={disabled}
                         className={cn(
                             'time-picker--component',
-                            // Field-style override (matches Input chrome,
-                            // not the global pill-shaped button default).
-                            '!rounded-md !border-input !bg-transparent !shadow-none !h-9 !px-3 !font-normal !text-foreground hover:!bg-transparent',
+                            // Shared field-style chrome (matches Input).
+                            PICKER_TRIGGER_CHROME,
                             'w-full justify-between text-left',
                             !value && '!text-muted-foreground',
-                            'aria-invalid:!border-destructive aria-invalid:!ring-2 aria-invalid:!ring-destructive/20',
 										(triggerProps as { className?: string }).className,
                             className
                         )}

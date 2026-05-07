@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './layout-header.examples';
+import examplesSource from './layout-header.examples?raw';
+
+<DocsPage
+	title="Layout · Header"
+	description="Topbar, breadcrumbs, command search, notifications, and action slots in a realistic app-shell canvas."
+	layer="layout"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="AppHeaderComposition" source={examplesSource}>
+	<Examples.AppHeaderComposition />
+</Example>
+
+<Example name="HeaderPartials" source={examplesSource}>
+	<Examples.HeaderPartials />
+</Example>
+
+<Example name="CustomNotificationRenderer" source={examplesSource}>
+	<Examples.CustomNotificationRenderer />
+</Example>
+
+</Section>
+
+</DocsPage>

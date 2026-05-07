@@ -18,6 +18,7 @@ import { useStrings } from '@/lib/strings';
 
 import { DatePickerFooter } from './date-picker-footer';
 import { DatePickerHeader } from './date-picker-header';
+import { PICKER_TRIGGER_CHROME } from './date-picker';
 import { defaultDatePickerStrings } from './date-pickers.strings';
 import type { DateRangePickerProps, DateRangeOutput } from './datepicker.types';
 import { enUS } from 'date-fns/locale';
@@ -187,10 +188,11 @@ export function DateRangePicker({
 							id="date-range-picker-trigger"
 							variant="secondary"
 							buttonStyle="outline"
+							aria-invalid={!!error}
 							className={cn(
 								'w-full justify-start text-left font-normal',
+								PICKER_TRIGGER_CHROME,
 								!range && 'text-muted-foreground',
-								error && 'border-destructive focus-visible:ring-destructive',
 										(triggerProps as { className?: string }).className,
 							)}
 							disabled={disabled}

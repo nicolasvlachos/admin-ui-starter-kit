@@ -1,0 +1,51 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './activities.examples';
+import examplesSource from './activities.examples?raw';
+
+<DocsPage
+	title="Features · Activity feed"
+	description="Interactive activity feed — generic, framework-agnostic, with headline segments, callbacks (actor / resource / action), strings, slots, mass event configuration, and a save/restore resource registry. For read-only tracking timelines (order, payment, changelog, milestones) see Composed → Timelines."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="DefaultDensityHeadlineSegmentsGrouping" source={examplesSource}>
+	<Examples.DefaultDensityHeadlineSegmentsGrouping />
+</Example>
+
+<Example name="CompactDensitySingleLineDotFeed" source={examplesSource}>
+	<Examples.CompactDensitySingleLineDotFeed />
+</Example>
+
+<Example name="RichDensityChangesMetadataActions" source={examplesSource}>
+	<Examples.RichDensityChangesMetadataActions />
+</Example>
+
+<Example name="MassEventConfigurationCustomStringsTones" source={examplesSource}>
+	<Examples.MassEventConfigurationCustomStringsTones />
+</Example>
+
+<Example name="CustomRowRenderingSlotsRenderRow" source={examplesSource}>
+	<Examples.CustomRowRenderingSlotsRenderRow />
+</Example>
+
+<Example name="ResourceRegistrySaveRestoreTaggingBadgingLinking" source={examplesSource}>
+	<Examples.ResourceRegistrySaveRestoreTaggingBadgingLinking />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### ActivityFeed
+<PropsTable component="ActivityFeed" />
+
+#### ActivityFeedCard
+<PropsTable component="ActivityFeedCard" />
+
+</Section>
+
+</DocsPage>

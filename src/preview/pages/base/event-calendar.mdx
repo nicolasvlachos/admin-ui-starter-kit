@@ -1,0 +1,77 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './event-calendar.examples';
+import examplesSource from './event-calendar.examples?raw';
+
+<DocsPage
+	title="Event calendar"
+	description="Month view with categories, filtering, navigation rules, custom event rendering, and three day-heading variants."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/event-calendar"
+>
+
+<Section title="Overview" id="overview">
+
+`EventCalendar` is the canonical month view — pass `events` and optional
+`categories`, drive filtering with `enableCategoryFilter` / `visibleCategories`
+or imperatively with `filterEvent`, and slot a custom renderer with
+`renderEvent`. Navigation can be capped via `minDate` / `maxDate` and
+`disabledDates`, and every string + locale is overridable.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Navigation modes" id="navigation">
+
+<Example name="RangeModeMonthYearCompactMonthYearJump" source={examplesSource}>
+	<Examples.RangeModeMonthYearCompactMonthYearJump />
+</Example>
+
+<Example name="NavigationLimitsDisabledDates" source={examplesSource}>
+	<Examples.NavigationLimitsDisabledDates />
+</Example>
+
+</Section>
+
+<Section title="Day-heading variants" id="day-heading">
+
+<Example name="DayHeadingVariantTinted" source={examplesSource}>
+	<Examples.DayHeadingVariantTinted />
+</Example>
+
+<Example name="DayHeadingVariantBordered" source={examplesSource}>
+	<Examples.DayHeadingVariantBordered />
+</Example>
+
+<Example name="DayHeadingVariantAccent" source={examplesSource}>
+	<Examples.DayHeadingVariantAccent />
+</Example>
+
+</Section>
+
+<Section title="Customisation" id="custom">
+
+<Example name="FilterEventRenderEventCustomEventRendering" source={examplesSource}>
+	<Examples.FilterEventRenderEventCustomEventRendering />
+</Example>
+
+<Example name="WithCustomStringsBG" source={examplesSource}>
+	<Examples.WithCustomStringsBG />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="EventCalendar" />
+
+</Section>
+
+</DocsPage>

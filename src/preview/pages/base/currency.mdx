@@ -1,0 +1,102 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './currency.examples';
+import examplesSource from './currency.examples?raw';
+
+<DocsPage
+	title="Currency"
+	description="MoneyDisplay and CurrencyPairPreview — locale-aware, dual-pricing-aware money rendering driven by useCurrency() / UIProvider config."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/currency"
+>
+
+<Section title="Overview" id="overview">
+
+`MoneyDisplay` renders a primary (and optional secondary) currency amount,
+using the active `useCurrency()` config for formatting, dual-pricing, and
+display mode. `CurrencyPairPreview` renders an inline `source → target`
+conversion. Both honour `UIProvider` config so consumers can flip the entire
+app to dual pricing or a different default currency in one place.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Sizes" id="sizes">
+
+<Example name="Sizes" source={examplesSource}>
+	<Examples.Sizes />
+</Example>
+
+</Section>
+
+<Section title="Currencies & empty state" id="currencies">
+
+<Example name="MultipleCurrencies" source={examplesSource}>
+	<Examples.MultipleCurrencies />
+</Example>
+
+<Example name="EmptyState" source={examplesSource}>
+	<Examples.EmptyState />
+</Example>
+
+</Section>
+
+<Section title="Dual pricing — stacked" id="dual-stacked">
+
+<Example name="PairStackedEmphasisVariants" source={examplesSource}>
+	<Examples.PairStackedEmphasisVariants />
+</Example>
+
+</Section>
+
+<Section title="Dual pricing — inline" id="dual-inline">
+
+<Example name="PairInlineEmphasisVariants" source={examplesSource}>
+	<Examples.PairInlineEmphasisVariants />
+</Example>
+
+<Example name="PairMinimalVariant" source={examplesSource}>
+	<Examples.PairMinimalVariant />
+</Example>
+
+</Section>
+
+<Section title="CurrencyPairPreview" id="pair-preview">
+
+<Example name="CurrencyPairPreviewExample" source={examplesSource}>
+	<Examples.CurrencyPairPreviewExample />
+</Example>
+
+</Section>
+
+<Section title="UIProvider configuration" id="provider">
+
+<Example name="ProviderConfigDualPricing" source={examplesSource}>
+	<Examples.ProviderConfigDualPricing />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticOrdersList" source={examplesSource}>
+	<Examples.RealisticOrdersList />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="MoneyDisplay" />
+<PropsTable component="CurrencyPairPreview" />
+
+</Section>
+
+</DocsPage>

@@ -1,0 +1,24 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './ui-badge.examples';
+import examplesSource from './ui-badge.examples?raw';
+
+<DocsPage
+	title="UI · Badge"
+	description="shadcn badge primitive (no theming wrapper)."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Variants" source={examplesSource}>
+	<Examples.Variants />
+</Example>
+
+<Example name="InContext" source={examplesSource}>
+	<Examples.InContext />
+</Example>
+
+</Section>
+
+</DocsPage>

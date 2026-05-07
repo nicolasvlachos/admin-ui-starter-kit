@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-kpi-row.examples';
+import examplesSource from './metrics-kpi-row.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · KPI row"
+	description="`MiniKpiRow` — compact horizontal divider-separated KPI strip for header / footer accents."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Example4KPIs" source={examplesSource}>
+	<Examples.Example4KPIs />
+</Example>
+
+<Example name="Example3KPIs" source={examplesSource}>
+	<Examples.Example3KPIs />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### MiniKpiRow
+<PropsTable component="MiniKpiRow" />
+
+</Section>
+
+</DocsPage>

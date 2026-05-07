@@ -1,0 +1,56 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './dense-info.examples';
+import examplesSource from './dense-info.examples?raw';
+
+<DocsPage
+	title="Composed · Dense info cards"
+	description="Five layout variants — dashboard, classification, financial, project, score."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Dashboard" source={examplesSource}>
+	<Examples.Dashboard />
+</Example>
+
+<Example name="ScoreCard" source={examplesSource}>
+	<Examples.ScoreCard />
+</Example>
+
+<Example name="Classification" source={examplesSource}>
+	<Examples.Classification />
+</Example>
+
+<Example name="Financial" source={examplesSource}>
+	<Examples.Financial />
+</Example>
+
+<Example name="ProjectCards" source={examplesSource}>
+	<Examples.ProjectCards />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### DenseInfoDashboard
+<PropsTable component="DenseInfoDashboard" />
+
+#### DenseInfoClassification
+<PropsTable component="DenseInfoClassification" />
+
+#### DenseInfoFinancial
+<PropsTable component="DenseInfoFinancial" />
+
+#### DenseInfoProjectCard
+<PropsTable component="DenseInfoProjectCard" />
+
+#### DenseInfoScoreCard
+<PropsTable component="DenseInfoScoreCard" />
+
+</Section>
+
+</DocsPage>

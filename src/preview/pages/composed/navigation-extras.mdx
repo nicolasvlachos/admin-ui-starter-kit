@@ -1,0 +1,35 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './navigation-extras.examples';
+import examplesSource from './navigation-extras.examples?raw';
+
+<DocsPage
+	title="Composed · Navigation (extras)"
+	description="BreadcrumbProgress wizard + CategoryNavCard sidebar."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="BreadcrumbProgressExample" source={examplesSource}>
+	<Examples.BreadcrumbProgressExample />
+</Example>
+
+<Example name="CategoryNavCardExample" source={examplesSource}>
+	<Examples.CategoryNavCardExample />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### BreadcrumbProgress
+<PropsTable component="BreadcrumbProgress" />
+
+#### CategoryNavCard
+<PropsTable component="CategoryNavCard" />
+
+</Section>
+
+</DocsPage>

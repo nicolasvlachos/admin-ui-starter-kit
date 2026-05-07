@@ -1,0 +1,39 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './gradient-card.examples';
+import examplesSource from './gradient-card.examples?raw';
+
+<DocsPage
+	title="Composed · Gradient card"
+	description="Vivid gradient card with optional pattern, badge, alert, action."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="HeroCardWithAction" source={examplesSource}>
+	<Examples.HeroCardWithAction />
+</Example>
+
+<Example name="CompactAllGradients" source={examplesSource}>
+	<Examples.CompactAllGradients />
+</Example>
+
+<Example name="HeroVariants" source={examplesSource}>
+	<Examples.HeroVariants />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### GradientCard
+<PropsTable component="GradientCard" />
+
+#### GradientCardCompact
+<PropsTable component="GradientCardCompact" />
+
+</Section>
+
+</DocsPage>

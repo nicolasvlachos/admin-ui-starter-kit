@@ -1,0 +1,84 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './commerce-extras.examples';
+import examplesSource from './commerce-extras.examples?raw';
+
+<DocsPage
+	title="Composed · Commerce (extras)"
+	description="Cart, coupon, order status, payment, tax breakdown, subscription, refund, address, voucher."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="CartSummaryCardExample" source={examplesSource}>
+	<Examples.CartSummaryCardExample />
+</Example>
+
+<Example name="CouponInputCardEmptyApplied" source={examplesSource}>
+	<Examples.CouponInputCardEmptyApplied />
+</Example>
+
+<Example name="OrderStatusCardExample" source={examplesSource}>
+	<Examples.OrderStatusCardExample />
+</Example>
+
+<Example name="PaymentMethodCardExample" source={examplesSource}>
+	<Examples.PaymentMethodCardExample />
+</Example>
+
+<Example name="TaxBreakdownCardExample" source={examplesSource}>
+	<Examples.TaxBreakdownCardExample />
+</Example>
+
+<Example name="SubscriptionSummaryCardExample" source={examplesSource}>
+	<Examples.SubscriptionSummaryCardExample />
+</Example>
+
+<Example name="RefundStatusCardExample" source={examplesSource}>
+	<Examples.RefundStatusCardExample />
+</Example>
+
+<Example name="AddressCardExample" source={examplesSource}>
+	<Examples.AddressCardExample />
+</Example>
+
+<Example name="VoucherEntryCardExample" source={examplesSource}>
+	<Examples.VoucherEntryCardExample />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### AddressCard
+<PropsTable component="AddressCard" />
+
+#### CartSummaryCard
+<PropsTable component="CartSummaryCard" />
+
+#### CouponInputCard
+<PropsTable component="CouponInputCard" />
+
+#### OrderStatusCard
+<PropsTable component="OrderStatusCard" />
+
+#### PaymentMethodCard
+<PropsTable component="PaymentMethodCard" />
+
+#### RefundStatusCard
+<PropsTable component="RefundStatusCard" />
+
+#### SubscriptionSummaryCard
+<PropsTable component="SubscriptionSummaryCard" />
+
+#### TaxBreakdownCard
+<PropsTable component="TaxBreakdownCard" />
+
+#### VoucherEntryCard
+<PropsTable component="VoucherEntryCard" />
+
+</Section>
+
+</DocsPage>

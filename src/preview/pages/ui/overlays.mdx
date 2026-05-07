@@ -1,0 +1,36 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './overlays.examples';
+import examplesSource from './overlays.examples?raw';
+
+<DocsPage
+	title="UI · Overlays"
+	description="Dialog, Sheet, Popover, Tooltip, HoverCard."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="DialogExample" source={examplesSource}>
+	<Examples.DialogExample />
+</Example>
+
+<Example name="SheetExample" source={examplesSource}>
+	<Examples.SheetExample />
+</Example>
+
+<Example name="PopoverExample" source={examplesSource}>
+	<Examples.PopoverExample />
+</Example>
+
+<Example name="TooltipExample" source={examplesSource}>
+	<Examples.TooltipExample />
+</Example>
+
+<Example name="HoverCardExample" source={examplesSource}>
+	<Examples.HoverCardExample />
+</Example>
+
+</Section>
+
+</DocsPage>

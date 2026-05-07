@@ -1,0 +1,269 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './forms.examples';
+import examplesSource from './forms.examples?raw';
+
+<DocsPage
+	title="Forms"
+	description="The full form scope — FormField wrapper plus every field component exported from base/forms/fields: text inputs, numeric, selects, toggles, choice groups, date/time, repeaters, localized fields, and uploads."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/forms"
+>
+
+<Section title="Overview" id="overview">
+
+The `forms/` folder ships the canonical form-row wrapper (`FormField` /
+`ControlledFormField`) plus every input primitive — `Input`, `Textarea`,
+`Select`, numeric/money/dimension/weight inputs, choice groups, date & time
+pickers, sliders, tag/phone/coordinates inputs, three repeater families, and
+the localized field set. Most fields are framework-free and accept
+value/onChange directly. The repeater and localized-* families opt into
+`react-hook-form` — that coupling is intentional and contained to those files.
+
+Pair any field with `FormField` (or `ControlledFormField` for RHF) to inherit
+the standard label / required asterisk / error / hint rhythm. Pass `invalid`
+to the inner field to flip the destructive border + ring.
+
+</Section>
+
+<Section title="FormField wrapper" id="form-field">
+
+<Example name="BasicField" source={examplesSource}>
+	<Examples.BasicField />
+</Example>
+
+<Example name="WithError" source={examplesSource}>
+	<Examples.WithError />
+</Example>
+
+<Example name="WithHelperText" source={examplesSource}>
+	<Examples.WithHelperText />
+</Example>
+
+</Section>
+
+<Section title="Text inputs" id="text-inputs">
+
+<Example name="InputBasic" source={examplesSource}>
+	<Examples.InputBasic />
+</Example>
+
+<Example name="InputWithIcons" source={examplesSource}>
+	<Examples.InputWithIcons />
+</Example>
+
+<Example name="InputWithAddons" source={examplesSource}>
+	<Examples.InputWithAddons />
+</Example>
+
+<Example name="InputClearableLoading" source={examplesSource}>
+	<Examples.InputClearableLoading />
+</Example>
+
+<Example name="InputCharacterCount" source={examplesSource}>
+	<Examples.InputCharacterCount />
+</Example>
+
+<Example name="TextareaExample" source={examplesSource}>
+	<Examples.TextareaExample />
+</Example>
+
+</Section>
+
+<Section title="Numeric inputs" id="numeric">
+
+<Example name="DecimalInputExample" source={examplesSource}>
+	<Examples.DecimalInputExample />
+</Example>
+
+<Example name="PercentageInputExample" source={examplesSource}>
+	<Examples.PercentageInputExample />
+</Example>
+
+<Example name="CurrencyInputExample" source={examplesSource}>
+	<Examples.CurrencyInputExample />
+</Example>
+
+<Example name="MoneyInputExample" source={examplesSource}>
+	<Examples.MoneyInputExample />
+</Example>
+
+<Example name="WeightInputExample" source={examplesSource}>
+	<Examples.WeightInputExample />
+</Example>
+
+<Example name="DimensionsInputExample" source={examplesSource}>
+	<Examples.DimensionsInputExample />
+</Example>
+
+</Section>
+
+<Section title="Selects" id="selects">
+
+<Example name="SelectExample" source={examplesSource}>
+	<Examples.SelectExample />
+</Example>
+
+<Example name="RichSelectExample" source={examplesSource}>
+	<Examples.RichSelectExample />
+</Example>
+
+<Example name="RoundingModeSelectExample" source={examplesSource}>
+	<Examples.RoundingModeSelectExample />
+</Example>
+
+</Section>
+
+<Section title="Toggles & checkboxes" id="toggles">
+
+<Example name="SwitchExample" source={examplesSource}>
+	<Examples.SwitchExample />
+</Example>
+
+<Example name="CheckboxExample" source={examplesSource}>
+	<Examples.CheckboxExample />
+</Example>
+
+<Example name="ToggleFieldExample" source={examplesSource}>
+	<Examples.ToggleFieldExample />
+</Example>
+
+<Example name="SwitchCardExample" source={examplesSource}>
+	<Examples.SwitchCardExample />
+</Example>
+
+</Section>
+
+<Section title="Choice groups" id="choice-groups">
+
+<Example name="PillRadioGroupExample" source={examplesSource}>
+	<Examples.PillRadioGroupExample />
+</Example>
+
+<Example name="ListRadioGroupExample" source={examplesSource}>
+	<Examples.ListRadioGroupExample />
+</Example>
+
+<Example name="CardRadioGroupExample" source={examplesSource}>
+	<Examples.CardRadioGroupExample />
+</Example>
+
+<Example name="CardCheckboxGroupExample" source={examplesSource}>
+	<Examples.CardCheckboxGroupExample />
+</Example>
+
+</Section>
+
+<Section title="Date & time" id="date-time">
+
+<Example name="DateTimeInputExample" source={examplesSource}>
+	<Examples.DateTimeInputExample />
+</Example>
+
+<Example name="TimePickerExample" source={examplesSource}>
+	<Examples.TimePickerExample />
+</Example>
+
+</Section>
+
+<Section title="Other inputs" id="other">
+
+<Example name="SliderExample" source={examplesSource}>
+	<Examples.SliderExample />
+</Example>
+
+<Example name="TagsInputExample" source={examplesSource}>
+	<Examples.TagsInputExample />
+</Example>
+
+<Example name="PhoneInputExample" source={examplesSource}>
+	<Examples.PhoneInputExample />
+</Example>
+
+<Example name="CoordinatesInputExample" source={examplesSource}>
+	<Examples.CoordinatesInputExample />
+</Example>
+
+</Section>
+
+<Section title="Repeaters" id="repeaters">
+
+These four primitives — `StringRepeater`, `ObjectRepeater`, `KeyValueEditor`,
+and `List` — share the underlying `<Repeater>` primitive (drag-to-reorder,
+add/remove, empty state). They are the only fields here that hard-couple to
+react-hook-form.
+
+<Example name="StringRepeaterExample" source={examplesSource}>
+	<Examples.StringRepeaterExample />
+</Example>
+
+<Example name="ObjectRepeaterExample" source={examplesSource}>
+	<Examples.ObjectRepeaterExample />
+</Example>
+
+<Example name="KeyValueEditorExample" source={examplesSource}>
+	<Examples.KeyValueEditorExample />
+</Example>
+
+<Example name="ListExample" source={examplesSource}>
+	<Examples.ListExample />
+</Example>
+
+</Section>
+
+<Section title="Localized fields" id="localized">
+
+The localized field family edits per-locale objects (e.g. `{ en: '…', bg: '…' }`)
+with a single field surface. Pass `primaryLocale` / `secondaryLocale` and the
+currently `activeLocale`. RHF-coupled.
+
+<Example name="LocalizedStringFieldExample" source={examplesSource}>
+	<Examples.LocalizedStringFieldExample />
+</Example>
+
+<Example name="LocalizedObjectFieldExample" source={examplesSource}>
+	<Examples.LocalizedObjectFieldExample />
+</Example>
+
+<Example name="LocalizedStringRepeaterExample" source={examplesSource}>
+	<Examples.LocalizedStringRepeaterExample />
+</Example>
+
+</Section>
+
+<Section title="Uploads" id="uploads">
+
+The full upload subsystem (`UploadTray`, `MediaGallery`, `FileUpload`,
+`ImageUpload`, `UploadProgressList`) lives on the dedicated
+[`base/upload-tray`](/base/upload-tray) page. The two field-shaped
+upload primitives appear here for completeness.
+
+<Example name="AvatarUploadExample" source={examplesSource}>
+	<Examples.AvatarUploadExample />
+</Example>
+
+<Example name="DropzoneExample" source={examplesSource}>
+	<Examples.DropzoneExample />
+</Example>
+
+</Section>
+
+<Section title="Whole form" id="whole-form">
+
+A realistic product form combining `Input`, `MoneyInput`, `Select`,
+`Textarea`, and `ToggleField` behind `ControlledFormField` and
+`react-hook-form`.
+
+<Example name="WholeForm" source={examplesSource}>
+	<Examples.WholeForm />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="FormField" />
+
+</Section>
+
+</DocsPage>

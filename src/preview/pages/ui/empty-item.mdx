@@ -1,0 +1,24 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './empty-item.examples';
+import examplesSource from './empty-item.examples?raw';
+
+<DocsPage
+	title="UI · Empty + Item"
+	description="Empty state and Item list-row primitives."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="EmptyState" source={examplesSource}>
+	<Examples.EmptyState />
+</Example>
+
+<Example name="ItemsList" source={examplesSource}>
+	<Examples.ItemsList />
+</Example>
+
+</Section>
+
+</DocsPage>

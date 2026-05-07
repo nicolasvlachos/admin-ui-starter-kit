@@ -1,0 +1,24 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './toggles-group.examples';
+import examplesSource from './toggles-group.examples?raw';
+
+<DocsPage
+	title="UI · Toggle + ToggleGroup"
+	description="Single toggle + radio/multiple group."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="SingleToggle" source={examplesSource}>
+	<Examples.SingleToggle />
+</Example>
+
+<Example name="MultipleSelectGroup" source={examplesSource}>
+	<Examples.MultipleSelectGroup />
+</Example>
+
+</Section>
+
+</DocsPage>

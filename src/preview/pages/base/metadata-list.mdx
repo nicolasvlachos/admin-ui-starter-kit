@@ -1,0 +1,97 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metadata-list.examples';
+import examplesSource from './metadata-list.examples?raw';
+
+<DocsPage
+	title="Metadata list"
+	description="Flexible label/value list for entity metadata. Three layouts (vertical grid, horizontal pills, two-column rows), per-item icons, tooltips, descriptions, and custom renderers — with first-class empty-state handling."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/display/metadata"
+>
+
+<Section title="Overview" id="overview">
+
+`MetadataList` renders an array of `{ id, label, value, icon?, tooltip?,
+description?, render?, emptyLabel? }` items. List-level props pick the
+`layout` (`vertical` / `rows` / `horizontal`), the `columns` count (1–4),
+and density. Per-item `render` escapes the default formatting for status
+pills, copyable IDs, links, or inline edits.
+
+</Section>
+
+<Section title="API surface" id="api-surface">
+
+<Example name="APISurface" source={examplesSource}>
+	<Examples.APISurface />
+</Example>
+
+</Section>
+
+<Section title="Vertical grid" id="vertical">
+
+<Example name="Vertical2ColumnNoIcons" source={examplesSource}>
+	<Examples.Vertical2ColumnNoIcons />
+</Example>
+
+<Example name="VerticalSingleColumnNoIcons" source={examplesSource}>
+	<Examples.VerticalSingleColumnNoIcons />
+</Example>
+
+<Example name="Example3ColumnWithIcons" source={examplesSource}>
+	<Examples.Example3ColumnWithIcons />
+</Example>
+
+<Example name="Dense4ColumnOverview" source={examplesSource}>
+	<Examples.Dense4ColumnOverview />
+</Example>
+
+</Section>
+
+<Section title="Two-column rows" id="rows">
+
+<Example name="RowsTwoColumnWithHairlines" source={examplesSource}>
+	<Examples.RowsTwoColumnWithHairlines />
+</Example>
+
+<Example name="RowsReceiptStyle" source={examplesSource}>
+	<Examples.RowsReceiptStyle />
+</Example>
+
+<Example name="RowsWithIconsTooltips" source={examplesSource}>
+	<Examples.RowsWithIconsTooltips />
+</Example>
+
+</Section>
+
+<Section title="Horizontal pills" id="horizontal">
+
+<Example name="HorizontalPillSummary" source={examplesSource}>
+	<Examples.HorizontalPillSummary />
+</Example>
+
+</Section>
+
+<Section title="Composition" id="composition">
+
+<Example name="SectionedMultiCard" source={examplesSource}>
+	<Examples.SectionedMultiCard />
+</Example>
+
+<Example name="WithTitleSeparator" source={examplesSource}>
+	<Examples.WithTitleSeparator />
+</Example>
+
+<Example name="EmptyStateFallbacksCustomRenderers" source={examplesSource}>
+	<Examples.EmptyStateFallbacksCustomRenderers />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="MetadataList" />
+
+</Section>
+
+</DocsPage>

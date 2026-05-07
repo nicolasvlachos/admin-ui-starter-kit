@@ -1,0 +1,68 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './copyable.examples';
+import examplesSource from './copyable.examples?raw';
+
+<DocsPage
+	title="Copyable"
+	description="Click-to-copy inline span with hover affordance and toast feedback."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/copyable"
+>
+
+<Section title="Overview" id="overview">
+
+`Copyable` wraps any value in a click-to-copy span. The copy icon appears on
+hover, the value lands on the clipboard, and a `sonner` toast confirms (mount
+a `<Toaster />` somewhere in the tree). Supports `mono`, `truncate`, custom
+`displayValue`, and a custom `successMessage`.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Variants" id="variants">
+
+<Example name="Mono" source={examplesSource}>
+	<Examples.Mono />
+</Example>
+
+<Example name="MonoTruncate" source={examplesSource}>
+	<Examples.MonoTruncate />
+</Example>
+
+<Example name="CustomDisplayValue" source={examplesSource}>
+	<Examples.CustomDisplayValue />
+</Example>
+
+<Example name="CustomToastMessage" source={examplesSource}>
+	<Examples.CustomToastMessage />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticOrderRow" source={examplesSource}>
+	<Examples.RealisticOrderRow />
+</Example>
+
+<Example name="CustomerListWithCopyableEmails" source={examplesSource}>
+	<Examples.CustomerListWithCopyableEmails />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="Copyable" />
+
+</Section>
+
+</DocsPage>

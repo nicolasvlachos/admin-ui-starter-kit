@@ -1,0 +1,40 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './contact-card.examples';
+import examplesSource from './contact-card.examples?raw';
+
+<DocsPage
+	title="Composed · Contact card"
+	description="ContactCard — name, role, email, phone, location, badge."
+	layer="composed"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="WithAllFields" source={examplesSource}>
+	<Examples.WithAllFields />
+</Example>
+
+<Example name="WithInitialsOnly" source={examplesSource}>
+	<Examples.WithInitialsOnly />
+</Example>
+
+<Example name="Minimal" source={examplesSource}>
+	<Examples.Minimal />
+</Example>
+
+<Example name="DifferentBadgeVariants" source={examplesSource}>
+	<Examples.DifferentBadgeVariants />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### ContactCard
+<PropsTable component="ContactCard" />
+
+</Section>
+
+</DocsPage>

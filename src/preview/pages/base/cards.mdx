@@ -1,0 +1,129 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './cards.examples';
+import examplesSource from './cards.examples?raw';
+
+<DocsPage
+	title="Cards (SmartCard)"
+	description="The composed card primitive — header (icon, title, suffix, slots), optional alert, expandable body, footer text or slot, and three surface chromes."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/cards"
+>
+
+<Section title="Overview" id="overview">
+
+`SmartCard` is the canonical card surface — every dashboard tile, settings
+panel, or KPI block runs through it. Three `surface` chromes (`card`, `flat`,
+`framed`), three padding scales, optional `headerStart` / `headerEnd` /
+`headerAction` slots, action menus, alert bands, footer text or `footerSlot`,
+and an `expandable` body for long content.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+</Section>
+
+<Section title="Surface variants" id="surfaces">
+
+<Example name="SurfaceVariants" source={examplesSource}>
+	<Examples.SurfaceVariants />
+</Example>
+
+</Section>
+
+<Section title="Padding sizes" id="padding">
+
+<Example name="PaddingSizes" source={examplesSource}>
+	<Examples.PaddingSizes />
+</Example>
+
+</Section>
+
+<Section title="Header composition" id="header">
+
+<Example name="WithIconTooltipFooter" source={examplesSource}>
+	<Examples.WithIconTooltipFooter />
+</Example>
+
+<Example name="HeaderSlots" source={examplesSource}>
+	<Examples.HeaderSlots />
+</Example>
+
+<Example name="WithActions" source={examplesSource}>
+	<Examples.WithActions />
+</Example>
+
+<Example name="HeaderAndFooterDividers" source={examplesSource}>
+	<Examples.HeaderAndFooterDividers />
+</Example>
+
+</Section>
+
+<Section title="Alerts" id="alerts">
+
+<Example name="AlertVariants" source={examplesSource}>
+	<Examples.AlertVariants />
+</Example>
+
+</Section>
+
+<Section title="Expandable" id="expandable">
+
+<Example name="ExpandableUncontrolled" source={examplesSource}>
+	<Examples.ExpandableUncontrolled />
+</Example>
+
+<Example name="ExpandableCustomLabels" source={examplesSource}>
+	<Examples.ExpandableCustomLabels />
+</Example>
+
+</Section>
+
+<Section title="States" id="states">
+
+<Example name="Skeleton" source={examplesSource}>
+	<Examples.Skeleton />
+</Example>
+
+</Section>
+
+<Section title="Primitive parts" id="primitives">
+
+`CardShell`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`,
+and `CardFooter` are exported from `base/cards` for the rare case when
+`SmartCard`'s composition is too opinionated.
+
+<Example name="PrimitiveComposition" source={examplesSource}>
+	<Examples.PrimitiveComposition />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="MetricKPICard" source={examplesSource}>
+	<Examples.MetricKPICard />
+</Example>
+
+<Example name="NotificationCard" source={examplesSource}>
+	<Examples.NotificationCard />
+</Example>
+
+<Example name="StatRowClickable" source={examplesSource}>
+	<Examples.StatRowClickable />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="SmartCard" />
+
+</Section>
+
+</DocsPage>

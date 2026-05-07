@@ -1,0 +1,39 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-analytics-bar.examples';
+import examplesSource from './metrics-analytics-bar.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Analytics bar"
+	description="`MetricBar` — horizontal KPI strip with hairline-divided cells. Pair with `MetricGrid` for card-style layouts."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="MetricBarDefault" source={examplesSource}>
+	<Examples.MetricBarDefault />
+</Example>
+
+<Example name="MetricBarGradientFrame" source={examplesSource}>
+	<Examples.MetricBarGradientFrame />
+</Example>
+
+<Example name="MetricGridCompactCardsAlternative" source={examplesSource}>
+	<Examples.MetricGridCompactCardsAlternative />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### MetricBar
+<PropsTable component="MetricBar" />
+
+#### MetricGrid
+<PropsTable component="MetricGrid" />
+
+</Section>
+
+</DocsPage>

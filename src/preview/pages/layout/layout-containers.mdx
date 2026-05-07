@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './layout-containers.examples';
+import examplesSource from './layout-containers.examples?raw';
+
+<DocsPage
+	title="Layout · Containers"
+	description="Container and Section primitives for page structure, width clamps, padding density, and semantic wrappers."
+	layer="layout"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="NarrowContainer" source={examplesSource}>
+	<Examples.NarrowContainer />
+</Example>
+
+<Example name="WideContainer" source={examplesSource}>
+	<Examples.WideContainer />
+</Example>
+
+<Example name="BareContainer" source={examplesSource}>
+	<Examples.BareContainer />
+</Example>
+
+<Example name="SectionRhythm" source={examplesSource}>
+	<Examples.SectionRhythm />
+</Example>
+
+</Section>
+
+</DocsPage>

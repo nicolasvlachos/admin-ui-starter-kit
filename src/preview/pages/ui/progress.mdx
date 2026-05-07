@@ -1,0 +1,20 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './progress.examples';
+import examplesSource from './progress.examples?raw';
+
+<DocsPage
+	title="UI · Progress"
+	description="Linear progress bar at varying values."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Values" source={examplesSource}>
+	<Examples.Values />
+</Example>
+
+</Section>
+
+</DocsPage>

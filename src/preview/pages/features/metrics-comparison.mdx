@@ -1,0 +1,40 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-comparison.examples';
+import examplesSource from './metrics-comparison.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Comparison"
+	description="`MetricComparison` — side-by-side current vs previous with a tone-tinted delta box. Reuses the unified `MetricData` shape so currency/percent formatting carries through."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+<Example name="WithCurrencyOverrideEUR" source={examplesSource}>
+	<Examples.WithCurrencyOverrideEUR />
+</Example>
+
+<Example name="PercentageValues" source={examplesSource}>
+	<Examples.PercentageValues />
+</Example>
+
+<Example name="FlatNoChange" source={examplesSource}>
+	<Examples.FlatNoChange />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### MetricComparison
+<PropsTable component="MetricComparison" />
+
+</Section>
+
+</DocsPage>

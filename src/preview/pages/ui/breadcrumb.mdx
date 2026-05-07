@@ -1,0 +1,24 @@
+import { DocsPage, Section, Example } from '@/preview/_docs';
+import * as Examples from './breadcrumb.examples';
+import examplesSource from './breadcrumb.examples?raw';
+
+<DocsPage
+	title="UI · Breadcrumb"
+	description="shadcn breadcrumb — list, items, separator (default & custom)."
+	layer="ui"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+<Example name="CustomSeparator" source={examplesSource}>
+	<Examples.CustomSeparator />
+</Example>
+
+</Section>
+
+</DocsPage>

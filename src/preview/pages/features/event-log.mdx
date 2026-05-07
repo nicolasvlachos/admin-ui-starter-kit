@@ -1,0 +1,36 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './event-log.examples';
+import examplesSource from './event-log.examples?raw';
+
+<DocsPage
+	title="Features · Event log"
+	description="Unified, mentions-aware mixed-source log: comments + audit events + system messages + custom kinds under one chronological surface. Inline `@user` / `#booking` / `$order` triggers work in the composer; resource chips render with tone-driven Badge variants in every entry kind."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="APISurface" source={examplesSource}>
+	<Examples.APISurface />
+</Example>
+
+<Example name="CommentsEventsUnderOneLog" source={examplesSource}>
+	<Examples.CommentsEventsUnderOneLog />
+</Example>
+
+<Example name="ReadOnlyTimelineNoComposer" source={examplesSource}>
+	<Examples.ReadOnlyTimelineNoComposer />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### EventLog
+<PropsTable component="EventLog" />
+
+</Section>
+
+</DocsPage>

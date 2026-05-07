@@ -1,0 +1,48 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './rich-text-editor.examples';
+import examplesSource from './rich-text-editor.examples?raw';
+
+<DocsPage
+	title="Features · Rich text editor"
+	description="Tiptap-backed editor with bold / italic / strike / lists / quote / undo-redo. Falls back to a non-editable preview when @tiptap/react is not bundled. Strings overridable via the `strings` prop."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="ProductionWiring" source={examplesSource}>
+	<Examples.ProductionWiring />
+</Example>
+
+<Example name="Default" source={examplesSource}>
+	<Examples.Default />
+</Example>
+
+<Example name="CompactSmallerInlineNote" source={examplesSource}>
+	<Examples.CompactSmallerInlineNote />
+</Example>
+
+<Example name="EmptyPlaceholder" source={examplesSource}>
+	<Examples.EmptyPlaceholder />
+</Example>
+
+<Example name="Disabled" source={examplesSource}>
+	<Examples.Disabled />
+</Example>
+
+<Example name="StringsOverride" source={examplesSource}>
+	<Examples.StringsOverride />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### RichTextEditor
+<PropsTable component="RichTextEditor" />
+
+</Section>
+
+</DocsPage>

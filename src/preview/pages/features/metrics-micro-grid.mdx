@@ -1,0 +1,32 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-micro-grid.examples';
+import examplesSource from './metrics-micro-grid.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Micro chart grid"
+	description="`MetricMicroGrid` — six-cell dense overview pairing each KPI with a different lightweight visualization (bars / line / dots / progress / area / pie)."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="DefaultAutoAssignedCharts" source={examplesSource}>
+	<Examples.DefaultAutoAssignedCharts />
+</Example>
+
+<Example name="PinnedChartKinds" source={examplesSource}>
+	<Examples.PinnedChartKinds />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### MetricMicroGrid
+<PropsTable component="MetricMicroGrid" />
+
+</Section>
+
+</DocsPage>

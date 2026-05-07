@@ -162,9 +162,9 @@ function fireChange(
 }
 
 const STEPPER_SIZE_CLASS: Record<FormControlSize, string> = {
-	sm: 'h-8 w-8',
-	base: 'h-9 w-9',
-	lg: 'h-10 w-10',
+	sm: 'w-8',
+	base: 'w-9',
+	lg: 'w-10',
 };
 
 function DecimalInputImpl(

@@ -7,7 +7,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useMemo } from 'react';
 import { Button, type ButtonVariant, type ButtonStyle } from '@/components/base/buttons';
-import { DatePicker, MonthYearPicker } from '@/components/base/date-pickers';
+import { MonthYearPicker } from '@/components/base/date-pickers';
 import {
 	Select,
 	SelectContent,
@@ -88,7 +88,7 @@ export function EventCalendarHeader({
 	locale,
 	actions,
 	strings: stringsProp,
-	rangeMode = 'date',
+	rangeMode: _rangeMode = 'date',
 	minDate,
 	maxDate,
 	prevDisabled = false,
@@ -111,32 +111,17 @@ export function EventCalendarHeader({
 					{displayLabel}
 				</Heading>
 
-				{rangeMode === 'month-year' ? (
-					<MonthYearPicker
-						value={{ month: currentDate.getMonth(), year: currentDate.getFullYear() }}
-						onChange={(output) => {
-							if (output.date) {
-								onDateChange?.(output.date);
-							}
-						}}
-						fromYear={minDate?.getFullYear()}
-						toYear={maxDate?.getFullYear()}
-						locale={locale}
-					/>
-				) : (
-					<DatePicker
-						mode="single"
-						value={currentDate}
-						onChange={(output) => {
-							if (output.date) {
-								onDateChange?.(output.date);
-							}
-						}}
-						enableYearDropdown
-						locale={locale}
-						buttonVariant="ghost"
-					/>
-				)}
+				<MonthYearPicker
+					value={{ month: currentDate.getMonth(), year: currentDate.getFullYear() }}
+					onChange={(output) => {
+						if (output.date) {
+							onDateChange?.(output.date);
+						}
+					}}
+					fromYear={minDate?.getFullYear()}
+					toYear={maxDate?.getFullYear()}
+					locale={locale}
+				/>
 			</div>
 
 			<div className="flex items-center gap-2">

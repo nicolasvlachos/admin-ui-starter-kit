@@ -1,0 +1,138 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './table.examples';
+import examplesSource from './table.examples?raw';
+
+<DocsPage
+	title="Table"
+	description="DataTable + Pagination — TanStack-React-Table-backed, with sorting, row actions, sticky header, three sizes, and three surface chromes."
+	layer="base"
+	status="ready"
+	sourcePath="src/components/base/table"
+>
+
+<Section title="Overview" id="overview">
+
+`DataTable<T>` wraps `@tanstack/react-table` with our typography, density,
+and surface tokens. Pass `columns` (typed against your row shape) and `data`,
+optionally enable `sorting`, supply `rowActions`, and tune `size` (xs / sm /
+base) and `surface` (card / glass / flat). Pair with `Pagination` for the
+canonical Laravel-paginator shape.
+
+</Section>
+
+<Section title="Default" id="default">
+
+<Example name="BasicDefaultSizeXsCompact" source={examplesSource}>
+	<Examples.BasicDefaultSizeXsCompact />
+</Example>
+
+</Section>
+
+<Section title="Sizes" id="sizes">
+
+<Example name="SizeSm" source={examplesSource}>
+	<Examples.SizeSm />
+</Example>
+
+<Example name="SizeBase" source={examplesSource}>
+	<Examples.SizeBase />
+</Example>
+
+</Section>
+
+<Section title="Surfaces" id="surfaces">
+
+<Example name="SurfaceGlassHeaderTransparentCleanOutlineNoMutedHeader" source={examplesSource}>
+	<Examples.SurfaceGlassHeaderTransparentCleanOutlineNoMutedHeader />
+</Example>
+
+<Example name="SurfaceFlatInsideSmartCardTableRendersNoChrome" source={examplesSource}>
+	<Examples.SurfaceFlatInsideSmartCardTableRendersNoChrome />
+</Example>
+
+<Example name="SizeSmGlassExplicitCellTextScaling" source={examplesSource}>
+	<Examples.SizeSmGlassExplicitCellTextScaling />
+</Example>
+
+</Section>
+
+<Section title="Features" id="features">
+
+<Example name="WithSortingRowActions" source={examplesSource}>
+	<Examples.WithSortingRowActions />
+</Example>
+
+</Section>
+
+<Section title="Cell renderers" id="cell-renderers">
+
+`StatusCell`, `DateCell`, `CurrencyCell`, and `AvatarCell` are reusable
+column-cell renderers exported from `base/table`. Compose them inside your
+column `cell` function to keep the table look consistent.
+
+<Example name="CellRenderers" source={examplesSource}>
+	<Examples.CellRenderers />
+</Example>
+
+</Section>
+
+<Section title="Selection" id="selection">
+
+<Example name="WithRowSelection" source={examplesSource}>
+	<Examples.WithRowSelection />
+</Example>
+
+</Section>
+
+<Section title="Toolbar" id="toolbar">
+
+<Example name="WithColumnVisibility" source={examplesSource}>
+	<Examples.WithColumnVisibility />
+</Example>
+
+<Example name="WithCustomToolbar" source={examplesSource}>
+	<Examples.WithCustomToolbar />
+</Example>
+
+</Section>
+
+<Section title="Sticky" id="sticky">
+
+<Example name="StickyHeaderAndFirstColumn" source={examplesSource}>
+	<Examples.StickyHeaderAndFirstColumn />
+</Example>
+
+</Section>
+
+<Section title="States" id="states">
+
+<Example name="EmptyState" source={examplesSource}>
+	<Examples.EmptyState />
+</Example>
+
+</Section>
+
+<Section title="Pagination" id="pagination">
+
+<Example name="PaginationExample" source={examplesSource}>
+	<Examples.PaginationExample />
+</Example>
+
+</Section>
+
+<Section title="Realistic usage" id="realistic">
+
+<Example name="RealisticOrdersTable" source={examplesSource}>
+	<Examples.RealisticOrdersTable />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+<PropsTable component="DataTable" />
+<PropsTable component="Pagination" />
+
+</Section>
+
+</DocsPage>

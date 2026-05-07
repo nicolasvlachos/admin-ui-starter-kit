@@ -1,0 +1,46 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './kanban.examples';
+import examplesSource from './kanban.examples?raw';
+
+<DocsPage
+	title="Features · Kanban"
+	description="Drag-and-drop board, generic in T. Pass `itemActions` (static array or per-item factory) for the ⋮ menu, `onItemClick` for whole-card click. Headless via `useKanban`; slots: KanbanBoard / KanbanColumn / KanbanColumnContent / KanbanItem / KanbanItemHandle / KanbanItemActions / KanbanOverlay."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="RoadmapBoardWithActionsOnItemClick" source={examplesSource}>
+	<Examples.RoadmapBoardWithActionsOnItemClick />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### Kanban
+<PropsTable component="Kanban" />
+
+#### KanbanBoard
+<PropsTable component="KanbanBoard" />
+
+#### KanbanColumn
+<PropsTable component="KanbanColumn" />
+
+#### KanbanColumnContent
+<PropsTable component="KanbanColumnContent" />
+
+#### KanbanItem
+<PropsTable component="KanbanItem" />
+
+#### KanbanItemActions
+<PropsTable component="KanbanItemActions" />
+
+#### KanbanOverlay
+<PropsTable component="KanbanOverlay" />
+
+</Section>
+
+</DocsPage>

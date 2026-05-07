@@ -65,9 +65,18 @@ export default function PreviewApp() {
 			{/* Header — section tabs */}
 			<header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
 				<div className="mx-auto flex max-w-[110rem] flex-col items-stretch gap-3 px-4 py-3 md:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
-					<div className="flex min-w-0 items-baseline gap-3">
-						<span className="shrink-0 text-sm font-semibold">Component Preview</span>
-						<span className="truncate text-xs text-muted-foreground">admin-ui-starter-kit</span>
+					<div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+						<span className="text-foreground font-semibold">Components</span>
+						{active && (
+							<>
+								<span>/</span>
+								<span>{active.section}</span>
+								<span>/</span>
+								<span>{active.family}</span>
+								<span>/</span>
+								<span className="text-foreground font-medium truncate">{active.label}</span>
+							</>
+						)}
 					</div>
 
 					<nav className="-mx-1 flex max-w-full items-center gap-1 overflow-x-auto px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0" aria-label="Sections">
@@ -138,11 +147,12 @@ export default function PreviewApp() {
 							<div className="px-2 py-4 text-xs text-muted-foreground">No matches.</div>
 						)}
 						{filteredFamilies.map(({ family, entries }) => (
-							<div key={family} className="mb-4">
-								<div className="px-2 pb-1 text-xxs font-semibold uppercase tracking-wider text-muted-foreground/80">
-									{family}
-								</div>
-								<ul className="space-y-0.5">
+							<details key={family} className="mb-2 group" open>
+								<summary className="flex cursor-pointer list-none items-center justify-between rounded-md px-2 py-1 text-xxs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground">
+									<span>{family}</span>
+									<span className="rounded-full bg-muted px-1.5 text-xxs tabular-nums">{entries.length}</span>
+								</summary>
+								<ul className="mt-1 space-y-0.5">
 									{entries.map((entry) => {
 										const isActive = entry.id === active?.id;
 										return (
@@ -163,7 +173,7 @@ export default function PreviewApp() {
 										);
 									})}
 								</ul>
-							</div>
+							</details>
 						))}
 					</nav>
 				</aside>

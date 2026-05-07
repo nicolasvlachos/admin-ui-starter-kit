@@ -1,0 +1,83 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-overview.examples';
+import examplesSource from './metrics-overview.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Overview"
+	description="The unified metrics module: a single Metric component with seven layout variants, plus MetricBar, MetricGrid, and supporting atoms (TrendChip, Sparkline, Skeleton). One MetricData shape powers every surface — see the dedicated pages for each layout."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="MetricBarDefault" source={examplesSource}>
+	<Examples.MetricBarDefault />
+</Example>
+
+<Example name="MetricBarGradientFrame" source={examplesSource}>
+	<Examples.MetricBarGradientFrame />
+</Example>
+
+<Example name="MetricGridCardVariant" source={examplesSource}>
+	<Examples.MetricGridCardVariant />
+</Example>
+
+<Example name="MetricGridCompactList" source={examplesSource}>
+	<Examples.MetricGridCompactList />
+</Example>
+
+<Example name="MetricSizesSmMdLg" source={examplesSource}>
+	<Examples.MetricSizesSmMdLg />
+</Example>
+
+<Example name="MetricMinimalInlineCopy" source={examplesSource}>
+	<Examples.MetricMinimalInlineCopy />
+</Example>
+
+<Example name="MetricTrendChipExample" source={examplesSource}>
+	<Examples.MetricTrendChipExample />
+</Example>
+
+<Example name="MetricSparklineExample" source={examplesSource}>
+	<Examples.MetricSparklineExample />
+</Example>
+
+<Example name="LoadingSkeletons" source={examplesSource}>
+	<Examples.LoadingSkeletons />
+</Example>
+
+<Example name="LiveLoadingState" source={examplesSource}>
+	<Examples.LiveLoadingState />
+</Example>
+
+<Example name="ErrorState" source={examplesSource}>
+	<Examples.ErrorState />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### Metric
+<PropsTable component="Metric" />
+
+#### MetricBar
+<PropsTable component="MetricBar" />
+
+#### MetricGrid
+<PropsTable component="MetricGrid" />
+
+#### MetricSkeleton
+<PropsTable component="MetricSkeleton" />
+
+#### MetricSparkline
+<PropsTable component="MetricSparkline" />
+
+#### MetricTrendChip
+<PropsTable component="MetricTrendChip" />
+
+</Section>
+
+</DocsPage>

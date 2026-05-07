@@ -1,0 +1,28 @@
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './metrics-analytics-cards.examples';
+import examplesSource from './metrics-analytics-cards.examples?raw';
+
+<DocsPage
+	title="Features · Metrics · Analytics cards"
+	description="`MetricGradient` — vivid gradient hero card with embedded area chart. Pick a `theme` to drive the colour palette."
+	layer="features"
+	status="ready"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="FourThemes" source={examplesSource}>
+	<Examples.FourThemes />
+</Example>
+
+</Section>
+
+
+<Section title="API" id="api">
+
+#### MetricGradient
+<PropsTable component="MetricGradient" />
+
+</Section>
+
+</DocsPage>
