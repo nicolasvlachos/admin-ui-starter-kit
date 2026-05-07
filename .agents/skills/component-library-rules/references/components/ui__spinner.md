@@ -4,6 +4,7 @@ title: "UI · Spinner"
 description: "Loading spinner — sized via className."
 layer: ui
 family: "Data display"
+sourcePath: src/components/ui/spinner
 examples:
   - Sizes
   - ColorViaClassName
@@ -24,11 +25,11 @@ tags:
 Loading spinner — sized via className.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/spinner`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Spinner } from '@/components/ui/spinner';
 import { Row } from '../../PreviewLayout';
 

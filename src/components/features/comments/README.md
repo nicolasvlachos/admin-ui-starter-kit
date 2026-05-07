@@ -243,11 +243,11 @@ through the registry and provider — no custom wiring needed.
 
 ## Examples in the repo
 
-- [`/features/comments`](../../../preview/pages/features/CommentsPage.tsx)
+- [`/features/comments`](../../../preview/pages/features/comments.mdx)
   preview — full demo of every prop
-- [`/features/event-log`](../../../preview/pages/features/EventLogPage.tsx)
+- [`/features/event-log`](../../../preview/pages/features/event-log.mdx)
   — comments mixed with audit events under one timeline
-- [`/features/enhanced-activities`](../../../preview/pages/features/EnhancedActivitiesPage.tsx)
+- [`/features/enhanced-activities`](../../../preview/pages/features/enhanced-activities.mdx)
   — Shopify-style timeline with comments rendered as note activities
 
 ---
@@ -255,6 +255,6 @@ through the registry and provider — no custom wiring needed.
 ## Don't
 
 - ❌ Hardcode strings inside JSX — use `strings` + `interpolateString`
-- ❌ Add `useQuery` / `router.visit` / `useI18n` to default export paths — those go in `adapters/$framework/`
+- ❌ Add `useQuery` / `router.visit` / `useI18n` to default export paths — consumers wire those at the call site
 - ❌ Edit `comment-content.tsx`'s prose classes ad-hoc — the body is rendered via `<MentionContent>` from the shared module
 - ❌ Render mention chips manually — let `parseMentionsFromHtml` + the editor's `<span class="rsc-mention">` markers do the work

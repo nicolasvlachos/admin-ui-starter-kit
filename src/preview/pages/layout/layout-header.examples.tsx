@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Bell, CheckCircle2, CircleAlert, Settings } from 'lucide-react';
 import { Badge } from '@/components/base/badge';
 import { Button } from '@/components/base/buttons';

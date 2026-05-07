@@ -4,6 +4,7 @@ title: "Composed · Feature announcement"
 description: "Highlight a new feature with tags and an action."
 layer: composed
 family: "Cards"
+sourcePath: src/components/composed/cards/feature-announcement
 examples:
   - WithIconTagsAction
 imports:
@@ -11,6 +12,7 @@ imports:
 tags:
   - composed
   - cards
+  - feature-announcement
   - feature
   - announcement
   - highlight
@@ -22,11 +24,11 @@ tags:
 Highlight a new feature with tags and an action.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/cards/feature-announcement`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Sparkles, Zap, Shield } from 'lucide-react';
 import { FeatureAnnouncementCard } from '@/components/composed/cards/feature-announcement';
 import { Col } from '../../PreviewLayout';

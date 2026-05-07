@@ -4,6 +4,7 @@ title: "UI · Empty + Item"
 description: "Empty state and Item list-row primitives."
 layer: ui
 family: "Data display"
+sourcePath: src/components/ui
 examples:
   - EmptyState
   - ItemsList
@@ -26,11 +27,11 @@ tags:
 Empty state and Item list-row primitives.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Inbox, FileText, Settings } from 'lucide-react';
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { Item, ItemContent, ItemDescription, ItemFooter, ItemMedia, ItemTitle } from '@/components/ui/item';

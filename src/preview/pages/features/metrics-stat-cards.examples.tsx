@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Metric, type MetricData } from '@/components/composed/analytics';
 
 const UP = [12, 18, 15, 25, 22, 30, 28, 35, 32, 40, 38, 45];

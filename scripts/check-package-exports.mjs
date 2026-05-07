@@ -5,6 +5,7 @@ const root = process.cwd();
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const exportsMap = pkg.exports ?? {};
 const failures = [];
+const viteLibConfig = fs.readFileSync(path.join(root, 'vite.lib.config.ts'), 'utf8');
 
 function exists(relativePath) {
 	return fs.existsSync(path.join(root, relativePath));
@@ -46,6 +47,7 @@ const wildcardLayers = [
 	{ key: './base/*', root: 'src/components/base' },
 	{ key: './composed/*', root: 'src/components/composed' },
 	{ key: './features/*', root: 'src/components/features' },
+	{ key: './layout/*', root: 'src/components/layout' },
 ];
 
 for (const layer of wildcardLayers) {
@@ -67,18 +69,20 @@ for (const layer of wildcardLayers) {
 		const indexTs = `${dir}/index.ts`;
 		const indexTsx = `${dir}/index.tsx`;
 		const exactKey = `${layer.key.replace('/*', '')}/${name}`;
+		const entryKey = `'components/${layer.key.slice(2, -2)}/${name}/index'`;
 
-		if (exists(indexTs)) continue;
-		if (exists(indexTsx)) {
-			// .tsx index — accept either a literal exact override OR the
-			// wildcard handling it. The library build emits `index.js`
-			// regardless of source extension.
+		if (!exists(indexTs) && !exists(indexTsx)) {
+			failures.push(
+				`${exactKey} is exposed by ${layer.key} but has no matching index.ts(x) source`,
+			);
 			continue;
 		}
 
-		failures.push(
-			`${exactKey} is exposed by ${layer.key} but has no matching index.ts(x) source`,
-		);
+		if (!viteLibConfig.includes(entryKey)) {
+			failures.push(
+				`${exactKey} is exposed by ${layer.key} but is missing from vite.lib.config.ts entries`,
+			);
+		}
 	}
 }
 

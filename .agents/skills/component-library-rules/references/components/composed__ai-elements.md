@@ -4,6 +4,7 @@ title: "Composed · AI (elements)"
 description: "Standalone surfaces ported from elements.ai-sdk.dev: shimmer, code-block, agent, package-info, reasoning, chain-of-thought, sources, inline-citation, task, artifact, file-tree, confirmation, attachment."
 layer: composed
 family: "AI"
+sourcePath: src/components/composed/ai
 examples:
   - Counter
   - AiShimmerExample
@@ -36,11 +37,11 @@ tags:
 Standalone surfaces ported from elements.ai-sdk.dev: shimmer, code-block, agent, package-info, reasoning, chain-of-thought, sources, inline-citation, task, artifact, file-tree, confirmation, attachment.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/ai`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Bot, Cpu, FileText, Wrench } from 'lucide-react';
 import {
 	AiAgent,

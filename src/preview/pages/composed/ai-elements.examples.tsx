@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Bot, Cpu, FileText, Wrench } from 'lucide-react';
 import {
 	AiAgent,

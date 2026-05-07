@@ -26,6 +26,7 @@ imports:
   - @/components/base/table
   - @/components/base/table/pagination
   - @/components/typography
+  - @/preview/_mocks
 tags:
   - base
   - navigation

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { Sparkles, Star, Zap } from 'lucide-react';
 import {

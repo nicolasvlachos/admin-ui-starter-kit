@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { BarChart3, Brain, CreditCard, ExternalLink, Home, Inbox, LifeBuoy, Package, Settings, Shield, SlidersHorizontal, Store, Users } from 'lucide-react';
 import { Badge } from '@/components/base/badge';
 import { SmartCard } from '@/components/base/cards';

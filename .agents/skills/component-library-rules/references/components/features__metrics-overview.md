@@ -4,6 +4,7 @@ title: "Features · Metrics · Overview"
 description: "The unified metrics module: a single Metric component with seven layout variants, plus MetricBar, MetricGrid, and supporting atoms (TrendChip, Sparkline, Skeleton). One MetricData shape powers every surface — see the dedicated pages for each layout."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/analytics
 examples:
   - MetricBarDefault
   - MetricBarGradientFrame
@@ -22,6 +23,7 @@ imports:
 tags:
   - features
   - metrics
+  - analytics
   - overview
   - unified
   - module
@@ -33,11 +35,11 @@ tags:
 The unified metrics module: a single Metric component with seven layout variants, plus MetricBar, MetricGrid, and supporting atoms (TrendChip, Sparkline, Skeleton). One MetricData shape powers every surface — see the dedicated pages for each layout.
 
 **Layer:** `features`  
+**Source:** `src/components/composed/analytics`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { DollarSign, ShoppingBag, TrendingUp, Users } from 'lucide-react';
 import {
 	Metric,

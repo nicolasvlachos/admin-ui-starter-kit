@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { AiSummaryBlock, AiClassificationPanel } from '@/components/composed/ai';
 
 export function AISummary() {

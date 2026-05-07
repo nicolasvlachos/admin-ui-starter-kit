@@ -5,11 +5,16 @@
  */
 import { useStrings, type StringsProp } from '@/lib/strings';
 import { cn } from '@/lib/utils';
-import { type InertiaLink } from '@/types/inertia.types';
 
 export interface NavigationTabItem {
 	label: string;
 	to: string;
+}
+
+export interface NavigationTabsItem {
+	label: string;
+	url: string;
+	active?: boolean;
 }
 
 export interface NavigationTabsStrings {
@@ -21,7 +26,7 @@ export const defaultNavigationTabsStrings: NavigationTabsStrings = {
 };
 
 interface NavigationTabsProps {
-	items: InertiaLink[];
+	items: NavigationTabsItem[];
 	currentUrl?: string;
 	strings?: StringsProp<NavigationTabsStrings>;
 }

@@ -4,6 +4,7 @@ title: "Composed · Invoice items"
 description: "Table, compact, detailed layouts with subtotal/tax/discount/total."
 layer: composed
 family: "Data display"
+sourcePath: src/components/composed/data-display/invoice-items
 examples:
   - Table
   - Compact
@@ -14,6 +15,7 @@ tags:
   - composed
   - data
   - display
+  - invoice-items
   - invoice
   - items
   - table
@@ -25,11 +27,11 @@ tags:
 Table, compact, detailed layouts with subtotal/tax/discount/total.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/data-display/invoice-items`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	InvoiceItemsTable,
 	InvoiceItemsCompact,

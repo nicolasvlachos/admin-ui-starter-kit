@@ -4,6 +4,7 @@ title: "Features · Metrics · KPI row"
 description: "`MiniKpiRow` — compact horizontal divider-separated KPI strip for header / footer accents."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/data-display/mini-kpi
 examples:
   - Example4KPIs
   - Example3KPIs
@@ -12,6 +13,7 @@ imports:
 tags:
   - features
   - metrics
+  - mini-kpi
   - kpi
   - row
   - minikpirow
@@ -23,11 +25,11 @@ tags:
 `MiniKpiRow` — compact horizontal divider-separated KPI strip for header / footer accents.
 
 **Layer:** `features`  
+**Source:** `src/components/composed/data-display/mini-kpi`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { MiniKpiRow } from '@/components/composed/data-display/mini-kpi';
 
 export function Example4KPIs() {

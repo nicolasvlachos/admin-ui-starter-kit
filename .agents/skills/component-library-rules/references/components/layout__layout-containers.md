@@ -4,6 +4,7 @@ title: "Layout · Containers"
 description: "Container and Section primitives for page structure, width clamps, padding density, and semantic wrappers."
 layer: layout
 family: "Building blocks"
+sourcePath: src/components/layout/containers
 examples:
   - NarrowContainer
   - WideContainer
@@ -22,6 +23,7 @@ tags:
   - container
   - section
   - primitives
+  - page
 ---
 
 # Layout · Containers
@@ -29,6 +31,7 @@ tags:
 Container and Section primitives for page structure, width clamps, padding density, and semantic wrappers.
 
 **Layer:** `layout`  
+**Source:** `src/components/layout/containers`
 
 ## Examples
 

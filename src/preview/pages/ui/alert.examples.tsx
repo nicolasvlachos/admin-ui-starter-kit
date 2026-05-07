@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Info, CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription, AlertAction } from '@/components/ui/alert';
 import { Col } from '../../PreviewLayout';

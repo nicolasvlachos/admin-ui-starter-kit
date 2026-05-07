@@ -4,6 +4,7 @@ title: "UI · Badge"
 description: "shadcn badge primitive (no theming wrapper)."
 layer: ui
 family: "Data display"
+sourcePath: src/components/ui/badge
 examples:
   - Variants
   - InContext
@@ -17,6 +18,7 @@ tags:
   - shadcn
   - primitive
   - theming
+  - wrapper
 ---
 
 # UI · Badge
@@ -24,11 +26,11 @@ tags:
 shadcn badge primitive (no theming wrapper).
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/badge`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Badge } from '@/components/ui/badge';
 import { Row } from '../../PreviewLayout';
 

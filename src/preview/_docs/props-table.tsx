@@ -1,6 +1,7 @@
 import { Text } from '@/components/typography/text';
 import { cn } from '@/lib/utils';
-import propsData from './props.generated.json';
+import { useEffect, useState } from 'react';
+import propsDataUrl from './props.generated.json?url';
 
 interface PropDoc {
 	name: string;
@@ -17,7 +18,21 @@ interface ComponentDoc {
 	props: Record<string, PropDoc>;
 }
 
-const PROPS_BY_NAME = propsData as Record<string, ComponentDoc>;
+let propsDataPromise: Promise<Record<string, ComponentDoc>> | null = null;
+
+function loadPropsData() {
+	if (!propsDataPromise) {
+		propsDataPromise = fetch(propsDataUrl).then(async (response) => {
+			if (!response.ok) {
+				throw new Error(`Unable to load props metadata: ${response.status}`);
+			}
+
+			return response.json() as Promise<Record<string, ComponentDoc>>;
+		});
+	}
+
+	return propsDataPromise;
+}
 
 export interface PropsTableProps {
 	component: string;
@@ -25,7 +40,48 @@ export interface PropsTableProps {
 }
 
 export function PropsTable({ component, className }: PropsTableProps) {
-	const doc = PROPS_BY_NAME[component];
+	const [propsByName, setPropsByName] = useState<Record<string, ComponentDoc> | null>(null);
+	const [loadError, setLoadError] = useState<Error | null>(null);
+
+	useEffect(() => {
+		let isCurrent = true;
+
+		loadPropsData()
+			.then((data) => {
+				if (isCurrent) {
+					setPropsByName(data);
+				}
+			})
+			.catch((error: unknown) => {
+				if (isCurrent) {
+					setLoadError(error instanceof Error ? error : new Error(String(error)));
+				}
+			});
+
+		return () => {
+			isCurrent = false;
+		};
+	}, []);
+
+	if (loadError) {
+		return (
+			<div className={cn('props-table--component rounded-md border border-warning/30 bg-warning/5 p-3', className)}>
+				<Text size="xs" type="secondary">
+					{loadError.message}
+				</Text>
+			</div>
+		);
+	}
+
+	if (!propsByName) {
+		return (
+			<Text size="xs" type="secondary" className={cn('props-table--component', className)}>
+				Loading props metadata...
+			</Text>
+		);
+	}
+
+	const doc = propsByName[component];
 
 	if (!doc) {
 		return (

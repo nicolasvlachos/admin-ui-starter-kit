@@ -4,6 +4,7 @@ title: "Composed · Vendor profile"
 description: "VendorProfileCard with metrics, stats and actions."
 layer: composed
 family: "Cards"
+sourcePath: src/components/composed/cards/vendor-profile
 examples:
   - WithEverything
   - Minimal
@@ -12,6 +13,7 @@ imports:
 tags:
   - composed
   - cards
+  - vendor-profile
   - vendor
   - profile
   - vendorprofilecard
@@ -23,11 +25,11 @@ tags:
 VendorProfileCard with metrics, stats and actions.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/cards/vendor-profile`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { VendorProfileCard } from '@/components/composed/cards/vendor-profile';
 
 export function WithEverything() {

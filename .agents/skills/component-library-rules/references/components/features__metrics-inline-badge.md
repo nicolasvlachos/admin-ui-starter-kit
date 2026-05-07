@@ -4,6 +4,7 @@ title: "Features · Metrics · Inline badge"
 description: "`InlineMetricBadge` — compact `label · value · change%` pill rows. Use as in-flow copy where a full Metric tile is too heavy."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/data-display/inline-metric
 examples:
   - MixedSizesDirections
 imports:
@@ -11,6 +12,7 @@ imports:
 tags:
   - features
   - metrics
+  - inline-metric
   - inline
   - badge
   - inlinemetricbadge
@@ -22,11 +24,11 @@ tags:
 `InlineMetricBadge` — compact `label · value · change%` pill rows. Use as in-flow copy where a full Metric tile is too heavy.
 
 **Layer:** `features`  
+**Source:** `src/components/composed/data-display/inline-metric`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { InlineMetricBadge } from '@/components/composed/data-display/inline-metric';
 
 export function MixedSizesDirections() {

@@ -791,13 +791,15 @@ When backward compatibility for previously-inline interfaces matters, re-export 
 
 ## 20. Preview registry stays in sync with the file tree
 
-Every preview page under `src/preview/pages/**` MUST appear in `src/preview/registry.tsx`, registered to the right section (`'UI' | 'Base' | 'Common' | 'Composed' | 'Features' | 'Layout'`). Adding a preview page without registering it produces dead files — they exist on disk but don't appear in the showcase, which silently rots.
+Every MDX preview page under `src/preview/pages/**/*.mdx` MUST appear in `src/preview/registry.tsx`, registered to the right section (`'UI' | 'Base' | 'Common' | 'Composed' | 'Features' | 'Layout'`). Adding a preview page without registering it produces dead files — they exist on disk but don't appear in the showcase, which silently rots.
 
 When adding a new preview page:
-1. Create `src/preview/pages/<section>/<Name>Page.tsx`.
-2. Add a `{ id, label, section, family, component, status }` entry in `registry.tsx`.
-3. Pick or reuse a `family` — the sidebar groups by family within a section.
-4. Verify the entry shows in the section nav by reloading the showcase.
+1. Create `src/preview/pages/<section>/<slug>.examples.tsx` with named example exports that import the real component API.
+2. Create `src/preview/pages/<section>/<slug>.mdx` that imports `DocsPage`, `Section`, `Example`, `PropsTable`, the examples module, and `?raw` source.
+3. Add a `{ id, label, section, family, component, status }` entry in `registry.tsx` that lazy-imports `./pages/<section>/<slug>.mdx`.
+4. Pick or reuse a `family` — the sidebar groups by family within a section.
+5. Run `npm run docs:generate-props` and `npm run docs:sync-skill` so the props table and agent component references stay fresh.
+6. Verify the entry shows in the section nav by reloading the showcase.
 
 When adding a new section (rare): extend the `PreviewEntry['section']` union, add it to `SECTION_ORDER`, then register pages.
 

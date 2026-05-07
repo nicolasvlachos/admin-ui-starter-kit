@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MetricGradient, type MetricDataPoint } from '@/components/composed/analytics';
 
 const data: MetricDataPoint[] = [

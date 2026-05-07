@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MessageSquare, Shield, Settings, Zap } from 'lucide-react';
 import { TeamMemberRow } from '@/components/composed/admin/team-member';
 import { RolePermissionCard } from '@/components/composed/admin/role-permission';

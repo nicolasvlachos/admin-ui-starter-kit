@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Col } from '../../PreviewLayout';

@@ -4,6 +4,7 @@ title: "Layout · Page"
 description: "Page shell, header partials, actions, and content regions with framework-neutral links."
 layer: layout
 family: "Shells"
+sourcePath: src/components/layout/page
 examples:
   - ProductionPageShell
   - ComposablePartials
@@ -21,6 +22,7 @@ tags:
   - shell
   - header
   - partials
+  - actions
 ---
 
 # Layout · Page
@@ -28,6 +30,7 @@ tags:
 Page shell, header partials, actions, and content regions with framework-neutral links.
 
 **Layer:** `layout`  
+**Source:** `src/components/layout/page`
 
 ## Examples
 

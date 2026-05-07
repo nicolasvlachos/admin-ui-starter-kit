@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Logo from '@/preview/_brand/logo';
 import AppLogo from '@/preview/_brand/app-logo';
 import { Row, Col } from '../../PreviewLayout';

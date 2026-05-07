@@ -21,7 +21,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [
 		// MDX must run BEFORE the React plugin so JSX-from-MDX is transformed correctly.
-		{ enforce: 'pre', ...mdx({ providerImportSource: '@mdx-js/react' }) },
+		{ enforce: 'pre', ...mdx() },
 		react(),
 		tailwindcss(),
 	],

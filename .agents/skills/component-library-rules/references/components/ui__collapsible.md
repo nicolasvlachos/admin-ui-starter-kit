@@ -4,6 +4,7 @@ title: "UI · Collapsible"
 description: "Headless show/hide region."
 layer: ui
 family: "Layout"
+sourcePath: src/components/ui/collapsible
 examples:
   - Default
 imports:
@@ -16,6 +17,7 @@ tags:
   - headless
   - show
   - hide
+  - region
 ---
 
 # UI · Collapsible
@@ -23,11 +25,11 @@ tags:
 Headless show/hide region.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/collapsible`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Button } from '@/components/ui/button';

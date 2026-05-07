@@ -9,6 +9,7 @@ examples:
   - Default
 imports:
   - @/components/features/global-search
+  - @/preview/_mocks
 tags:
   - features
   - search

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { QrCode } from 'lucide-react';
 import { Badge } from '@/components/base/badge';

@@ -68,10 +68,10 @@ Consumers wire it once at the root:
 <AppSidebar renderLink={(l) => <Link to={l.href}>{l.children}</Link>}>
 ```
 
-For Inertia:
+For a framework router:
 
 ```tsx
-<AppSidebar renderLink={(l) => <InertiaLink href={l.href}>{l.children}</InertiaLink>}>
+<AppSidebar renderLink={(l) => <AppLink href={l.href}>{l.children}</AppLink>}>
 ```
 
 If a layout component needs to *select* a target without rendering a

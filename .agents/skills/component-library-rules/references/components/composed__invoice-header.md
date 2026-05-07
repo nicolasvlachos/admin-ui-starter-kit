@@ -4,6 +4,7 @@ title: "Composed · Invoice header"
 description: "Top of an invoice — number, status, parties, amount."
 layer: composed
 family: "Data display"
+sourcePath: src/components/composed/data-display/invoice-header
 examples:
   - Paid
   - Overdue
@@ -13,6 +14,7 @@ tags:
   - composed
   - data
   - display
+  - invoice-header
   - invoice
   - header
   - top
@@ -24,11 +26,11 @@ tags:
 Top of an invoice — number, status, parties, amount.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/data-display/invoice-header`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { InvoiceHeaderCard } from '@/components/composed/data-display/invoice-header';
 
 export function Paid() {

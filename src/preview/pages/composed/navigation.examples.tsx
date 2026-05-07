@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Heart, Star, Sparkles, Zap } from 'lucide-react';
 import {
 	KanbanMicroBoard,

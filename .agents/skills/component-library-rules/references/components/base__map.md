@@ -33,7 +33,6 @@ Leaflet-backed map primitives — Map shell, MapTileLayer, MapMarker, MapPopup. 
 ## Examples
 
 ```tsx
-import 'leaflet/dist/leaflet.css';
 import { Map, MapTileLayer, MapMarker, MapPopup } from '@/components/base/map';
 
 const NEW_YORK: [number, number] = [40.7128, -74.006];

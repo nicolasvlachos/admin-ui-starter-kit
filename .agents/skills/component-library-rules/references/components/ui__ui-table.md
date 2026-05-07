@@ -4,6 +4,7 @@ title: "UI · Table"
 description: "shadcn table primitive (no data layer)."
 layer: ui
 family: "Data display"
+sourcePath: src/components/ui/table
 examples:
   - Default
 imports:
@@ -23,11 +24,11 @@ tags:
 shadcn table primitive (no data layer).
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/table`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	Table,
 	TableBody,

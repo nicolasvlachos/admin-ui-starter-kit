@@ -4,14 +4,18 @@ title: "Common · Brand"
 description: "Logo + AppLogo (sized variants). Source images expected at /assets/media/gct-logo[-light].png."
 layer: common
 family: "Branding"
+sourcePath: src/preview/_brand
 examples:
   - LogoExample
   - AppLogoSizes
   - AppLogoVariants
 imports:
+  - @/preview/_brand/app-logo
+  - @/preview/_brand/logo
 tags:
   - common
   - branding
+  - _brand
   - brand
   - logo
   - applogo
@@ -23,11 +27,11 @@ tags:
 Logo + AppLogo (sized variants). Source images expected at /assets/media/gct-logo[-light].png.
 
 **Layer:** `common`  
+**Source:** `src/preview/_brand`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import Logo from '@/preview/_brand/logo';
 import AppLogo from '@/preview/_brand/app-logo';
 import { Row, Col } from '../../PreviewLayout';

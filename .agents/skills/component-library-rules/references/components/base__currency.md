@@ -19,6 +19,7 @@ examples:
 imports:
   - @/components/base/currency/currency-pair-preview
   - @/components/base/display/money-display
+  - @/preview/_mocks
 tags:
   - base
   - display

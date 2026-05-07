@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
     Bell,
     CalendarRange,
@@ -313,7 +312,7 @@ export function CommentsEventsUnderOneLog() {
 }
 
 export function ReadOnlyTimelineNoComposer() {
-	const [entries, setEntries] = useState<typeof INITIAL_ENTRIES>(INITIAL_ENTRIES);
+	const [entries] = useState<typeof INITIAL_ENTRIES>(INITIAL_ENTRIES);
 	return (
 		<>
 			<EventLog

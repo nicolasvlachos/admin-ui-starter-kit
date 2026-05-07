@@ -239,10 +239,10 @@ everything else (via `<EventLogEventRow>`). Override per-kind via the
 
 ## Examples in the repo
 
-- [`/features/event-log`](../../../../preview/pages/features/EventLogPage.tsx)
+- [`/features/event-log`](../../../../preview/pages/features/event-log.mdx)
   preview — comments + audit events + system + notification under one
   feed
-- [`/features/enhanced-activities`](../../../../preview/pages/features/EnhancedActivitiesPage.tsx)
+- [`/features/enhanced-activities`](../../../../preview/pages/features/enhanced-activities.mdx)
   preview — Shopify-style activity timeline with comments rendered
   inline as note activities (uses `<ActivityFeedCard>` rather than
   `<EventLog>` to demonstrate the alternative pattern)

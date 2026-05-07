@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { LogOut, Settings, User, UserPlus } from 'lucide-react';
 import { Button } from '@/components/base/buttons';
 import { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '@/components/base/display/avatar';

@@ -4,6 +4,7 @@ title: "UI · Pagination"
 description: "Manual composition of pagination controls."
 layer: ui
 family: "Navigation"
+sourcePath: src/components/ui/pagination
 examples:
   - Default
 imports:
@@ -22,11 +23,11 @@ tags:
 Manual composition of pagination controls.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/pagination`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	Pagination,
 	PaginationContent,

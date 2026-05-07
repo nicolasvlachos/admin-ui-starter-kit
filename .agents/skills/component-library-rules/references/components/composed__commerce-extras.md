@@ -4,6 +4,7 @@ title: "Composed · Commerce (extras)"
 description: "Cart, coupon, order status, payment, tax breakdown, subscription, refund, address, voucher."
 layer: composed
 family: "Commerce"
+sourcePath: src/components/composed/commerce
 examples:
   - CartSummaryCardExample
   - CouponInputCardEmptyApplied
@@ -30,11 +31,11 @@ tags:
 Cart, coupon, order status, payment, tax breakdown, subscription, refund, address, voucher.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/commerce`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Sparkles, Star, Zap } from 'lucide-react';
 import {

@@ -46,16 +46,4 @@ export default defineConfig([
       }],
     },
   },
-  // Showcase example modules are mechanically converted from legacy .tsx
-  // pages and intentionally use `@ts-nocheck` while individual examples are
-  // hand-polished. They are NOT part of the published library tarball — they
-  // live under src/preview/ which is the in-repo showcase host only.
-  {
-    files: ['src/preview/**/*.examples.tsx', 'src/preview/pages/**/*.tsx'],
-    rules: {
-      '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
-    },
-  },
 ])

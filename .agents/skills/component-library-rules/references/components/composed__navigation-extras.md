@@ -4,6 +4,7 @@ title: "Composed · Navigation (extras)"
 description: "BreadcrumbProgress wizard + CategoryNavCard sidebar."
 layer: composed
 family: "Navigation"
+sourcePath: src/components/composed/navigation
 examples:
   - BreadcrumbProgressExample
   - CategoryNavCardExample
@@ -23,11 +24,11 @@ tags:
 BreadcrumbProgress wizard + CategoryNavCard sidebar.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/navigation`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Inbox, Heart, ShoppingBag, Sparkles, Users } from 'lucide-react';
 import { BreadcrumbProgress, CategoryNavCard } from '@/components/composed/navigation';

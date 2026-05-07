@@ -4,6 +4,7 @@ title: "Composed · AI"
 description: "Summary block + classification panel."
 layer: composed
 family: "AI"
+sourcePath: src/components/composed/ai
 examples:
   - AISummary
   - AIClassification
@@ -23,11 +24,11 @@ tags:
 Summary block + classification panel.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/ai`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { AiSummaryBlock, AiClassificationPanel } from '@/components/composed/ai';
 
 export function AISummary() {

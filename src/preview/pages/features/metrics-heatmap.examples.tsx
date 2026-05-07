@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ActivityHeatmap, type ActivityHeatmapDay } from '@/components/composed/analytics';
 
 function generate(): ActivityHeatmapDay[] {

@@ -45,12 +45,7 @@ import type {
 } from "leaflet"
 import type * as LeafletDrawNamespace from "leaflet-draw"
 import type * as LeafletNamespace from "leaflet"
-import "leaflet-draw/dist/leaflet.draw.css"
-import "leaflet.fullscreen/dist/Control.FullScreen.css"
 import type {} from "leaflet.markercluster"
-import "leaflet.markercluster/dist/MarkerCluster.css"
-import "leaflet.markercluster/dist/MarkerCluster.Default.css"
-import "leaflet/dist/leaflet.css"
 import {
     CircleIcon,
     LayersIcon,
@@ -83,25 +78,27 @@ import React, {
     type Ref,
 } from "react"
 import { renderToString } from "react-dom/server"
-import {
-    useMap,
-    useMapEvents,
-    type CircleMarkerProps,
-    type CircleProps,
-    type LayerGroupProps,
-    type MapContainerProps,
-    type MarkerProps,
-    type PolygonProps,
-    type PolylineProps,
-    type PopupProps,
-    type RectangleProps,
-    type TileLayerProps,
-    type TooltipProps,
+import type {
+    CircleMarkerProps,
+    CircleProps,
+    LayerGroupProps,
+    MapContainerProps,
+    MarkerProps,
+    PolygonProps,
+    PolylineProps,
+    PopupProps,
+    RectangleProps,
+    TileLayerProps,
+    TooltipProps,
 } from "react-leaflet"
 import type { MarkerClusterGroupProps } from "react-leaflet-markercluster"
 
 type LeafletModule = typeof LeafletNamespace
 type LeafletDrawModule = typeof LeafletDrawNamespace
+type ReactLeafletModule = typeof import("react-leaflet")
+type ReactLeafletHooks = Pick<ReactLeafletModule, "useMap" | "useMapEvents">
+
+const ReactLeafletHooksContext = createContext<ReactLeafletHooks | null>(null)
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- react-leaflet lazy exports include forwardRef components and this preserves prop inference at call sites.
 function createLazyComponent<T extends ComponentType<any>>(
@@ -193,11 +190,55 @@ const LeafletMarkerClusterGroup = createLazyComponent(async () =>
         default: mod.default,
     }))
 )
+const ReactLeafletHooksProvider = createLazyComponent(async () => {
+    const mod = await import("react-leaflet")
+
+    function ReactLeafletHooksProvider({
+        children,
+    }: {
+        children?: ReactNode
+    }) {
+        return (
+            <ReactLeafletHooksContext.Provider
+                value={{
+                    useMap: mod.useMap,
+                    useMapEvents: mod.useMapEvents,
+                }}>
+                {children}
+            </ReactLeafletHooksContext.Provider>
+        )
+    }
+
+    return {
+        default: ReactLeafletHooksProvider,
+    }
+})
+
+function useLeafletMap() {
+    const hooks = useContext(ReactLeafletHooksContext)
+    if (!hooks) {
+        throw new Error("Map controls must be rendered within Map.")
+    }
+
+    return hooks.useMap()
+}
+
+function useLeafletMapEvents(
+    handlers: Parameters<ReactLeafletModule["useMapEvents"]>[0]
+) {
+    const hooks = useContext(ReactLeafletHooksContext)
+    if (!hooks) {
+        throw new Error("Map controls must be rendered within Map.")
+    }
+
+    return hooks.useMapEvents(handlers)
+}
 
 function Map({
     zoom = 15,
     maxZoom = 18,
     className,
+    children,
     ...props
 }: Omit<MapContainerProps, "zoomControl"> & {
     center: LatLngExpression
@@ -214,8 +255,9 @@ function Map({
                 "z-50 size-full min-h-96 flex-1 rounded-md",
                 className
             )}
-            {...props}
-        />
+            {...props}>
+            <ReactLeafletHooksProvider>{children}</ReactLeafletHooksProvider>
+        </LeafletMapContainer>
     )
 }
 
@@ -260,7 +302,7 @@ function MapTileLayer({
     darkAttribution?: string
     ref?: Ref<TileLayer>
 }) {
-    const map = useMap()
+    const map = useLeafletMap()
     if (map.attributionControl) {
         map.attributionControl.setPrefix("")
     }
@@ -753,10 +795,10 @@ function MapZoomControl({
     className,
     ...props
 }: React.ComponentProps<"div"> & { position?: string }) {
-    const map = useMap()
+    const map = useLeafletMap()
     const [zoomLevel, setZoomLevel] = useState(map.getZoom())
 
-    useMapEvents({
+    useLeafletMapEvents({
         zoomend: () => {
             setZoomLevel(map.getZoom())
         },
@@ -800,7 +842,7 @@ function MapFullscreenControl({
     className,
     ...props
 }: React.ComponentProps<"button"> & { position?: string }) {
-    const map = useMap()
+    const map = useLeafletMap()
     const [isFullscreen, setIsFullscreen] = useState(false)
 
     const { L } = useLeaflet()
@@ -869,7 +911,7 @@ function MapLocateControl({
         onLocationFound?: (location: LocationEvent) => void
         onLocationError?: (error: ErrorEvent) => void
     } & { position?: string }) {
-    const map = useMap()
+    const map = useLeafletMap()
     const [isLocating, setIsLocating] = useDebounceLoadingState(200)
     const [location, setLocation] = useState<LatLngExpression | null>(null)
     const hasLocation = location !== null
@@ -977,7 +1019,7 @@ function MapDrawControl({
     position?: string
 }) {
     const { L, LeafletDraw } = useLeaflet()
-    const map = useMap()
+    const map = useLeafletMap()
     const featureGroupRef = useRef<L.FeatureGroup | null>(null)
     const editControlRef = useRef<EditToolbar.Edit | null>(null)
     const deleteControlRef = useRef<EditToolbar.Delete | null>(null)
@@ -1058,7 +1100,7 @@ function MapDrawShapeButton<T extends Draw.Feature>({
         throw new Error("MapDrawShapeButton must be used within MapDrawControl")
     }
     const { L } = useLeaflet()
-    const map = useMap()
+    const map = useLeafletMap()
     const controlRef = useRef<T | null>(null)
     const { activeMode, setActiveMode } = drawContext
     const isActive = activeMode === drawMode
@@ -1256,7 +1298,7 @@ function MapDrawActionButton<T extends EditToolbar.Edit | EditToolbar.Delete>({
         )
 
     const { L } = useLeaflet()
-    const map = useMap()
+    const map = useLeafletMap()
     const { featureGroup, activeMode, setActiveMode, layersCount } = drawContext
     const isActive = activeMode === drawAction
     const hasFeatures = layersCount > 0

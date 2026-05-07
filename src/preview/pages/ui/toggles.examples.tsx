@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
@@ -27,7 +26,6 @@ export function CheckboxExample() {
 
 export function SwitchExample() {
 	const [enabled, setEnabled] = useState(true);
-	const [size, setSize] = useState('md');
 	return (
 		<>
 			<Row>

@@ -4,6 +4,7 @@ title: "Features · Metrics · Micro chart grid"
 description: "`MetricMicroGrid` — six-cell dense overview pairing each KPI with a different lightweight visualization (bars / line / dots / progress / area / pie)."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/analytics
 examples:
   - DefaultAutoAssignedCharts
   - PinnedChartKinds
@@ -12,6 +13,7 @@ imports:
 tags:
   - features
   - metrics
+  - analytics
   - micro
   - chart
   - grid
@@ -23,11 +25,11 @@ tags:
 `MetricMicroGrid` — six-cell dense overview pairing each KPI with a different lightweight visualization (bars / line / dots / progress / area / pie).
 
 **Layer:** `features`  
+**Source:** `src/components/composed/analytics`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { MetricMicroGrid } from '@/components/composed/analytics';
 
 export function DefaultAutoAssignedCharts() {

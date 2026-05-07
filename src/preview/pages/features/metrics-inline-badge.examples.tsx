@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { InlineMetricBadge } from '@/components/composed/data-display/inline-metric';
 
 export function MixedSizesDirections() {

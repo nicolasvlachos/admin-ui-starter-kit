@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { DollarSign, ShoppingBag, TrendingUp, Users } from 'lucide-react';
 import {
 	Metric,

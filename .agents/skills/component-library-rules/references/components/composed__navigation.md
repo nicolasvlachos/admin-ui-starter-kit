@@ -4,6 +4,7 @@ title: "Composed · Navigation & boards"
 description: "Kanban, tab switcher, time ruler, vendor performance, experience activity."
 layer: composed
 family: "Navigation"
+sourcePath: src/components/composed/navigation
 examples:
   - KanbanMicroBoardExample
   - TabSwitcherCardExample
@@ -27,11 +28,11 @@ tags:
 Kanban, tab switcher, time ruler, vendor performance, experience activity.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/navigation`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Heart, Star, Sparkles, Zap } from 'lucide-react';
 import {
 	KanbanMicroBoard,

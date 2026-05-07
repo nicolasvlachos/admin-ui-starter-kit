@@ -1,85 +1,142 @@
 # Preview pages and the showcase registry
 
-Open this when adding, moving, or refactoring a preview page.
+Open this when adding, moving, or refactoring a showcase page.
 
 ## The contract
 
-Every file under `src/preview/pages/**/*.tsx` MUST appear in `src/preview/registry.tsx`. Pages on disk that aren't registered are dead — they exist but never appear in the showcase, so they silently rot.
+Every MDX page under `src/preview/pages/**/*.mdx` MUST appear in
+`src/preview/registry.tsx`. Pages on disk that are not registered are dead —
+they exist but never appear in the showcase, so they silently rot.
+
+Each page normally has a sibling examples file:
+
+```
+src/preview/pages/<section>/<slug>.mdx
+src/preview/pages/<section>/<slug>.examples.tsx
+```
+
+The MDX file owns prose, sections, live example wrappers, and API tables. The
+examples file owns named React examples that import the real library components.
 
 ## Adding a new preview page
 
-1. **Create** `src/preview/pages/<section>/<Name>Page.tsx`. Sections: `ui`, `base`, `common`, `composed`, `features`, `layout`.
-2. **Compose with the real components.** Import from `@/components/base/...`, `@/components/composed/...`, `@/components/features/...`, `@/components/layout/...`. Use real props, real data — not custom inline mocks.
-3. **Wrap with `PreviewPage` + `PreviewSection`** from `src/preview/PreviewLayout.tsx`. They handle title, description, two-column grid, card chrome.
+1. **Create** `src/preview/pages/<section>/<slug>.examples.tsx`. Sections:
+   `ui`, `base`, `common`, `composed`, `features`, `layout`.
+2. **Compose with the real components.** Import from
+   `@/components/base/...`, `@/components/composed/...`,
+   `@/components/features/...`, `@/components/layout/...`. Use real props and
+   realistic data, not a custom visual mock.
+3. **Create** `src/preview/pages/<section>/<slug>.mdx`. Import
+   `DocsPage`, `Section`, `Example`, and `PropsTable` from `@/preview/_docs`,
+   then render each named example through `<Example>`.
 4. **Register** in `src/preview/registry.tsx`:
     ```ts
     {
         id: '<section>/<slug>',
         label: 'Friendly name',
-        section: 'Composed',          // capitalized — the union in PreviewEntry['section']
+        section: 'Composed',          // capitalized — PreviewEntry['section']
         family: 'Cards',              // groups in the sidebar
-        component: lazy(() => import('./pages/composed/CardsContactPage')),
+        component: lazy(() => import('./pages/composed/contact-card.mdx')),
         status: 'ready',              // 'ready' | 'wip' | 'broken'
     },
     ```
-5. **Verify** in the running showcase — open the section tab and confirm the entry appears under the right family.
+5. **Regenerate docs surfaces**:
+   `npm run docs:generate-props` and `npm run docs:sync-skill`.
+6. **Verify** in the running showcase — open the section tab and confirm the
+   entry appears under the right family.
 
 ## Page anatomy
 
+```mdx
+import { DocsPage, Section, Example, PropsTable } from '@/preview/_docs';
+import * as Examples from './feature.examples';
+import examplesSource from './feature.examples?raw';
+
+<DocsPage
+    title="Features · Feature"
+    description="One-line description of what this surface does."
+    layer="features"
+    status="ready"
+    sourcePath="src/components/features/feature"
+>
+
+<Section title="Examples" id="examples">
+
+<Example name="Default" source={examplesSource}>
+    <Examples.Default />
+</Example>
+
+<Example name="StringsOverride" source={examplesSource}>
+    <Examples.StringsOverride />
+</Example>
+
+</Section>
+
+<Section title="API" id="api">
+
+#### Feature
+<PropsTable component="Feature" />
+
+</Section>
+
+</DocsPage>
+```
+
 ```tsx
+// feature.examples.tsx
 import { useState } from 'react';
 import { Feature } from '@/components/features/feature';
-import { PreviewPage, PreviewSection } from '../../PreviewLayout';
 
-export default function FeaturePage() {
+export function Default() {
+    const [value, setValue] = useState('');
+    return <Feature value={value} onChange={setValue} />;
+}
+
+export function StringsOverride() {
     const [value, setValue] = useState('');
     return (
-        <PreviewPage
-            title="Features · Feature"
-            description="One-line description of what this surface does."
-        >
-            <PreviewSection title="API surface">
-                {/* Quick prose + monospace examples of the public props */}
-            </PreviewSection>
-
-            <PreviewSection title="Default" span="full">
-                <Feature value={value} onChange={setValue} />
-            </PreviewSection>
-
-            <PreviewSection title="With slot override" description="Demo a custom slot.">
-                <Feature value={value} onChange={setValue} renderItem={(item) => /* … */} />
-            </PreviewSection>
-
-            <PreviewSection title="Strings override">
-                <Feature value={value} onChange={setValue} strings={{ title: 'Custom title' }} />
-            </PreviewSection>
-        </PreviewPage>
+        <Feature
+            value={value}
+            onChange={setValue}
+            strings={{ title: 'Custom title' }}
+        />
     );
 }
 ```
 
-`<PreviewSection span="full">` makes a section span both columns (use for wider components like editors, tables, complex layouts).
+## Example rules
 
-## Heading rules in previews
+Examples are public documentation and informal API tests. Keep them thin:
 
-`PreviewLayout` uses `Heading tag="h1"` for the page title and `Heading tag="h4"` for section titles — both with their default sizes from the typography system. **Don't add `!important` overrides** — fix the typography component if a default looks wrong.
+- Import the actual shipped component or exported partial.
+- Keep reusable demo data in the examples file, not the MDX file.
+- Use `Row` / `Col` from `src/preview/PreviewLayout.tsx` only for simple demo
+  arrangement. Page chrome belongs to `DocsPage`, `Section`, and `Example`.
+- Avoid `// @ts-nocheck` on new examples. Existing converted examples may still
+  have it, but new work should be typed.
 
 ## Forbidden — re-implementing the component
 
-A preview page that defines a "private" version of the component inline is a smell:
+A preview example that defines a "private" version of the component inline is a
+smell:
 
 ```tsx
-// ❌ This is the rule-10 violation — a 122-line "static visual mock" with no
+// ❌ This is the rule-10 violation — a static visual mock with no
 //    `import { RichTextEditor } from '@/components/features/rich-text-editor'`.
 const TOOLBAR_BUTTONS = [{ icon: Bold, label: 'Bold' }, /* … */];
-export default function RichTextEditorPage() {
+export function Default() {
     return /* … hand-rolled toolbar + body */;
 }
 ```
 
-If the preview can't drive the real component, the underlying feature is missing a slot, render-prop, or fallback path. **Fix the feature**, then make the preview a thin demo.
+If the preview cannot drive the real component, the underlying feature is
+missing a slot, render-prop, exported partial, or fallback path. Fix the
+feature, then make the preview a thin demo.
 
-The one acceptable exception: when a feature genuinely can't render in the showcase context (e.g. a peer-dep isn't bundled). Then the feature itself ships a fallback (see `features/rich-text-editor` `FallbackRichTextEditor`), and the preview imports the real component which decides at runtime which path to take.
+The one acceptable exception: when a feature genuinely cannot render in the
+showcase context because an optional peer is absent. In that case the feature
+itself ships a fallback, and the preview imports the real component which
+decides at runtime which path to take.
 
 ## Status meanings
 
@@ -91,4 +148,6 @@ The one acceptable exception: when a feature genuinely can't render in the showc
 
 ## When restructuring a feature folder
 
-If you move a partial from the feature root into `partials/`, double-check the preview pages that demo it — sometimes they import partials directly (e.g. `import { ActivityRow } from '@/components/features/activities'`). Update imports through the index barrel rather than direct paths so future moves don't break the preview.
+If you move a partial from the feature root into `partials/`, double-check the
+examples that demo it. Update imports through the index barrel rather than
+direct paths so future moves do not break the showcase.

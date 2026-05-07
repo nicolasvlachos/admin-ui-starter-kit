@@ -4,6 +4,7 @@ title: "UI · Progress"
 description: "Linear progress bar at varying values."
 layer: ui
 family: "Data display"
+sourcePath: src/components/ui/progress
 examples:
   - Values
 imports:
@@ -16,6 +17,7 @@ tags:
   - linear
   - bar
   - varying
+  - values
 ---
 
 # UI · Progress
@@ -23,11 +25,11 @@ tags:
 Linear progress bar at varying values.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/progress`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Progress } from '@/components/ui/progress';
 import { Col } from '../../PreviewLayout';
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { RichTextEditor } from '@/components/features/rich-text-editor';
 import { Text } from '@/components/typography';

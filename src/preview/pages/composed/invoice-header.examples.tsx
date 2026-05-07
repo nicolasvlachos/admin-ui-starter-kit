@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { InvoiceHeaderCard } from '@/components/composed/data-display/invoice-header';
 
 export function Paid() {

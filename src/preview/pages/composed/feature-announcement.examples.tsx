@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Sparkles, Zap, Shield } from 'lucide-react';
 import { FeatureAnnouncementCard } from '@/components/composed/cards/feature-announcement';
 import { Col } from '../../PreviewLayout';

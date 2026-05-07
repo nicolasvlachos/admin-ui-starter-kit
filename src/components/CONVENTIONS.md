@@ -104,9 +104,9 @@ gratuitous `!text-X` usage out of base and composed components.
 `SmartCard` is the single card primitive. Only `src/components/base/cards/smart-card.tsx`
 imports the underlying shadcn `Card` parts from `@/components/ui/card`.
 
-**Allowed exception:** `src/preview/pages/ui/UiCardPage.tsx` and other preview
-pages that exist to demonstrate the raw primitive itself. Production components
-never reach past SmartCard.
+**Allowed exception:** MDX showcase pages under `src/preview/pages/ui/` that
+exist to demonstrate the raw primitive itself. Production components never
+reach past SmartCard.
 
 If you need card-shaped chrome that SmartCard does not yet expose, extend
 SmartCard rather than introducing a parallel wrapper.
@@ -168,11 +168,11 @@ The `base/` and `composed/` layers are framework-agnostic.
 - Allowed: React, lucide-react icons, Radix/shadcn primitives, RHF (only inside
   `base/forms/fields/*` and only behind opt-in field wrappers).
 - Disallowed: Inertia, Next router, react-router, Ziggy `route()`, direct
-  `axios` imports outside `src/hooks/use-api.ts`.
+  HTTP-client imports such as `axios`.
 
-`use-api` accepts an HTTP client adapter; consumers wire axios at the app
-boundary and pass it in. App-specific service hooks (e.g. suggestions) live in
-the consuming app, not in this library.
+Data fetching is a consumer concern. Components accept callbacks, fetchers, or
+pre-resolved data; app-specific service hooks live in the consuming app, not in
+this library.
 
 ---
 

@@ -4,6 +4,7 @@ title: "Composed · Commerce"
 description: "Bookings, loyalty, discount stacks, shipment tracking."
 layer: composed
 family: "Commerce"
+sourcePath: src/components/composed/commerce
 examples:
   - UpcomingBookings
   - LoyaltyPoints
@@ -26,11 +27,11 @@ tags:
 Bookings, loyalty, discount stacks, shipment tracking.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/commerce`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	UpcomingBookingRow,
 	LoyaltyPointsCard,

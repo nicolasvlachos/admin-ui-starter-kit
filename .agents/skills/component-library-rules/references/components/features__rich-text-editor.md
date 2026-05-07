@@ -4,6 +4,7 @@ title: "Features · Rich text editor"
 description: "Tiptap-backed editor with bold / italic / strike / lists / quote / undo-redo. Falls back to a non-editable preview when @tiptap/react is not bundled. Strings overridable via the `strings` prop."
 layer: features
 family: "Inputs"
+sourcePath: src/components/features/rich-text-editor
 examples:
   - ProductionWiring
   - Default
@@ -17,6 +18,7 @@ imports:
 tags:
   - features
   - inputs
+  - rich-text-editor
   - rich
   - text
   - editor
@@ -28,11 +30,11 @@ tags:
 Tiptap-backed editor with bold / italic / strike / lists / quote / undo-redo. Falls back to a non-editable preview when @tiptap/react is not bundled. Strings overridable via the `strings` prop.
 
 **Layer:** `features`  
+**Source:** `src/components/features/rich-text-editor`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { RichTextEditor } from '@/components/features/rich-text-editor';
 import { Text } from '@/components/typography';

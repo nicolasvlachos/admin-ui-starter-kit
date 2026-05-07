@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { InvoiceTable } from '@/components/composed/data-display/invoice-table';
 
 export function Default() {

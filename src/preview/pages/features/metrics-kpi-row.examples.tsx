@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MiniKpiRow } from '@/components/composed/data-display/mini-kpi';
 
 export function Example4KPIs() {

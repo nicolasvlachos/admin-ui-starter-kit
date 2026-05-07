@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Edit, Trash2, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {

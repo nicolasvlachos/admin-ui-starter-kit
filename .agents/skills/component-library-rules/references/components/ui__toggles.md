@@ -4,6 +4,7 @@ title: "UI · Toggles"
 description: "Checkbox, Switch, RadioGroup, Slider primitives."
 layer: ui
 family: "Forms"
+sourcePath: src/components/ui
 examples:
   - CheckboxExample
   - SwitchExample
@@ -28,11 +29,11 @@ tags:
 Checkbox, Switch, RadioGroup, Slider primitives.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Switch } from '@/components/ui/switch';
@@ -61,7 +62,6 @@ export function CheckboxExample() {
 
 export function SwitchExample() {
 	const [enabled, setEnabled] = useState(true);
-	const [size, setSize] = useState('md');
 	return (
 		<>
 			<Row>

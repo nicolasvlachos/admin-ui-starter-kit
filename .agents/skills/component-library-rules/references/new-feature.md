@@ -102,4 +102,8 @@ export type { FeatureProps } from './$feature.types';
 
 ## After landing
 
-Add a preview page under `src/preview/pages/features/$FeatureName>Page.tsx` and register it in `src/preview/registry.tsx` (see [`preview-pages.md`](preview-pages.md)).
+Add a showcase docs pair under `src/preview/pages/features/`:
+`$feature.examples.tsx` for named live examples and `$feature.mdx` for
+`DocsPage` / `Section` / `Example` / `PropsTable` documentation. Register the
+MDX page in `src/preview/registry.tsx`, then run `npm run docs:generate-props`
+and `npm run docs:sync-skill` (see [`preview-pages.md`](preview-pages.md)).

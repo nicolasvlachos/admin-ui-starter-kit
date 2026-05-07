@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { CreditCard, DollarSign, ShoppingBag, Users } from 'lucide-react';
 import { MetricBar, MetricGrid, type MetricData } from '@/components/composed/analytics';
 

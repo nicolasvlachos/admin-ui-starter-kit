@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
     Bell,
     Bookmark,
@@ -238,7 +237,7 @@ export function DefaultDensityHeadlineSegmentsGrouping() {
 }
 
 export function CompactDensitySingleLineDotFeed() {
-	const [registry, setRegistry] =
+	const [registry] =
 	        useState<Record<string, ActivityResourceConfig>>(RESOURCE_SEED);
 	return (
 		<>

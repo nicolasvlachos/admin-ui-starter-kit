@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { Inbox, Heart, ShoppingBag, Sparkles, Users } from 'lucide-react';
 import { BreadcrumbProgress, CategoryNavCard } from '@/components/composed/navigation';

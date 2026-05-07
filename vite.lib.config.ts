@@ -47,7 +47,6 @@ const externalPrefixes = [
 	'clsx',
 	'react-hook-form',
 	'zustand',
-	'axios',
 ];
 
 const isExternal = (id: string): boolean => {
@@ -57,6 +56,11 @@ const isExternal = (id: string): boolean => {
 	}
 	if (id.startsWith('@/') || id.startsWith('.') || id.startsWith('/')) return false;
 	return /^[a-z@]/.test(id);
+};
+
+const assetFileNames = (asset: { name?: string }): string => {
+	if (asset.name === 'style.css') return 'style.css';
+	return 'assets/[name]-[hash][extname]';
 };
 
 /**
@@ -72,6 +76,7 @@ const entry: Record<string, string> = {
 
 	// base
 	'components/base/index': 'src/components/base/index.tsx',
+	'components/base/accordion/index': 'src/components/base/accordion/index.ts',
 	'components/base/badge/index': 'src/components/base/badge/index.ts',
 	'components/base/buttons/index': 'src/components/base/buttons/index.tsx',
 	'components/base/cards/index': 'src/components/base/cards/index.ts',
@@ -88,6 +93,8 @@ const entry: Record<string, string> = {
 	'components/base/navigation/index': 'src/components/base/navigation/index.ts',
 	'components/base/popover/index': 'src/components/base/popover/index.ts',
 	'components/base/popover-menu/index': 'src/components/base/popover-menu/index.ts',
+	'components/base/sheet/index': 'src/components/base/sheet/index.ts',
+	'components/base/sidebar/index': 'src/components/base/sidebar/index.ts',
 	'components/base/spinner/index': 'src/components/base/spinner/index.ts',
 	'components/base/table/index': 'src/components/base/table/index.tsx',
 	'components/base/toaster/index': 'src/components/base/toaster/index.ts',
@@ -102,16 +109,19 @@ const entry: Record<string, string> = {
 	'components/composed/dark-surfaces/index': 'src/components/composed/dark-surfaces/index.ts',
 	'components/composed/data-display/index': 'src/components/composed/data-display/index.ts',
 	'components/composed/navigation/index': 'src/components/composed/navigation/index.ts',
+	'components/composed/onboarding/index': 'src/components/composed/onboarding/index.ts',
 	'components/composed/timelines/index': 'src/components/composed/timelines/index.ts',
 
 	// features
 	'components/features/index': 'src/components/features/index.ts',
 	'components/features/activities/index': 'src/components/features/activities/index.ts',
+	'components/features/ai-chat/index': 'src/components/features/ai-chat/index.ts',
 	'components/features/card/index': 'src/components/features/card/index.ts',
 	'components/features/comments/index': 'src/components/features/comments/index.ts',
 	'components/features/event-log/index': 'src/components/features/event-log/index.ts',
 	'components/features/filters/index': 'src/components/features/filters/index.ts',
 	'components/features/global-search/index': 'src/components/features/global-search/index.ts',
+	'components/features/kanban/index': 'src/components/features/kanban/index.ts',
 	'components/features/mentions/index': 'src/components/features/mentions/index.ts',
 	'components/features/overlays/index': 'src/components/features/overlays/index.ts',
 	'components/features/rich-text-editor/index': 'src/components/features/rich-text-editor/index.ts',
@@ -152,7 +162,6 @@ export default defineConfig({
 		cssCodeSplit: true,
 		lib: {
 			entry,
-			formats: ['es', 'cjs'],
 		},
 		rollupOptions: {
 			external: isExternal,
@@ -162,22 +171,15 @@ export default defineConfig({
 					preserveModules: false,
 					entryFileNames: '[name].js',
 					chunkFileNames: '_shared/[name]-[hash].js',
-					assetFileNames: (asset) => {
-						if (asset.name === 'style.css') return 'style.css';
-						return 'assets/[name]-[hash][extname]';
-					},
+					assetFileNames,
 				},
 				{
 					format: 'cjs',
 					preserveModules: false,
 					entryFileNames: '[name].cjs',
 					chunkFileNames: '_shared/[name]-[hash].cjs',
-					assetFileNames: (asset) => {
-						if (asset.name === 'style.css') return 'style.css';
-						return 'assets/[name]-[hash][extname]';
-					},
+					assetFileNames,
 					exports: 'named',
-					interop: 'auto',
 				},
 			],
 		},

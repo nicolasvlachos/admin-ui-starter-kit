@@ -4,6 +4,7 @@ title: "UI · Calendar"
 description: "react-day-picker styled with shadcn primitives."
 layer: ui
 family: "Forms"
+sourcePath: src/components/ui/calendar
 examples:
   - Single
 imports:
@@ -15,6 +16,7 @@ tags:
   - react
   - day
   - picker
+  - styled
 ---
 
 # UI · Calendar
@@ -22,11 +24,11 @@ tags:
 react-day-picker styled with shadcn primitives.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/calendar`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Col } from '../../PreviewLayout';

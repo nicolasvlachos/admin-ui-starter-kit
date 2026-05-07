@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export function Vertical() {

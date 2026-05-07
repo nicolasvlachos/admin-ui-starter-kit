@@ -4,6 +4,7 @@ title: "Composed · Contact card"
 description: "ContactCard — name, role, email, phone, location, badge."
 layer: composed
 family: "Cards"
+sourcePath: src/components/composed/cards/contact-card
 examples:
   - WithAllFields
   - WithInitialsOnly
@@ -14,6 +15,7 @@ imports:
 tags:
   - composed
   - cards
+  - contact-card
   - contact
   - card
   - contactcard
@@ -25,11 +27,11 @@ tags:
 ContactCard — name, role, email, phone, location, badge.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/cards/contact-card`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { ContactCard } from '@/components/composed/cards/contact-card';
 import { Col } from '../../PreviewLayout';
 

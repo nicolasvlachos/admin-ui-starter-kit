@@ -4,6 +4,7 @@ title: "Composed · Dense info cards"
 description: "Five layout variants — dashboard, classification, financial, project, score."
 layer: composed
 family: "Data display"
+sourcePath: src/components/composed/data-display/dense-info-card
 examples:
   - Dashboard
   - ScoreCard
@@ -16,6 +17,7 @@ tags:
   - composed
   - data
   - display
+  - dense-info-card
   - dense
   - info
   - cards
@@ -27,11 +29,11 @@ tags:
 Five layout variants — dashboard, classification, financial, project, score.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/data-display/dense-info-card`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	DenseInfoDashboard,
 	DenseInfoClassification,

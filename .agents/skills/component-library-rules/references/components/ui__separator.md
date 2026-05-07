@@ -4,6 +4,7 @@ title: "UI · Separator"
 description: "Horizontal & vertical dividers."
 layer: ui
 family: "Layout"
+sourcePath: src/components/ui/separator
 examples:
   - Horizontal
   - Vertical
@@ -23,11 +24,11 @@ tags:
 Horizontal & vertical dividers.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/separator`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Separator } from '@/components/ui/separator';
 
 export function Horizontal() {

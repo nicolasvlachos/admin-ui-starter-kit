@@ -4,6 +4,7 @@ title: "Features · Metrics · Comparison"
 description: "`MetricComparison` — side-by-side current vs previous with a tone-tinted delta box. Reuses the unified `MetricData` shape so currency/percent formatting carries through."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/analytics
 examples:
   - Default
   - WithCurrencyOverrideEUR
@@ -14,6 +15,7 @@ imports:
 tags:
   - features
   - metrics
+  - analytics
   - comparison
   - metriccomparison
   - side
@@ -25,11 +27,11 @@ tags:
 `MetricComparison` — side-by-side current vs previous with a tone-tinted delta box. Reuses the unified `MetricData` shape so currency/percent formatting carries through.
 
 **Layer:** `features`  
+**Source:** `src/components/composed/analytics`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { MetricComparison, type MetricData } from '@/components/composed/analytics';
 
 const monthly: { current: MetricData; previous: MetricData } = {

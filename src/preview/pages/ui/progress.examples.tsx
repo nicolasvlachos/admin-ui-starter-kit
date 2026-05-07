@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Progress } from '@/components/ui/progress';
 import { Col } from '../../PreviewLayout';
 

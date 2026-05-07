@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MetricComparison, type MetricData } from '@/components/composed/analytics';
 
 const monthly: { current: MetricData; previous: MetricData } = {

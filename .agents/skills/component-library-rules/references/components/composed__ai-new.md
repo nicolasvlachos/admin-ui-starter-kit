@@ -4,6 +4,7 @@ title: "Composed · AI (extras)"
 description: "Confidence dial, prompt suggestions, token usage card, message bubble, tool call, citation, feedback."
 layer: composed
 family: "AI"
+sourcePath: src/components/composed/ai
 examples:
   - AiConfidenceCardExample
   - AiPromptSuggestionsExample
@@ -28,11 +29,11 @@ tags:
 Confidence dial, prompt suggestions, token usage card, message bubble, tool call, citation, feedback.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/ai`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { BarChart3, Database, FileText, MessageSquare, Search } from 'lucide-react';
 import {

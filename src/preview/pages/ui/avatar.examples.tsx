@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage, AvatarGroup, AvatarGroupCount, AvatarBadge } from '@/components/ui/avatar';
 import { Row } from '../../PreviewLayout';
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState } from 'react';
 import { Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';

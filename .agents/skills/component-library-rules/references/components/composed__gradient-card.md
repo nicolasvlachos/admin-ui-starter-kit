@@ -4,6 +4,7 @@ title: "Composed · Gradient card"
 description: "Vivid gradient card with optional pattern, badge, alert, action."
 layer: composed
 family: "Cards"
+sourcePath: src/components/composed/cards/gradient-card
 examples:
   - HeroCardWithAction
   - CompactAllGradients
@@ -13,6 +14,7 @@ imports:
 tags:
   - composed
   - cards
+  - gradient-card
   - gradient
   - card
   - vivid
@@ -24,11 +26,11 @@ tags:
 Vivid gradient card with optional pattern, badge, alert, action.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/cards/gradient-card`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { ShoppingBag, DollarSign, Users, Sparkles } from 'lucide-react';
 import { GradientCard, GradientCardCompact, type GradientPreset } from '@/components/composed/cards/gradient-card';
 

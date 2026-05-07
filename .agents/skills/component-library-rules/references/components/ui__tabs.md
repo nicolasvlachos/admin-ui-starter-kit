@@ -4,6 +4,7 @@ title: "UI · Tabs"
 description: "Tab list with content panels."
 layer: ui
 family: "Navigation"
+sourcePath: src/components/ui/tabs
 examples:
   - Default
 imports:
@@ -15,6 +16,7 @@ tags:
   - tab
   - list
   - content
+  - panels
 ---
 
 # UI · Tabs
@@ -22,11 +24,11 @@ tags:
 Tab list with content panels.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/tabs`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export function Default() {

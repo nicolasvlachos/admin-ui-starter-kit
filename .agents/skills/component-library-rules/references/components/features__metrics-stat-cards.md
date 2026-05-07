@@ -4,6 +4,7 @@ title: "Features · Metrics · Stat cards"
 description: "Two stat tile flavors built from the unified `Metric` component — `accent` (dark surface + sparkline) and `colored` (segmented progress bar)."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/analytics
 examples:
   - MetricAccent
   - MetricColored
@@ -12,6 +13,7 @@ imports:
 tags:
   - features
   - metrics
+  - analytics
   - stat
   - cards
   - tile
@@ -23,11 +25,11 @@ tags:
 Two stat tile flavors built from the unified `Metric` component — `accent` (dark surface + sparkline) and `colored` (segmented progress bar).
 
 **Layer:** `features`  
+**Source:** `src/components/composed/analytics`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Metric, type MetricData } from '@/components/composed/analytics';
 
 const UP = [12, 18, 15, 25, 22, 30, 28, 35, 32, 40, 38, 45];

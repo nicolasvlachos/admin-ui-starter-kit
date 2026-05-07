@@ -4,6 +4,7 @@ title: "UI · Alert"
 description: "shadcn alert primitive: variants, with title/description/action."
 layer: ui
 family: "Feedback"
+sourcePath: src/components/ui/alert
 examples:
   - Variants
   - WithAlertAction
@@ -17,6 +18,7 @@ tags:
   - shadcn
   - primitive
   - variants
+  - title
 ---
 
 # UI · Alert
@@ -24,11 +26,11 @@ tags:
 shadcn alert primitive: variants, with title/description/action.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/alert`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Info, CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription, AlertAction } from '@/components/ui/alert';
 import { Col } from '../../PreviewLayout';

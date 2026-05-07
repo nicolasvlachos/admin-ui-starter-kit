@@ -4,6 +4,7 @@ title: "Layout · Users & avatars"
 description: "User identity surfaces used by layout headers, sidebars, menus, avatar groups, and status badges."
 layer: layout
 family: "Building blocks"
+sourcePath: src/components/layout
 examples:
   - AvatarStates
   - HeaderUserMenuExample
@@ -32,11 +33,11 @@ tags:
 User identity surfaces used by layout headers, sidebars, menus, avatar groups, and status badges.
 
 **Layer:** `layout`  
+**Source:** `src/components/layout`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { LogOut, Settings, User, UserPlus } from 'lucide-react';
 import { Button } from '@/components/base/buttons';
 import { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '@/components/base/display/avatar';

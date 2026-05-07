@@ -52,6 +52,7 @@ imports:
   - @/components/ui/avatar
   - @/components/ui/separator
   - @/components/ui/tooltip
+  - @/preview/_mocks
 tags:
   - base
   - display

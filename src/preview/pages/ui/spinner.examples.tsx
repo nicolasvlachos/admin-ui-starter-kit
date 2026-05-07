@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Spinner } from '@/components/ui/spinner';
 import { Row } from '../../PreviewLayout';
 

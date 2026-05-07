@@ -4,6 +4,7 @@ title: "Composed · Admin · API key list"
 description: "Collapsible section with per-row dropdown menu (Copy / Delete) and an optional Add action in the header. Generic enough for any 'named secret list' — service tokens, webhook URLs, deployment hooks. Composes base/cards + base/display/collapsible + base/navigation/ActionMenu + base/copyable."
 layer: composed
 family: "Admin"
+sourcePath: src/components/composed/admin
 examples:
   - DefaultVisibleSecretsCallbacksForAddDelete
   - MaskedSecretsStripeStyle
@@ -25,11 +26,11 @@ tags:
 Collapsible section with per-row dropdown menu (Copy / Delete) and an optional Add action in the header. Generic enough for any 'named secret list' — service tokens, webhook URLs, deployment hooks. Composes base/cards + base/display/collapsible + base/navigation/ActionMenu + base/copyable.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/admin`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { ApiKeyList, type ApiKeyListItem } from '@/components/composed/admin';
 import { Col } from '../../PreviewLayout';

@@ -4,6 +4,7 @@ title: "Composed · Invoice table"
 description: "Line items with qty / price / total."
 layer: composed
 family: "Data display"
+sourcePath: src/components/composed/data-display/invoice-table
 examples:
   - Default
   - WithTaxRate
@@ -13,6 +14,7 @@ tags:
   - composed
   - data
   - display
+  - invoice-table
   - invoice
   - table
   - line
@@ -24,11 +26,11 @@ tags:
 Line items with qty / price / total.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/data-display/invoice-table`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { InvoiceTable } from '@/components/composed/data-display/invoice-table';
 
 export function Default() {

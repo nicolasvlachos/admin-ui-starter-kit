@@ -1,6 +1,4 @@
-// @ts-nocheck
 import { toast } from 'sonner';
-import { Toaster } from '@/components/base/toaster';
 import { Button } from '@/components/ui/button';
 import { Row } from '../../PreviewLayout';
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ShoppingBag, DollarSign, Users, Sparkles } from 'lucide-react';
 import { GradientCard, GradientCardCompact, type GradientPreset } from '@/components/composed/cards/gradient-card';
 

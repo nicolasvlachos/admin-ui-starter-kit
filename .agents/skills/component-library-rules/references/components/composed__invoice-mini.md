@@ -4,6 +4,7 @@ title: "Composed · Invoice mini"
 description: "Compact invoice tile — paid / pending / overdue."
 layer: composed
 family: "Data display"
+sourcePath: src/components/composed/data-display/invoice-mini
 examples:
   - Statuses
 imports:
@@ -12,6 +13,7 @@ tags:
   - composed
   - data
   - display
+  - invoice-mini
   - invoice
   - mini
   - compact
@@ -23,11 +25,11 @@ tags:
 Compact invoice tile — paid / pending / overdue.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/data-display/invoice-mini`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { InvoiceMiniCard } from '@/components/composed/data-display/invoice-mini';
 
 export function Statuses() {

@@ -4,6 +4,7 @@ title: "Composed · Admin"
 description: "Team list, permissions, conversations, settings, inventory."
 layer: composed
 family: "Admin"
+sourcePath: src/components/composed/admin
 examples:
   - TeamMembers
   - RolePermissions
@@ -31,11 +32,11 @@ tags:
 Team list, permissions, conversations, settings, inventory.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/admin`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { MessageSquare, Shield, Settings, Zap } from 'lucide-react';
 import { TeamMemberRow } from '@/components/composed/admin/team-member';
 import { RolePermissionCard } from '@/components/composed/admin/role-permission';

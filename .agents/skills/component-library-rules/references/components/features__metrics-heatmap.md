@@ -4,6 +4,7 @@ title: "Features · Metrics · Activity heatmap"
 description: "`ActivityHeatmap` — GitHub-style daily-activity calendar with success-tinted intensity cells."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/analytics
 examples:
   - OrderActivity
 imports:
@@ -11,6 +12,7 @@ imports:
 tags:
   - features
   - metrics
+  - analytics
   - activity
   - heatmap
   - activityheatmap
@@ -22,11 +24,11 @@ tags:
 `ActivityHeatmap` — GitHub-style daily-activity calendar with success-tinted intensity cells.
 
 **Layer:** `features`  
+**Source:** `src/components/composed/analytics`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { ActivityHeatmap, type ActivityHeatmapDay } from '@/components/composed/analytics';
 
 function generate(): ActivityHeatmapDay[] {

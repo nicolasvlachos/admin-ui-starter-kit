@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Search, Mail, Lock } from 'lucide-react';
 import {
 	InputGroup,

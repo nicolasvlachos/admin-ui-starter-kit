@@ -4,6 +4,7 @@ title: "Features · Metrics · Analytics bar"
 description: "`MetricBar` — horizontal KPI strip with hairline-divided cells. Pair with `MetricGrid` for card-style layouts."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/analytics
 examples:
   - MetricBarDefault
   - MetricBarGradientFrame
@@ -17,6 +18,7 @@ tags:
   - bar
   - metricbar
   - horizontal
+  - kpi
 ---
 
 # Features · Metrics · Analytics bar
@@ -24,11 +26,11 @@ tags:
 `MetricBar` — horizontal KPI strip with hairline-divided cells. Pair with `MetricGrid` for card-style layouts.
 
 **Layer:** `features`  
+**Source:** `src/components/composed/analytics`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { CreditCard, DollarSign, ShoppingBag, Users } from 'lucide-react';
 import { MetricBar, MetricGrid, type MetricData } from '@/components/composed/analytics';
 

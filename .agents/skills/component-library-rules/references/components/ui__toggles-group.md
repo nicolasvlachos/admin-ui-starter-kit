@@ -4,6 +4,7 @@ title: "UI · Toggle + ToggleGroup"
 description: "Single toggle + radio/multiple group."
 layer: ui
 family: "Forms"
+sourcePath: src/components/ui
 examples:
   - SingleToggle
   - MultipleSelectGroup
@@ -24,11 +25,11 @@ tags:
 Single toggle + radio/multiple group.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight } from 'lucide-react';
 import { Toggle } from '@/components/ui/toggle';

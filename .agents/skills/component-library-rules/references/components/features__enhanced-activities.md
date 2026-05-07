@@ -2,6 +2,7 @@
 id: features/enhanced-activities
 title: "Features · Enhanced activities"
 family: "Collaboration"
+sourcePath: src/components/features
 examples:
   - APISurface
   - ActivityTimelineComposer
@@ -20,11 +21,11 @@ tags:
 
 # Features · Enhanced activities
 
+**Source:** `src/components/features`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
     Bell,
     Bookmark,
@@ -314,9 +315,6 @@ const INITIAL_ACTIVITIES: ActivityItem<CommentActivityData>[] = [
 /* ------------------------------------------------------------------ */
 
 export function APISurface() {
-	const [activities, setActivities] = useState<typeof INITIAL_ACTIVITIES>(
-	        INITIAL_ACTIVITIES,
-	    );
 	return (
 		<>
 			<Text type="secondary">
@@ -372,7 +370,7 @@ export function ActivityTimelineComposer() {
 }
 
 export function CompactDensity() {
-	const [activities, setActivities] = useState<typeof INITIAL_ACTIVITIES>(
+	const [activities] = useState<typeof INITIAL_ACTIVITIES>(
 	        INITIAL_ACTIVITIES,
 	    );
 	return (

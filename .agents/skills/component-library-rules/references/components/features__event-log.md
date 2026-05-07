@@ -4,6 +4,7 @@ title: "Features · Event log"
 description: "Unified, mentions-aware mixed-source log: comments + audit events + system messages + custom kinds under one chronological surface. Inline `@user` / `#booking` / `$order` triggers work in the composer; resource chips render with tone-driven Badge variants in every entry kind."
 layer: features
 family: "Collaboration"
+sourcePath: src/components/features/event-log
 examples:
   - APISurface
   - CommentsEventsUnderOneLog
@@ -16,6 +17,7 @@ imports:
 tags:
   - features
   - collaboration
+  - event-log
   - event
   - log
   - unified
@@ -27,11 +29,11 @@ tags:
 Unified, mentions-aware mixed-source log: comments + audit events + system messages + custom kinds under one chronological surface. Inline `@user` / `#booking` / `$order` triggers work in the composer; resource chips render with tone-driven Badge variants in every entry kind.
 
 **Layer:** `features`  
+**Source:** `src/components/features/event-log`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
     Bell,
     CalendarRange,
@@ -346,7 +348,7 @@ export function CommentsEventsUnderOneLog() {
 }
 
 export function ReadOnlyTimelineNoComposer() {
-	const [entries, setEntries] = useState<typeof INITIAL_ENTRIES>(INITIAL_ENTRIES);
+	const [entries] = useState<typeof INITIAL_ENTRIES>(INITIAL_ENTRIES);
 	return (
 		<>
 			<EventLog

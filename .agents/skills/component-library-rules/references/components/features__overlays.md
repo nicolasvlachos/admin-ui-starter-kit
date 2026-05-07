@@ -2,6 +2,7 @@
 id: features/overlays
 title: "Features · Overlays"
 family: "Overlays"
+sourcePath: src/components/features/overlays
 examples:
   - APISurface
   - DialogDefault
@@ -24,11 +25,11 @@ tags:
 
 # Features · Overlays
 
+**Source:** `src/components/features/overlays`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import {
 	AlertCircle,

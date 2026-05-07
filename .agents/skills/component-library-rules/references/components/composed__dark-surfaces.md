@@ -4,6 +4,7 @@ title: "Composed · Dark surfaces"
 description: "Dark-wrapped components — payment, receipt, info panel, order items, outstanding balance."
 layer: composed
 family: "Surfaces"
+sourcePath: src/components/composed/dark-surfaces
 examples:
   - PaymentConfirmation
   - BookingReceipt
@@ -15,6 +16,7 @@ imports:
 tags:
   - composed
   - surfaces
+  - dark-surfaces
   - dark
   - wrapped
   - components
@@ -26,11 +28,11 @@ tags:
 Dark-wrapped components — payment, receipt, info panel, order items, outstanding balance.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/dark-surfaces`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	DarkPaymentConfirmation,
 	BookingReceiptDark,

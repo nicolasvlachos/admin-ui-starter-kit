@@ -4,6 +4,7 @@ title: "UI · Overlays"
 description: "Dialog, Sheet, Popover, Tooltip, HoverCard."
 layer: ui
 family: "Overlays"
+sourcePath: src/components/ui
 examples:
   - DialogExample
   - SheetExample
@@ -31,17 +32,17 @@ tags:
 Dialog, Sheet, Popover, Tooltip, HoverCard.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/base/sheet';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Row } from '../../PreviewLayout';
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { CourseCard } from '@/components/composed/cards/course-card';
 
 const SAMPLE_PARTICIPANTS = [

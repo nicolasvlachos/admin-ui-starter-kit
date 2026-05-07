@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Inbox, FileText, Settings } from 'lucide-react';
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { Item, ItemContent, ItemDescription, ItemFooter, ItemMedia, ItemTitle } from '@/components/ui/item';

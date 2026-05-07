@@ -4,6 +4,7 @@ title: "UI · Avatar"
 description: "Avatar with fallback, image, sizes, group, badge."
 layer: ui
 family: "Data display"
+sourcePath: src/components/ui/avatar
 examples:
   - Sizes
   - WithImageFallback
@@ -19,6 +20,7 @@ tags:
   - fallback
   - image
   - sizes
+  - group
 ---
 
 # UI · Avatar
@@ -26,11 +28,11 @@ tags:
 Avatar with fallback, image, sizes, group, badge.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/avatar`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Avatar, AvatarFallback, AvatarImage, AvatarGroup, AvatarGroupCount, AvatarBadge } from '@/components/ui/avatar';
 import { Row } from '../../PreviewLayout';
 

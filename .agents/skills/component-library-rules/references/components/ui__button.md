@@ -4,6 +4,7 @@ title: "UI · Button"
 description: "shadcn primitive button — variants, sizes, button group."
 layer: ui
 family: "Forms"
+sourcePath: src/components/ui/button
 examples:
   - Variants
   - Sizes
@@ -18,6 +19,7 @@ tags:
   - shadcn
   - primitive
   - variants
+  - sizes
 ---
 
 # UI · Button
@@ -25,11 +27,11 @@ tags:
 shadcn primitive button — variants, sizes, button group.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/button`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Button } from '@/components/ui/button';
 import { ButtonGroup } from '@/components/ui/button-group';
 import { Row } from '../../PreviewLayout';

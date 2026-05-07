@@ -4,6 +4,7 @@ title: "UI · Menus"
 description: "DropdownMenu, ContextMenu, Command palette."
 layer: ui
 family: "Overlays"
+sourcePath: src/components/ui
 examples:
   - DropdownMenuExample
   - ContextMenuRightClick
@@ -27,11 +28,11 @@ tags:
 DropdownMenu, ContextMenu, Command palette.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Edit, Trash2, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {

@@ -16,6 +16,7 @@ examples:
 imports:
   - @/components/base/copyable
   - @/components/base/toaster
+  - @/preview/_mocks
 tags:
   - base
   - display

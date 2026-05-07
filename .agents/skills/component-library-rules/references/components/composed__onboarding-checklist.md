@@ -4,6 +4,7 @@ title: "Composed · Onboarding · Checklist"
 description: "Step-list accordion with completed / in-progress / pending status indicators. Auto-opens the next non-completed step. Strings + status ARIA fully overridable. Composes base/accordion."
 layer: composed
 family: "Onboarding"
+sourcePath: src/components/composed/onboarding
 examples:
   - BorderedDefaultPointOfSaleOnboarding
   - CardVariantWorkspaceSetupControlled
@@ -29,11 +30,11 @@ tags:
 Step-list accordion with completed / in-progress / pending status indicators. Auto-opens the next non-completed step. Strings + status ARIA fully overridable. Composes base/accordion.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/onboarding`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { QrCode } from 'lucide-react';
 import { Badge } from '@/components/base/badge';

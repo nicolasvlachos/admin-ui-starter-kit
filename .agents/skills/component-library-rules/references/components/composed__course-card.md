@@ -4,6 +4,7 @@ title: "Composed · Course card"
 description: "Group experience with participants & progress."
 layer: composed
 family: "Cards"
+sourcePath: src/components/composed/cards/course-card
 examples:
   - DefaultWithEverything
   - GradientVioletFuchsiaPinkDefault
@@ -15,6 +16,7 @@ imports:
 tags:
   - composed
   - cards
+  - course-card
   - course
   - card
   - group
@@ -26,11 +28,11 @@ tags:
 Group experience with participants & progress.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/cards/course-card`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { CourseCard } from '@/components/composed/cards/course-card';
 
 const SAMPLE_PARTICIPANTS = [

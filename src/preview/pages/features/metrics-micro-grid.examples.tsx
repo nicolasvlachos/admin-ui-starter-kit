@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MetricMicroGrid } from '@/components/composed/analytics';
 
 export function DefaultAutoAssignedCharts() {

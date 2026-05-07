@@ -9,7 +9,7 @@ The same primitives power inline references in:
 - [`features/comments`](../comments) — comment composer + body
 - [`features/event-log`](../event-log) —
   unified comments + audit / system events under one timeline
-- [`features/enhanced-activities`](../../../preview/pages/features/EnhancedActivitiesPage.tsx)
+- [`features/enhanced-activities`](../../../preview/pages/features/enhanced-activities.mdx)
   preview — Shopify-style timeline with notes inline
 
 Pass the same `resources` and `onResourceSearch` props to every surface

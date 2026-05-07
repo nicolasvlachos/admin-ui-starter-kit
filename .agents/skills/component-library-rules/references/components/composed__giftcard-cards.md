@@ -4,6 +4,7 @@ title: "Composed · Giftcard cards"
 description: "Five visual variants — gradient, compact, minimal, dark, illustrated."
 layer: composed
 family: "Cards"
+sourcePath: src/components/composed/cards/giftcard-card
 examples:
   - GradientDefault
   - Minimal
@@ -15,6 +16,7 @@ imports:
 tags:
   - composed
   - cards
+  - giftcard-card
   - giftcard
   - five
   - visual
@@ -26,11 +28,11 @@ tags:
 Five visual variants — gradient, compact, minimal, dark, illustrated.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/cards/giftcard-card`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	GiftcardCard,
 	GiftcardCompact,

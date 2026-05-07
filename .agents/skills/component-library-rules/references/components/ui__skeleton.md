@@ -4,6 +4,7 @@ title: "UI · Skeleton"
 description: "Animated loading placeholders."
 layer: ui
 family: "Data display"
+sourcePath: src/components/ui/skeleton
 examples:
   - Lines
   - CardPlaceholder
@@ -24,11 +25,11 @@ tags:
 Animated loading placeholders.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/skeleton`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Skeleton } from '@/components/ui/skeleton';
 import { Col } from '../../PreviewLayout';
 

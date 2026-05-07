@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ContactCard } from '@/components/composed/cards/contact-card';
 import { Col } from '../../PreviewLayout';
 

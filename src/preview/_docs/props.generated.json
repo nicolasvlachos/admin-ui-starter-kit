@@ -10352,6 +10352,13 @@
         "defaultValue": null,
         "type": "((results: PlaceFeature[]) => void) | undefined"
       },
+      "strings": {
+        "name": "strings",
+        "required": false,
+        "description": "",
+        "defaultValue": null,
+        "type": "DeepPartial<PlaceAutocompleteStrings> | undefined"
+      },
       "lang": {
         "name": "lang",
         "required": false,
@@ -10547,6 +10554,13 @@
         "description": "",
         "defaultValue": null,
         "type": "((results: PlaceFeature[]) => void) | undefined"
+      },
+      "strings": {
+        "name": "strings",
+        "required": false,
+        "description": "",
+        "defaultValue": null,
+        "type": "DeepPartial<PlaceAutocompleteStrings> | undefined"
       },
       "lang": {
         "name": "lang",
@@ -10854,7 +10868,7 @@
         "required": true,
         "description": "",
         "defaultValue": null,
-        "type": "InertiaLink[]"
+        "type": "NavigationTabsItem[]"
       },
       "currentUrl": {
         "name": "currentUrl",
@@ -13691,62 +13705,6 @@
     "displayName": "Toaster",
     "description": "",
     "filePath": "src/components/base/toaster/toaster.tsx",
-    "props": {}
-  },
-  "Table": {
-    "displayName": "Table",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
-    "props": {
-      "containerClassName": {
-        "name": "containerClassName",
-        "required": false,
-        "description": "",
-        "defaultValue": null,
-        "type": "string | undefined"
-      }
-    }
-  },
-  "TableHeader": {
-    "displayName": "TableHeader",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
-    "props": {}
-  },
-  "TableBody": {
-    "displayName": "TableBody",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
-    "props": {}
-  },
-  "TableFooter": {
-    "displayName": "TableFooter",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
-    "props": {}
-  },
-  "TableHead": {
-    "displayName": "TableHead",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
-    "props": {}
-  },
-  "TableRow": {
-    "displayName": "TableRow",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
-    "props": {}
-  },
-  "TableCell": {
-    "displayName": "TableCell",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
-    "props": {}
-  },
-  "TableCaption": {
-    "displayName": "TableCaption",
-    "description": "",
-    "filePath": "src/components/base/table/primitive.tsx",
     "props": {}
   },
   "asidenavigationmenu": {
@@ -16768,48 +16726,6 @@
         "description": "",
         "defaultValue": "false",
         "type": "boolean | undefined"
-      }
-    }
-  },
-  "LazyImage": {
-    "displayName": "LazyImage",
-    "description": "LazyImage — a layout-stable image component.\n\nRenders a container of fixed dimensions (driven by `containerClassName`)\nwith a Skeleton placeholder. Once the browser finishes loading the image,\nthe skeleton is removed and the image becomes visible.\n\nWhen the image is already in the browser cache (e.g. table re-render,\ndialog close animation), it renders fully visible immediately — no\nskeleton, no opacity transition, no flash.",
-    "filePath": "src/components/base/display/lazy-image.tsx",
-    "props": {
-      "fallback": {
-        "name": "fallback",
-        "required": false,
-        "description": "Fallback rendered on error (no src, or load failure).",
-        "defaultValue": null,
-        "type": "ReactNode"
-      },
-      "containerClassName": {
-        "name": "containerClassName",
-        "required": false,
-        "description": "Class applied to the outer container that reserves layout space.",
-        "defaultValue": null,
-        "type": "string | undefined"
-      },
-      "skeletonClassName": {
-        "name": "skeletonClassName",
-        "required": false,
-        "description": "Class applied to the skeleton placeholder.",
-        "defaultValue": null,
-        "type": "string | undefined"
-      },
-      "onLoaded": {
-        "name": "onLoaded",
-        "required": false,
-        "description": "Callback after image loads successfully.",
-        "defaultValue": null,
-        "type": "(() => void) | undefined"
-      },
-      "onLoadError": {
-        "name": "onLoadError",
-        "required": false,
-        "description": "Callback on load error.",
-        "defaultValue": null,
-        "type": "(() => void) | undefined"
       }
     }
   },

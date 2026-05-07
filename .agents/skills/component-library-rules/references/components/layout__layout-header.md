@@ -4,6 +4,7 @@ title: "Layout · Header"
 description: "Topbar, breadcrumbs, command search, notifications, and action slots in a realistic app-shell canvas."
 layer: layout
 family: "Shells"
+sourcePath: src/components/layout
 examples:
   - AppHeaderComposition
   - HeaderPartials
@@ -32,11 +33,11 @@ tags:
 Topbar, breadcrumbs, command search, notifications, and action slots in a realistic app-shell canvas.
 
 **Layer:** `layout`  
+**Source:** `src/components/layout`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Bell, CheckCircle2, CircleAlert, Settings } from 'lucide-react';
 import { Badge } from '@/components/base/badge';
 import { Button } from '@/components/base/buttons';

@@ -4,6 +4,7 @@ title: "UI · Scroll area"
 description: "Custom-styled scroll viewport."
 layer: ui
 family: "Layout"
+sourcePath: src/components/ui/scroll-area
 examples:
   - Vertical
   - Horizontal
@@ -12,6 +13,7 @@ imports:
 tags:
   - ui
   - layout
+  - scroll-area
   - scroll
   - area
   - custom
@@ -23,11 +25,11 @@ tags:
 Custom-styled scroll viewport.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/scroll-area`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export function Vertical() {

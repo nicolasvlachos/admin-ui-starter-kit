@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ArrowUp, Copy, Edit3, Eye, Trash2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { Badge } from '@/components/base/badge';

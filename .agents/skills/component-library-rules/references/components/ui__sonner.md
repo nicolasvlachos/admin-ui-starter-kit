@@ -4,14 +4,15 @@ title: "UI · Sonner toaster"
 description: "Toast notifications."
 layer: ui
 family: "Feedback"
+sourcePath: src/components/ui/button
 examples:
   - TriggerToasts
 imports:
-  - @/components/base/toaster
   - @/components/ui/button
 tags:
   - ui
   - feedback
+  - button
   - sonner
   - toaster
   - toast
@@ -23,13 +24,12 @@ tags:
 Toast notifications.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/button`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { toast } from 'sonner';
-import { Toaster } from '@/components/base/toaster';
 import { Button } from '@/components/ui/button';
 import { Row } from '../../PreviewLayout';
 

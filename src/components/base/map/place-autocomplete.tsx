@@ -1,4 +1,5 @@
 import { Text } from "@/components/typography"
+import { useStrings, type StringsProp } from "@/lib/strings"
 import { cn } from "@/lib/utils"
 import {
     Command,
@@ -13,9 +14,25 @@ import {
     InputGroupInput,
 } from "@/components/ui/input-group"
 import { Spinner } from "@/components/ui/spinner"
-import type { BBox, Feature, FeatureCollection, Point } from "geojson"
 import { MapPinIcon, SearchIcon } from "lucide-react"
 import * as React from "react"
+
+type BBox = [number, number, number, number]
+type Point = {
+    type: "Point"
+    coordinates: [number, number]
+}
+type Feature<TGeometry, TProperties> = {
+    type: "Feature"
+    geometry: TGeometry
+    properties: TProperties
+    bbox?: BBox
+}
+type FeatureCollection<TGeometry, TProperties> = {
+    type: "FeatureCollection"
+    features: Array<Feature<TGeometry, TProperties>>
+    bbox?: BBox
+}
 
 interface PlaceFeatureProperties {
     osm_id: number
@@ -39,6 +56,20 @@ interface PlaceFeatureProperties {
 }
 type PlaceFeature = Feature<Point, PlaceFeatureProperties>
 type PlaceFeatureCollection = FeatureCollection<Point, PlaceFeatureProperties>
+
+interface PlaceAutocompleteStrings {
+    searchPlaceholder: string
+    error: string
+    noResults: string
+    unknownPlace: string
+}
+
+const defaultPlaceAutocompleteStrings: PlaceAutocompleteStrings = {
+    searchPlaceholder: "Search",
+    error: "Error: {{message}}",
+    noResults: "Can't find {{query}}.",
+    unknownPlace: "Unknown",
+}
 
 /**
  * Query parameters for Photon geocoding API
@@ -80,6 +111,7 @@ interface PlaceAutocompleteProps
     onChange?: (value: string) => void
     onPlaceSelect?: (feature: PlaceFeature) => void
     onResultsChange?: (results: PlaceFeature[]) => void
+    strings?: StringsProp<PlaceAutocompleteStrings>
 }
 
 function formatAddress(properties: PlaceFeatureProperties) {
@@ -256,6 +288,15 @@ function usePlaceSearch({
     return { results, isLoading, error, hasSearched }
 }
 
+function formatPlaceAutocompleteString(
+    template: string,
+    params: Record<string, string>
+) {
+    return template.replace(/\{\{\s*(\w+)\s*\}\}/g, (match, key) => {
+        return params[key] ?? match
+    })
+}
+
 function PlaceAutocomplete({
     debounceMs = 300,
     lang,
@@ -271,8 +312,10 @@ function PlaceAutocomplete({
     onChange: controlledOnChange,
     onPlaceSelect,
     onResultsChange,
+    strings: stringsProp,
     ...props
 }: PlaceAutocompleteProps) {
+    const strings = useStrings(defaultPlaceAutocompleteStrings, stringsProp)
     const [internalValue, setInternalValue] = React.useState(defaultValue)
     const [searchQuery, setSearchQuery] = React.useState("")
 
@@ -314,7 +357,7 @@ function PlaceAutocomplete({
                         <SearchIcon />
                     </InputGroupAddon>
                     <InputGroupInput
-                        placeholder="Search"
+                        placeholder={strings.searchPlaceholder}
                         value={displayValue}
                         onChange={(event) => {
                             const newValue = event.target.value
@@ -342,10 +385,20 @@ function PlaceAutocomplete({
                             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
                             "data-[state=open]:slide-in-from-top-2 data-[state=closed]:slide-out-to-top-2"
                         )}>
-                        {!!error && <CommandEmpty>Error: {error.message}</CommandEmpty>}
+                        {!!error && (
+                            <CommandEmpty>
+                                {formatPlaceAutocompleteString(
+                                    strings.error,
+                                    { message: error.message }
+                                )}
+                            </CommandEmpty>
+                        )}
                         {!!hasNoResults && (
                             <CommandEmpty>
-                                Can't find {displayValue}.
+                                {formatPlaceAutocompleteString(
+                                    strings.noResults,
+                                    { query: displayValue }
+                                )}
                             </CommandEmpty>
                           )}
                         {results.length > 0 && (
@@ -384,7 +437,7 @@ function PlaceAutocomplete({
                                                     {feature.properties.name ||
                                                         feature.properties
                                                             .street ||
-                                                        "Unknown"}
+                                                        strings.unknownPlace}
                                                 </Text>
                                                 <Text tag="span" size="xs" type="secondary">
                                                     {formattedAddress}
@@ -402,4 +455,10 @@ function PlaceAutocomplete({
     )
 }
 
-export { PlaceAutocomplete, type PlaceAutocompleteProps, type PlaceFeature }
+export {
+    PlaceAutocomplete,
+    defaultPlaceAutocompleteStrings,
+    type PlaceAutocompleteProps,
+    type PlaceAutocompleteStrings,
+    type PlaceFeature,
+}

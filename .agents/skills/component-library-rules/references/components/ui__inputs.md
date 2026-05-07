@@ -4,6 +4,7 @@ title: "UI · Inputs"
 description: "Input, Textarea, Select primitives."
 layer: ui
 family: "Forms"
+sourcePath: src/components/ui
 examples:
   - InputExample
   - TextareaExample
@@ -26,11 +27,11 @@ tags:
 Input, Textarea, Select primitives.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';

@@ -32,6 +32,7 @@ imports:
   - @/components/base/combobox
   - @/components/typography
   - @/components/ui/avatar
+  - @/preview/_mocks
 tags:
   - base
   - forms

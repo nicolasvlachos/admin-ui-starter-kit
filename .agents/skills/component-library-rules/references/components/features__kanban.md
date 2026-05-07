@@ -4,6 +4,7 @@ title: "Features · Kanban"
 description: "Drag-and-drop board, generic in T. Pass `itemActions` (static array or per-item factory) for the ⋮ menu, `onItemClick` for whole-card click. Headless via `useKanban`; slots: KanbanBoard / KanbanColumn / KanbanColumnContent / KanbanItem / KanbanItemHandle / KanbanItemActions / KanbanOverlay."
 layer: features
 family: "Boards"
+sourcePath: src/components/features/kanban
 examples:
   - RoadmapBoardWithActionsOnItemClick
 imports:
@@ -18,6 +19,7 @@ tags:
   - drag
   - drop
   - board
+  - generic
 ---
 
 # Features · Kanban
@@ -25,11 +27,11 @@ tags:
 Drag-and-drop board, generic in T. Pass `itemActions` (static array or per-item factory) for the ⋮ menu, `onItemClick` for whole-card click. Headless via `useKanban`; slots: KanbanBoard / KanbanColumn / KanbanColumnContent / KanbanItem / KanbanItemHandle / KanbanItemActions / KanbanOverlay.
 
 **Layer:** `features`  
+**Source:** `src/components/features/kanban`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { ArrowUp, Copy, Edit3, Eye, Trash2 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { Badge } from '@/components/base/badge';

@@ -4,6 +4,7 @@ title: "Features · Activity feed"
 description: "Interactive activity feed — generic, framework-agnostic, with headline segments, callbacks (actor / resource / action), strings, slots, mass event configuration, and a save/restore resource registry. For read-only tracking timelines (order, payment, changelog, milestones) see Composed → Timelines."
 layer: features
 family: "Collaboration"
+sourcePath: src/components/features/activities
 examples:
   - DefaultDensityHeadlineSegmentsGrouping
   - CompactDensitySingleLineDotFeed
@@ -18,6 +19,7 @@ imports:
 tags:
   - features
   - collaboration
+  - activities
   - activity
   - feed
   - interactive
@@ -29,11 +31,11 @@ tags:
 Interactive activity feed — generic, framework-agnostic, with headline segments, callbacks (actor / resource / action), strings, slots, mass event configuration, and a save/restore resource registry. For read-only tracking timelines (order, payment, changelog, milestones) see Composed → Timelines.
 
 **Layer:** `features`  
+**Source:** `src/components/features/activities`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
     Bell,
     Bookmark,
@@ -273,7 +275,7 @@ export function DefaultDensityHeadlineSegmentsGrouping() {
 }
 
 export function CompactDensitySingleLineDotFeed() {
-	const [registry, setRegistry] =
+	const [registry] =
 	        useState<Record<string, ActivityResourceConfig>>(RESOURCE_SEED);
 	return (
 		<>

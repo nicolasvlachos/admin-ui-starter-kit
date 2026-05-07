@@ -4,6 +4,7 @@ title: "Layout · Sidebar"
 description: "Full app sidebar assembly plus reusable navigation, workspace, and footer item partials."
 layer: layout
 family: "Shells"
+sourcePath: src/components/layout
 examples:
   - AppSidebarShell
   - NavigationPartials
@@ -32,11 +33,11 @@ tags:
 Full app sidebar assembly plus reusable navigation, workspace, and footer item partials.
 
 **Layer:** `layout`  
+**Source:** `src/components/layout`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { BarChart3, Brain, CreditCard, ExternalLink, Home, Inbox, LifeBuoy, Package, Settings, Shield, SlidersHorizontal, Store, Users } from 'lucide-react';
 import { Badge } from '@/components/base/badge';
 import { SmartCard } from '@/components/base/cards';

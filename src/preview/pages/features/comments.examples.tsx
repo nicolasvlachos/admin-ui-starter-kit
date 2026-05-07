@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
     Briefcase,
     CalendarRange,
@@ -6,13 +5,12 @@ import {
     Package,
     User,
 } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import {
     Comments,
     type CommentAttachment,
     type CommentAttachmentUploadContext,
     type CommentData,
-    type CommentFormValues,
     type CommentReference,
     type CommentResourceType,
     type CommentableContext,
@@ -260,7 +258,7 @@ export function APISurface() {
 }
 
 export function CommentsExample() {
-	const [comments, setComments] = useState<
+	const [comments] = useState<
 	        CommentData<
 	            { id: string; name: string; avatar?: string },
 	            unknown,
@@ -281,7 +279,7 @@ export function CommentsExample() {
 }
 
 export function ReadOnly() {
-	const [comments, setComments] = useState<
+	const [comments] = useState<
 	        CommentData<
 	            { id: string; name: string; avatar?: string },
 	            unknown,
@@ -301,13 +299,6 @@ export function ReadOnly() {
 }
 
 export function EmptyStateCustomStrings() {
-	const [comments, setComments] = useState<
-	        CommentData<
-	            { id: string; name: string; avatar?: string },
-	            unknown,
-	            ResourceKind
-	        >[]
-	    >(INITIAL_COMMENTS);
 	return (
 		<>
 			<Comments
@@ -328,7 +319,7 @@ export function EmptyStateCustomStrings() {
 }
 
 export function CustomReferenceRendering() {
-	const [comments, setComments] = useState<
+	const [comments] = useState<
 	        CommentData<
 	            { id: string; name: string; avatar?: string },
 	            unknown,

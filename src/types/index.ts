@@ -11,5 +11,3 @@ export interface NavItem {
 	icon?: LucideIcon | string;
 	badge?: string;
 }
-
-export type { PageShared, InertiaLink } from './inertia.types';

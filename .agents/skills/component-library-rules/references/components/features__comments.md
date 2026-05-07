@@ -4,6 +4,7 @@ title: "Features · Comments"
 description: "Generic, framework-agnostic comments with rich-text composer (TipTap-backed), inline resource references (mentions, links, badges), attachment uploads with progress, and reactions. Every callback / registry flows as a direct prop — no provider."
 layer: features
 family: "Collaboration"
+sourcePath: src/components/features/comments
 examples:
   - APISurface
   - CommentsExample
@@ -20,6 +21,7 @@ tags:
   - generic
   - framework
   - agnostic
+  - rich
 ---
 
 # Features · Comments
@@ -27,11 +29,11 @@ tags:
 Generic, framework-agnostic comments with rich-text composer (TipTap-backed), inline resource references (mentions, links, badges), attachment uploads with progress, and reactions. Every callback / registry flows as a direct prop — no provider.
 
 **Layer:** `features`  
+**Source:** `src/components/features/comments`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
     Briefcase,
     CalendarRange,
@@ -39,13 +41,12 @@ import {
     Package,
     User,
 } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import {
     Comments,
     type CommentAttachment,
     type CommentAttachmentUploadContext,
     type CommentData,
-    type CommentFormValues,
     type CommentReference,
     type CommentResourceType,
     type CommentableContext,
@@ -293,7 +294,7 @@ export function APISurface() {
 }
 
 export function CommentsExample() {
-	const [comments, setComments] = useState<
+	const [comments] = useState<
 	        CommentData<
 	            { id: string; name: string; avatar?: string },
 	            unknown,
@@ -314,7 +315,7 @@ export function CommentsExample() {
 }
 
 export function ReadOnly() {
-	const [comments, setComments] = useState<
+	const [comments] = useState<
 	        CommentData<
 	            { id: string; name: string; avatar?: string },
 	            unknown,
@@ -334,13 +335,6 @@ export function ReadOnly() {
 }
 
 export function EmptyStateCustomStrings() {
-	const [comments, setComments] = useState<
-	        CommentData<
-	            { id: string; name: string; avatar?: string },
-	            unknown,
-	            ResourceKind
-	        >[]
-	    >(INITIAL_COMMENTS);
 	return (
 		<>
 			<Comments
@@ -361,7 +355,7 @@ export function EmptyStateCustomStrings() {
 }
 
 export function CustomReferenceRendering() {
-	const [comments, setComments] = useState<
+	const [comments] = useState<
 	        CommentData<
 	            { id: string; name: string; avatar?: string },
 	            unknown,

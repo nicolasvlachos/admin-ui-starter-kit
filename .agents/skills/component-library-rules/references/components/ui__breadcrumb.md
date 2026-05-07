@@ -4,6 +4,7 @@ title: "UI · Breadcrumb"
 description: "shadcn breadcrumb — list, items, separator (default & custom)."
 layer: ui
 family: "Navigation"
+sourcePath: src/components/ui/breadcrumb
 examples:
   - Default
   - CustomSeparator
@@ -16,6 +17,7 @@ tags:
   - shadcn
   - list
   - items
+  - separator
 ---
 
 # UI · Breadcrumb
@@ -23,11 +25,11 @@ tags:
 shadcn breadcrumb — list, items, separator (default & custom).
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/breadcrumb`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Slash } from 'lucide-react';
 import {
 	Breadcrumb,

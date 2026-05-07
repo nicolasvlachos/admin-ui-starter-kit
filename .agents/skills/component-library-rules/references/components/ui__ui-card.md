@@ -4,6 +4,7 @@ title: "UI · Card"
 description: "shadcn primitive card with header / title / description / content / footer."
 layer: ui
 family: "Layout"
+sourcePath: src/components/ui/card
 examples:
   - Default
   - CompactSizeSm
@@ -16,6 +17,7 @@ tags:
   - shadcn
   - primitive
   - header
+  - title
 ---
 
 # UI · Card
@@ -23,11 +25,11 @@ tags:
 shadcn primitive card with header / title / description / content / footer.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/card`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 
 export function Default() {

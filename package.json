@@ -47,12 +47,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "build:showcase": "vite build --outDir dist/showcase --emptyOutDir --base=./",
-    "build:lib": "rm -rf dist && vite build -c vite.lib.config.ts && tailwindcss -i ./src/App.css -o ./dist/style.css --minify",
+    "build:lib": "node scripts/clean-dist.mjs && vite build -c vite.lib.config.ts && tailwindcss -i ./src/App.css -o ./dist/style.css --minify",
     "lint": "eslint .",
     "lint:architecture": "node scripts/check-architecture.mjs",
     "test:exports": "node scripts/check-package-exports.mjs",
     "docs:generate-props": "node scripts/generate-props-tables.mjs",
-    "docs:convert-pages": "node scripts/convert-preview-page.mjs",
     "docs:check-props": "node scripts/check-props-fresh.mjs",
     "docs:sync-skill": "node scripts/sync-skill-components.mjs",
     "typecheck": "tsc -p tsconfig.app.json --noEmit --ignoreDeprecations 6.0",
@@ -130,6 +129,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
+    "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -146,7 +146,6 @@
     "@tiptap/pm": "^3.0.0",
     "@tiptap/react": "^3.0.0",
     "@tiptap/starter-kit": "^3.0.0",
-    "axios": "^1.0.0",
     "cmdk": "^1.0.0",
     "culori": "^4.0.0",
     "leaflet": "^1.0.0",
@@ -203,9 +202,6 @@
     "tw-animate-css": {
       "optional": true
     },
-    "axios": {
-      "optional": true
-    },
     "cmdk": {
       "optional": true
     },
@@ -252,7 +248,6 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@eslint/js": "^10.0.1",
     "@fontsource-variable/inter": "^5.2.8",
-    "@mdx-js/react": "^3.1.1",
     "@mdx-js/rollup": "^3.1.1",
     "@tailwindcss/cli": "^4.2.4",
     "@tailwindcss/vite": "^4.2.4",
@@ -267,13 +262,11 @@
     "@types/leaflet": "^1.9.21",
     "@types/leaflet-draw": "^1.0.13",
     "@types/leaflet.markercluster": "^1.5.6",
-    "@types/mdx": "^2.0.13",
     "@types/node": "^24.12.2",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "axios": "^1.15.2",
     "cmdk": "^1.1.1",
     "culori": "^4.0.2",
     "eslint": "^10.2.1",

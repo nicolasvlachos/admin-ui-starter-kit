@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { InvoiceMiniCard } from '@/components/composed/data-display/invoice-mini';
 
 export function Statuses() {

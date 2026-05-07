@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { VendorProfileCard } from '@/components/composed/cards/vendor-profile';
 
 export function WithEverything() {

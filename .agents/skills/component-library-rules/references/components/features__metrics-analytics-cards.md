@@ -4,6 +4,7 @@ title: "Features · Metrics · Analytics cards"
 description: "`MetricGradient` — vivid gradient hero card with embedded area chart. Pick a `theme` to drive the colour palette."
 layer: features
 family: "Metrics"
+sourcePath: src/components/composed/analytics
 examples:
   - FourThemes
 imports:
@@ -15,6 +16,7 @@ tags:
   - cards
   - metricgradient
   - vivid
+  - gradient
 ---
 
 # Features · Metrics · Analytics cards
@@ -22,11 +24,11 @@ tags:
 `MetricGradient` — vivid gradient hero card with embedded area chart. Pick a `theme` to drive the colour palette.
 
 **Layer:** `features`  
+**Source:** `src/components/composed/analytics`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { MetricGradient, type MetricDataPoint } from '@/components/composed/analytics';
 
 const data: MetricDataPoint[] = [

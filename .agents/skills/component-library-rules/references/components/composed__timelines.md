@@ -4,6 +4,7 @@ title: "Composed · Timelines"
 description: "Read-only tracking timelines — steps, order, payment, activity stream, release changelog, project milestones. For interactive activity (segments, mass-config, resource registry, callbacks) see Features → Activity feed."
 layer: composed
 family: "Timelines"
+sourcePath: src/components/composed/timelines
 examples:
   - StepsVertical
   - StepsHorizontalExample
@@ -28,11 +29,11 @@ tags:
 Read-only tracking timelines — steps, order, payment, activity stream, release changelog, project milestones. For interactive activity (segments, mass-config, resource registry, callbacks) see Features → Activity feed.
 
 **Layer:** `composed`  
+**Source:** `src/components/composed/timelines`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import {
 	AlertTriangle,
 	CheckCircle,

@@ -4,6 +4,7 @@ title: "UI · Input group"
 description: "Input with leading / trailing add-ons."
 layer: ui
 family: "Forms"
+sourcePath: src/components/ui/input-group
 examples:
   - LeadingIcon
   - TrailingAddon
@@ -13,6 +14,7 @@ imports:
 tags:
   - ui
   - forms
+  - input-group
   - input
   - group
   - leading
@@ -24,11 +26,11 @@ tags:
 Input with leading / trailing add-ons.
 
 **Layer:** `ui`  
+**Source:** `src/components/ui/input-group`
 
 ## Examples
 
 ```tsx
-// @ts-nocheck
 import { Search, Mail, Lock } from 'lucide-react';
 import {
 	InputGroup,

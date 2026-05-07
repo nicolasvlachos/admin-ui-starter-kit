@@ -81,10 +81,54 @@ const REGISTRY_MAP = buildRegistryMap();
 
 function discoverImports(examplesSource) {
 	const out = new Set();
-	const re = /from\s+['"](@\/components\/[^'"]+)['"]/g;
+	const re = /from\s+['"](@\/(?:components|preview)\/[^'"]+)['"]/g;
 	let m;
 	while ((m = re.exec(examplesSource))) out.add(m[1]);
 	return [...out].sort();
+}
+
+function importToSourcePath(specifier) {
+	if (!specifier.startsWith('@/components/') && !specifier.startsWith('@/preview/')) {
+		return '';
+	}
+	return `src/${specifier.slice(2)}`;
+}
+
+function commonDirectory(paths) {
+	if (paths.length === 0) return '';
+	const split = paths.map((p) => p.split('/').filter(Boolean));
+	const out = [];
+	for (let i = 0; i < split[0].length; i++) {
+		const segment = split[0][i];
+		if (split.every((parts) => parts[i] === segment)) out.push(segment);
+		else break;
+	}
+	return out.length >= 3 ? out.join('/') : '';
+}
+
+function inferSourcePath({ id, layer, imports }) {
+	const candidates = imports
+		.map(importToSourcePath)
+		.filter(Boolean)
+		.filter((p) => !p.startsWith('src/components/typography'));
+
+	if (candidates.length === 0) return '';
+
+	const idParts = id.split('/');
+	const idSection = idParts[0];
+	const preferredLayer = layer || idSection;
+	const layerCandidates = candidates.filter((p) =>
+		p.startsWith(`src/components/${preferredLayer}/`),
+	);
+	const scoped = layerCandidates.length > 0 ? layerCandidates : candidates;
+
+	const slug = idParts[1] ?? '';
+	const slugCandidates = slug
+		? scoped.filter((p) => p.split('/').includes(slug))
+		: [];
+	const narrowed = slugCandidates.length > 0 ? slugCandidates : scoped;
+
+	return commonDirectory(narrowed) || narrowed[0] || '';
 }
 
 function discoverExampleNames(examplesSource) {
@@ -187,27 +231,29 @@ for (const abs of mdxFiles) {
 
 	const reg = REGISTRY_MAP.get(id) ?? {};
 	const family = reg.family ?? '';
+	const sourcePath = fm.sourcePath || inferSourcePath({ id, layer: fm.layer, imports });
+	const resolvedFm = { ...fm, sourcePath };
 	const tags = deriveTags({
-		layer: fm.layer,
+		layer: resolvedFm.layer,
 		family,
-		sourcePath: fm.sourcePath,
-		title: fm.title,
-		description: fm.description,
+		sourcePath: resolvedFm.sourcePath,
+		title: resolvedFm.title,
+		description: resolvedFm.description,
 	});
 
 	const docFile = `${id.replace(/\//g, '__')}.md`;
-	const md = buildMarkdown({ id, fm, family, examplesSource, exampleNames, imports, tags });
+	const md = buildMarkdown({ id, fm: resolvedFm, family, examplesSource, exampleNames, imports, tags });
 	const outPath = resolve(OUT_DIR, docFile);
 	generated[outPath] = md;
 
 	indexEntries.push({
 		id,
-		title: fm.title || id,
-		description: fm.description || '',
-		layer: fm.layer || '',
+		title: resolvedFm.title || id,
+		description: resolvedFm.description || '',
+		layer: resolvedFm.layer || '',
 		family,
 		tags,
-		sourcePath: fm.sourcePath || '',
+		sourcePath: resolvedFm.sourcePath || '',
 		examples: exampleNames,
 		doc: `./${docFile}`,
 	});
